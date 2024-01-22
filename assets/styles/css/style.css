@@ -164,6 +164,7 @@ i.fa-solid.fa-chevron-down{
     list-style-type:none;
     padding: 7px;
     position: relative;
+    margin-bottom: 0.5rem;
 }
 
 .link-footer{

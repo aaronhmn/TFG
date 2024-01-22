@@ -246,6 +246,7 @@ input:focus, select:focus, select, input.form-control:focus {
     list-style-type:none;
     padding: 7px;
     position: relative;
+    margin-bottom: 0.5rem;
 }
 
 .link-footer{
