@@ -46,7 +46,7 @@
                   type="text"
                   name="busqueda"
                   id="busqueda"
-                  placeholder="...."
+                  placeholder="Buscar"
                 />
                 <button type="submit" style="display: flex; align-items: center; justify-content: center;">
                   <i class="fas fa-search" style="color: #8350f2"></i>
@@ -101,7 +101,7 @@
                   type="text"
                   name="busqueda"
                   id="busqueda"
-                  placeholder="...."
+                  placeholder="Buscar"
                 />
                 <button type="submit" style="display: flex; align-items: center; justify-content: center;">
                   <i class="fas fa-search" style="color: #8350f2"></i>
@@ -157,7 +157,7 @@
                   <li style="padding-right: 0"><a href="#">Auriculares</a></li>
                   <li style="padding-right: 0"><a href="#">Teclados</a></li>
                   <li style="padding-right: 0"><a href="#">Ratones</a></li>
-                  <li style="padding-right: 0"><a href="#">Alfombrillas</a></li>
+                  <!--<li style="padding-right: 0"><a href="#">Alfombrillas</a></li>-->
                 </ul>
               </li>
             </ul>

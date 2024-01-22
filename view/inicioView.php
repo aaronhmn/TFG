@@ -44,12 +44,7 @@ namespace views;
       
             <div class="nav-busqueda">
               <form action="">
-                <input
-                  type="text"
-                  name="busqueda"
-                  id="busqueda"
-                  placeholder="...."
-                />
+                <input type="search" name="busqueda" id="busqueda" placeholder="Buscar"/>
                 <button type="submit" style="display: flex; align-items: center; justify-content: center;">
                   <i class="fas fa-search" style="color: #8350f2"></i>
                 </button>
@@ -97,10 +92,10 @@ namespace views;
             <div class="nav-busqueda">
               <form action="">
                 <input
-                  type="text"
+                  type="search"
                   name="busqueda"
                   id="busqueda"
-                  placeholder="...."
+                  placeholder="Buscar"
                 />
                 <button type="submit" style="display: flex; align-items: center; justify-content: center;">
                   <i class="fas fa-search" style="color: #8350f2"></i>

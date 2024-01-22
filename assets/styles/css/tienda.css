@@ -50,10 +50,10 @@ nav .nav-busqueda{
     border: none;
     outline: none;
     background: #f2f2f2;
-    border-radius: 30px;
+    border-radius: 10px;
     color: #8350F2;
     font-size: 16px;
-    text-align: center;
+    /*text-align: center;*/
     padding-left: 5px;
 }
 

@@ -37,7 +37,7 @@
                   type="text"
                   name="busqueda"
                   id="busqueda"
-                  placeholder="...."
+                  placeholder="Buscar"
                 />
                 <button type="submit" style="display: flex; align-items: center; justify-content: center;">
                   <i class="fas fa-search" style="color: #8350f2"></i>
@@ -96,7 +96,7 @@
                   type="text"
                   name="busqueda"
                   id="busqueda"
-                  placeholder="...."
+                  placeholder="Buscar"
                 />
                 <button type="submit" style="display: flex; align-items: center; justify-content: center;">
                   <i class="fas fa-search" style="color: #8350f2"></i>
