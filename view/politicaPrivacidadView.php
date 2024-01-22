@@ -61,13 +61,10 @@
               </li>
       
               <!--Si el usuario esta logueado esta opcion se ocultara y aparecera el icono del perfil que cuando este sin loguear estará oculto-->
+              <a href="../controller/carritoController.php"><i class="fas fa-shopping-cart fa-lg"></i></a>
+              <a href="../controller/perfilController.php"><i class="fa-solid fa-user fa-lg"></i></a>
               <li>
-                <a href="../controller/carritoController.php"><i class="fas fa-shopping-cart"></i></a>
-              </li>
-              <li>
-                <a href="../controller/perfilController.php"><i class="fa-solid fa-user"></i></a>
-              </li>
-              <form action='../controller/cerrarSesionController.php' method="POST">
+                <form action='../controller/cerrarSesionController.php' method="POST">
                   <button class="boton-cs"><b>Cerrar Sesión</b></button>
                 </form>
                 <!--<a href="../controller/cerrarSesiónController.php"><i class="fas fa-sign-out-alt"></i></a>-->
@@ -123,9 +120,7 @@
               </li>
       
               <!--Si el usuario esta logueado esta opcion se ocultara y aparecera el icono del perfil que cuando este sin loguear estará oculto-->
-              <li>
-                <a href="../controller/carritoController.php"><i class="fas fa-shopping-cart"></i></a>
-              </li>
+              <a href="../controller/carritoController.php"><i class="fas fa-shopping-cart fa-lg"></i></a>
               <!--si el usuario esta logueado estara visible, si no, estara oculto-->
             </ul>
           </nav> 
