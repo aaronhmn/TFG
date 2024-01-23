@@ -157,22 +157,31 @@
             </ul>
           </li>
           <li>
+          <div class="select-menu">
+              <div class="select-btn">
+                <span class="sBtn-text">Elige una marca</span>
+                <i class="fa-solid fa-chevron-down" style="color: #000000; display: visible;"></i>
+              </div>
+            </div>
+          </li>
+            
+          <!--<li>
             <select class="form-select custom-select" id="marcas" style="border: none; background-color: #f2f2f2;">
-              <option style="margin: 10px;" value="placeholder">Marcas...</option>
+              <option style="margin: 10px;" value="placeholder" disabled selected>Marcas...</option>
               <option value="msi">MSI</option>
               <option value="mg">Mars Gaming</option>
               <option value="razer">Razer</option>
               <option value="zowie">Zowie</option>
               <option value="logitech">Logitech</option>
             </select>
-          </li>
-          <li>
+          </li>-->
+          <!--<li>
             <select class="form-select custom-select" id="orden" style="border: none; background-color: #f2f2f2;">
-              <option value="placeholder">Ordenar por...</option>
+              <option value="placeholder" disabled selected>Ordenar por...</option>
               <option value="precioBajo">De precio más bajo a más alto</option>
               <option value="precioAlto">De precio más alto a más bajo</option>
             </select>
-          </li>
+          </li>-->
         </ul>
       </div>
     </header>

@@ -2,7 +2,6 @@
 namespace views;
 ?>
 
-
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -22,10 +21,6 @@ namespace views;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"/>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <title>Página de Inicio - Genesis</title>
   </head>
@@ -131,52 +126,54 @@ namespace views;
 
     <!--HEADER CON TEXTO -->
     <div class="container-fluid" style="width: 90%;">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-4">
-                <h2 class="mt-5">BIENVENIDO A GENESIS, LA MEJOR TIENDA ONLINE DE ORDENADORES Y HARDWARE</h2>
-                <p style="font-size: 20px;" class="mt-5">La mejor tienda online de España para comprar productos tecnológicos</p>
-                <h3 class="mt-5">¡PRODUCTOS CON LA MEJOR CALIDAD AL MEJOR PRECIO!</h3>
-            </div>
+    <div class="row align-items-center justify-content-center">
 
-            <div class="col-8">
-                <div id="carouselExampleIndicators" class="carousel slide">
-                    <div class="carousel-indicators">
-                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner">
-                      <div class="carousel-item active">
-                        <img src="../assets/img/inicio4.jpg" class="d-block w-100" height="600" alt="img-1">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../assets/img/inicio3.jpg" class="d-block w-100" height="600" alt="img-2">
-                      </div>
-                      <div class="carousel-item">
-                        <img src="../assets/img/inicio.jpg" class="d-block w-100" height="600" alt="img-3">
-                      </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
+              <!-- Texto (col-12 en pantallas pequeñas y medianas, col-md-4 en tabletas y más grandes) -->
+        <div class="col-12 col-md-4">
+          <h3 class="mt-0">BIENVENIDO A GENESIS, LA MEJOR TIENDA ONLINE DE ORDENADORES Y HARDWARE</h3>
+          <p style="font-size: 20px;" class="mt-5">La mejor tienda online de España para comprar productos tecnológicos</p>
+          <h4 class="mt-5">¡PRODUCTOS CON LA MEJOR CALIDAD AL MEJOR PRECIO!</h4>
+        </div>
+        <!-- Carrusel (col-12 en pantallas pequeñas, col-md-8 en tabletas y más grandes) -->
+        <div class="carrusel col-12 col-md-8 mb-4 d-none d-sm-block">
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                 </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="../assets/img/inicio4.jpg" class="d-block w-100" height="600" alt="img-1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../assets/img/inicio3.jpg" class="d-block w-100" height="600" alt="img-2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../assets/img/inicio.jpg" class="d-block w-100" height="600" alt="img-3">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-          </div>
-      </div>
+        </div>
+    </div>
+</div>
 
     <!--CARDS DE CATEGORIAS-->
     <div class="cards" style="margin-top: 15px;">
       <div class="cuadradito">
-        <h2><b>Categorías</b></h2>
+        <h3 style="margin-left:40px;"><b>Categorías</b></h3>
       </div>
-      <h3 style="display: flex; flex: 1; left: 0; padding-left: 20px; margin-top: 15px;">
+      <h4 style="display: flex; flex: 1; left: 0; padding-left: 20px; margin-top: 15px;">
         <b>Busca productos por categorías</b>
-      </h3>
+      </h4>
       <div class="services" style="display: flex; flex-wrap: wrap;">
         <div class="content content-1">
           <div>
@@ -210,9 +207,9 @@ namespace views;
     <!--MARCAS-->
     <div class="container mt-5">
       <div class="cuadradito" style="margin-left: 90px;">
-        <h2 style="margin-left:40px;"><b>Marcas</b></h2>
+        <h3 style="margin-left:40px;"><b>Marcas</b></h3>
       </div>
-      <h3 style="margin-left: 90px; margin-top: 25px;"><b>Las marcas que componen nuestros productos</b></h3>
+      <h4 style="margin-left: 90px; margin-top: 25px;"><b>Las marcas que componen nuestros productos</b></h4>
       
       <div class="row" style="margin-top: 70px">
         <div class="col-md-3 logo-container">
@@ -318,9 +315,9 @@ namespace views;
     <!--PROXIMOS PRODUCTOS-->
     <div class="container py-5">
       <div class="cuadradito" style="margin-left: 5px;">
-        <h2 style="margin-left:40px;"><b>Productos</b></h2>
+        <h3 style="margin-left:40px;"><b>Productos</b></h3>
       </div>
-      <h3 style="margin-left: 5px; margin-top: 25px;"><b>Los productos que proximamente estarán en la web</b></h3><br>
+      <h4 style="margin-left: 5px; margin-top: 25px;"><b>Los productos que proximamente estarán en la web</b></h4><br>
       <div class="row">
           <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
               <img src="../assets/img/Proximos productos/gpu.jpg" style="background-position: center; background-size:contain;" class="w-100 shadow-1-strong rounded mb-4" alt="" sizes="(max-width: 1080 px) 100vw, 1080px" width="1080" height="650px" loading="lazy">
@@ -341,10 +338,10 @@ namespace views;
     <!--INFO-->
        <div class="container mt-5" style="margin-bottom: 100px;">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 mb-4">
                 <div class="circle mx-auto">
                     <div class="circle-small">
-                        <i class="fas fa-truck fa-2x" style="cursor: auto;"></i>
+                        <i class="fas fa-truck fa-xl" style="cursor: auto;"></i>
                     </div>
                 </div>
                 <div class="text-center mt-3">
@@ -352,10 +349,10 @@ namespace views;
                     <p>Entrega gratuita a partir de 60€</p>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-4">
                 <div class="circle mx-auto">
                     <div class="circle-small">
-                        <i class="fas fa-headphones fa-2x" style="cursor: auto;"></i>
+                        <i class="fas fa-headphones fa-xl" style="cursor: auto;"></i>
                     </div>
                 </div>
                 <div class="text-center mt-3">
@@ -363,10 +360,10 @@ namespace views;
                     <p>Todas las horas del día a su disposición</p>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-4">
                 <div class="circle mx-auto">
                     <div class="circle-small">
-                        <i class="fas fa-check fa-2x" style="cursor: auto;"></i>
+                        <i class="fas fa-check fa-xl" style="cursor: auto;"></i>
                     </div>
                 </div>
                 <div class="text-center mt-3">
