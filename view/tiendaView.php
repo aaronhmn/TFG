@@ -136,7 +136,7 @@
 
     <header class="header">
       <input type="checkbox" id="toggle" />
-      <label for="toggle"><i class="fas fa-cog fa-2x" style="color: #fff"></i></label>
+      <label for="toggle"><i class="fa-solid fa-sliders fa-rotate-90 fa-lg" style="color: #000000;"></i></label>
       <div class="navegation">
         <ul>
           <li>

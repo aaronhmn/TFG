@@ -242,7 +242,7 @@ namespace views;
             style="display: flex; align-items: center; justify-content: center"
             target="_blank"
           >
-            <img src="../assets/img/marcas/amd.png" alt="AMD" class="img-fluid"
+            <img src="../assets/img/marcas/amd3.png" alt="AMD" class="img-fluid"
           /></a>
         </div>
         <div class="col-md-3 logo-container">
@@ -252,7 +252,7 @@ namespace views;
             target="_blank"
           >
             <img
-              src="../assets/img/marcas/nvidia.png"
+              src="../assets/img/marcas/nvidia2.png"
               alt="NVIDIA"
               class="img-fluid"
           /></a>
@@ -273,13 +273,13 @@ namespace views;
         </div>
         <div class="col-md-3 logo-container">
           <a
-            href="https://es.marsgaming.eu/es/"
+            href="https://www.asus.com/es/"
             style="display: flex; align-items: center; justify-content: center"
             target="_blank"
           >
             <img
-              src="../assets/img/marcas/LOGO-MARS-GAMING-2.png"
-              alt="Mars Gaming"
+              src="../assets/img/marcas/asus.png"
+              alt="Asus"
               class="img-fluid"
           /></a>
         </div>
@@ -290,7 +290,7 @@ namespace views;
             target="_blank"
           >
             <img
-              src="../assets/img/marcas/zowie.png"
+              src="../assets/img/marcas/zowie2.png"
               alt="Zowie"
               class="img-fluid"
           /></a>
