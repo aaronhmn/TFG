@@ -271,10 +271,14 @@ i.fa-solid.fa-chevron-down {
 }
 
 .logo-container img {
-  max-width: 50%;
+  max-width: 40%;
   height: auto;
 }
 
+#marcas{
+  margin-top: 150px; 
+  margin-bottom: 100px;
+}
 
 /*INFORMACION DE LA WEB*/
 .circle {
@@ -442,5 +446,25 @@ input.form-control:focus {
 
   #btnSubir {
     visibility: hidden;
+  }
+}
+
+@media (max-width:767px){
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+  }
+
+  .logo-container img {
+    max-width: 35%;
+    height: auto;
+  }
+
+  #marcas{
+    margin-top: 0px; 
+    margin-bottom: 0px;
   }
 }

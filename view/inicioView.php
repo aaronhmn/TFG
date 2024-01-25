@@ -258,7 +258,7 @@ namespace views;
           /></a>
         </div>
       </div>
-      <div class="row" style="margin-top: 120px; margin-bottom: 100px">
+      <div class="row" id="marcas">
         <div class="col-md-3 logo-container">
           <a
             href="https://www.intel.com/content/www/us/en/homepage.html"
