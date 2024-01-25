@@ -300,3 +300,9 @@ input:focus, select:focus, select, textarea.form-control:focus, input.form-contr
     }
 
 }
+
+@media (max-width:321px){
+    #mapa{
+      display: none;
+    }
+  }

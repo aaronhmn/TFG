@@ -260,6 +260,12 @@ textarea.form-control {
     }
 }
 
+@media (max-width: 1199px){
+    .col-md-8, .col-md-3 {
+        width: 100%;
+    }
+}
+
 @media (max-width: 768px) {
     .col-sm-12 {
       max-width: 100%;
@@ -303,3 +309,9 @@ textarea.form-control {
         border: 1px solid #ffa500;
     }
 }
+
+@media (max-width:321px){
+    #mapa{
+      display: none;
+    }
+  }

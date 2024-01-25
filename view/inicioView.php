@@ -385,7 +385,7 @@ namespace views;
     <div class="container py-5" style="padding-bottom: 0!important;">
         <div class="row text-center">
             <!-- Columna 1 -->
-            <div class="col-lg-6 col-md-12" style="margin-top: 10px; margin-bottom: 15px;">
+            <div class="col-lg-6 col-md-12" id="mapa" style="margin-top: 10px; margin-bottom: 15px;">
                 <div editable="rich">
                     <h2 style="color: #ffa500">Mapa</h2>
                 </div>
@@ -485,7 +485,7 @@ namespace views;
     <div class="container py-5" style="padding-bottom: 0!important;">
         <div class="row text-center">
             <!-- Columna 1 -->
-            <div class="col-lg-6 col-md-12" style="margin-top: 10px; margin-bottom: 15px;">
+            <div class="col-lg-6 col-md-12" id="mapa" style="margin-top: 10px; margin-bottom: 15px;">
                 <div editable="rich">
                     <h2 style="color: #ffa500">Mapa</h2>
                 </div>

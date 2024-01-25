@@ -150,7 +150,7 @@ namespace views;
 
     <div class="container" style="margin-top: 50px; margin-bottom: 100px;">
       <div class="row" style="margin-right: 0px;">
-        <div class="col-md-12 col-sm-12" style="background-color: #fff; margin: 6px; border-radius: 12px;">
+        <div class="col-xl-8 col-sm-12" style="background-color: #fff; margin: 6px; border-radius: 12px;">
           <form class="row g-3" style="margin: 10px">
             <h2 style="color: #8350f2; display:flex; justify-content:center;"><b>Contacto</b></h2>
             <div class="col-12">
@@ -181,9 +181,9 @@ namespace views;
           </form>
         </div><br><br>
 
-        <div class="col-md-12 col-sm-12" style="background-color: #fff; margin: 6px; border-radius: 12px;">
+        <div class="col-xl-3 col-sm-12" style="background-color: #fff; margin: 6px; border-radius: 12px;">
           <div class="row" style="display: flex; align-items: center; justify-content:center;">
-            <div class="col-auto" style="margin-top: 30px; margin-left: 30px;">
+            <div class="col-auto" style="margin-top: 30px;">
               <i class="fa-solid fa-phone fa-2x" style="color: #ffa500; cursor: auto;"></i>
             </div>
             <div class="col-auto" style="margin-top: 30px">
@@ -221,7 +221,7 @@ namespace views;
     <div class="container py-5" style="padding-bottom: 0!important;">
         <div class="row text-center">
             <!-- Columna 1 -->
-            <div class="col-lg-6 col-md-12" style="margin-top: 10px; margin-bottom: 15px;">
+            <div class="col-lg-6 col-md-12" id="mapa" style="margin-top: 10px; margin-bottom: 15px;">
                 <div editable="rich">
                     <h2 style="color: #ffa500">Mapa</h2>
                 </div>
@@ -321,7 +321,7 @@ namespace views;
     <div class="container py-5" style="padding-bottom: 0!important;">
         <div class="row text-center">
             <!-- Columna 1 -->
-            <div class="col-lg-6 col-md-12" style="margin-top: 10px; margin-bottom: 15px;">
+            <div class="col-lg-6 col-md-12" id="mapa" style="margin-top: 10px; margin-bottom: 15px;">
                 <div editable="rich">
                     <h2 style="color: #ffa500">Mapa</h2>
                 </div>

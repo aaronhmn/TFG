@@ -468,3 +468,9 @@ input.form-control:focus {
     margin-bottom: 0px;
   }
 }
+
+@media (max-width:321px){
+  #mapa{
+    display: none;
+  }
+}

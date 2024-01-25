@@ -483,3 +483,9 @@ input:focus, select:focus, select, input.form-control:focus {
         visibility: hidden;
      }
 }
+
+@media (max-width:321px){
+    #mapa{
+      display: none;
+    }
+  }
