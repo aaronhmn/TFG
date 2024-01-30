@@ -206,10 +206,10 @@ namespace views;
 
     <!--MARCAS-->
     <div class="container mt-5">
-      <div class="cuadradito" style="margin-left: 90px;">
+      <div class="cuadradito" style="margin-left: 5px;">
         <h3 style="margin-left:40px;"><b>Marcas</b></h3>
       </div>
-      <h4 style="margin-left: 90px; margin-top: 25px;"><b>Las marcas que componen nuestros productos</b></h4>
+      <h4 style="margin-left: 5px; margin-top: 25px;"><b>Las marcas que componen nuestros productos</b></h4>
       
       <div class="row" style="margin-top: 70px">
         <div class="col-md-3 logo-container">
