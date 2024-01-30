@@ -5,7 +5,7 @@
   font-family: "Montserrat", sans-serif;
 }
 
-/*BARRA DE NAVEGACION*/
+/*!BARRA DE NAVEGACION*/
 nav {
   width: 100%;
   height: 100px;
@@ -129,7 +129,7 @@ i.fa-solid.fa-chevron-down {
   flex: 1;
   left: 0;
   margin-top: 50px;
-  margin-left: 20px;
+  margin-left: 0px;
   width: 20px;
   height: 40px;
   color: #8530f2;
@@ -155,7 +155,7 @@ i.fa-solid.fa-chevron-down {
   margin-bottom: 125px;
 }
 
-/*FOOTER*/
+/*!FOOTER*/
 .li-footer {
   width: auto;
   list-style-type: none;
@@ -191,63 +191,37 @@ i.fa-solid.fa-chevron-down {
   padding: 7px;
 }
 
-.cards {
-  max-width: 1100px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 30px;
-}
-.cards h2.header {
-  font-size: 40px;
-  margin: 0 0 30px 0;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-.services {
-  display: flex;
-  align-items: center;
-}
+/*!Tarjetas de categorias*/
 .content {
-  display: flex;
-  flex-wrap: wrap;
-  flex: 1;
-  margin: 20px;
   padding: 20px;
   border: 2px solid black;
   border-radius: 4px;
   transition: all 0.3s ease;
 }
-.content .fab {
-  font-size: 70px;
-  margin: 16px 0;
-}
-.content > * {
-  flex: 1 1 100%;
-}
+
 .content:hover {
   color: white;
 }
-.content:hover a {
-  border-color: white;
-  background: white;
-}
+
 .content-1:hover {
   border-color: #ffa500;
   background: #8350f2;
 }
+
 .content-1:hover a {
   color: #8350f2;
 }
-.content h2 {
-  font-size: 30px;
-  margin: 16px 0;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+
+.content h3 {
+  font-size: 20px;
+  margin-top: 15px;
 }
-.content p {
-  font-size: 17px;
-  font-family: "Poppins", sans-serif;
+
+.content i {
+  margin-top: 15px;
+  cursor: pointer;
 }
+
 .content a {
   margin: 22px 0;
   background: black;
@@ -259,11 +233,16 @@ i.fa-solid.fa-chevron-down {
   border-radius: 25px;
   transition: 0.3s ease;
 }
+
 .content a:hover {
   border-radius: 4px;
 }
 
-/*MARCAS*/
+/*!MARCAS*/
+.contenedor-marcas{
+  margin-top: 150px;
+}
+
 .logo-container {
   display: flex;
   align-items: center;
@@ -275,12 +254,12 @@ i.fa-solid.fa-chevron-down {
   height: auto;
 }
 
-#marcas{
-  margin-top: 150px; 
-  margin-bottom: 100px;
+#marcas {
+  margin-top: 150px;
+  margin-bottom: 50px;
 }
 
-/*INFORMACION DE LA WEB*/
+/*!INFORMACION DE LA WEB*/
 .circle {
   background-color: rgba(128, 128, 128, 0.676);
   width: 70px;
@@ -400,6 +379,22 @@ input.form-control:focus {
   }
 }
 
+@media (max-width: 991px){
+  #marcas {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .logo-container img {
+    max-width: 35%;
+    height: auto;
+  }
+
+  .contenedor-marcas{
+    margin-top: 100px;
+  }
+}
+
 @media (max-width: 600px) {
   nav .logo {
     display: none;
@@ -503,5 +498,16 @@ input.form-control:focus {
     right: 0;
     /* transform: scale(0.9); */
     background: #f2f2f2;
+  }
+}
+
+@media (max-width: 281px){
+  .logo-container img {
+    max-width: 45%;
+    height: auto;
+  }
+  #marcas{
+    margin-top: -20px; 
+    margin-bottom: -20px;
   }
 }
