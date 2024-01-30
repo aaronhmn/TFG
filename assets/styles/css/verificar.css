@@ -212,7 +212,7 @@ input:focus, select:focus, select, input.form-control:focus {
 
     nav .menu{
         display: block;
-        width: 100px;
+        width: 75px;
         text-align: center;
     }
     #chk1:checked ~ ul{

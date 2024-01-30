@@ -371,7 +371,7 @@ input.form-control:focus {
 
   nav .menu {
     display: block;
-    width: 100px;
+    width: 75px;
     text-align: center;
   }
   #chk1:checked ~ ul {
@@ -470,7 +470,38 @@ input.form-control:focus {
 }
 
 @media (max-width:321px){
+
   #mapa{
     display: none;
+  }
+
+  .img-logo{
+    display: none;
+  }
+
+  .nav-busqueda input {
+    width: 120%;
+    height: 40px;
+    border: none;
+    outline: none;
+    background: #f2f2f2;
+    border-radius: 10px;
+    color: #8350f2;
+    font-size: 16px;
+    /* text-align: center; */
+    padding-left: 10px;
+  }
+
+  .nav-busqueda button {
+    cursor: pointer;
+    width: 0px;
+    height: 40px;
+    border-radius: 30px;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    /* transform: scale(0.9); */
+    background: #f2f2f2;
   }
 }
