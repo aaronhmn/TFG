@@ -255,9 +255,9 @@ namespace views;
           </a>
         </div>
       </div>
-    </div>
+    </div><br>
+    <hr>
   </div>
-  <br /><br />
 
   <!--PROXIMOS PRODUCTOS-->
   <div class="container py-5">
@@ -279,7 +279,8 @@ namespace views;
       <div class="col-lg-4 mb-4 mb-lg-0">
         <img src="../assets/img/Proximos productos/lampara.jpg" class="w-100 shadow-1-strong rounded mb-4" alt="" sizes="(max-width: 1080px) 100vw, 1080px" width="1080" height="650px" loading="lazy">
       </div>
-    </div>
+    </div><br><br><br><br>
+    <hr>
   </div><br>
 
   <!--INFO-->
