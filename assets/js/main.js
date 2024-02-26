@@ -62,5 +62,3 @@
   let trailValue = 0
   // interval (Duration)
   let interval = 4000
-
-  //Select Tienda
