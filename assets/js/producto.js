@@ -47,3 +47,16 @@
   smallImg[3].onclick = function(){
     mainImg.src = smallImg[3].src;
   }
+
+  // Obtener todos los elementos con la clase 'small-img-col'
+  const smallImgCols = document.querySelectorAll('.small-img-col');
+
+  // Iterar sobre cada elemento y agregar un evento de clic
+  smallImgCols.forEach(col => {
+    col.addEventListener('click', () => {
+      // Eliminar la clase 'selected' de todos los elementos
+      smallImgCols.forEach(col => col.classList.remove('selected'));
+      // Agregar la clase 'selected' solo al elemento clicado
+      col.classList.add('selected');
+    });
+  });

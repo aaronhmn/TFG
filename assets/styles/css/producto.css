@@ -159,6 +159,10 @@ input:focus, select:focus, select, textarea.form-control:focus, input.form-contr
 }
 
 /* IMAGENES PRODUCTOS */
+.img-fluid{
+    border-radius: 15px;
+}
+
 .small-img-group{
     display: flex;
     justify-content: space-between;
@@ -167,6 +171,15 @@ input:focus, select:focus, select, textarea.form-control:focus, input.form-contr
 .small-img-col{
     flex-basis: 24%;
     cursor: pointer;
+}
+
+.small-img{
+    border-radius: 15px;
+}
+
+.small-img-col.selected{
+    border: solid 2px #8350F2 !important;
+    border-radius: 15px;
 }
 
 .nombre-producto{
