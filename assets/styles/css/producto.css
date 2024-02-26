@@ -236,11 +236,11 @@ input:focus, select:focus, select, textarea.form-control:focus, input.form-contr
     width: 50%;
   }
 
-  .boton-carrito:hover{
+.boton-carrito:hover{
     background: #6f39e4;
-  }
+}
 
-  .boton-like{
+.boton-like{
     width: 44px;
     height: 44px;
     text-align: center;
@@ -253,35 +253,62 @@ input:focus, select:focus, select, textarea.form-control:focus, input.form-contr
     transition: background-color 0.3s;
     border: none;
     color: #fff;
-  }
+}
 
-  .boton-like:hover{
+.boton-like:hover{
     background: rgb(255, 71, 102);
-  }
+}
 
-  .boton-comprar{
-    background: #ffa500;
-    padding: .5em;
+.boton-fav{
+    background: rgb(255, 71, 102);
+    padding: .8em;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
     border: none;
     color: #fff;
-    width: 100%;
-  }
+    width: 50%;
+}
 
-  .boton-comprar:hover{
-    background: #e69500;
-  }
+.boton-fav:hover{
+    background: #e74c3c;
+}
 
-  .info-producto{
-    text-align: center;
-    margin-top: 100px;
-  }
-
-  .tabla-iconos {
+.tabla-iconos {
     border: 2px solid black;
-  }
+}
+
+.info-producto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+}
+
+.tab-content {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+}
+
+.nav-pills {
+    justify-content: center; /* Centrar los botones de las pestañas */
+}
+
+.nav-link {
+    margin: 0 10px; /* Ajustar el espacio entre los elementos */
+}
+
+.nav-link b {
+   font-size: 18px;
+}
+
+.nav-link.active,
+.nav-link:focus {
+    background-color: #8350f2 !important; /* Cambiar el color de fondo de los botones cuando están activos, con foco o en hover */
+    color: white !important; /* Cambiar el color del texto cuando están activos */
+}
+
 
 /*!FOOTER*/
 .li-footer{

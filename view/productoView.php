@@ -172,9 +172,9 @@ namespace views;
         <div class="row mt-5">
           <div class="col">
             <div class="d-flex align-items-center">
-              <input class="mas-productos" type="number" value="1" min="1">
-              <button class="boton-carrito ms-3">Añadir al Carrito</button>
-              <button class="boton-like ms-3"><i class="fas fa-heart" style="color: white;"></i></button>
+              <!-- <input class="mas-productos" type="number" value="1" min="1"> -->
+              <button class="boton-carrito">Añadir al Carrito<i class="fas fa-shopping-cart" style="color: white; margin-left: 10px;"></i></button>
+              <button class="boton-fav ms-2">Añadir a Favorito<i class="fas fa-heart" style="color: white; margin-left: 10px;"></i></button>
             </div>
           </div>
         </div>
@@ -214,13 +214,13 @@ namespace views;
     <div class="info-producto">
       <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
         <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="pills-descripcion-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Características</button>
+          <button class="nav-link active" id="pills-descripcion-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" style="color: #8350f2;"><b>Características</b></button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="pills-especificacion-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Especificación</button>
+          <button class="nav-link" id="pills-especificacion-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" style="color: #8350f2;"><b>Especificación</b></button>
         </li>
         <li class="nav-item" role="presentation">
-          <button class="nav-link" id="pills-comentario-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Comentarios</button>
+          <button class="nav-link" id="pills-comentario-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" style="color: #8350f2;"><b>Comentarios</b></button>
         </li>
       </ul>
       <div class="tab-content" id="pills-tabContent">
