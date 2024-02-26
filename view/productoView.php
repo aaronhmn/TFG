@@ -121,7 +121,7 @@ namespace views;
   <div class="container sproduct mt-5">
     <div class="row">
       <div class="col-lg-5 col-md-12 col-12 mb-5">
-        <img class="img-fluid w-100 pb-2" src="../assets/img/productos/perifericos/auriculares/Auricular 2/img-1.webp" alt="">
+        <img class="img-fluid w-100 pb-2" src="../assets/img/productos/perifericos/auriculares/Auricular 2/img-1.webp" id="mainImg" alt="">
 
         <div class="small-img-group">
           <div class="small-img-col">
