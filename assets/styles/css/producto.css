@@ -203,6 +203,17 @@ input:focus, select:focus, select, textarea.form-control:focus, input.form-contr
     /* margin-left: 30px; */
 }
 
+/* Estilo personalizado para el botón del accordion cuando está expandido */
+.accordion-item button.accordion-button:not(.collapsed) {
+    background-color: #8350f2 !important;
+    color: white !important;
+}
+  
+ /* Cambiar el color de la sombra al enfocar */
+.accordion-item button.accordion-button:focus {
+    box-shadow: 0 0 0 0.2rem rgba(109, 65, 202, 0.5) !important; /* Color de sombra ligeramente más claro */
+}
+
 .mas-productos {
     width: 48px;
     height: 38px;
