@@ -53,7 +53,6 @@ nav .nav-busqueda{
     border-radius: 10px;
     color: #8350F2;
     font-size: 16px;
-    /*text-align: center;*/
     padding-left: 10px;
 }
 
@@ -199,11 +198,9 @@ form{
     display: flex;
     align-items: center;
     justify-content: center;
-    /* background-color: white;  */
     margin-bottom: 20px; 
     border-radius: 1.2em; 
     padding: 22px;
-    /* box-shadow: 0 10px 20px rgba(0, 0, 0, .2); */
     border: solid 2px #8350f2;
 }
 
@@ -362,7 +359,6 @@ form{
     display: flex;
     align-items: center;
     flex-direction: column;
-    /* justify-content: space-between; */
     margin-bottom: .6em;
     background: #fff;
   }
@@ -411,10 +407,6 @@ form{
     color: #6f39e4;
   }
 
-  /* .descripcion{
-    margin: .6em 0;
-  } */
-
   .contenedor-boton{
     display: flex;
     justify-content: center;
@@ -461,36 +453,6 @@ form{
   .icono-carrito i{
     background: #ffffff00;
   }
-
-  /* .boton-like{
-    width: 44px;
-    height: 44px;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 2em;
-    line-height: 1.92em;
-    background: red;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    transition: background-color 0.3s;
-    border: none;
-    color: #fff;
-    margin: 10px;
-  }
-
-  .boton-like:hover{
-    background: rgb(255, 71, 102);
-  }
-
-  .boton-like i{
-    background: #ffffff00;
-  }
-
-  .icono-carrito .boton-carrito p, .boton-like{
-    padding: .5em .8em;
-  } */
 
  /*!FOOTER*/
 .li-footer{
