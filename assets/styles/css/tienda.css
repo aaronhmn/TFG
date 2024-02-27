@@ -145,6 +145,21 @@ i.fa-solid.fa-chevron-down{
     border: 1px solid #8350F2;
 }
 
+nav input:focus,
+select:focus,
+select,
+input.form-control:focus {
+  outline: 2px solid #8350f2;
+
+  outline-width: 1 !important;
+
+  box-shadow: none;
+
+  -moz-box-shadow: none;
+
+  -webkit-box-shadow: none;
+}
+
 /*!CHECKBOX DE LOS FILTROS*/
 .check{
     margin-right: 3px;

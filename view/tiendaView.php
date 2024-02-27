@@ -233,7 +233,7 @@
           <!-- Card 1 -->
           <div class="col mb-4">
           <div class="tarjeta-producto">
-              <a href="../controller/productoController.php"><img class="img-producto" src="img-2.webp" alt="producto"></a>
+              <a href="../controller/productoController.php"><img class="img-producto" src="../assets/img/productos/perifericos/auriculares/Auricular 2/img-1.webp" alt="producto"></a>
               <a href="../controller/productoController.php">
                 <div class="contenedor-tarjeta">
                   <div class="contenedor-info">
@@ -258,8 +258,8 @@
           <!-- Card 2 -->
           <div class="col mb-4">
           <div class="tarjeta-producto">
-              <a href="#"><img class="img-producto" src="img-2.webp" alt="producto"></a>
-              <a href="#">
+              <a href="../controller/productoController.php"><img class="img-producto" src="../assets/img/productos/perifericos/auriculares/Auricular 2/img-1.webp" alt="producto"></a>
+              <a href="../controller/productoController.php">
                 <div class="contenedor-tarjeta">
                   <div class="contenedor-info">
                     <div class="estrellas">
@@ -272,7 +272,7 @@
                     <h3 class="precio"><b>57,99 €</b></h3>
                   </div>
                   <hr>
-                  <a href="#">
+                  <a href="../controller/productoController.php">
                     <p class="nombre-producto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores nobis explicabo fugit?</p>
                   </a>
                 </div>
@@ -283,8 +283,8 @@
           <!-- Card 3 -->
           <div class="col mb-4">
           <div class="tarjeta-producto">
-              <a href="#"><img class="img-producto" src="img-2.webp" alt="producto"></a>
-              <a href="#">
+              <a href="../controller/productoController.php"><img class="img-producto" src="../assets/img/productos/perifericos/auriculares/Auricular 2/img-1.webp" alt="producto"></a>
+              <a href="../controller/productoController.php">
                 <div class="contenedor-tarjeta">
                   <div class="contenedor-info">
                     <div class="estrellas">
@@ -297,7 +297,7 @@
                     <h3 class="precio"><b>57,99 €</b></h3>
                   </div>
                   <hr>
-                  <a href="#">
+                  <a href="../controller/productoController.php">
                     <p class="nombre-producto">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores soluta quod vel tempora exercitationem illum! Ut facilis dolor ducimus impedit dolores.</p>
                   </a>
                 </div>
@@ -308,8 +308,8 @@
           <!-- Card 4 -->
           <div class="col mb-4">
           <div class="tarjeta-producto">
-              <a href="#"><img class="img-producto" src="img-2.webp" alt="producto"></a>
-              <a href="#">
+              <a href="../controller/productoController.php"><img class="img-producto" src="../assets/img/productos/perifericos/auriculares/Auricular 2/img-1.webp" alt="producto"></a>
+              <a href="../controller/productoController.php">
                 <div class="contenedor-tarjeta">
                   <div class="contenedor-info">
                     <div class="estrellas">
@@ -322,7 +322,7 @@
                     <h3 class="precio"><b>57,99 €</b></h3>
                   </div>
                   <hr>
-                  <a href="#">
+                  <a href="../controller/productoController.php">
                     <p class="nombre-producto">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores soluta quod vel tempora exercitationem illum! Ut facilis dolor ducimus impedit dolores.</p>
                   </a>
                 </div>
@@ -333,8 +333,8 @@
           <!-- Card 5 -->
           <div class="col mb-4">
           <div class="tarjeta-producto">
-              <a href="#"><img class="img-producto" src="img-2.webp" alt="producto"></a>
-              <a href="#">
+              <a href="../controller/productoController.php"><img class="img-producto" src="../assets/img/productos/perifericos/auriculares/Auricular 2/img-1.webp" alt="producto"></a>
+              <a href="../controller/productoController.php">
                 <div class="contenedor-tarjeta">
                   <div class="contenedor-info">
                     <div class="estrellas">
@@ -347,7 +347,7 @@
                     <h3 class="precio"><b>57,99 €</b></h3>
                   </div>
                   <hr>
-                  <a href="#">
+                  <a href="../controller/productoController.php">
                     <p class="nombre-producto">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores soluta quod vel tempora exercitationem illum! Ut facilis dolor ducimus impedit dolores.</p>
                   </a>
                 </div>
