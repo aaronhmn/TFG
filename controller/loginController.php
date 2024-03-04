@@ -52,19 +52,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (is_array($resultado) && $usuario["contrasena"] == $resultado["contrasena"]) {
                 session_start();
                 $_SESSION['email'] = $email;
-
+            
                 if ($resultado["activo"] == 0) {
                     header("Location: ../controller/verificarController.php");
                     $_SESSION['login'] = false;
                     exit();
                 } else {
-                    header("Location: ../controller/inicioController.php");
+                    // Redirigir a diferentes vistas según el rol del usuario
+                    if ($resultado["rol"] == 0) {
+                        // Si el rol es 0 (cliente), redirigir al inicio de los clientes
+                        header("Location: ../controller/inicioController.php");
+                    } elseif ($resultado["rol"] == 1) {
+                        // Si el rol es 1 (administrador), redirigir al inicio de los administradores
+                        header("Location: ../controller/inicioAdminController.php");
+                    }
                     $_SESSION['login'] = true;
                     exit();
                 }
             } else {
-                echo "<script>console.log('Email o contraseña incorrecta');</script >";
+                echo "<script>console.log('Email o contraseña incorrecta');</script>";
             }
+            
         }
     }
 }

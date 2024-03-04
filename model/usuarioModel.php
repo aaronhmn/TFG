@@ -184,9 +184,7 @@ class Usuario
         if (isset($usuario) && isset($usuario["idusuario"]) && is_numeric($usuario["idusuario"])  && $conexPDO != null) {
             try {
                 //Preparamos la sentencia
-                $sentencia = $conexPDO->prepare("UPDATE genesis.usuario set nombre=:nombre, primer_apellido=:primer_apellido, segundo_apellido=:segundo_apellido, dni=:dni, email=:email, nombre_usuario=:nombre_usuario, direccion=:direccion, telefono=:telefono, activacion=:activacion, activo=:activo, rol=:activo, contrasena=:contrasena where idusuario=:idusuario");
-
-                //print($sentencia->queryString);
+                $sentencia = $conexPDO->prepare("UPDATE genesis.usuario set nombre=:nombre, primer_apellido=:primer_apellido, segundo_apellido=:segundo_apellido, dni=:dni, email=:email, nombre_usuario=:nombre_usuario, direccion=:direccion, telefono=:telefono, activacion=:activacion, activo=:activo, rol=:rol where idusuario=:idusuario");
 
                 //Asociamos los valores a los parametros de la sentencia sql
                 $sentencia->bindParam(":idusuario", $usuario["idusuario"]);
@@ -201,7 +199,8 @@ class Usuario
                 $sentencia->bindParam(":activacion", $usuario["activacion"]);
                 $sentencia->bindParam(":activo", $usuario["activo"]);
                 $sentencia->bindParam(":rol", $usuario["rol"]);
-                $sentencia->bindParam(":contrasena", $usuario["contrasena"]);
+                /* $sentencia->bindParam(":contrasena", $usuario["contrasena"]); */
+                
                 //Ejecutamos la sentencia
                 $result = $sentencia->execute();
             } catch (PDOException $e) {

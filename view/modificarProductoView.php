@@ -46,7 +46,7 @@ namespace view;
           </div>
 
           <div class=" form-group row mb-sm-2 mt-sm-2 ">
-            <label for="subcategoria" class="col-lg-3 col-form-label">Subategoria:</label>
+            <label for="sub_categoria" class="col-lg-3 col-form-label">Subategoria:</label>
             <div class="col-lg-6">
                <input type="text" class="form-control" id="sub_categoria" name="sub_categoria" 
                value='<?=(isset($producto)?$producto["sub_categoria"]:"") ?>' />
@@ -88,7 +88,7 @@ namespace view;
                 <br>
                 <?php echo '<img src="'.$producto['ruta_imagen'].'" width="200" height="200"/>'; ?>
                 <br><br>
-                <input type="file" class="form-control" name="inputImagen">
+                <input type="file" class="form-control" id="inputImagen" name="inputImagen">
             </div>
 
           </div>
