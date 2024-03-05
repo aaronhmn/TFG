@@ -12,5 +12,5 @@ require_once("../model/usuarioModel.php");
 $mensaje=null;
 
 
-include("../view/checkoutView.php");
+include("../view/pedidoView.php");
 ?>

@@ -29,7 +29,7 @@ namespace views;
       rel="stylesheet"
     />
 
-    <title>Página de Contacto - Genesis</title>
+    <title>Página de Pedido - Genesis</title>
   </head>
   <body style="background-color: #e6e6fa">
     <!--NAV DE LA PAGINA-->
