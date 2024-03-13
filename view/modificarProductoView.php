@@ -46,7 +46,7 @@ namespace view;
           </div>
 
           <div class=" form-group row mb-sm-2 mt-sm-2 ">
-            <label for="sub_categoria" class="col-lg-3 col-form-label">Subategoria:</label>
+            <label for="sub_categoria" class="col-lg-3 col-form-label">Subcategoria:</label>
             <div class="col-lg-6">
                <input type="text" class="form-control" id="sub_categoria" name="sub_categoria" 
                value='<?=(isset($producto)?$producto["sub_categoria"]:"") ?>' />
@@ -56,14 +56,14 @@ namespace view;
           <div class="form-group row mb-sm-2 mt-sm-2">
             <label for="descripcion" class="col-lg-3 col-form-label">Descripción:</label>
             <div class="col-lg-6">
-              <textarea class="form-control" id="descripcion" name="descripcion" rows="5"><?=$producto["descripcion"] = $_GET["descripcion"];?></textarea>
+              <textarea class="form-control" id="descripcion" name="descripcion" rows="5"><?=$producto["descripcion"];?></textarea>
             </div>
           </div>
 
           <div class="form-group row mb-sm-2 mt-sm-2">
             <label for="especificacion" class="col-lg-3 col-form-label">Especificación:</label>
             <div class="col-lg-6">
-              <textarea class="form-control" id="especificacion" name="especificacion" rows="5"><?=$producto["especificacion"] = $_GET["especificacion"];?></textarea>
+              <textarea class="form-control" id="especificacion" name="especificacion" rows="5"><?=$producto["especificacion"];?></textarea>
             </div>
           </div>
 

@@ -15,6 +15,7 @@ $producto = array();
 
 // Solo se ejecutará cuando reciba una petición del registro
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+
     $producto["idproducto"] = $_GET["idProducto"];
     $producto["nombre"] = $_GET["nombre"];
     $producto["precio"] = $_GET["precio"];
@@ -31,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 // Solo se ejecutará cuando reciba una petición del registro
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
     $producto["idproducto"] = $_POST["idProducto"];
     $producto["nombre"] = $_POST["nombre"];
     $producto["precio"] = $_POST["precio"];
@@ -49,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $imageType = $_FILES["inputImagen"]["type"];
 
     if (substr($imageType, 0, 5) == "image") {
+
         $target_dir = "../assets/img/products/";
         $file = $_FILES["inputImagen"]["name"];
         $path = pathinfo($file);
@@ -62,27 +65,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $producto["imagen"] = $imageName;
         $producto["ruta_imagen"] = $path_filename_ext;
 
-        if (file_exists($path_filename_ext)) {
-        } else {
-            if (move_uploaded_file($tmp_name, $path_filename_ext)) {
-            } else {
+        if(file_exists($path_filename_ext))
+            {
+
             }
-        }
+            else
+            {
+                if(move_uploaded_file($tmp_name, $path_filename_ext))
+                {
+
+                }
+                else
+                {
+
+                }
+            }
     }
 
     //Nos conectamos a la Bd
     $conexPDO = utils::conectar();
     $gestorproducto = new producto();
     $gestorproducto->updateProducto($producto, $conexPDO);
-
-    // Verifica el contenido de $_GET
-    var_dump($_GET);
-
-    // Verifica el contenido de $_POST
-    var_dump($_POST);
-
-    // Verifica el contenido de $producto
-    var_dump($producto);
 
     include("../view/modificarProductoView.php");
 }
