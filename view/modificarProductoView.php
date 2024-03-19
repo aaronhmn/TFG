@@ -90,6 +90,8 @@ namespace view;
                 <br><br>
                 <input type="file" class="form-control" id="inputImagen" name="inputImagen">
             </div>
+            <!-- Agregar el campo oculto para la ruta de la imagen para que no se borre cada vez que se modifique algo -->
+            <input type="hidden" name="ruta_imagen" value='<?=(isset($producto)?$producto["ruta_imagen"]:"") ?>' />
 
           </div>
             

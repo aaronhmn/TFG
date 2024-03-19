@@ -43,49 +43,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $producto["marca"] = $_POST["marca"];
     $producto["stock"] = $_POST["stock"];
 
+    // Verificar si se ha enviado una nueva imagen
+    if ($_FILES["inputImagen"]["size"] > 0) {
+        // Obtener la información de la nueva imagen
+        $imageName = $_FILES["inputImagen"]["name"];
+        $imageData = $_FILES["inputImagen"]["tmp_name"];
+        $imageType = $_FILES["inputImagen"]["type"];
 
+        if (substr($imageType, 0, 5) == "image") {
+            $target_dir = "../assets/img/products/";
+            $file = $_FILES["inputImagen"]["name"];
+            $path = pathinfo($file);
+            $filename = $path['filename'];
+            $ext = $path['extension'];
+            $tmp_name = $_FILES["inputImagen"]["tmp_name"];
 
-    // Obtengo la imagen
-    $imageName = $_FILES["inputImagen"]["name"];
-    $imageData = $_FILES["inputImagen"]["tmp_name"];
-    $imageType = $_FILES["inputImagen"]["type"];
+            $path_filename_ext = $target_dir . $filename . "." . $ext;
 
-    if (substr($imageType, 0, 5) == "image") {
-
-        $target_dir = "../assets/img/products/";
-        $file = $_FILES["inputImagen"]["name"];
-        $path = pathinfo($file);
-        $filename = $path['filename'];
-        $ext = $path['extension'];
-        $tmp_name = $_FILES["inputImagen"]["tmp_name"];
-
-        $path_filename_ext = $target_dir . $filename . "." . $ext;
-
-        $producto["tipo_imagen"] = $imageData;
-        $producto["imagen"] = $imageName;
-        $producto["ruta_imagen"] = $path_filename_ext;
-
-        if(file_exists($path_filename_ext))
-            {
-
+            // Mover la imagen al directorio de destino
+            if (move_uploaded_file($tmp_name, $path_filename_ext)) {
+                // Actualizar la ruta de la imagen en el array del producto
+                $producto["ruta_imagen"] = $path_filename_ext;
+            } else {
+                // Manejar el error si no se pudo mover la imagen
+                // Puedes mostrar un mensaje de error o realizar otra acción adecuada
             }
-            else
-            {
-                if(move_uploaded_file($tmp_name, $path_filename_ext))
-                {
-
-                }
-                else
-                {
-
-                }
-            }
+        }
+    } else {
+        // Conservar la ruta de la imagen existente si no se envía una nueva imagen
+        $producto["ruta_imagen"] = $_POST["ruta_imagen"];
     }
 
-    //Nos conectamos a la Bd
+    // Actualizar el producto en la base de datos
     $conexPDO = utils::conectar();
     $gestorproducto = new producto();
     $gestorproducto->updateProducto($producto, $conexPDO);
 
+    // Incluir la vista para mostrar el resultado
     include("../view/modificarProductoView.php");
 }
