@@ -26,7 +26,7 @@ namespace view;
 
                     <div class="mb-3">
                         <label for="inputEdad" class="form-label">Precio</label>
-                        <input type="number" class="form-control" name="inputPrecio" aria-describedby="emailHelp">
+                        <input type="number" step="0.01" class="form-control" name="inputPrecio" aria-describedby="emailHelp">
                     </div>
 
                     <div class="mb-3">
@@ -60,8 +60,8 @@ namespace view;
                     </div>
 
                     <div class="mb-3">
-                        <label for="inputImagen" class="form-label">Imagen</label>
-                        <input type="file" class="form-control" name="inputImagen">
+                        <label for="inputImagen" class="form-label">Inserta las imágenes:</label>
+                        <input type="file" class="form-control" id="inputImagen" name="inputImagen">
                     </div>
 
                     <div class="d-grid">

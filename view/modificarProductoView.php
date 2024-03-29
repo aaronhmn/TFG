@@ -32,7 +32,7 @@ namespace view;
           <div class=" form-group row mb-sm-2 mt-sm-2 ">
             <label for="precio" class="col-lg-3 col-form-label">Precio:</label>
             <div class="col-lg-6">
-               <input type="number" class="form-control" id="precio" name="precio" 
+               <input type="number" step="0.01" class="form-control" id="precio" name="precio" 
                value='<?=(isset($producto)?$producto["precio"]:"") ?>' />
             </div>
           </div>
@@ -84,7 +84,7 @@ namespace view;
           </div>
 
             <div class="mb-3">
-                <label for="inputImagen" class="form-label">Imagen del producto: </label>
+                <label for="inputImagen" class="form-label">Imágenes del producto: </label>
                 <br>
                 <?php echo '<img src="'.$producto['ruta_imagen'].'" width="200" height="200"/>'; ?>
                 <br><br>
