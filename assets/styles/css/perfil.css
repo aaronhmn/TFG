@@ -129,21 +129,6 @@ i.fa-solid.fa-chevron-down{
     color: #8350F2;
 }
 
-.boton-cs{
-    background-color: #000;
-    color: #fff;
-    border: 1px solid #000;
-    border-radius: 8px;
-    width: 140px;
-    height: 42px;
-}
-
-.boton-cs:hover{
-    background-color: #8350F2;
-    color: #fff;
-    border: 1px solid #8350F2;
-}
-
 input:focus, select:focus, select, textarea.form-control:focus, input.form-control:focus {
 
     outline: 2px solid #8350F2;
@@ -217,12 +202,12 @@ input:focus, select:focus, select, textarea.form-control:focus, input.form-contr
         top: 100px;
         right: -100%;
         background: #8350F2;
-        box-shadow: 5px 0px 0px #000;
         height: calc(70vh - 100px);
         width: 100%;
         flex-direction: column;
         align-items: center;
         transition: right 0.3s linear;
+        padding-left: 0;
     }
 
     nav ul li a{
@@ -251,13 +236,6 @@ input:focus, select:focus, select, textarea.form-control:focus, input.form-contr
     nav .img-logo{
         width: 80px;
     }
-
-    .boton-cs:hover{
-        background-color: #ffa500;
-        color: #000;
-        border: 1px solid #ffa500;
-    }
-
 }
 
 @media (max-width: 768px) {
@@ -277,12 +255,12 @@ input:focus, select:focus, select, textarea.form-control:focus, input.form-contr
         top: 100px;
         right: -100%;
         background: #8350F2;
-        box-shadow: 5px 0px 0px #000;
         height: calc(100vh - 100px);
         width: 100%;
         flex-direction: column;
         align-items: center;
         transition: right 0.3s linear;
+        padding-left: 0;
     }
 
     nav .nav-busqueda{
@@ -292,13 +270,6 @@ input:focus, select:focus, select, textarea.form-control:focus, input.form-contr
     nav .img-logo{
         width: 75px;
     }
-
-    .boton-cs:hover{
-        background-color: #ffa500;
-        color: #000;
-        border: 1px solid #ffa500;
-    }
-
 }
 
 @media (max-width:321px){

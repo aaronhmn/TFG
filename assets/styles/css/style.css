@@ -102,26 +102,54 @@ i.fas.fa-sign-out-alt {
   color: #000;
 }
 
-i.fas.fa-shopping-cart:hover,
+/* i.fas.fa-shopping-cart:hover,
 i.fa-solid.fa-user:hover,
 i.fas.fa-sign-out-alt,
 i.fa-solid.fa-chevron-down {
   color: #8350f2;
+} */
+
+.dropdown-menu {
+  min-width: 220px; 
+  max-height: 185px;
+  background-color: #8350f2; /** este color #D3D3D3 de fondo o el color lavanda */
+  border: 2px solid #e6e6fa;
+  display: none;
+  position: absolute;
+  top: calc(100% + 18px) !important; /* 10px por debajo del icono de usuario */
+  left: 50% !important; /* Centrar horizontalmente */
+  transform: translateX(-50%) !important; /* Alinear al centro */
 }
 
-.boton-cs {
-  background-color: #000;
+.dropdown-menu a.dropdown-item{
+  border: none;
   color: #fff;
-  border: 1px solid #000;
-  border-radius: 8px;
-  width: 140px;
-  height: 42px;
 }
 
-.boton-cs:hover {
-  background-color: #8350f2;
+.dropdown-menu a.dropdown-item:hover {
+  background-color: #e6e6fa;
+  color: #000;
+}
+
+.dropdown-menu button.dropdown-item {
+  font-size: 18px;
   color: #fff;
-  border: 1px solid #8350f2;
+}
+
+.dropdown-menu button.dropdown-item:hover {
+  background-color: red;
+  color: white;
+}
+
+/* Estilo de la flecha */
+.dropdown-toggle::after {
+  font-family: "Font Awesome 6 Solid";   /* Usamos la versión gratuita de Font Awesome */
+  transition: transform 0.3s ease;
+  margin-left: 0.25rem;
+}
+
+.dropdown-toggle[aria-expanded="true"]::after {
+  transform: rotate(180deg);   /* Girar la flecha hacia arriba */
 }
 
 .cuadradito {
@@ -326,12 +354,12 @@ input.form-control:focus {
     top: 100px;
     right: -100%;
     background: #8350f2;
-    box-shadow: 5px 0px 0px #000;
-    height: calc(70vh - 100px);
+    height: calc(55vh - 100px);
     width: 100%;
     flex-direction: column;
     align-items: center;
     transition: right 0.3s linear;
+    padding-left: 0;
   }
 
   nav ul li a {
@@ -343,10 +371,10 @@ input.form-control:focus {
     color: #f2f2f2;
   }
 
-  i.fas.fa-shopping-cart:hover,
+  /* i.fas.fa-shopping-cart:hover,
   i.fa-solid.fa-user:hover {
     color: #f2f2f2;
-  }
+  } */
 
   nav .menu {
     display: block;
@@ -371,11 +399,32 @@ input.form-control:focus {
     max-width: 50%;
     height: auto;
   }
-
-  .boton-cs:hover {
-    background-color: #ffa500;
+  
+  .dropdown-menu {
+    min-width: 220px; 
+    max-height: 185px;
+    background-color: #e6e6fa; /** este color #D3D3D3 de fondo o el color lavanda */
+    border: 3px solid #8350f2;
+    display: none;
+    position: absolute;
+    top: calc(100% + 18px) !important; /* 10px por debajo del icono de usuario */
+    left: 50% !important; /* Centrar horizontalmente */
+    transform: translateX(-50%) !important; /* Alinear al centro */
+  }
+  
+  .dropdown-menu a.dropdown-item{
+    border: none;
     color: #000;
-    border: 1px solid #ffa500;
+  }
+  
+  .dropdown-menu a.dropdown-item:hover {
+    background-color: #8350f2;
+    color: #fff;
+  }
+  
+  .dropdown-menu button.dropdown-item {
+    font-size: 18px;
+    color: #000;
   }
 }
 
@@ -405,12 +454,12 @@ input.form-control:focus {
     top: 100px;
     right: -100%;
     background: #8350f2;
-    box-shadow: 5px 0px 0px #000;
-    height: calc(100vh - 100px);
+    height: calc(80vh - 100px);
     width: 100%;
     flex-direction: column;
     align-items: center;
     transition: right 0.3s linear;
+    padding-left: 0;
   }
 
   nav .nav-busqueda {
@@ -419,12 +468,6 @@ input.form-control:focus {
 
   nav .img-logo {
     width: 75px;
-  }
-
-  .boton-cs:hover {
-    background-color: #ffa500;
-    color: #000;
-    border: 1px solid #ffa500;
   }
 
   .logo-container {
@@ -511,3 +554,4 @@ input.form-control:focus {
     margin-bottom: -20px;
   }
 }
+

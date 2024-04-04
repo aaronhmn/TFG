@@ -61,7 +61,7 @@ namespace view;
 
                     <div class="mb-3">
                         <label for="inputImagen" class="form-label">Inserta las imágenes:</label>
-                        <input type="file" class="form-control" id="inputImagen" name="inputImagen">
+                        <input type="file" class="form-control" id="inputImagen" name="inputImagen[]" multiple>
                     </div>
 
                     <div class="d-grid">
