@@ -1,4 +1,5 @@
 <?php
+
 namespace model;
 
 require_once("utils.php");
@@ -185,5 +186,38 @@ class producto
         }
 
         return $result;
+    }
+
+    public function getImagenesPorProducto($idProducto, $conexPDO)
+    {
+        $rutasImagenes = [];
+
+        if (isset($idProducto) && is_numeric($idProducto)) {
+            if ($conexPDO != null) {
+                try {
+                    // Preparamos la sentencia SQL para obtener las rutas de las imágenes
+                    $sentencia = $conexPDO->prepare("SELECT ruta_imagen FROM genesis.producto WHERE idproducto = :idProducto");
+
+                    // Vinculamos el parámetro ':idProducto' al valor real de la variable $idProducto
+                    $sentencia->bindParam(':idProducto', $idProducto, PDO::PARAM_INT);
+
+                    // Ejecutamos la consulta
+                    $sentencia->execute();
+
+                    // Obtenemos el resultado de la consulta
+                    $fila = $sentencia->fetch(PDO::FETCH_ASSOC);
+
+                    if ($fila && $fila['ruta_imagen']) {
+                        // Si la columna 'ruta_imagen' contiene las rutas de las imágenes separadas por comas,
+                        // las separamos y las agregamos al array $rutasImagenes
+                        $rutasImagenes = explode(',', $fila['ruta_imagen']);
+                    }
+                } catch (PDOException $e) {
+                    print("Error al acceder a la BD: " . $e->getMessage());
+                }
+            }
+        }
+
+        return $rutasImagenes;
     }
 }

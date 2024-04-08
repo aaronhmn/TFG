@@ -4,26 +4,36 @@ namespace model;
 use \model\productoModel;
 use \model\utils;
 
-
-//Añadimos el código del modelo
+// Añadimos el código del modelo
 require_once("../model/productoModel.php");
 require_once("../model/utils.php");
 
-    //Creamos un array para guardar los datos del producto
-    $producto = array();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $idProducto = $_POST["idProducto"];
 
-    // Solo se ejecutará cuando reciba una petición del registro
-    if ($_SERVER['REQUEST_METHOD'] == 'POST')
-    {
-        $idProducto = $_POST["idProducto"];
+    // Nos conectamos a la Bd
+    $conexPDO = utils::conectar();
 
-        //Nos conectamos a la Bd
-        $conexPDO = utils::conectar();
-        $gestorProducto = new Producto();
-        $gestorProducto->delProducto($idProducto, $conexPDO);
+    // Recuperar las rutas de las imágenes antes de eliminar el producto
+    $gestorProducto = new Producto();
+    $rutasImagenes = $gestorProducto->getImagenesPorProducto($idProducto, $conexPDO);
 
-        header("Location: ../controller/productosAdminController.php");
-        exit();
+    // Verificar si se recuperaron las rutas de las imágenes
+    if ($rutasImagenes) {
+        foreach ($rutasImagenes as $rutaImagen) {
+            if (file_exists($rutaImagen)) {
+                unlink($rutaImagen); // Eliminar la imagen del servidor
+            } else {
+                // Manejar el caso en que el archivo no exista. Puede ser simplemente un registro en un log.
+            }
+        }
     }
 
+    // Después de eliminar las imágenes, proceder a eliminar el producto
+    $gestorProducto->delProducto($idProducto, $conexPDO);
+
+    // Redirigir al administrador de productos
+    header("Location: ../controller/productosAdminController.php");
+    exit();
+}
 ?>

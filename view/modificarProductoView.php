@@ -86,9 +86,15 @@ namespace view;
             <div class="mb-3">
                 <label for="inputImagen" class="form-label">Imágenes del producto: </label>
                 <br>
-                <?php echo '<img src="'.$producto['ruta_imagen'].'" width="200" height="200"/>'; ?>
+                <?php 
+                $prueba = explode(",", $producto['ruta_imagen']);
+                echo '<img src="'.$prueba[0].'" width="200" height="200"/>'; 
+                echo '<img src="'.$prueba[1].'" width="200" height="200"/>'; 
+                echo '<img src="'.$prueba[2].'" width="200" height="200"/>'; 
+                echo '<img src="'.$prueba[3].'" width="200" height="200"/>'; 
+                ?>
                 <br><br>
-                <input type="file" class="form-control" id="inputImagen" name="inputImagen">
+                <input type="file" class="form-control" id="inputImagen" name="inputImagen[]" multiple>
             </div>
             <!-- Agregar el campo oculto para la ruta de la imagen para que no se borre cada vez que se modifique algo -->
             <input type="hidden" name="ruta_imagen" value='<?=(isset($producto)?$producto["ruta_imagen"]:"") ?>' />
