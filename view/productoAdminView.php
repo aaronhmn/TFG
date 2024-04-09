@@ -17,6 +17,12 @@
 
 <body style="background-color: #e6e6fa">
 
+    <?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    ?>
+
     <div class="sidebar">
         <div class="logo"></div>
         <ul class="menu">
@@ -51,11 +57,9 @@
         <div class="navbar2">
             <ul>
                 <li>
-                    <?php
-                    print("<form method='GET' action='../controller/insertarProductosAdminController.php'>");
-                    print("<button class='btn btn-success'>Insertar producto nuevo</button>");
-                    print("</form>");
-                    ?>
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#insertarProductoModal">
+                        Insertar producto nuevo
+                    </button>
                 </li>
                 <li>
                     <h3 style="color: #8350F2;">Bienvenido <b>ADMIN</b></h3>
@@ -68,6 +72,17 @@
             </ul>
         </div>
         <br>
+        <?php
+        if (isset($_SESSION['mensaje'])) {
+            echo "<div class='alert alert-{$_SESSION['tipo_mensaje']} alert-dismissible fade show' role='alert'>
+            {$_SESSION['mensaje']}
+            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+          </div>";
+            // Limpia los mensajes después de mostrarlos
+            unset($_SESSION['mensaje']);
+            unset($_SESSION['tipo_mensaje']);
+        }
+        ?>
         <div class="row">
             <div class="col-lg-12 col-sm-12">
                 <table class="table">
@@ -142,6 +157,7 @@
                             print("</td>\n");
                             //Final de fila
                             print("</tr>\n");
+
                         }
                         ?>
                     </tbody>
@@ -157,5 +173,90 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Insertar Producto -->
+    <div class="modal fade" id="insertarProductoModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modalLabel" style="color: #8350F2;">Insertar nuevo producto</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Aquí va el formulario de inserción de producto -->
+                    <form method="POST" action="../controller/insertarProductosAdminController.php" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="inputNombre" class="form-label" style="color: #8350F2;">Nombre:</label>
+                            <input type="text" class="form-control" name="inputNombre" aria-describedby="emailHelp">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="inputPrecio" class="form-label" style="color: #8350F2;">Precio:</label>
+                                <input type="number" step="0.01" class="form-control" name="inputPrecio" aria-describedby="emailHelp">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="inputStock" class="form-label" style="color: #8350F2;">Stock:</label>
+                                <input type="number" class="form-control" name="inputStock" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="inputCategoria" class="form-label" style="color: #8350F2;">Categoría:</label>
+                                <input type="text" class="form-control" name="inputCategoria" aria-describedby="emailHelp">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="inputSubCategoria" class="form-label" style="color: #8350F2;">Subcategoría:</label>
+                                <input type="text" class="form-control" name="inputSubCategoria" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputNombre" class="form-label" style="color: #8350F2;">Marca:</label>
+                            <input type="text" class="form-control" name="inputMarca" aria-describedby="emailHelp">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label" style="color: #8350F2;">Descripción:</label>
+                            <textarea class="form-control" name="inputDescripcion" rows="5"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label" style="color: #8350F2;">Especificacion:</label>
+                            <textarea class="form-control" name="inputEspecificacion" rows="5"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="inputImagen" class="form-label" style="color: #8350F2;">Inserta las imágenes:</label>
+                            <input type="file" class="form-control" id="inputImagen" name="inputImagen[]" multiple>
+                        </div>
+
+                        <div class="d-grid">
+                            <button class="btn btn-primary" type="submit" value="Upload" style="background-color: #8350F2; border:#8350F2;">Insertar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        //script para borrar lo que haya dentro del modal
+        document.addEventListener("DOMContentLoaded", function() {
+            // Selecciona el modal por su ID
+            var modal = document.getElementById('insertarProductoModal');
+
+            // Escucha el evento 'hidden.bs.modal' que se dispara cuando el modal se ha cerrado
+            modal.addEventListener('hidden.bs.modal', function(event) {
+                // Encuentra el formulario dentro del modal y lo resetea
+                modal.querySelector('form').reset();
+            });
+        });
+    </script>
+
 </body>
+
 </html>

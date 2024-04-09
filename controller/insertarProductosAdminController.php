@@ -1,6 +1,8 @@
 <?php
 
 namespace model;
+session_start();
+
 
 use \model\utils;
 use \model\productoModel;
@@ -100,10 +102,15 @@ function InsertarProducto($nombre, $precio, $categoria, $subCategoria, $descripc
 
     //Para verificar si todo funcionó correctamente
     if ($resultado != null) {
-        $mensaje = "El producto se Registro Correctamente";
-        echo ($mensaje);
+        $_SESSION['mensaje'] = "El producto ha sido creado correctamente.";
+        $_SESSION['tipo_mensaje'] = "success";
+        header('Location: ../controller/productosAdminController.php');
+        exit();
     } else {
-        $mensaje = "Ha habido un fallo al acceder a la Base de Datos";
-        echo ($mensaje);
+        $_SESSION['mensaje'] = "Error al crear el producto.";
+        $_SESSION['tipo_mensaje'] = "danger";
+        // Si decides redireccionar de todos modos o manejar de otra forma
+        header('Location: ../controller/productosAdminController.php');
+        exit();
     }
 }

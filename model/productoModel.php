@@ -220,4 +220,21 @@ class producto
 
         return $rutasImagenes;
     }
+
+    public function getValoracionPromedio($idProducto, $conexPDO) {
+        if (isset($idProducto) && is_numeric($idProducto)) {
+            if ($conexPDO != null) {
+                try {
+                    $sentencia = $conexPDO->prepare("SELECT AVG(valoracion) as promedio FROM valoraciones WHERE idproducto = ?");
+                    $sentencia->bindParam(1, $idProducto);
+                    $sentencia->execute();
+                    $resultado = $sentencia->fetch(PDO::FETCH_ASSOC);
+                    return $resultado ? round($resultado['promedio']) : 0; // Redondeamos el promedio para trabajar con estrellas enteras
+                } catch (PDOException $e) {
+                    print("Error al acceder a BD" . $e->getMessage());
+                }
+            }
+        }
+        return 0; // Retornar 0 si no hay valoraciones o si ocurre un error
+    }
 }

@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../assets/styles/css/tienda.css" />
-
+  <link rel="icon" type="image/vnd.icon" href="../assets/img/genesis logo sin fondo favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -134,133 +134,36 @@
       <!-- Columna de la derecha con cards -->
       <div class="col-md-12 col-xl-9">
         <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-4">
-          <!-- Contenido de las tarjetas -->
-          <!-- Card 1 -->
-          <div class="col mb-4">
-          <div class="tarjeta-producto">
-              <a href="../controller/productoController.php"><img class="img-producto" src="" alt="producto"></a>
-              <a href="../controller/productoController.php">
-                <div class="contenedor-tarjeta">
-                  <div class="contenedor-info">
-                    <div class="estrellas">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
+          <!-- Iterar sobre cada producto y mostrar su información en una tarjeta -->
+          <?php if (isset($productos) && is_array($productos)): ?>
+            <?php foreach ($productos as $producto) : ?>
+              <div class="col mb-4">
+                <div class="tarjeta-producto">
+                  <?php $prueba = explode(",", $producto['ruta_imagen']); ?>
+                  <a href="../controller/productoController.php?id=<?= $producto['idproducto'] ?>"><img class="img-producto" src="<?= $prueba[0] ?>" alt="<?= $producto['nombre'] ?>"></a>
+                  <a href="../controller/productoController.php?id=<?= $producto['idproducto'] ?>">
+                    <div class="contenedor-tarjeta">
+                      <div class="contenedor-info">
+                        <div class="estrellas">
+                          <!-- Aquí podrías poner la lógica para mostrar las estrellas basadas en las reseñas, por ejemplo -->
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                          <i class="fa fa-star"></i>
+                        </div>
+                        <h3 class="precio"><b><?= $producto['precio'] ?> €</b></h3>
+                      </div>
+                      <hr>
+                      <p class="nombre-producto"><?= $producto['nombre'] ?></p>
                     </div>
-                    <h3 class="precio"><b>57,99 €</b></h3>
-                  </div>
-                  <hr>
-                  <a href="../controller/productoController.php">
-                    <p class="nombre-producto">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi, blanditiis!</p>
                   </a>
                 </div>
-              </a>   
-            </div>
-          </div>
-
-          <!-- Card 2 -->
-          <div class="col mb-4">
-          <div class="tarjeta-producto">
-              <a href="../controller/productoController.php"><img class="img-producto" src="" alt="producto"></a>
-              <a href="../controller/productoController.php">
-                <div class="contenedor-tarjeta">
-                  <div class="contenedor-info">
-                    <div class="estrellas">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                    </div>
-                    <h3 class="precio"><b>57,99 €</b></h3>
-                  </div>
-                  <hr>
-                  <a href="../controller/productoController.php">
-                    <p class="nombre-producto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores nobis explicabo fugit?</p>
-                  </a>
-                </div>
-              </a>   
-            </div>
-          </div>
-
-          <!-- Card 3 -->
-          <div class="col mb-4">
-          <div class="tarjeta-producto">
-              <a href="../controller/productoController.php"><img class="img-producto" src="" alt="producto"></a>
-              <a href="../controller/productoController.php">
-                <div class="contenedor-tarjeta">
-                  <div class="contenedor-info">
-                    <div class="estrellas">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                    </div>
-                    <h3 class="precio"><b>57,99 €</b></h3>
-                  </div>
-                  <hr>
-                  <a href="../controller/productoController.php">
-                    <p class="nombre-producto">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores soluta quod vel tempora exercitationem illum! Ut facilis dolor ducimus impedit dolores.</p>
-                  </a>
-                </div>
-              </a>   
-            </div>
-          </div>
-
-          <!-- Card 4 -->
-          <div class="col mb-4">
-          <div class="tarjeta-producto">
-              <a href="../controller/productoController.php"><img class="img-producto" src="" alt="producto"></a>
-              <a href="../controller/productoController.php">
-                <div class="contenedor-tarjeta">
-                  <div class="contenedor-info">
-                    <div class="estrellas">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                    </div>
-                    <h3 class="precio"><b>57,99 €</b></h3>
-                  </div>
-                  <hr>
-                  <a href="../controller/productoController.php">
-                    <p class="nombre-producto">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores soluta quod vel tempora exercitationem illum! Ut facilis dolor ducimus impedit dolores.</p>
-                  </a>
-                </div>
-              </a>   
-            </div>
-          </div>
-
-          <!-- Card 5 -->
-          <div class="col mb-4">
-          <div class="tarjeta-producto">
-              <a href="../controller/productoController.php"><img class="img-producto" src="" alt="producto"></a>
-              <a href="../controller/productoController.php">
-                <div class="contenedor-tarjeta">
-                  <div class="contenedor-info">
-                    <div class="estrellas">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                    </div>
-                    <h3 class="precio"><b>57,99 €</b></h3>
-                  </div>
-                  <hr>
-                  <a href="../controller/productoController.php">
-                    <p class="nombre-producto">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores soluta quod vel tempora exercitationem illum! Ut facilis dolor ducimus impedit dolores.</p>
-                  </a>
-                </div>
-              </a>   
-            </div>
-          </div>
-
-          <!-- Repite este bloque para las tarjetas 5, 6, 7 y 8 -->
+              </div>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <p>No se encontraron productos.</p>
+          <?php endif; ?>
         </div>
       </div>
     </div>

@@ -90,14 +90,14 @@
             <thead>
               <tr>
                 <th style="background-color: #8350F2; color: #fff;" scope="col">Id</th>
+                <th style="background-color: #8350F2; color: #fff;" scope="col">Nombre de Usuario</th>
                 <th style="background-color: #8350F2; color: #fff;" scope="col">Nombre</th>
                 <th style="background-color: #8350F2; color: #fff;" scope="col">Primer Apellido</th>
                 <th style="background-color: #8350F2; color: #fff;" scope="col">Segundo Apellido</th>
                 <th style="background-color: #8350F2; color: #fff;" scope="col">DNI</th>
                 <th style="background-color: #8350F2; color: #fff;" scope="col">Correo Electrónico</th>
-                <th style="background-color: #8350F2; color: #fff;" scope="col">Nombre de Usuario</th>
-                <!--<th style="background-color: #8350F2; color: #fff;" scope="col">Dirección</th>-->
-                <!--<th style="background-color: #8350F2; color: #fff;" scope="col">Teléfono</th>-->
+                <th style="background-color: #8350F2; color: #fff;" scope="col">Dirección</th>
+                <th style="background-color: #8350F2; color: #fff;" scope="col">Teléfono</th>
                 <th style="background-color: #8350F2; color: #fff;" scope="col">Activación</th>
                 <th style="background-color: #8350F2; color: #fff;" scope="col">Activo</th>
                 <th style="background-color: #8350F2; color: #fff;" scope="col">Rol</th>
@@ -115,6 +115,8 @@
 
                 //Id de cliente
                 print("<td style=' padding-top: 14px;' scope='row'><b>" . $producto["idusuario"] . "</b></td>\n");
+                                //Nombr de Usuario
+                                print("<td style=' padding-top: 14px;'>" . $producto["nombre_usuario"] . "</td>\n");
                 //Nombre
                 print("<td style=' padding-top: 14px;'>" . $producto["nombre"] . "</td>\n");
                 //Primer Apellido
@@ -125,12 +127,10 @@
                 print("<td style=' padding-top: 14px;'>" . $producto["dni"] . "</td>\n");
                 //Email
                 print("<td style=' padding-top: 14px;'>" . $producto["email"] . "</td>\n");
-                //Nombr de Usuario
-                print("<td style=' padding-top: 14px;'>" . $producto["nombre_usuario"] . "</td>\n");
                 //Direccion
-                //print("<td style=' padding-top: 14px;'>" . $producto["direccion"] . "</td>\n");
+                print("<td style=' padding-top: 14px;'>" . $producto["direccion"] . "</td>\n");
                 //Telefono
-                //print("<td style=' padding-top: 14px;'>" . $producto["telefono"] . "</td>\n");
+                print("<td style=' padding-top: 14px;'>" . $producto["telefono"] . "</td>\n");
                 //Estado de activación
                 print("<td style=' padding-top: 14px;'>" . $producto["activacion"] . "</td>\n");
                 //Activo
@@ -150,12 +150,12 @@
                 print("<td>\n");
                 print("<form method='GET' action='../controller/modificarUsuarioController.php'>");
                 print("<input type='hidden' name='idUsuario' value='" . $producto["idusuario"] . "'/>");
+                print("<input type='hidden' name='nombre_usuario' value='" . $producto["nombre_usuario"] . "'/>");
                 print("<input type='hidden' name='nombre' value='" . $producto["nombre"] . "'/>");
                 print("<input type='hidden' name='primer_apellido' value='" . $producto["primer_apellido"] . "'/>");
                 print("<input type='hidden' name='segundo_apellido' value='" . $producto["segundo_apellido"] . "'/>");
                 print("<input type='hidden' name='dni' value='" . $producto["dni"] . "'/>");
                 print("<input type='hidden' name='email' value='" . $producto["email"] . "'/>");
-                print("<input type='hidden' name='nombre_usuario' value='" . $producto["nombre_usuario"] . "'/>");
                 print("<input type='hidden' name='direccion' value='" . $producto["direccion"] . "'/>");
                 print("<input type='hidden' name='telefono' value='" . $producto["telefono"] . "'/>");
                 print("<input type='hidden' name='activacion' value='" . $producto["activacion"] . "'/>");

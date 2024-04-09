@@ -123,12 +123,6 @@ i.fa-solid.fa-user {
     color: #000; 
 }
 
-i.fas.fa-shopping-cart:hover,
-i.fa-solid.fa-user:hover,
-i.fa-solid.fa-chevron-down{
-    color: #8350F2;
-}
-
 nav input:focus,
 select:focus,
 select,
