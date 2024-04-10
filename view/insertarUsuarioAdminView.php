@@ -38,28 +38,43 @@ namespace views;
                     </div>
 
                     <div class="mb-3">
-                        <label style="color: #5f5f5f;" for="inputNombre" class="form-label"><b>Primer Apellido:</b></label>
+                        <label style="color: #5f5f5f;" for="inputPrimerApellido" class="form-label"><b>Primer Apellido:</b></label>
                         <input style="border: 1px solid #5f5f5f;"  type="text" class="form-control" name="inputPrimerApellido" aria-describedby="emailHelp">
                     </div>
 
                     <div class="mb-3">
-                        <label style="color: #5f5f5f;" for="inputNombre" class="form-label"><b>Segundo Apellido:</b></label>
+                        <label style="color: #5f5f5f;" for="inputSegundoApellido" class="form-label"><b>Segundo Apellido:</b></label>
                         <input style="border: 1px solid #5f5f5f;"  type="text" class="form-control" name="inputSegundoApellido" aria-describedby="emailHelp">
                     </div>
 
                     <div class="mb-3">
-                        <label style="color: #5f5f5f;" for="inputEdad" class="form-label"><b>Telefono:</b></label>
+                        <label style="color: #5f5f5f;" for="inputTelefono" class="form-label"><b>Telefono:</b></label>
                         <input style="border: 1px solid #5f5f5f;"  type="tel" class="form-control" name="inputTelefono" aria-describedby="emailHelp">
                     </div>
 
                     <div class="mb-3">
-                        <label style="color: #5f5f5f;" for="inputFechaNac" class="form-label"><b>DNI:</b></label>
+                        <label style="color: #5f5f5f;" for="inputDNI" class="form-label"><b>DNI:</b></label>
                         <input style="border: 1px solid #5f5f5f;"  type="text" class="form-control" name="inputDNI" aria-describedby="emailHelp">
                     </div>
 
                     <div class="mb-3">
-                        <label style="color: #5f5f5f;" for="inputSexo" class="form-label"><b>Dirección:</b></label>
-                        <input style="border: 1px solid #5f5f5f;"  type="text" class="form-control" name="inputDireccion" aria-describedby="emailHelp">
+                        <label style="color: #5f5f5f;" for="inputCodigoPostal" class="form-label"><b>Código Postal:</b></label>
+                        <input style="border: 1px solid #5f5f5f;"  type="number" class="form-control" name="inputCodigoPostal" aria-describedby="emailHelp">
+                    </div>
+
+                    <div class="mb-3">
+                        <label style="color: #5f5f5f;" for="inputCalle" class="form-label"><b>Nombre de la calle o avenida:</b></label>
+                        <input style="border: 1px solid #5f5f5f;"  type="text" class="form-control" name="inputCalle" aria-describedby="emailHelp">
+                    </div>
+
+                    <div class="mb-3">
+                        <label style="color: #5f5f5f;" for="inputNumeroBloque" class="form-label"><b>Número del bloque o de la casa:</b></label>
+                        <input style="border: 1px solid #5f5f5f;"  type="number" class="form-control" name="inputNumeroBloque" aria-describedby="emailHelp">
+                    </div>
+
+                    <div class="mb-3">
+                        <label style="color: #5f5f5f;" for="inputPiso" class="form-label"><b>Piso:</b></label>
+                        <input style="border: 1px solid #5f5f5f;"  type="text" class="form-control" name="inputPiso" aria-describedby="emailHelp">
                     </div>
 
                     <div class="mb-3">
@@ -68,7 +83,7 @@ namespace views;
                     </div>
 
                     <div class="mb-3">
-                        <label style="color: #5f5f5f;" for="inputEmail" class="form-label"><b>Nombre de usuario:</b></label>
+                        <label style="color: #5f5f5f;" for="inputUsuario" class="form-label"><b>Nombre de usuario:</b></label>
                         <input style="border: 1px solid #5f5f5f;"  type="text" class="form-control" name="inputUsuario" aria-describedby="emailHelp">
                     </div>
 

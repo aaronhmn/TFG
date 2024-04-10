@@ -129,7 +129,7 @@ class Usuario
         if (isset($usuario) && $conexPDO != null) {
             try {
                 //Preparamos la sentencia
-                $sentencia = $conexPDO->prepare("INSERT INTO genesis.usuario (nombre, primer_apellido, segundo_apellido, dni, email, contrasena, nombre_usuario, direccion, telefono, salt, activacion, activo) VALUES ( :nombre, :primer_apellido, :segundo_apellido, :dni, :email, :contrasena, :nombre_usuario, :direccion, :telefono, :salt, :activacion, :activo)");
+                $sentencia = $conexPDO->prepare("INSERT INTO genesis.usuario (nombre, primer_apellido, segundo_apellido, dni, email, contrasena, nombre_usuario, codigo_postal, calle, numero_bloque, piso, telefono, salt, activacion, activo) VALUES ( :nombre, :primer_apellido, :segundo_apellido, :dni, :email, :contrasena, :nombre_usuario, :codigo_postal, :calle, :numero_bloque, :piso, :telefono, :salt, :activacion, :activo)");
 
                 //Asociamos los valores a los parametros de la sentencia sql (A la izquierda el parámetro y a la derecha los valores como están en la base de datos)
                 $sentencia->bindParam(":nombre", $usuario["nombre"]);
@@ -139,7 +139,10 @@ class Usuario
                 $sentencia->bindParam(":email", $usuario["email"]);
                 $sentencia->bindParam(":contrasena", $usuario["contrasena"]);
                 $sentencia->bindParam(":nombre_usuario", $usuario["nombre_usuario"]);
-                $sentencia->bindParam(":direccion", $usuario["direccion"]);
+                $sentencia->bindParam(":codigo_postal", $usuario["codigo_postal"]);
+                $sentencia->bindParam(":calle", $usuario["calle"]);
+                $sentencia->bindParam(":numero_bloque", $usuario["numero_bloque"]);
+                $sentencia->bindParam(":piso", $usuario["piso"]);
                 $sentencia->bindParam(":telefono", $usuario["telefono"]);
                 $sentencia->bindParam(":salt", $usuario["salt"]);
                 $sentencia->bindParam(":activacion", $usuario["activacion"]);
@@ -184,7 +187,7 @@ class Usuario
         if (isset($usuario) && isset($usuario["idusuario"]) && is_numeric($usuario["idusuario"])  && $conexPDO != null) {
             try {
                 //Preparamos la sentencia
-                $sentencia = $conexPDO->prepare("UPDATE genesis.usuario set nombre=:nombre, primer_apellido=:primer_apellido, segundo_apellido=:segundo_apellido, dni=:dni, email=:email, nombre_usuario=:nombre_usuario, direccion=:direccion, telefono=:telefono, activacion=:activacion, activo=:activo, rol=:rol where idusuario=:idusuario");
+                $sentencia = $conexPDO->prepare("UPDATE genesis.usuario set nombre=:nombre, primer_apellido=:primer_apellido, segundo_apellido=:segundo_apellido, dni=:dni, email=:email, nombre_usuario=:nombre_usuario, codigo_postal=:codigo_postal, calle=:calle, numero_bloque=:numero_bloque, piso=:piso, telefono=:telefono, activacion=:activacion, activo=:activo, rol=:rol, estado=:estado where idusuario=:idusuario");
 
                 //Asociamos los valores a los parametros de la sentencia sql
                 $sentencia->bindParam(":idusuario", $usuario["idusuario"]);
@@ -194,11 +197,15 @@ class Usuario
                 $sentencia->bindParam(":dni", $usuario["dni"]);
                 $sentencia->bindParam(":email", $usuario["email"]);               
                 $sentencia->bindParam(":nombre_usuario", $usuario["nombre_usuario"]);
-                $sentencia->bindParam(":direccion", $usuario["direccion"]);
+                $sentencia->bindParam(":codigo_postal", $usuario["codigo_postal"]);
+                $sentencia->bindParam(":calle", $usuario["calle"]);
+                $sentencia->bindParam(":numero_bloque", $usuario["numero_bloque"]);
+                $sentencia->bindParam(":piso", $usuario["piso"]);
                 $sentencia->bindParam(":telefono", $usuario["telefono"]);
                 $sentencia->bindParam(":activacion", $usuario["activacion"]);
                 $sentencia->bindParam(":activo", $usuario["activo"]);
                 $sentencia->bindParam(":rol", $usuario["rol"]);
+                $sentencia->bindParam(":estado", $usuario["estado"]);
                 /* $sentencia->bindParam(":contrasena", $usuario["contrasena"]); */
                 
                 //Ejecutamos la sentencia
@@ -264,4 +271,34 @@ class Usuario
 
         return $result;
     }
+
+    function BanUsuarioPorId($idUsuario, $conexPDO)
+{
+    $result = null;
+
+    if (isset($idUsuario) && is_numeric($idUsuario) && $conexPDO != null) {
+        try {
+            // Primero, obtenemos el estado actual del usuario (si está baneado o no)
+            $sentencia = $conexPDO->prepare("SELECT estado FROM genesis.usuario WHERE idusuario = ?");
+            $sentencia->bindParam(1, $idUsuario, PDO::PARAM_INT);
+            $sentencia->execute();
+            $usuario = $sentencia->fetch(PDO::FETCH_ASSOC);
+
+            if ($usuario) {
+                // Invertimos el estado: si es 0 (activo), lo ponemos a 1 (baneado), y viceversa.
+                $nuevoEstado = $usuario['estado'] == 0 ? 1 : 0;
+
+                // Actualizamos el estado del usuario en la base de datos
+                $sentencia = $conexPDO->prepare("UPDATE genesis.usuario SET estado = ? WHERE idusuario = ?");
+                $sentencia->bindParam(1, $nuevoEstado, PDO::PARAM_INT);
+                $sentencia->bindParam(2, $idUsuario, PDO::PARAM_INT);
+                $result = $sentencia->execute();
+            }
+        } catch (PDOException $e) {
+            print("Error al cambiar el estado de baneo del usuario: " . $e->getMessage());
+        }
+    }
+
+    return $result;
+}
 }

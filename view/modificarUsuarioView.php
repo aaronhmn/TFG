@@ -63,8 +63,23 @@ namespace view;
                     </div>
 
                     <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 10px;">
-                        <label for="direccion" style="color: #5f5f5f; margin-bottom: 5px;"><b>Dirección:</b></label>
-                        <input type="text" style="border: 1px solid #5f5f5f;" class="form-control" id="direccion" name="direccion" value='<?=(isset($usuario)?$usuario["direccion"]:"") ?>' />
+                        <label for="codigo_postal" style="color: #5f5f5f; margin-bottom: 5px;"><b>Código Postal:</b></label>
+                        <input type="number" style="border: 1px solid #5f5f5f;" class="form-control" id="codigo_postal" name="codigo_postal" value='<?=(isset($usuario)?$usuario["codigo_postal"]:"") ?>' />
+                    </div>
+
+                    <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 10px;">
+                        <label for="calle" style="color: #5f5f5f; margin-bottom: 5px;"><b>Nombre de la calle o avenida:</b></label>
+                        <input type="text" style="border: 1px solid #5f5f5f;" class="form-control" id="calle" name="calle" value='<?=(isset($usuario)?$usuario["calle"]:"") ?>' />
+                    </div>
+
+                    <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 10px;">
+                        <label for="numero_bloque" style="color: #5f5f5f; margin-bottom: 5px;"><b>Número del bloque o casa:</b></label>
+                        <input type="number" style="border: 1px solid #5f5f5f;" class="form-control" id="numero_bloque" name="numero_bloque" value='<?=(isset($usuario)?$usuario["numero_bloque"]:"") ?>' />
+                    </div>
+
+                    <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 10px;">
+                        <label for="piso" style="color: #5f5f5f; margin-bottom: 5px;"><b>Piso:</b></label>
+                        <input type="text" style="border: 1px solid #5f5f5f;" class="form-control" id="piso" name="piso" value='<?=(isset($usuario)?$usuario["piso"]:"") ?>' />
                     </div>
 
                     <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 10px;">

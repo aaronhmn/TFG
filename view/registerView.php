@@ -49,7 +49,19 @@ namespace views;
                     <label></label>
                 </div>
                 <div class="input-box">
-                    <input type="text" required placeholder="Dirección" id="direccion" name="direccion" autocomplete="nope">
+                    <input type="text" required placeholder="Código Postal" id="codigo_postal" name="codigo_postal" autocomplete="nope">
+                    <label></label>
+                </div>
+                <div class="input-box">
+                    <input type="text" required placeholder="Nombre de la calle o avenida" id="calle" name="calle" autocomplete="nope">
+                    <label></label>
+                </div>
+                <div class="input-box">
+                    <input type="text" required placeholder="Número del bloque o casa" id="numero_bloque" name="numero_bloque" autocomplete="nope">
+                    <label></label>
+                </div>
+                <div class="input-box">
+                    <input type="text" required placeholder="Piso" id="piso" name="piso" autocomplete="nope">
                     <label></label>
                 </div>
                 <div class="input-box">

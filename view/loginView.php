@@ -1,26 +1,26 @@
 <?php
+
 namespace views;
 ?>
 
-
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../assets/styles/css/login.css" />
     <link rel="icon" type="image/vnd.icon" href="../assets/img/genesis logo sin fondo favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
 
     <title>Inicio de Sesión - Genesis</title>
-  </head>
-  <body style="background-color: #e6e6fa">
-    
+</head>
+
+<body style="background-color: #e6e6fa">
+
     <div class="wrapper">
         <div class="form-box login">
             <div class="encabezado">
@@ -49,5 +49,6 @@ namespace views;
             </form>
         </div>
     </div>
-  </body>
+</body>
+
 </html>

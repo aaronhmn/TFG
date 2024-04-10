@@ -13,10 +13,6 @@ $mensaje = null;
 
 include("../view/loginView.php");
 
-
-
-
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['email']) &&  isset($_POST['contrasena'])) {
         $email = $_POST['email'];
@@ -41,15 +37,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $salt = $resultado["salt"];
                 $usuario["salt"] = $salt;
 
-                
-            //Encriptamos la contraseña con la función crypt para ver si councide con la de la base de datos
-            //utilizando la salt generada y SHA-512
-            $usuario["contrasena"] = crypt($contraseña, '$6$rounds=5000$' . $salt . '$');
+                //Encriptamos la contraseña con la función crypt para ver si coincide con la de la base de datos
+                //utilizando la salt generada y SHA-512
+                $usuario["contrasena"] = crypt($contraseña, '$6$rounds=5000$' . $salt . '$');
             }
-           
 
-
+            // Agregamos una comprobación para ver si el usuario está baneado
             if (is_array($resultado) && $usuario["contrasena"] == $resultado["contrasena"]) {
+                // Verificamos si el usuario está baneado (estado = 1)
+                if ($resultado["estado"] == 1) {
+                    // Aquí puedes manejar cómo notificar al usuario que está baneado
+                    // Por ejemplo, puedes redirigir a una página que informe al usuario
+                    // o mostrar un mensaje directamente.
+                    echo "<script>alert('Tu cuenta está baneada. Contacta con el soporte para más información.');</script>";
+                    exit(); // Aseguramos que no continúe el proceso de inicio de sesión
+                }
+
                 session_start();
                 $_SESSION['email'] = $email;
             
@@ -72,7 +75,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             } else {
                 echo "<script>console.log('Email o contraseña incorrecta');</script>";
             }
-            
         }
     }
 }

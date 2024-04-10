@@ -20,7 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $segundoApellido = $_POST['inputSegundoApellido'];
     $telefono = $_POST['inputTelefono'];
     $dni = $_POST['inputDNI'];
-    $direccion = $_POST['inputDireccion'];
+    $codigoPostal = $_POST['inputCodigoPostal'];
+    $calle = $_POST['inputCalle'];
+    $numeroBloque = $_POST['inputNumeroBloque'];
+    $piso = $_POST['inputPiso'];
     $email = $_POST['inputEmail'];
     $usuario = $_POST['inputUsuario'];
     $contraseña = $_POST['inputPassword'];
@@ -31,7 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $datosUsuario["segundo_apellido"] = utils::limpiar_datos($segundoApellido);
     $datosUsuario["telefono"] = utils::limpiar_datos($telefono);
     $datosUsuario["dni"] = utils::limpiar_datos($dni);
-    $datosUsuario["direccion"] = utils::limpiar_datos($direccion);
+    $datosUsuario["codigo_postal"] = utils::limpiar_datos($codigoPostal);
+    $datosUsuario["calle"] = utils::limpiar_datos($calle);
+    $datosUsuario["numero_bloque"] = utils::limpiar_datos($numeroBloque);
+    $datosUsuario["piso"] = utils::limpiar_datos($piso);
     $datosUsuario["email"] = utils::limpiar_datos($email);
     $datosUsuario["nombre_usuario"] = utils::limpiar_datos($usuario);
 
