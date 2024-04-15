@@ -8,6 +8,6 @@
 <body>
     <h1>Acceso Denegado</h1>
     <p>No tienes permiso para acceder a esta página.</p>
-    <a href="../view/inicioView.php">Volver a la página de inicio</a>
+    <a href="../controller/inicioController.php">Volver a la página de inicio</a>
 </body>
 </html>

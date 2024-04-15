@@ -62,7 +62,12 @@
                     </button>
                 </li>
                 <li>
-                    <h3 style="color: #8350F2;">Bienvenido <b>ADMIN</b></h3>
+                    <h3 style="color: #8350F2;">Bienvenido 
+                    <?php
+                        $resultado = $_SESSION['nombre_usuario'];
+                        print "<b>" .$resultado. "</b>";
+                    ?>
+                    </h3>
                 </li>
                 <li>
                     <form action='../controller/cerrarSesionController.php' method="POST">
@@ -119,7 +124,11 @@
                             //Categoria
                             print("<td style='padding-top: 14px;'>" . $datosProducto["categoria"] . "</td>\n");
                             //Sub Categoria
-                            print("<td style='padding-top: 14px;'>" . $datosProducto["sub_categoria"] . "</td>\n");
+                            if($datosProducto["sub_categoria"] != null ){
+                                print("<td style=' padding-top: 14px;'>" . $datosProducto["sub_categoria"] . "</td>\n");
+                              }else{
+                                print("<td style=' padding-top: 14px;'>nulo</td>\n");
+                              }
                             //Descripcion
                             //print("<td style='padding-top: 14px;'>" . $datosProducto[$i]["descripcion"] . "</td>\n");
                             //Especificacion

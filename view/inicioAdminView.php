@@ -48,7 +48,12 @@
     <div class="main-content">
         <div class="header-wrapper">
             <div class="header- title">
-                <h2>Bienvenido</h2>
+                <h2>Bienvenido 
+                <?php
+                    $resultado = $_SESSION['nombre_usuario'];
+                    print "<b>" .$resultado. "</b>";
+                ?>
+                </h2>
                 <h4>Página de inicio - Dashboard</h4>
                 <!--<a href="https://www.youtube.com/watch?v=CgCPP2KO5ds" target="_blank">Video Tutorial</a>-->
                 <form action='../controller/cerrarSesionController.php' method="POST">

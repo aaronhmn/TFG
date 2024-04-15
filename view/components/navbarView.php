@@ -1,6 +1,7 @@
 <?php
 
 namespace views;
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +16,6 @@ namespace views;
 <body style="background-color: #e6e6fa">
   <!--NAV DE LA PAGINA-->
   <?php
-  session_start();
   if (isset($_SESSION['login'])) {
     if ($_SESSION['login'] == true) { ?>
       <nav>
@@ -52,7 +52,11 @@ namespace views;
           <div class="dropdown">
             <!-- Icono de usuario -->
             <a class="nav-link dropdown-toggle" href="#" id="userIcon" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="fa-solid fa-user fa-lg"></i>
+              <i class="fa-solid fa-user fa-lg" style="margin-right: 5px;"></i>
+              <?php
+              $resultado = $_SESSION['nombre_usuario'];
+              print "<b>" .$resultado. "</b>";
+              ?>
             </a>
             <ul class="dropdown-menu" aria-labelledby="userIcon" id="dropdownMenu">
               <li><a class="dropdown-item" href="../controller/perfilController.php"><i class="fa-solid fa-gear fa-sm" style="margin-right: 5px;"></i>Mi perfil</a></li>
@@ -122,4 +126,5 @@ namespace views;
   <br /><br /><br /><br /><br />
 
 </body>
+
 </html>

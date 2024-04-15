@@ -13,9 +13,11 @@ require_once("../model/utils.php");
 require_once("../model/productoModel.php");
 $mensaje = null;
 
+session_start();
+
 // Verificar si el usuario está logueado y si es administrador
-if (!isset($_SESSION['idusuario']) || $_SESSION['rol'] != 1) {
-    header('Location: ../view/noAutorizadoView.php'); // Redirecciona a una página de error
+if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'] != 1) {
+    header('Location: ../view/noAutorizadoView.php');
     exit();
 }
 

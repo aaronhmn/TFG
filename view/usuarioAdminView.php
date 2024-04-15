@@ -78,7 +78,12 @@
           ?>
         </li>
         <li>
-          <h3 style="color: #8350F2;">Bienvenido <b>ADMIN</b></h3>
+          <h3 style="color: #8350F2;">Bienvenido 
+          <?php
+              $resultado = $_SESSION['nombre_usuario'];
+              print "<b>" .$resultado. "</b>";
+          ?>
+          </h3>
         </li>
         <li>
           <form action='../controller/cerrarSesionController.php' method="POST">
