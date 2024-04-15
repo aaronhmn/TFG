@@ -7,6 +7,13 @@ use \model\Utils;
 require_once("../model/usuarioModel.php");
 require_once("../model/utils.php");
 $mensaje = null;
+
+// Verificar si el usuario está logueado y si es administrador
+if (!isset($_SESSION['idusuario']) || $_SESSION['rol'] != 1) {
+    header('Location: ../view/noAutorizadoView.php'); // Redirecciona a una página de error
+    exit();
+}
+
 $gestorUsuarios = new Usuario();
 
 //Nos conectamos a la Bd

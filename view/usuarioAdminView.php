@@ -142,7 +142,11 @@
               //Numero del Bloque o casa
               print("<td style=' padding-top: 14px;'>" . $producto["numero_bloque"] . "</td>\n");
               //Piso
-              print("<td style=' padding-top: 14px;'>" . $producto["piso"] . "</td>\n");
+              if($producto["piso"] != null ){
+                print("<td style=' padding-top: 14px;'>" . $producto["piso"] . "</td>\n");
+              }else{
+                print("<td style=' padding-top: 14px;'>nulo</td>\n");
+              }
               //Telefono
               print("<td style=' padding-top: 14px;'>" . $producto["telefono"] . "</td>\n");
               //Estado de activación

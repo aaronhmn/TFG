@@ -10,6 +10,12 @@ use \model\utils;
 require_once("../model/productoModel.php");
 require_once("../model/utils.php");
 
+// Verificar si el usuario está logueado y si es administrador
+if (!isset($_SESSION['idusuario']) || $_SESSION['rol'] != 1) {
+    header('Location: ../view/noAutorizadoView.php'); // Redirecciona a una página de error
+    exit();
+}
+
 //Creamos un array para guardar los datos del producto
 $producto = array();
 
