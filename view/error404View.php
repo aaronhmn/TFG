@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Error 403 - Acceso Denegado</title>
+    <title>Error 404 - Página no encontrada</title>
     <link rel="icon" type="image/vnd.icon" href="../assets/img/genesis logo sin fondo favicon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -51,8 +51,8 @@
 
 <body>
     <div class="container">
-        <h1 class="display-1">Error 403</h1><br>
-        <p class="fs-5">Acceso denegado, no tienes permisos para acceder a esta página :(</p><br>
+        <h1 class="display-1">Error 404</h1><br>
+        <p class="fs-5">Página no encontrada :(</p><br>
         <a href="../controller/inicioController.php"><button  class="boton">Volver al inicio</button></a>
     </div>
 </body>

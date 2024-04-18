@@ -98,16 +98,12 @@ nav {
     min-width: 220px;
     max-height: 185px;
     background-color: #8350f2;
-    /** este color #D3D3D3 de fondo o el color lavanda */
     border: 2px solid #e6e6fa;
     display: none;
     position: absolute;
-    top: calc(100% + 18px) !important;
-    /* 10px por debajo del icono de usuario */
-    left: 50% !important;
-    /* Centrar horizontalmente */
-    transform: translateX(-50%) !important;
-    /* Alinear al centro */
+    top: calc(100% + 18px) !important; /* 10px por debajo del icono de usuario */
+    left: 50% !important; /* Centrar horizontalmente */
+    transform: translateX(-50%) !important; /* Alinear al centro */
   }
 
   .dropdown-menu a.dropdown-item {
