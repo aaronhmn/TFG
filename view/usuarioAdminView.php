@@ -38,10 +38,32 @@
           <span>Productos</span>
         </a>
       </li>
-      <li class="home">
+      <li>
+        <a href="../controller/categoriasAdminController.php">
+          <i class="fas fa-list-alt"></i>
+          <span>Categorías</span>
+        </a>
+      </li>
+      <li>
+        <a href="../controller/marcasAdminController.php">
+          <i class="fa-solid fa-flag"></i>
+          <span>Marcas</span>
+        </a>
+      </li>
+      <li>
         <a href="../controller/inicioController.php">
           <i class="fas fa-home"></i>
           <span>Web</span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="fas fa-sign-out" style="color: #2d2d2d;"></i>
+          <span>
+            <form action='../controller/cerrarSesionController.php' method="POST">
+              <button class="boton-CS" style="color: #2d2d2d; background-color: rgba(0, 0, 0, 0);"><b>Salir</b></button>
+            </form>
+          </span>
         </a>
       </li>
     </ul>
@@ -78,11 +100,11 @@
           ?>
         </li>
         <li>
-          <h3 style="color: #8350F2;">Bienvenido 
-          <?php
-              $resultado = $_SESSION['nombre_usuario'];
-              print "<b>" .$resultado. "</b>";
-          ?>
+          <h3 style="color: #8350F2;">Bienvenido
+            <?php
+            $resultado = $_SESSION['nombre_usuario'];
+            print "<b>" . $resultado . "</b>";
+            ?>
           </h3>
         </li>
         <li>
@@ -147,9 +169,9 @@
               //Numero del Bloque o casa
               print("<td style=' padding-top: 14px;'>" . $producto["numero_bloque"] . "</td>\n");
               //Piso
-              if($producto["piso"] != null ){
+              if ($producto["piso"] != null) {
                 print("<td style=' padding-top: 14px;'>" . $producto["piso"] . "</td>\n");
-              }else{
+              } else {
                 print("<td style=' padding-top: 14px;'>nulo</td>\n");
               }
               //Telefono

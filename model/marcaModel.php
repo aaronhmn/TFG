@@ -115,6 +115,48 @@ class marca{
          return $result;
      }
 
+     public function getMarcasPag($conexPDO, $ordAsc, string $campoOrd, int $numPag, int $cantElem)
+    {
+
+        if ($conexPDO != null) {
+            try {
+                //Primero introducimos la sentencia a ejecutar con prepare
+                //Ponemos en lugar de valores directamente, interrogaciones
+
+                //Query inicial
+                $query = "SELECT * FROM genesis.marca ORDER BY ? ";
+
+                //si esta ordenada descentemente añadimos DESC
+                if (!$ordAsc) $query = $query . "DESC ";
+
+                //Añadimos a la query la cantidad de elementos por página con LIMIT
+                //Y desde que página empieza con OFFSET
+                $query = $query . "LIMIT ? OFFSET ?";
+
+                $sentencia = $conexPDO->prepare($query);
+                //el primer parametro es el campo a ordenar
+                $sentencia->bindParam(1, $campoOrd);
+                //El segundo parametro es la cantidad de elementos por pagina
+                $sentencia->bindParam(2, $cantElem, PDO::PARAM_INT);
+                //El tercer parametro es desde que registro empieza a partir de la
+                //pagina actual
+                $offset = ($numPag - 1) * $cantElem;
+                if ($numPag != 1)
+                    $offset++;
+
+                $sentencia->bindParam(3, $offset, PDO::PARAM_INT);
+
+                //Ejecutamos la sentencia
+                $sentencia->execute();
+
+                //Devolvemos los datos del cliente
+                return $sentencia->fetchAll();
+            } catch (PDOException $e) {
+                print("Error al acceder a BD" . $e->getMessage());
+            }
+        }
+    }
+
 }
 
 ?>

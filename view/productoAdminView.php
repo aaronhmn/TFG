@@ -44,10 +44,32 @@
                     <span><b>Productos</b></span>
                 </a>
             </li>
-            <li class="home">
+            <li>
+                <a href="../controller/categoriasAdminController.php">
+                    <i class="fas fa-list-alt"></i>
+                    <span>Categorías</span>
+                </a>
+            </li>
+            <li>
+                <a href="../controller/marcasAdminController.php">
+                <i class="fa-solid fa-flag"></i>
+                    <span>Marcas</span>
+                </a>
+            </li>
+            <li>
                 <a href="../controller/inicioController.php">
                     <i class="fas fa-home"></i>
                     <span>Web</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-sign-out" style="color: #2d2d2d;"></i>
+                    <span>
+                        <form action='../controller/cerrarSesionController.php' method="POST">
+                            <button class="boton-CS" style="color: #2d2d2d; background-color: rgba(0, 0, 0, 0);"><b>Salir</b></button>
+                        </form>
+                    </span>
                 </a>
             </li>
         </ul>

@@ -102,16 +102,13 @@ body{
 
 .home{
     position: absolute;
-    bottom: 0;
+    bottom: 1;
     left: 0;
     width: 100%;
 }
 
-.logout{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+.boton-CS:hover{
+    color: #2d2d2d !important;
 }
 
 .main-content{

@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/styles/css/admin.css">
     <link rel="icon" type="image/vnd.icon" href="../assets/img/genesis logo sin fondo favicon.png">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
 
     <title>Inicio - Dashboard</title>
 </head>
+
 <body>
 
     <div class="sidebar">
@@ -36,10 +38,32 @@
                     <span>Productos</span>
                 </a>
             </li>
-            <li class="home">
+            <li>
+                <a href="../controller/categoriasAdminController.php">
+                    <i class="fas fa-list-alt"></i>
+                    <span>Categorías</span>
+                </a>
+            </li>
+            <li>
+                <a href="../controller/marcasAdminController.php">
+                <i class="fa-solid fa-flag"></i>
+                    <span>Marcas</span>
+                </a>
+            </li>
+            <li>
                 <a href="../controller/inicioController.php">
                     <i class="fas fa-home"></i>
                     <span>Web</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-sign-out" style="color: #2d2d2d;"></i>
+                    <span>
+                        <form action='../controller/cerrarSesionController.php' method="POST">
+                            <button class="boton-CS" style="color: #2d2d2d; background-color: rgba(0, 0, 0, 0);"><b>Salir</b></button>
+                        </form>
+                    </span>
                 </a>
             </li>
         </ul>
@@ -48,11 +72,11 @@
     <div class="main-content">
         <div class="header-wrapper">
             <div class="header- title">
-                <h2>Bienvenido 
-                <?php
+                <h2>Bienvenido
+                    <?php
                     $resultado = $_SESSION['nombre_usuario'];
-                    print "<b>" .$resultado. "</b>";
-                ?>
+                    print "<b>" . $resultado . "</b>";
+                    ?>
                 </h2>
                 <h4>Página de inicio - Dashboard</h4>
                 <!--<a href="https://www.youtube.com/watch?v=CgCPP2KO5ds" target="_blank">Video Tutorial</a>-->
@@ -67,4 +91,5 @@
     </div>
 
 </body>
+
 </html>
