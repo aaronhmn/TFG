@@ -134,35 +134,39 @@ class producto
     }
 
     function updateProducto($producto, $conexPDO)
-    {
-        $result = null;
-        if (isset($producto) && isset($producto["idproducto"]) && is_numeric($producto["idproducto"])  && $conexPDO != null) {
-            try {
-                //Preparamos la sentencia
-                $sentencia = $conexPDO->prepare("UPDATE genesis.producto set nombre=:nombre, precio=:precio, id_categoria=:id_categoria, descripcion=:descripcion, especificacion=:especificacion, id_marca=:id_marca, stock=:stock, ruta_imagen=:ruta_imagen  where idproducto=:idproducto");
+{
+    $result = null;
+    if (isset($producto) && isset($producto["idproducto"]) && is_numeric($producto["idproducto"]) && $conexPDO != null) {
+        try {
+            // Preparamos la sentencia SQL con todos los campos necesarios, incluidas las claves foráneas
+            $sql = "UPDATE genesis.producto SET nombre = :nombre, precio = :precio, id_categoria = :id_categoria, descripcion = :descripcion, especificacion = :especificacion, id_marca = :id_marca, stock = :stock, ruta_imagen = :ruta_imagen  WHERE idproducto = :idproducto";
 
-                //Asociamos los valores a los parametros de la sentencia sql
-                $sentencia->bindParam(":idproducto", $producto["idproducto"]);
-                $sentencia->bindParam(":nombre", $producto["nombre"]);
-                $sentencia->bindParam(":precio", $producto["precio"]);
-                $sentencia->bindParam(":id_categoria", $producto["id_categoria"]);
-                $sentencia->bindParam(":descripcion", $producto["descripcion"]);
-                $sentencia->bindParam(":especificacion", $producto["especificacion"]);
-                $sentencia->bindParam(":id_marca", $producto["id_marca"]);
-                $sentencia->bindParam(":stock", $producto["stock"]);
-                $sentencia->bindParam(":ruta_imagen", $producto["ruta_imagen"]);
+            $stmt = $conexPDO->prepare($sql);
 
+            // Asociamos los valores a los parámetros de la sentencia SQL
+            $stmt->bindParam(":idproducto", $producto["idproducto"], PDO::PARAM_INT);
+            $stmt->bindParam(":nombre", $producto["nombre"]);
+            $stmt->bindParam(":precio", $producto["precio"]);
+            $stmt->bindParam(":id_categoria", $producto["id_categoria"]);
+            $stmt->bindParam(":descripcion", $producto["descripcion"]);
+            $stmt->bindParam(":especificacion", $producto["especificacion"]);
+            $stmt->bindParam(":id_marca", $producto["id_marca"]);
+            $stmt->bindParam(":stock", $producto["stock"]);
+            $stmt->bindParam(":ruta_imagen", $producto["ruta_imagen"]);
 
+            // Ejecutamos la sentencia
+            $result = $stmt->execute();
 
-                //Ejecutamos la sentencia
-                $result = $sentencia->execute();
-            } catch (PDOException $e) {
-                print("Error al acceder a BD" . $e->getMessage());
-            }
+        } catch (PDOException $e) {
+            print("Error al actualizar producto en BD: " . $e->getMessage());
+            // Considera loguear el error en un archivo de logs para un seguimiento detallado
         }
-
-        return $result;
+    } else {
+        print("Datos insuficientes para actualizar el producto o conexión de base de datos nula.");
     }
+
+    return $result;
+}
 
     function delProducto($idProducto, $conexPDO)
     {
@@ -234,5 +238,31 @@ class producto
             }
         }
         return 0; // Retornar 0 si no hay valoraciones o si ocurre un error
+    }
+}
+
+function getCategorias($conexPDO) {
+    if ($conexPDO != null) {
+        try {
+            $sentencia = $conexPDO->prepare("SELECT * FROM genesis.categoria");
+            $sentencia->execute();
+            return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            print("Error al acceder a BD: " . $e->getMessage());
+            return [];
+        }
+    }
+}
+
+function getMarcas($conexPDO) {
+    if ($conexPDO != null) {
+        try {
+            $sentencia = $conexPDO->prepare("SELECT * FROM genesis.marca");
+            $sentencia->execute();
+            return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            print("Error al acceder a BD: " . $e->getMessage());
+            return [];
+        }
     }
 }

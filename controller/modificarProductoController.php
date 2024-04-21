@@ -22,35 +22,34 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'
     exit();
 }
 //Creamos un array para guardar los datos del producto
-$producto = array();
+/* $producto = array(); */
+$conexPDO = utils::conectar();
+
 
 // Solo se ejecutará cuando reciba una petición del registro
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET["idProducto"])) {
+    $gestorProducto = new producto();
+    $producto = $gestorProducto->getProductoId($_GET["idProducto"], $conexPDO);
 
-    $producto["idproducto"] = $_GET["idProducto"];
-    $producto["nombre"] = $_GET["nombre"];
-    $producto["precio"] = $_GET["precio"];
-    $producto["id_categoria"] = $_GET["id_categoria"];
-    $producto["descripcion"] = $_GET["descripcion"];
-    $producto["especificacion"] = $_GET["especificacion"];
-    $producto["id_marca"] = $_GET["id_marca"];
-    $producto["stock"] = $_GET["stock"];
-    $producto["ruta_imagen"] = $_GET["ruta_imagen"];
+    $gestorMarca = new marca();
+    $marcas = $gestorMarca->getMarcas($conexPDO);
+
+    $gestorCategoria = new categoria();
+    $categorias = $gestorCategoria->getCategorias($conexPDO);
 
     include("../view/modificarProductoView.php");
-}
-
-// Solo se ejecutará cuando reciba una petición del registro
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-    $producto["idproducto"] = $_POST["idProducto"];
-    $producto["nombre"] = $_POST["nombre"];
-    $producto["precio"] = $_POST["precio"];
-    $producto["id_categoria"] = $_POST["id_categoria"];
-    $producto["descripcion"] = $_POST["descripcion"];
-    $producto["especificacion"] = $_POST["especificacion"];
-    $producto["id_marca"] = $_POST["id_marca"];
-    $producto["stock"] = $_POST["stock"];
+} elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $producto = [
+        "idproducto" => $_POST["idProducto"],
+        "nombre" => $_POST["nombre"],
+        "precio" => $_POST["precio"],
+        "id_categoria" => $_POST["id_categoria"],
+        "descripcion" => $_POST["descripcion"],
+        "especificacion" => $_POST["especificacion"],
+        "id_marca" => $_POST["id_marca"],
+        "stock" => $_POST["stock"],
+        "ruta_imagen" => $_POST["ruta_imagen"] // Asegúrate de enviar este campo en el formulario.
+    ];
 
     // Verificar si se ha enviado al menos una nueva imagen
     if (!empty($_FILES['inputImagen']['name'][0])) {
@@ -97,9 +96,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Actualizar el producto en la base de datos
-    $conexPDO = utils::conectar();
+    /* $conexPDO = utils::conectar(); */
     $gestorproducto = new producto();
     $gestorproducto->updateProducto($producto, $conexPDO);
+    
+    $gestorMarca = new marca();
+    $marcas = $gestorMarca->getMarcas($conexPDO);
+
+    $gestorCategoria = new categoria();
+    $categorias = $gestorCategoria->getCategorias($conexPDO);
 
     // Incluir la vista para mostrar el resultado
     include("../view/modificarProductoView.php");

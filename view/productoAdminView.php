@@ -167,10 +167,10 @@
                             print("<input type='hidden' name='idProducto' value='" . $datosProducto["idproducto"] . "'/>");
                             print("<input type='hidden' name='nombre' value='" . $datosProducto["nombre"] . "'/>");
                             print("<input type='hidden' name='precio' value='" . $datosProducto["precio"] . "'/>");
-                            print("<input type='hidden' name='categoria' value='" . $nombreCategoria . "'/>");
+                            print("<input type='hidden' name='id_categoria' value='" . $nombreCategoria . "'/>");
                             print("<input type='hidden' name='descripcion' value='" . $datosProducto["descripcion"] . "'/>");
                             print("<input type='hidden' name='especificacion' value='" . $datosProducto["especificacion"] . "'/>");
-                            print("<input type='hidden' name='marca' value='" . $nombreMarca . "'/>");
+                            print("<input type='hidden' name='id_marca' value='" . $nombreMarca . "'/>");
                             print("<input type='hidden' name='stock' value='" . $datosProducto["stock"] . "'/>");
                             print("<input type='hidden' name='ruta_imagen' value='" . $datosProducto["ruta_imagen"] . "'/>");
 
@@ -242,16 +242,6 @@
                                 </select>
                             </div>
                         </div>
-
-                        <!-- <div class="mb-3">
-                            <label for="selectMarca" class="form-label"><b>Marca:</b></label>
-                            <select class="form-select" name="inputMarca" id="selectMarca">
-                                <option value="" selected disabled>Seleccione una marca</option>
-                                <?php foreach ($marcas as $marca) : ?>
-                                    <option value="<?= $marca['idmarca'] ?>"><?= htmlspecialchars($marca['nombre_marca']) ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div> -->
 
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label"><b>Descripción:</b></label>
