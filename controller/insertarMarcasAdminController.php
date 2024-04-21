@@ -1,14 +1,13 @@
 <?php
-
 namespace model;
 
-use \model\categoria;
 use \model\utils;
-
+use \model\marca;
 
 //Añadimos el código del modelo
-require_once("../model/categoriaModel.php");
 require_once("../model/utils.php");
+require_once("../model/marcaModel.php");
+$mensaje=null;
 
 session_start();
 
@@ -18,29 +17,33 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'
     exit();
 }
 
-//Creamos un array para guardar los datos del usuario
-$categoria = array();
-
 // Solo se ejecutará cuando reciba una petición del registro
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $idCategoria = $_POST["idCategoria"];
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
+{
+    $nombre = $_POST['inputNombre'];
 
-    //Nos conectamos a la Bd
+    $datosMarca = array();
+    $datosMarca["nombre_marca"] = utils::limpiar_datos($nombre);
+
+    $gestorMarca = new Marca();
+
+    //Nos conectamos a la Base de Datos
     $conexPDO = utils::conectar();
-    $gestorCategoria = new Categoria();
-    $resultado = $gestorCategoria->delCategoria($idCategoria, $conexPDO);
+    $resultado = $gestorMarca->addMarca($datosMarca, $conexPDO);
 
     //Para verificar si todo funcionó correctamente
     if ($resultado != null) {
-        $_SESSION['mensaje'] = "La categoria ha sido borrada correctamente.";
+        $_SESSION['mensaje'] = "La marca ha sido creada correctamente.";
         $_SESSION['tipo_mensaje'] = "success";
-        header('Location: ../controller/categoriasAdminController.php');
+        header('Location: ../controller/marcasAdminController.php');
         exit();
     } else {
-        $_SESSION['mensaje'] = "Error al borrar la categoria.";
+        $_SESSION['mensaje'] = "Error al crear la marca.";
         $_SESSION['tipo_mensaje'] = "danger";
         // Si decides redireccionar de todos modos o manejar de otra forma
-        header('Location: ../controller/categoriasAdminController.php');
+        header('Location: ../controller/marcasAdminController.php');
         exit();
     }
 }
+
+?>

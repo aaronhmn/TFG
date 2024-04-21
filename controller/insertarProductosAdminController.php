@@ -6,11 +6,15 @@ session_start();
 
 
 use \model\utils;
-use \model\productoModel;
+use \model\producto;
+use \model\marca;
+use \model\categoria;
 
 //Añadimos el código del modelo
 require_once("../model/utils.php");
 require_once("../model/productoModel.php");
+require_once("../model/marcaModel.php");
+require_once("../model/categoriaModel.php");
 $mensaje = null;
 
 session_start();
@@ -28,27 +32,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nombre = $_POST['inputNombre'];
     $precio = $_POST['inputPrecio'];
     $categoria = $_POST['inputCategoria'];
-    $subCategoria = $_POST['inputSubCategoria'];
     $descripcion = $_POST['inputDescripcion'];
     $especificacion = $_POST['inputEspecificacion'];
     $marca = $_POST['inputMarca'];
     $stock = $_POST['inputStock'];
 
-    InsertarProducto($nombre, $precio, $categoria, $subCategoria, $descripcion, $especificacion, $marca, $stock);
+    InsertarProducto($nombre, $precio, $categoria, $descripcion, $especificacion, $marca, $stock);
 }
 
-function InsertarProducto($nombre, $precio, $categoria, $subCategoria, $descripcion, $especificacion, $marca, $stock)
+function InsertarProducto($nombre, $precio, $categoria, $descripcion, $especificacion, $marca, $stock)
 {
     //Declaramos un array vacio que alojará los datos del producto
     $producto = array();
 
     $producto["nombre"] = utils::limpiar_datos($nombre);
     $producto["precio"] = utils::limpiar_datos($precio);
-    $producto["categoria"] = utils::limpiar_datos($categoria);
-    $producto["sub_categoria"] = utils::limpiar_datos($subCategoria);
+    $producto["id_categoria"] = utils::limpiar_datos($categoria);
     $producto["descripcion"] = utils::limpiar_datos($descripcion);
     $producto["especificacion"] = utils::limpiar_datos($especificacion);
-    $producto["marca"] = utils::limpiar_datos($marca);
+    $producto["id_marca"] = utils::limpiar_datos($marca);
     $producto["stock"] = utils::limpiar_datos($stock);
 
     // Inicializa una variable para almacenar las rutas de las imágenes

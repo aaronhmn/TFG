@@ -15,7 +15,7 @@
     <title>Inicio - Dashboard</title>
 </head>
 
-<body>
+<body style="background-color: #e6e6fa">
 
     <div class="sidebar">
         <div class="logo"></div>
@@ -46,48 +46,39 @@
             </li>
             <li>
                 <a href="../controller/marcasAdminController.php">
-                <i class="fa-solid fa-flag"></i>
+                    <i class="fa-solid fa-flag"></i>
                     <span>Marcas</span>
-                </a>
-            </li>
-            <li>
-                <a href="../controller/inicioController.php">
-                    <i class="fas fa-home"></i>
-                    <span>Web</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-sign-out" style="color: #2d2d2d;"></i>
-                    <span>
-                        <form action='../controller/cerrarSesionController.php' method="POST">
-                            <button class="boton-CS" style="color: #2d2d2d; background-color: rgba(0, 0, 0, 0);"><b>Salir</b></button>
-                        </form>
-                    </span>
                 </a>
             </li>
         </ul>
     </div>
 
-    <div class="main-content">
-        <div class="header-wrapper">
-            <div class="header- title">
-                <h2>Bienvenido
-                    <?php
-                    $resultado = $_SESSION['nombre_usuario'];
-                    print "<b>" . $resultado . "</b>";
-                    ?>
-                </h2>
-                <h4>Página de inicio - Dashboard</h4>
-                <!--<a href="https://www.youtube.com/watch?v=CgCPP2KO5ds" target="_blank">Video Tutorial</a>-->
-                <form action='../controller/cerrarSesionController.php' method="POST">
-                    <button>
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>Logout</span>
-                    </button>
-                </form>
-            </div>
-        </div>
+    <div class="container" style="max-width: 1600px;"><br><br>
+        <nav class="navbar3">
+            <img class="logo" src="../assets/img/genesis logo sin fondo favicon.png" alt="">
+            <p class="parrafo-logo"><b>Genesis</b></p>
+            <ul>
+                <li>
+                    <h3 style="margin-right: 50px;">Bienvenido
+                        <?php
+                        $resultado = $_SESSION['nombre_usuario'];
+                        print "<b style='color: #8350f2;'>" . $resultado . "</b>";
+                        ?>
+                    </h3>
+                </li>
+                <li>
+                    <form action='../controller/inicioController.php' method="POST">
+                        <button class="btn btn-primary home-boton" style="margin-right: 50px; background-color: #8350F2; border-color: #8350F2; border-radius: 4px;"><i class="fas fa-home" style="color: white; margin-right: 8px;"></i><b>Ir a la web</b></button>
+                    </form>
+                </li>
+                <li>
+                    <form action='../controller/cerrarSesionController.php' method="POST">
+                        <button class="btn btn-danger"><i class="fas fa-sign-out" style="color: white; margin-right: 8px;"></i><b>Cerrar Sesión</b></button>
+                    </form>
+                </li>
+            </ul>
+        </nav><br>
+        <hr style="border-top: 2px solid #8350F2;"><br>
     </div>
 
 </body>

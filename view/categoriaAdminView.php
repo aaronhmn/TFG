@@ -46,49 +46,46 @@
             </li>
             <li>
                 <a href="../controller/marcasAdminController.php">
-                <i class="fa-solid fa-flag"></i>
+                    <i class="fa-solid fa-flag"></i>
                     <span>Marcas</span>
-                </a>
-            </li>
-            <li>
-                <a href="../controller/inicioController.php">
-                    <i class="fas fa-home"></i>
-                    <span>Web</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-sign-out" style="color: #2d2d2d;"></i>
-                    <span>
-                        <form action='../controller/cerrarSesionController.php' method="POST">
-                            <button class="boton-CS" style="color: #2d2d2d; background-color: rgba(0, 0, 0, 0);"><b>Salir</b></button>
-                        </form>
-                    </span>
                 </a>
             </li>
         </ul>
     </div>
 
     <div class="container" style="max-width: 1600px;"><br><br>
+        <nav class="navbar3">
+            <img class="logo" src="../assets/img/genesis logo sin fondo favicon.png" alt="">
+            <p class="parrafo-logo"><b>Genesis</b></p>
+            <ul>
+                <li>
+                    <h3 style="margin-right: 50px;">Bienvenido
+                        <?php
+                        $resultado = $_SESSION['nombre_usuario'];
+                        print "<b style='color: #8350f2;'>" . $resultado . "</b>";
+                        ?>
+                    </h3>
+                </li>
+                <li>
+                    <form action='../controller/inicioController.php' method="POST">
+                        <button class="btn btn-primary home-boton" style="margin-right: 50px; background-color: #8350F2; border-color: #8350F2; border-radius: 4px;"><i class="fas fa-home" style="color: white; margin-right: 8px;"></i><b>Ir a la web</b></button>
+                    </form>
+                </li>
+                <li>
+                    <form action='../controller/cerrarSesionController.php' method="POST">
+                        <button class="btn btn-danger"><i class="fas fa-sign-out" style="color: white; margin-right: 8px;"></i><b>Cerrar Sesión</b></button>
+                    </form>
+                </li>
+            </ul>
+        </nav><br>
+        <hr style="border-top: 2px solid #8350F2;"><br>
+
         <div class="navbar2">
             <ul>
                 <li>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#insertarCategoriaModal">
                         Insertar categoria nueva
                     </button>
-                </li>
-                <li>
-                    <h3 style="color: #8350F2;">Bienvenido
-                        <?php
-                        $resultado = $_SESSION['nombre_usuario'];
-                        print "<b>" . $resultado . "</b>";
-                        ?>
-                    </h3>
-                </li>
-                <li>
-                    <form action='../controller/cerrarSesionController.php' method="POST">
-                        <button class="btn" style="background-color: #ec5353; color: #fff;"><b>Cerrar Sesión</b></button>
-                    </form>
                 </li>
             </ul>
         </div>
@@ -169,7 +166,7 @@
                     <form method="POST" action="../controller/insertarCategoriasAdminController.php" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="inputNombre" class="form-label"><b>Nombre de la Categoría:</b></label>
-                            <input type="text" class="form-control" name="inputNombre" aria-describedby="emailHelp">
+                            <input type="text" class="form-control" name="inputNombre" required aria-describedby="emailHelp">
                         </div>
                         <div class="d-grid">
                             <button class="btn btn-primary" type="submit" value="Upload" style="background-color: #8350F2; border:#8350F2;">Insertar</button>
@@ -193,7 +190,7 @@
                     <form method="POST" action="../controller/modificarCategoriaAdminController.php" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="nombre_categoria" class="form-label"><b>Nombre de la Categoría:</b></label>
-                            <input type="text" class="form-control" name="nombre_categoria" id="nombre_categoria" value="">
+                            <input type="text" class="form-control" name="nombre_categoria" id="nombre_categoria" value="" required>
                             <input type="hidden" name="idCategoria" id="idCategoria" value="">
                         </div>
                         <div class="d-grid">

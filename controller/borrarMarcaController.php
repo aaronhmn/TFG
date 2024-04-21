@@ -2,12 +2,12 @@
 
 namespace model;
 
-use \model\categoria;
+use \model\marca;
 use \model\utils;
 
 
 //Añadimos el código del modelo
-require_once("../model/categoriaModel.php");
+require_once("../model/marcaModel.php");
 require_once("../model/utils.php");
 
 session_start();
@@ -23,24 +23,24 @@ $categoria = array();
 
 // Solo se ejecutará cuando reciba una petición del registro
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $idCategoria = $_POST["idCategoria"];
+    $idMarca = $_POST["idMarca"];
 
     //Nos conectamos a la Bd
     $conexPDO = utils::conectar();
-    $gestorCategoria = new Categoria();
-    $resultado = $gestorCategoria->delCategoria($idCategoria, $conexPDO);
+    $gestorMarca = new Marca();
+    $resultado = $gestorMarca->delMarca($idMarca, $conexPDO);
 
     //Para verificar si todo funcionó correctamente
     if ($resultado != null) {
-        $_SESSION['mensaje'] = "La categoria ha sido borrada correctamente.";
+        $_SESSION['mensaje'] = "La marca ha sido borrada correctamente.";
         $_SESSION['tipo_mensaje'] = "success";
-        header('Location: ../controller/categoriasAdminController.php');
+        header('Location: ../controller/marcasAdminController.php');
         exit();
     } else {
-        $_SESSION['mensaje'] = "Error al borrar la categoria.";
+        $_SESSION['mensaje'] = "Error al borrar la marca.";
         $_SESSION['tipo_mensaje'] = "danger";
         // Si decides redireccionar de todos modos o manejar de otra forma
-        header('Location: ../controller/categoriasAdminController.php');
+        header('Location: ../controller/marcasAdminController.php');
         exit();
     }
 }

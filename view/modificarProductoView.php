@@ -41,15 +41,7 @@ namespace view;
             <label for="categoria" class="col-lg-3 col-form-label">Categoria:</label>
             <div class="col-lg-6">
                <input type="text" class="form-control" id="categoria" name="categoria" 
-               value='<?=(isset($producto)?$producto["categoria"]:"") ?>' />
-            </div>
-          </div>
-
-          <div class=" form-group row mb-sm-2 mt-sm-2 ">
-            <label for="sub_categoria" class="col-lg-3 col-form-label">Subcategoria:</label>
-            <div class="col-lg-6">
-               <input type="text" class="form-control" id="sub_categoria" name="sub_categoria" 
-               value='<?=(isset($producto)?$producto["sub_categoria"]:"") ?>' />
+               value='<?=(isset($producto)?$producto["id_categoria"]:"") ?>' />
             </div>
           </div>
 
@@ -71,7 +63,7 @@ namespace view;
             <label for="marca" class="col-lg-3 col-form-label">Marca:</label>
             <div class="col-lg-6">
               <input type="text" class="form-control" id="marca" name="marca"
-               value='<?=(isset($producto)?$producto["marca"]:"") ?>' />
+               value='<?=(isset($producto)?$producto["id_marca"]:"") ?>' />
             </div>
           </div>
 

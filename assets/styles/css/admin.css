@@ -134,7 +134,45 @@ body{
     list-style: none;
 }
 
+.navbar3{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo{
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1rem;
+}
+
+.parrafo-logo{
+    color: #8350F2;
+    margin-left: -10px;
+    font-size: 40px;
+}
+
+.navbar3 ul{
+    flex: 2;
+    display: flex;
+    justify-content:end;
+    padding-left: 0;
+}
+
+.navbar3 ul li{
+    list-style: none;
+}
+
 .form-control:focus {
     border-color: #8350F2 !important;
-    box-shadow: 0 0 0 0.25rem rgba(131, 80, 242, 0.5) !important; /* Sombra ligera con el mismo color */
+    box-shadow: 0 0 0 0.25rem rgba(131, 80, 242, 0.5) !important; 
 }
+
+.form-select:focus {
+    border-color: #8350F2 !important;
+    box-shadow: 0 0 0 0.25rem rgba(131, 80, 242, 0.5) !important;
+}
+
+

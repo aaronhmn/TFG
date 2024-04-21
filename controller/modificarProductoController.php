@@ -2,12 +2,16 @@
 
 namespace model;
 
-use \model\productoModel;
+use \model\producto;
+use \model\marca;
+use \model\categoria;
 use \model\utils;
 
 
 //Añadimos el código del modelo
 require_once("../model/productoModel.php");
+require_once("../model/marcaModel.php");
+require_once("../model/categoriaModel.php");
 require_once("../model/utils.php");
 
 session_start();
@@ -26,11 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $producto["idproducto"] = $_GET["idProducto"];
     $producto["nombre"] = $_GET["nombre"];
     $producto["precio"] = $_GET["precio"];
-    $producto["categoria"] = $_GET["categoria"];
-    $producto["sub_categoria"] = $_GET["sub_categoria"];
+    $producto["id_categoria"] = $_GET["id_categoria"];
     $producto["descripcion"] = $_GET["descripcion"];
     $producto["especificacion"] = $_GET["especificacion"];
-    $producto["marca"] = $_GET["marca"];
+    $producto["id_marca"] = $_GET["id_marca"];
     $producto["stock"] = $_GET["stock"];
     $producto["ruta_imagen"] = $_GET["ruta_imagen"];
 
@@ -43,11 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $producto["idproducto"] = $_POST["idProducto"];
     $producto["nombre"] = $_POST["nombre"];
     $producto["precio"] = $_POST["precio"];
-    $producto["categoria"] = $_POST["categoria"];
-    $producto["sub_categoria"] = $_POST["sub_categoria"];
+    $producto["id_categoria"] = $_POST["id_categoria"];
     $producto["descripcion"] = $_POST["descripcion"];
     $producto["especificacion"] = $_POST["especificacion"];
-    $producto["marca"] = $_POST["marca"];
+    $producto["id_marca"] = $_POST["id_marca"];
     $producto["stock"] = $_POST["stock"];
 
     // Verificar si se ha enviado al menos una nueva imagen

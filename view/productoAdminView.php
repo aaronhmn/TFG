@@ -52,49 +52,45 @@
             </li>
             <li>
                 <a href="../controller/marcasAdminController.php">
-                <i class="fa-solid fa-flag"></i>
+                    <i class="fa-solid fa-flag"></i>
                     <span>Marcas</span>
-                </a>
-            </li>
-            <li>
-                <a href="../controller/inicioController.php">
-                    <i class="fas fa-home"></i>
-                    <span>Web</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-sign-out" style="color: #2d2d2d;"></i>
-                    <span>
-                        <form action='../controller/cerrarSesionController.php' method="POST">
-                            <button class="boton-CS" style="color: #2d2d2d; background-color: rgba(0, 0, 0, 0);"><b>Salir</b></button>
-                        </form>
-                    </span>
                 </a>
             </li>
         </ul>
     </div>
 
     <div class="container" style="max-width: 1600px;"><br><br>
+        <nav class="navbar3">
+            <img class="logo" src="../assets/img/genesis logo sin fondo favicon.png" alt="">
+            <p class="parrafo-logo"><b>Genesis</b></p>
+            <ul>
+                <li>
+                    <h3 style="margin-right: 50px;">Bienvenido
+                        <?php
+                        $resultado = $_SESSION['nombre_usuario'];
+                        print "<b style='color: #8350f2;'>" . $resultado . "</b>";
+                        ?>
+                    </h3>
+                </li>
+                <li>
+                    <form action='../controller/inicioController.php' method="POST">
+                        <button class="btn btn-primary home-boton" style="margin-right: 50px; background-color: #8350F2; border-color: #8350F2; border-radius: 4px;"><i class="fas fa-home" style="color: white; margin-right: 8px;"></i><b>Ir a la web</b></button>
+                    </form>
+                </li>
+                <li>
+                    <form action='../controller/cerrarSesionController.php' method="POST">
+                        <button class="btn btn-danger"><i class="fas fa-sign-out" style="color: white; margin-right: 8px;"></i><b>Cerrar Sesión</b></button>
+                    </form>
+                </li>
+            </ul>
+        </nav><br>
+        <hr style="border-top: 2px solid #8350F2;"><br>
         <div class="navbar2">
             <ul>
                 <li>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#insertarProductoModal">
                         Insertar producto nuevo
                     </button>
-                </li>
-                <li>
-                    <h3 style="color: #8350F2;">Bienvenido 
-                    <?php
-                        $resultado = $_SESSION['nombre_usuario'];
-                        print "<b>" .$resultado. "</b>";
-                    ?>
-                    </h3>
-                </li>
-                <li>
-                    <form action='../controller/cerrarSesionController.php' method="POST">
-                        <button class="btn" style="background-color: #ec5353; color: #fff;"><b>Cerrar Sesión</b></button>
-                    </form>
                 </li>
             </ul>
         </div>
@@ -119,7 +115,6 @@
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Nombre</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Precio</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Categoria</th>
-                            <th style="background-color: #8350F2; color: #fff;" scope="col">Sub Categoria</th>
                             <!--<th style="text-align: center;" scope="col">Descripcion</th>-->
                             <!--<th style="text-align: center;" scope="col">Especificacion</th>-->
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Marca</th>
@@ -134,6 +129,9 @@
                         //que tenga el array de datosProducto
 
                         foreach ($productosPaginados as $datosProducto) {
+
+                            $nombreMarca = $gestorMarcas->getMarcaId($datosProducto["id_marca"], $conexPDO)['nombre_marca']; 
+                            $nombreCategoria = $gestorCategorias->getCategoriaId($datosProducto["id_categoria"], $conexPDO)['nombre_categoria'];
                             //Comienzo de fila
                             print("<tr style='align-items: center; background-color: gray;'>\n");
 
@@ -144,19 +142,13 @@
                             //Precio
                             print("<td style='padding-top: 14px;'>" . $datosProducto["precio"] . "€</td>\n");
                             //Categoria
-                            print("<td style='padding-top: 14px;'>" . $datosProducto["categoria"] . "</td>\n");
-                            //Sub Categoria
-                            if($datosProducto["sub_categoria"] != null ){
-                                print("<td style=' padding-top: 14px;'>" . $datosProducto["sub_categoria"] . "</td>\n");
-                              }else{
-                                print("<td style=' padding-top: 14px;'>nulo</td>\n");
-                              }
+                            print("<td style='padding-top: 14px;'>" . $nombreCategoria . "</td>\n");
                             //Descripcion
                             //print("<td style='padding-top: 14px;'>" . $datosProducto[$i]["descripcion"] . "</td>\n");
                             //Especificacion
                             //print("<td style='padding-top: 14px;'>" . $datosProducto[$i]["especificacion"] . "</td>\n");
                             //Marca
-                            print("<td style='padding-top: 14px;'>" . $datosProducto["marca"] . "</td>\n");
+                            print("<td style='padding-top: 14px;'>" . $nombreMarca . "</td>\n");
                             //Stock
                             print("<td style='padding-top: 14px;'>" . $datosProducto["stock"] . "</td>\n");
 
@@ -175,11 +167,10 @@
                             print("<input type='hidden' name='idProducto' value='" . $datosProducto["idproducto"] . "'/>");
                             print("<input type='hidden' name='nombre' value='" . $datosProducto["nombre"] . "'/>");
                             print("<input type='hidden' name='precio' value='" . $datosProducto["precio"] . "'/>");
-                            print("<input type='hidden' name='categoria' value='" . $datosProducto["categoria"] . "'/>");
-                            print("<input type='hidden' name='sub_categoria' value='" . $datosProducto["sub_categoria"] . "'/>");
+                            print("<input type='hidden' name='categoria' value='" . $nombreCategoria . "'/>");
                             print("<input type='hidden' name='descripcion' value='" . $datosProducto["descripcion"] . "'/>");
                             print("<input type='hidden' name='especificacion' value='" . $datosProducto["especificacion"] . "'/>");
-                            print("<input type='hidden' name='marca' value='" . $datosProducto["marca"] . "'/>");
+                            print("<input type='hidden' name='marca' value='" . $nombreMarca . "'/>");
                             print("<input type='hidden' name='stock' value='" . $datosProducto["stock"] . "'/>");
                             print("<input type='hidden' name='ruta_imagen' value='" . $datosProducto["ruta_imagen"] . "'/>");
 
@@ -188,7 +179,6 @@
                             print("</td>\n");
                             //Final de fila
                             print("</tr>\n");
-
                         }
                         ?>
                     </tbody>
@@ -217,49 +207,64 @@
                     <!-- Aquí va el formulario de inserción de producto -->
                     <form method="POST" action="../controller/insertarProductosAdminController.php" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label for="inputNombre" class="form-label" style="color: #8350F2;">Nombre:</label>
+                            <label for="inputNombre" class="form-label"><b>Nombre:</b></label>
                             <input type="text" class="form-control" name="inputNombre" aria-describedby="emailHelp">
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="inputPrecio" class="form-label" style="color: #8350F2;">Precio:</label>
+                                <label for="inputPrecio" class="form-label"><b>Precio:</b></label>
                                 <input type="number" step="0.01" class="form-control" name="inputPrecio" aria-describedby="emailHelp">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="inputStock" class="form-label" style="color: #8350F2;">Stock:</label>
+                                <label for="inputStock" class="form-label"><b>Stock:</b></label>
                                 <input type="number" class="form-control" name="inputStock" aria-describedby="emailHelp">
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="inputCategoria" class="form-label" style="color: #8350F2;">Categoría:</label>
-                                <input type="text" class="form-control" name="inputCategoria" aria-describedby="emailHelp">
+                                <label for="selectCategoria" class="form-label"><b>Categoria:</b></label>
+                                <select class="form-select" name="inputCategoria" id="selectCategoria">
+                                    <option value="" selected disabled>Elija una categoría</option>
+                                    <?php foreach ($categorias as $categoria) : ?>
+                                        <option value="<?= $categoria['idcategoria'] ?>"><?= htmlspecialchars($categoria['nombre_categoria']) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="inputSubCategoria" class="form-label" style="color: #8350F2;">Subcategoría:</label>
-                                <input type="text" class="form-control" name="inputSubCategoria" aria-describedby="emailHelp">
+                                <label for="selectMarca" class="form-label"><b>Marca:</b></label>
+                                <select class="form-select" name="inputMarca" id="selectMarca">
+                                    <option value="" selected disabled>Elija una marca</option>
+                                    <?php foreach ($marcas as $marca) : ?>
+                                        <option value="<?= $marca['idmarca'] ?>"><?= htmlspecialchars($marca['nombre_marca']) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="inputNombre" class="form-label" style="color: #8350F2;">Marca:</label>
-                            <input type="text" class="form-control" name="inputMarca" aria-describedby="emailHelp">
-                        </div>
+                        <!-- <div class="mb-3">
+                            <label for="selectMarca" class="form-label"><b>Marca:</b></label>
+                            <select class="form-select" name="inputMarca" id="selectMarca">
+                                <option value="" selected disabled>Seleccione una marca</option>
+                                <?php foreach ($marcas as $marca) : ?>
+                                    <option value="<?= $marca['idmarca'] ?>"><?= htmlspecialchars($marca['nombre_marca']) ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div> -->
 
                         <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label" style="color: #8350F2;">Descripción:</label>
+                            <label for="exampleFormControlTextarea1" class="form-label"><b>Descripción:</b></label>
                             <textarea class="form-control" name="inputDescripcion" rows="5"></textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label" style="color: #8350F2;">Especificacion:</label>
+                            <label for="exampleFormControlTextarea1" class="form-label"><b>Especificacion:</b></label>
                             <textarea class="form-control" name="inputEspecificacion" rows="5"></textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label for="inputImagen" class="form-label" style="color: #8350F2;">Inserta las imágenes:</label>
+                            <label for="inputImagen" class="form-label"><b>Inserta las imágenes:</b></label>
                             <input type="file" class="form-control" id="inputImagen" name="inputImagen[]" multiple>
                         </div>
 

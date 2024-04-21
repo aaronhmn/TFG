@@ -65,7 +65,7 @@ session_start();
               <?php 
                 $rol = $_SESSION['rol'];
                 if($rol === 1){
-                  print "<li><a class='dropdown-item' href='../controller/inicioAdminController.php' style='margin-top: 5px;'><i class='fa-solid fa-heart fa-sm' style='margin-right: 5px;'></i>Dashboard</a></li>";
+                  print "<li><a class='dropdown-item' href='../controller/inicioAdminController.php' style='margin-top: 5px;'><i class='fas fa-tachometer-alt' style='margin-right: 5px;'></i>Dashboard</a></li>";
                 } 
               ?>
               <li>

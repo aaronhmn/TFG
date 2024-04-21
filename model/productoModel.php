@@ -107,21 +107,51 @@ class producto
         $result = null;
         if (isset($producto) && $conexPDO != null) {
             try {
-                //Preparamos la sentencia
-                $sentencia = $conexPDO->prepare("INSERT INTO genesis.producto (nombre, precio, categoria, sub_categoria, descripcion, especificacion, marca, stock, imagen, tipo_imagen, ruta_imagen) VALUES ( :nombre, :precio, :categoria, :sub_categoria, :descripcion, :especificacion, :marca, :stock, :imagen, :tipo_imagen, :ruta_imagen)");
+                // Preparamos la sentencia SQL con todos los campos necesarios, incluidas las claves foráneas
+                $sql = "INSERT INTO genesis.producto (nombre, precio, id_categoria, descripcion, especificacion, id_marca, stock, imagen, tipo_imagen, ruta_imagen) VALUES (:nombre, :precio, :id_categoria, :descripcion, :especificacion, :id_marca, :stock, :imagen, :tipo_imagen, :ruta_imagen)";
+                $stmt = $conexPDO->prepare($sql);
 
-                //Asociamos los valores a los parametros de la sentencia sql (A la izquierda el parámetro y a la derecha los valores como están en la base de datos)
+                // Asociamos los valores a los parámetros de la sentencia SQL
+                $stmt->bindParam(":nombre", $producto["nombre"]);
+                $stmt->bindParam(":precio", $producto["precio"]);
+                $stmt->bindParam(":id_categoria", $producto["id_categoria"]);
+                $stmt->bindParam(":descripcion", $producto["descripcion"]);
+                $stmt->bindParam(":especificacion", $producto["especificacion"]);
+                $stmt->bindParam(":id_marca", $producto["id_marca"]);
+                $stmt->bindParam(":stock", $producto["stock"]);
+                $stmt->bindParam(":imagen", $producto["imagen"]);
+                $stmt->bindParam(":tipo_imagen", $producto["tipo_imagen"]);
+                $stmt->bindParam(":ruta_imagen", $producto["ruta_imagen"]);
+
+                // Ejecutamos la sentencia
+                $result = $stmt->execute();
+            } catch (PDOException $e) {
+                print("Error al acceder a BD: " . $e->getMessage());
+            }
+        }
+
+        return $result;
+    }
+
+    function updateProducto($producto, $conexPDO)
+    {
+        $result = null;
+        if (isset($producto) && isset($producto["idproducto"]) && is_numeric($producto["idproducto"])  && $conexPDO != null) {
+            try {
+                //Preparamos la sentencia
+                $sentencia = $conexPDO->prepare("UPDATE genesis.producto set nombre=:nombre, precio=:precio, id_categoria=:id_categoria, descripcion=:descripcion, especificacion=:especificacion, id_marca=:id_marca, stock=:stock, ruta_imagen=:ruta_imagen  where idproducto=:idproducto");
+
+                //Asociamos los valores a los parametros de la sentencia sql
+                $sentencia->bindParam(":idproducto", $producto["idproducto"]);
                 $sentencia->bindParam(":nombre", $producto["nombre"]);
                 $sentencia->bindParam(":precio", $producto["precio"]);
-                $sentencia->bindParam(":categoria", $producto["categoria"]);
-                $sentencia->bindParam(":sub_categoria", $producto["sub_categoria"]);
+                $sentencia->bindParam(":id_categoria", $producto["id_categoria"]);
                 $sentencia->bindParam(":descripcion", $producto["descripcion"]);
                 $sentencia->bindParam(":especificacion", $producto["especificacion"]);
-                $sentencia->bindParam(":marca", $producto["marca"]);
+                $sentencia->bindParam(":id_marca", $producto["id_marca"]);
                 $sentencia->bindParam(":stock", $producto["stock"]);
-                $sentencia->bindParam(":imagen", $producto["imagen"]);
-                $sentencia->bindParam(":tipo_imagen", $producto["tipo_imagen"]);
                 $sentencia->bindParam(":ruta_imagen", $producto["ruta_imagen"]);
+
 
 
                 //Ejecutamos la sentencia
@@ -149,39 +179,6 @@ class producto
                 } catch (PDOException $e) {
                     print("Error al borrar" . $e->getMessage());
                 }
-            }
-        }
-
-        return $result;
-    }
-
-
-    function updateProducto($producto, $conexPDO)
-    {
-        $result = null;
-        if (isset($producto) && isset($producto["idproducto"]) && is_numeric($producto["idproducto"])  && $conexPDO != null) {
-            try {
-                //Preparamos la sentencia
-                $sentencia = $conexPDO->prepare("UPDATE genesis.producto set nombre=:nombre, precio=:precio, categoria=:categoria, sub_categoria=:sub_categoria, descripcion=:descripcion, especificacion=:especificacion, marca=:marca, stock=:stock, ruta_imagen=:ruta_imagen  where idproducto=:idproducto");
-
-                //Asociamos los valores a los parametros de la sentencia sql
-                $sentencia->bindParam(":idproducto", $producto["idproducto"]);
-                $sentencia->bindParam(":nombre", $producto["nombre"]);
-                $sentencia->bindParam(":precio", $producto["precio"]);
-                $sentencia->bindParam(":categoria", $producto["categoria"]);
-                $sentencia->bindParam(":sub_categoria", $producto["sub_categoria"]);
-                $sentencia->bindParam(":especificacion", $producto["especificacion"]);
-                $sentencia->bindParam(":descripcion", $producto["descripcion"]);
-                $sentencia->bindParam(":marca", $producto["marca"]);
-                $sentencia->bindParam(":stock", $producto["stock"]);
-                $sentencia->bindParam(":ruta_imagen", $producto["ruta_imagen"]);
-
-
-
-                //Ejecutamos la sentencia
-                $result = $sentencia->execute();
-            } catch (PDOException $e) {
-                print("Error al acceder a BD" . $e->getMessage());
             }
         }
 
@@ -221,7 +218,8 @@ class producto
         return $rutasImagenes;
     }
 
-    public function getValoracionPromedio($idProducto, $conexPDO) {
+    public function getValoracionPromedio($idProducto, $conexPDO)
+    {
         if (isset($idProducto) && is_numeric($idProducto)) {
             if ($conexPDO != null) {
                 try {

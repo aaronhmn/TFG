@@ -1,11 +1,15 @@
 <?php
 namespace model;
 
-use \model\productoModel;
+use \model\producto;
 use \model\utils;
+use \model\marca;
+use \model\categoria;
 
 //Añadimos el código del modelo
 require_once("../model/productoModel.php");
+require_once("../model/marcaModel.php");
+require_once("../model/categoriaModel.php");
 require_once("../model/utils.php");
 $mensaje=null;
 
@@ -18,11 +22,15 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'
 }
 
 $gestorProductos = new Producto();
+$gestorMarcas = new Marca();
+$gestorCategorias = new Categoria();
 
 //Nos conectamos a la Bd
 $conexPDO = utils::conectar();
 //Recolectamos los datos de los productos
 $datosProducto = $gestorProductos->getProductos($conexPDO);
+$marcas = $gestorMarcas->getMarcas($conexPDO);
+$categorias = $gestorCategorias->getCategorias($conexPDO);
 
 //Paginacion
 $totalProductos = $gestorProductos->getProductos($conexPDO);

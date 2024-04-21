@@ -53,7 +53,7 @@ namespace views;
       </div>
 
       <div class="col-lg-6 col-md-12 col-12">
-        <h2 class="nombre-producto"><b><?= $productos['nombre'] ?></b></h2>
+        <h3 class="nombre-producto"><b><?= $productos['nombre'] ?></b></h3>
         <div class="contenedor-info mt-4">
           <div class="estrellas">
             <i class="fa fa-star"></i>
