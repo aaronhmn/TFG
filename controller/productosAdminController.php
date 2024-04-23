@@ -21,6 +21,13 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'
     exit();
 }
 
+function truncarTexto($texto, $maxCaracteres) {
+    if (strlen($texto) > $maxCaracteres) {
+        $texto = substr($texto, 0, $maxCaracteres) . '...';
+    }
+    return $texto;
+}
+
 $gestorProductos = new Producto();
 $gestorMarcas = new Marca();
 $gestorCategorias = new Categoria();

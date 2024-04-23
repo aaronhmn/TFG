@@ -127,6 +127,12 @@
                         <?php
                         //Tenemos que generar una fila tr para cada producto
                         //que tenga el array de datosProducto
+                        function truncarTexto($texto, $maxCaracteres) {
+                            if (strlen($texto) > $maxCaracteres) {
+                                $texto = substr($texto, 0, $maxCaracteres) . '...';
+                            }
+                            return $texto;
+                        }
 
                         foreach ($productosPaginados as $datosProducto) {
 
@@ -138,7 +144,7 @@
                             //Id de producto
                             print("<td style='padding-top: 14px;' scope='row'><b>" . $datosProducto["idproducto"] . "</b></td>\n");
                             //Nombre
-                            print("<td style='padding-top: 14px;'>" . "<a href='../controller/detallesProductoAdminController.php' class='ID-REF' data-id='" . $datosProducto["idproducto"] . "'>" . $datosProducto["nombre"] . "</a>" . "</td>\n");
+                            print("<td style='padding-top: 14px;'>" . truncarTexto($datosProducto["nombre"], 20) . "</td>\n");
                             //Precio
                             print("<td style='padding-top: 14px;'>" . $datosProducto["precio"] . "€</td>\n");
                             //Categoria

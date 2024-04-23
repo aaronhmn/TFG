@@ -231,45 +231,6 @@
     </div><br>
   </div>
 
-  <div class="modal fade" id="empModal" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Detalles del Usuario</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body"> </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div>
-    </div>
-    <!--</div>-->
-
-    <script type='text/javascript'>
-      $(document).ready(function() {
-        $('.ID-REF').click(function() {
-          var userId = $(this).data('id');
-          $.ajax({
-            url: '../controller/detallesUsuarioController.php',
-            type: 'post',
-            data: {
-              userId: userId
-            },
-            success: function(response) {
-              $('.modal-body').html(response);
-              $('#empModal').modal('show');
-            }
-          });
-        });
-      });
-    </script>
-
-    <div class="mt-3">
-      <p class="mb-0  text-center">¿Volver al menú? <a href="../controller/usuariosAdminController.php" class="text-primary fw-bold">Menú </a></p>
-    </div>
-  </div>
-
 </body>
 
 </html>

@@ -37,7 +37,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $marca = $_POST['inputMarca'];
     $stock = $_POST['inputStock'];
 
-    InsertarProducto($nombre, $precio, $categoria, $descripcion, $especificacion, $marca, $stock);
+    // Verifica si se subieron exactamente cuatro imágenes
+    if (count($_FILES['inputImagen']['name']) == 4) {
+        InsertarProducto($nombre, $precio, $categoria, $descripcion, $especificacion, $marca, $stock);
+    } else {
+        $_SESSION['mensaje'] = "Debe subir exactamente cuatro imágenes.";
+        $_SESSION['tipo_mensaje'] = "warning";
+        header('Location: ../controller/productosAdminController.php');
+        exit();
+    }
 }
 
 function InsertarProducto($nombre, $precio, $categoria, $descripcion, $especificacion, $marca, $stock)

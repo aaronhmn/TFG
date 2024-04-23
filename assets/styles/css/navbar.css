@@ -96,7 +96,7 @@ nav {
 
   .dropdown-menu {
     min-width: 220px;
-    max-height: 185px;
+    max-height: 230px !important;
     background-color: #8350f2;
     border: 2px solid #e6e6fa;
     display: none;

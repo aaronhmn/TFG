@@ -1,6 +1,7 @@
 <?php
 
 namespace views;
+
 session_start();
 ?>
 
@@ -55,28 +56,44 @@ session_start();
               <i class="fa-solid fa-user fa-lg" style="margin-right: 5px;"></i>
               <?php
               $resultado = $_SESSION['nombre_usuario'];
-              print "<b>" .$resultado. "</b>";
+              print "<b>" . $resultado . "</b>";
               ?>
             </a>
-            <ul class="dropdown-menu" aria-labelledby="userIcon" id="dropdownMenu">
-              <li><a class="dropdown-item" href="../controller/perfilController.php"><i class="fa-solid fa-gear fa-sm" style="margin-right: 5px;"></i>Mi perfil</a></li>
-              <li><a class="dropdown-item" href="../controller/misPedidosController.php" style="margin-top: 5px;"><i class="fa-solid fa-bag-shopping fa-sm" style="margin-right: 5px;"></i>Mis Pedidos</a></li>
-              <li><a class="dropdown-item" href="../controller/favoritosController.php" style="margin-top: 5px;"><i class="fa-solid fa-heart fa-sm" style="margin-right: 5px;"></i>Lista de Favoritos</a></li>
-              <?php 
-                $rol = $_SESSION['rol'];
-                if($rol === 1){
-                  print "<li><a class='dropdown-item' href='../controller/inicioAdminController.php' style='margin-top: 5px;'><i class='fas fa-tachometer-alt' style='margin-right: 5px;'></i>Dashboard</a></li>";
-                } 
-              ?>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li>
-                <form action='../controller/cerrarSesionController.php' method="POST">
-                  <button class="dropdown-item btn btn-link"><i class="fa-solid fa-sign-out fa-sm" style="margin-right: 5px;"></i>Cerrar sesión</button>
-                </form>
-              </li>
-            </ul>
+            <?php
+            $rol = $_SESSION['rol'];
+            if ($rol === 0) {
+            ?>
+              <ul class="dropdown-menu" aria-labelledby="userIcon" id="dropdownMenu">
+                <li><a class="dropdown-item" href="../controller/perfilController.php"><i class="fa-solid fa-gear fa-sm" style="margin-right: 5px;"></i>Mi perfil</a></li>
+                <li><a class="dropdown-item" href="../controller/misPedidosController.php" style="margin-top: 5px;"><i class="fa-solid fa-bag-shopping fa-sm" style="margin-right: 5px;"></i>Mis Pedidos</a></li>
+                <li><a class="dropdown-item" href="../controller/favoritosController.php" style="margin-top: 5px;"><i class="fa-solid fa-heart fa-sm" style="margin-right: 5px;"></i>Lista de Favoritos</a></li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li>
+                  <form action='../controller/cerrarSesionController.php' method="POST">
+                    <button class="dropdown-item btn btn-link"><i class="fa-solid fa-sign-out fa-sm" style="margin-right: 5px;"></i>Cerrar sesión</button>
+                  </form>
+                </li>
+              </ul>
+            <?php
+            }
+            if ($rol === 1) {
+            ?>
+              <ul class="dropdown-menu" aria-labelledby="userIcon" id="dropdownMenu">
+                <li><a class='dropdown-item' href='../controller/inicioAdminController.php' style='margin-top: 5px;'><i class='fas fa-tachometer-alt' style='margin-right: 5px;'></i>Dashboard</a></li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li>
+                  <form action='../controller/cerrarSesionController.php' method="POST">
+                    <button class="dropdown-item btn btn-link"><i class="fa-solid fa-sign-out fa-sm" style="margin-right: 5px;"></i>Cerrar sesión</button>
+                  </form>
+                </li>
+              </ul>
+            <?php
+            }
+            ?>
           </div>
           <a href="../controller/carritoController.php"><i class="fas fa-shopping-cart fa-lg"></i></a>
         </ul>

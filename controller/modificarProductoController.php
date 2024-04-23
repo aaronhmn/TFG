@@ -7,8 +7,7 @@ use \model\marca;
 use \model\categoria;
 use \model\utils;
 
-
-//Añadimos el código del modelo
+// Incluir los modelos necesarios
 require_once("../model/productoModel.php");
 require_once("../model/marcaModel.php");
 require_once("../model/categoriaModel.php");
@@ -16,17 +15,14 @@ require_once("../model/utils.php");
 
 session_start();
 
-// Verificar si el usuario está logueado y si es administrador
+// Verificar si el usuario está logueado y es administrador
 if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'] != 1) {
     header('Location: ../view/noAutorizadoView.php');
     exit();
 }
-//Creamos un array para guardar los datos del producto
-/* $producto = array(); */
+
 $conexPDO = utils::conectar();
 
-
-// Solo se ejecutará cuando reciba una petición del registro
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET["idProducto"])) {
     $gestorProducto = new producto();
     $producto = $gestorProducto->getProductoId($_GET["idProducto"], $conexPDO);
@@ -39,6 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET["idProducto"])) {
 
     include("../view/modificarProductoView.php");
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $idProducto = $_POST["idProducto"];
+    $gestorProducto = new producto();
+    
+    // Recuperar la información del producto antes de actualizar
+    $productoActual = $gestorProducto->getProductoId($idProducto, $conexPDO);
+
+    // Array para mantener los datos del producto a actualizar
     $producto = [
         "idproducto" => $_POST["idProducto"],
         "nombre" => $_POST["nombre"],
@@ -47,18 +50,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET["idProducto"])) {
         "descripcion" => $_POST["descripcion"],
         "especificacion" => $_POST["especificacion"],
         "id_marca" => $_POST["id_marca"],
-        "stock" => $_POST["stock"],
-        "ruta_imagen" => $_POST["ruta_imagen"] // Asegúrate de enviar este campo en el formulario.
+        "stock" => $_POST["stock"]
     ];
 
-    // Verificar si se ha enviado al menos una nueva imagen
+    // Verificar si se han enviado nuevas imágenes
     if (!empty($_FILES['inputImagen']['name'][0])) {
-        $imagenesRutas = []; // Inicializa una nueva lista para almacenar las rutas de las imágenes actualizadas
+        // Eliminar imágenes antiguas
+        $rutasAntiguas = explode(',', $productoActual['ruta_imagen']);
+        foreach ($rutasAntiguas as $rutaAntigua) {
+            if (file_exists($rutaAntigua)) {
+                unlink($rutaAntigua); // Borrar la imagen del servidor
+            }
+        }
 
-        // Itera sobre todos los archivos subidos
+        $imagenesRutas = []; // Inicializa una lista para las nuevas imágenes
         foreach ($_FILES['inputImagen']['name'] as $key => $name) {
             $imageType = $_FILES['inputImagen']['type'][$key];
-            // Verificar si el archivo es realmente una imagen
             if (substr($imageType, 0, 5) == "image") {
                 $targetDir = "../assets/img/products/";
                 $path = pathinfo($name);
@@ -67,45 +74,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET["idProducto"])) {
                 $temp_name = $_FILES['inputImagen']['tmp_name'][$key];
                 $path_filename_ext = $targetDir . $filename . "." . $ext;
 
-                // Verifica si el archivo ya existe
                 if (!file_exists($path_filename_ext)) {
-                    // Mueve el archivo subido a la carpeta de destino
                     if (move_uploaded_file($temp_name, $path_filename_ext)) {
-                        $imagenesRutas[] = $path_filename_ext; // Agrega la ruta de la imagen al array
+                        $imagenesRutas[] = $path_filename_ext;
                     } else {
-                        echo "File not uploaded";
+                        echo "Error al subir el archivo.";
                     }
                 } else {
-                    echo "File already exists";
+                    echo "El archivo ya existe en el servidor.";
                 }
             } else {
-                echo "Solo está permitido subir imágenes";
+                echo "Tipo de archivo no permitido.";
             }
         }
-
-        // Concatena las rutas de las imágenes en una sola cadena, separadas por comas
-        $rutasConcatenadas = implode(',', $imagenesRutas);
-        $producto["ruta_imagen"] = $rutasConcatenadas; // Actualiza la ruta de la imagen en el array del producto
+        $producto["ruta_imagen"] = implode(',', $imagenesRutas);
     } else {
-        // Conservar la ruta de la imagen existente si no se envía una nueva imagen
-        if (isset($_POST["ruta_imagen"])) {
-            $producto["ruta_imagen"] = $_POST["ruta_imagen"];
-        } else {
-            echo "No se proporcionó la ruta de la imagen existente.";
-        }
+        // Conservar la ruta de la imagen existente
+        $producto["ruta_imagen"] = $productoActual["ruta_imagen"];
     }
 
     // Actualizar el producto en la base de datos
-    /* $conexPDO = utils::conectar(); */
-    $gestorproducto = new producto();
-    $gestorproducto->updateProducto($producto, $conexPDO);
-    
-    $gestorMarca = new marca();
-    $marcas = $gestorMarca->getMarcas($conexPDO);
+    $gestorProducto->updateProducto($producto, $conexPDO);
 
-    $gestorCategoria = new categoria();
-    $categorias = $gestorCategoria->getCategorias($conexPDO);
-
-    // Incluir la vista para mostrar el resultado
+    // Redirigir al usuario o recargar la información
     include("../view/modificarProductoView.php");
 }
+?>
