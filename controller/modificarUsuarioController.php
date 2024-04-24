@@ -38,8 +38,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'
         $usuario["activo"] = $_GET["activo"];
         $usuario["rol"] = $_GET["rol"];
         $usuario["estado"] = $_GET["estado"];
-        
-        include("../view/modificarUsuarioView.php");
+        /* $usuario["contrasena"] = $_GET["contrasena"]; */
     }
 
     // Solo se ejecutará cuando reciba una petición del registro
@@ -61,27 +60,24 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'
         $usuario["activo"] = $_POST["activo"];
         $usuario["rol"] = $_POST["rol"];
         $usuario["estado"] = $_POST["estado"];
+        /* $usuario["contrasena"] = $_POST["contrasena"]; */
         
-
         //Nos conectamos a la Bd
         $conexPDO = utils::conectar();
         $gestorUsuario = new Usuario();
         $resultado=$gestorUsuario->updateUsuario($usuario, $conexPDO);
 
-        include("../view/modificarUsuarioView.php");
-
-        if ($resultado != null)
-        {
-            $mensaje = "El Usuario se Registro Correctamente";
-            print ("<p style='display:flex; justify-content:center; color: #67cb57;'><b>".($mensaje)."</b></p>");
-
-            /*header("Location: ../controller/usuariosAdminController.php");
-                exit();*/
-        }    
-        else
-        {
-            $mensaje = "Ha habido un fallo al acceder a la Base de Datos";
-            echo ($mensaje);
+        if ($resultado != null) {
+            $_SESSION['mensaje'] = "El usuario ha sido modificado correctamente.";
+            $_SESSION['tipo_mensaje'] = "success";
+            header('Location: ../controller/usuariosAdminController.php');
+            exit();
+        } else {
+            $_SESSION['mensaje'] = "Error al modificar el usuario.";
+            $_SESSION['tipo_mensaje'] = "danger";
+            // Si decides redireccionar de todos modos o manejar de otra forma
+            header('Location: ../controller/usuariosAdminController.php');
+            exit();
         }
     }
 

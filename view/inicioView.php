@@ -83,37 +83,37 @@ namespace views;
       <b>Busca productos por categorías</b>
     </h4>
     <div class="row">
-      <div class="col-lg-3 col-md-6 mb-3">
+      <div class="col-lg-4 col-md-6 mb-3">
         <div class="content content-1 text-center">
           <i class="fas fa-computer fa-4x mb-3"></i>
           <h3>Ordenadores</h3>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 mb-3">
+      <div class="col-lg-4 col-md-6 mb-3">
         <div class="content content-1 text-center">
           <i class="fa-solid fa-laptop fa-4x mb-3"></i>
           <h3>Portátiles</h3>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 mb-3">
+      <div class="col-lg-4 col-md-6 mb-3">
         <div class="content content-1 text-center">
           <i class="fa-solid fa-desktop fa-4x mb-3"></i>
           <h3>Monitores</h3>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 mb-3">
+      <div class="col-lg-4 col-md-6 mb-3">
         <div class="content content-1 text-center">
           <i class="fa-solid fa-headphones fa-4x mb-3"></i>
           <h3>Auriculares</h3>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 mb-3">
+      <div class="col-lg-4 col-md-6 mb-3">
         <div class="content content-1 text-center">
           <i class="fa-solid fa-keyboard fa-4x mb-3"></i>
           <h3>Teclados</h3>
         </div>
       </div>
-      <div class="col-lg-3 col-md-6 mb-3">
+      <div class="col-lg-4 col-md-6 mb-3">
         <div class="content content-1 text-center">
           <i class="fa-solid fa-mouse fa-4x mb-3"></i>
           <h3>Ratones</h3>

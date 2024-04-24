@@ -17,7 +17,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'
     exit();
 }
 //var_dump($datosClientes);
-include("../view/insertarUsuarioAdminView.php");
+/* include("../view/insertarUsuarioAdminView.php"); */
 
 // Solo se ejecutará cuando reciba una petición del registro
 if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -62,18 +62,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $conexPDO = utils::conectar();
     $resultado = $gestorUsu->addUsuario($datosUsuario, $conexPDO);
 
-    if ($resultado != null)
-    {
-        $mensaje = "El Usuario se Registro Correctamente";
-        echo ($mensaje);
-
-        /*header("Location: ../controller/usuariosAdminController.php");
-                exit();*/ 
-    }    
-    else
-    {
-        $mensaje = "Ha habido un fallo al acceder a la Base de Datos";
-        echo ($mensaje);
+    //Para verificar si todo funcionó correctamente
+    if ($resultado != null) {
+        $_SESSION['mensaje'] = "El usuario ha sido creado correctamente.";
+        $_SESSION['tipo_mensaje'] = "success";
+        header('Location: ../controller/usuariosAdminController.php');
+        exit();
+    } else {
+        $_SESSION['mensaje'] = "Error al crear el usuario.";
+        $_SESSION['tipo_mensaje'] = "danger";
+        // Si decides redireccionar de todos modos o manejar de otra forma
+        header('Location: ../controller/usuariosAdminController.php');
+        exit();
     }
 }
 

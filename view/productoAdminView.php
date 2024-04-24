@@ -127,7 +127,8 @@
                         <?php
                         //Tenemos que generar una fila tr para cada producto
                         //que tenga el array de datosProducto
-                        function truncarTexto($texto, $maxCaracteres) {
+                        function truncarTexto($texto, $maxCaracteres)
+                        {
                             if (strlen($texto) > $maxCaracteres) {
                                 $texto = substr($texto, 0, $maxCaracteres) . '...';
                             }
@@ -136,7 +137,7 @@
 
                         foreach ($productosPaginados as $datosProducto) {
 
-                            $nombreMarca = $gestorMarcas->getMarcaId($datosProducto["id_marca"], $conexPDO)['nombre_marca']; 
+                            $nombreMarca = $gestorMarcas->getMarcaId($datosProducto["id_marca"], $conexPDO)['nombre_marca'];
                             $nombreCategoria = $gestorCategorias->getCategoriaId($datosProducto["id_categoria"], $conexPDO)['nombre_categoria'];
                             //Comienzo de fila
                             print("<tr style='align-items: center; background-color: gray;'>\n");
@@ -159,14 +160,13 @@
                             print("<td style='padding-top: 14px;'>" . $datosProducto["stock"] . "</td>\n");
 
 
-                            //Para cada producto creamos un boton para eliminarlo
-                            //que llamara al controlador borrarProducto y le pasara el id
-                            print("<td>\n");
-                            print("<form method='POST' action='../controller/borrarProductoController.php'>");
-                            print("<input type='hidden' name='idProducto' value='" . $datosProducto["idproducto"] . "'/>");
-                            print("<button name= 'eliminar' style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;'><i class='fas fa-trash-alt fa-lg' style='color: #f00505;'></i></button>");
-                            print("</form>");
-                            print("</td>\n");
+                            // Botón para eliminar
+                            echo "<td>";
+                            echo "<form id='formEliminar-{$datosProducto['idproducto']}' method='POST' action='../controller/borrarProductoController.php'>";
+                            echo "<input type='hidden' name='idProducto' value='{$datosProducto['idproducto']}'/>";
+                            echo "<button style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;' type='button' onclick='mostrarModalEliminar(" . $datosProducto['idproducto'] . ");'><i class='fa-solid fa-trash-alt fa-lg' style='color: red;'></i></button>";
+                            echo "</form>";
+                            echo "</td>";
 
                             print("<td>\n");
                             print("<form method='GET' action='../controller/modificarProductoController.php'>");
@@ -273,6 +273,25 @@
         </div>
     </div>
 
+        <!-- Modal de Confirmación de Eliminación -->
+        <div class="modal fade" id="confirmacionEliminarModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modalLabel" style="color: #8350F2;"><b>Confirmar Eliminación</b></h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <b>¿Estás seguro de que deseas eliminar este producto?</b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmarEliminar">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
     <script>
@@ -287,6 +306,15 @@
                 modal.querySelector('form').reset();
             });
         });
+
+        function mostrarModalEliminar(idProducto) {
+            var modal = new bootstrap.Modal(document.getElementById('confirmacionEliminarModal'));
+            var botonEliminar = document.getElementById('confirmarEliminar');
+            botonEliminar.onclick = function() {
+                document.getElementById('formEliminar-' + idProducto).submit();
+            };
+            modal.show();
+        }
     </script>
 
 </body>

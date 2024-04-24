@@ -9,8 +9,6 @@ require_once("../model/utils.php");
 require_once("../model/usuarioModel.php");
 $mensaje=null;
 
-include("../view/registerView.php");
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $nombre = $_POST['nombre'];
@@ -67,6 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         echo ($mensaje);
     }
 }
+
+include("../view/registerView.php");
 
 
 ?>

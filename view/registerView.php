@@ -61,7 +61,7 @@ namespace views;
                     <label></label>
                 </div>
                 <div class="input-box">
-                    <input type="text" required placeholder="Piso" id="piso" name="piso" autocomplete="nope">
+                    <input type="text" placeholder="Piso" id="piso" name="piso" autocomplete="nope">
                     <label></label>
                 </div>
                 <div class="input-box">
