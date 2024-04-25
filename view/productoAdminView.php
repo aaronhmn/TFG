@@ -145,7 +145,12 @@
                             //Id de producto
                             print("<td style='padding-top: 14px;' scope='row'><b>" . $datosProducto["idproducto"] . "</b></td>\n");
                             //Nombre
-                            print("<td style='padding-top: 14px;'>" . truncarTexto($datosProducto["nombre"], 20) . "</td>\n");
+                            print("<td style='padding-top: 14px;'>");
+                            print("<a href='#' class='text-primary' data-bs-toggle='modal' data-bs-target='#productoDetalleModal' data-idusuario='" . $datosProducto['idproducto'] . "'>");
+                            print(htmlspecialchars(truncarTexto($datosProducto["nombre"], 20)));
+                            print("</a>");
+                            print("</td>\n");
+                            /* print("<td style='padding-top: 14px;'>" . truncarTexto($datosProducto["nombre"], 20) . "</td>\n"); */
                             //Precio
                             print("<td style='padding-top: 14px;'>" . $datosProducto["precio"] . "€</td>\n");
                             //Categoria
@@ -168,7 +173,8 @@
                             echo "</form>";
                             echo "</td>";
 
-                            print("<td>\n");
+                            // Botón para modificar
+                            /* print("<td>\n");
                             print("<form method='GET' action='../controller/modificarProductoController.php'>");
                             print("<input type='hidden' name='idProducto' value='" . $datosProducto["idproducto"] . "'/>");
                             print("<input type='hidden' name='nombre' value='" . $datosProducto["nombre"] . "'/>");
@@ -182,9 +188,25 @@
 
                             print("<button name='modificar' style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;' value='false' ><i class='fas fa-edit fa-lg' style='color: #005eff;'></i></button>");
                             print("</form>");
-                            print("</td>\n");
+                            print("</td>\n"); */
                             //Final de fila
-                            print("</tr>\n");
+                            /* print("</tr>\n"); */
+
+                            echo "<td>";
+                            echo "<button data-bs-toggle='modal' data-bs-target='#modificarProductoModal'";
+                            echo " data-id='" . htmlspecialchars($datosProducto['idproducto'], ENT_QUOTES) . "'";
+                            echo " data-nombre='" . htmlspecialchars($datosProducto['nombre'], ENT_QUOTES) . "'";
+                            echo " data-precio='" . htmlspecialchars($datosProducto['precio'], ENT_QUOTES) . "'";
+                            /* echo " data-segundoapellido='" . htmlspecialchars($datosProducto['segundo_apellido'], ENT_QUOTES) . "'"; */
+                            echo " data-descripcion='" . htmlspecialchars($datosProducto['descripcion'], ENT_QUOTES) . "'";
+                            echo " data-especificacion='" . htmlspecialchars($datosProducto['especificacion'], ENT_QUOTES) . "'";
+                            /* echo " data-nombreusuario='" . htmlspecialchars($datosProducto['nombre_usuario'], ENT_QUOTES) . "'"; */
+                            echo " data-stock='" . htmlspecialchars($datosProducto['stock'], ENT_QUOTES) . "'";
+                            echo " data-ruta_imagen='" . htmlspecialchars($datosProducto['ruta_imagen'], ENT_QUOTES) . "'";
+                            echo " style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;'>";
+                            echo "<i class='fas fa-edit fa-lg' style='color: #005eff;'></i>";
+                            echo "</button>";
+                            echo "</td>";
                         }
                         ?>
                     </tbody>
@@ -273,8 +295,33 @@
         </div>
     </div>
 
-        <!-- Modal de Confirmación de Eliminación -->
-        <div class="modal fade" id="confirmacionEliminarModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <!-- Modal Detalles Usuario -->
+    <div class="modal fade" id="productoDetalleModal" tabindex="-1" aria-labelledby="productoDetalleLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="productoDetalleLabel" style="color: #8350F2;">Detalles del Producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Nombre:</strong> <span id="detalle_nombre"></span></p>
+                    <p><strong>Precio:</strong> <span id="detalle_precio"></span></p>
+                    <p><strong>Segundo Apellido:</strong> <span id="detalle_segundo_apellido"></span></p>
+                    <p><strong>Descripcion:</strong> <span id="detalle_descripcion"></span></p>
+                    <p><strong>Especificacion:</strong> <span id="detalle_especificacion"></span></p>
+                    <p><strong>Código Postal:</strong> <span id="detalle_codigo_postal"></span></p>
+                    <p><strong>Stock:</strong> <span id="detalle_stock"></span></p>
+                    <p><strong>Ruta de Imagen:</strong> <span id="detalle_ruta_imagen"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación de Eliminación -->
+    <div class="modal fade" id="confirmacionEliminarModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -293,6 +340,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 
     <script>
         //script para borrar lo que haya dentro del modal
@@ -315,6 +364,39 @@
             };
             modal.show();
         }
+
+        //detalles producto
+        $('#productoDetalleModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var idProducto = button.data('idProducto'); // Asegúrate de que este data-attribute está definido correctamente en el HTML
+
+            $.ajax({
+                url: '../controller/detalleProductoAdminController.php', // Asegúrate de que este endpoint está correctamente definido y apunta al script correcto en el servidor
+                type: 'POST',
+                data: {
+                    idProducto: idProducto
+                },
+                dataType: 'json', // Esperamos una respuesta en formato JSON
+                success: function(producto) {
+                    if (producto && !producto.error) {
+                        $('#detalle_nombre').text(producto.nombre || 'No disponible');
+                        $('#detalle_precio').text(producto.precio || 'No disponible');
+                        $('#detalle_segundo_apellido').text(producto.segundo_apellido || 'No disponible');
+                        $('#detalle_descipcion').text(producto.descripcion || 'No disponible');
+                        $('#detalle_especificacion').text(producto.especificacion || 'No disponible');
+                        $('#detalle_codigo_postal').text(producto.codigo_postal || 'No disponible');
+                        $('#detalle_stock').text(producto.stock || 'No disponible');
+                        $('#detalle_ruta_imagen').text(producto.ruta_imagen || 'No disponible');
+
+                    } else {
+                        console.error('No se pudo cargar la información del producto.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error en la solicitud AJAX: ' + error);
+                }
+            });
+        });
     </script>
 
 </body>

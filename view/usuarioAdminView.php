@@ -130,14 +130,14 @@
               <th style="background-color: #8350F2; color: #fff;" scope="col">Nombre</th>
               <th style="background-color: #8350F2; color: #fff;" scope="col">Primer Apellido</th>
               <th style="background-color: #8350F2; color: #fff;" scope="col">Segundo Apellido</th>
-              <!-- <th style="background-color: #8350F2; color: #fff;" scope="col">DNI</th> -->
+              <th style="background-color: #8350F2; color: #fff;" scope="col">DNI</th>
               <th style="background-color: #8350F2; color: #fff;" scope="col">Correo Electrónico</th>
               <!-- <th style="background-color: #8350F2; color: #fff;" scope="col">Código Postal</th> -->
               <!-- <th style="background-color: #8350F2; color: #fff;" scope="col">Calle</th>
               <th style="background-color: #8350F2; color: #fff;" scope="col">Número Bloque</th>
               <th style="background-color: #8350F2; color: #fff;" scope="col">Piso</th> -->
               <!-- <th style="background-color: #8350F2; color: #fff;" scope="col">Teléfono</th> -->
-              <th style="background-color: #8350F2; color: #fff;" scope="col">Activación</th>
+              <!-- <th style="background-color: #8350F2; color: #fff;" scope="col">Activación</th> -->
               <th style="background-color: #8350F2; color: #fff;" scope="col">Activo</th>
               <th style="background-color: #8350F2; color: #fff;" scope="col">Rol</th>
               <th style="background-color: #8350F2; color: #fff;" scope="col">Estado</th>
@@ -147,8 +147,6 @@
           </thead>
           <tbody>
             <?php
-            //Tenemos que generar una fila tr para cada cliente
-            //que tenga el array de datosClientes
             foreach ($usuariosPaginados as $producto) {
               //Comienzo de fila
               print("<tr style='align-items: center; background-color: gray;'>\n");
@@ -168,7 +166,7 @@
               //Segundo Apellido
               print("<td style=' padding-top: 14px;'>" . $producto["segundo_apellido"] . "</td>\n");
               //DNI
-              /* print("<td style=' padding-top: 14px;'>" . $producto["dni"] . "</td>\n"); */
+              print("<td style=' padding-top: 14px;'>" . $producto["dni"] . "</td>\n");
               //Email
               print("<td style=' padding-top: 14px;'>" . $producto["email"] . "</td>\n");
               //Codigo Postal
@@ -178,7 +176,7 @@
               //Numero del Bloque o casa
               /* print("<td style=' padding-top: 14px;'>" . $producto["numero_bloque"] . "</td>\n"); */
               //Piso
-             /*  if ($producto["piso"] != null) {
+              /*  if ($producto["piso"] != null) {
                 print("<td style=' padding-top: 14px;'>" . $producto["piso"] . "</td>\n");
               } else {
                 print("<td style=' padding-top: 14px;'>nulo</td>\n");
@@ -186,21 +184,13 @@
               //Telefono
               /* print("<td style=' padding-top: 14px;'>" . $producto["telefono"] . "</td>\n"); */
               //Estado de activación
-              print("<td style=' padding-top: 14px;'>" . $producto["activacion"] . "</td>\n");
+              /* print("<td style=' padding-top: 14px;'>" . $producto["activacion"] . "</td>\n"); */
               //Activo
               print("<td style=' padding-top: 14px;'>" . $producto["activo"] . "</td>\n");
               //Rol
               print("<td style=' padding-top: 14px;'>" . $producto["rol"] . "</td>\n");
               //Estado
               print("<td style=' padding-top: 14px;'>" . $producto["estado"] . "</td>\n");
-
-              // Botón para eliminar
-              echo "<td>";
-              echo "<form id='formEliminar-{$producto['idusuario']}' method='POST' action='../controller/banearUsuarioController.php'>";
-              echo "<input type='hidden' name='idUsuario' value='{$producto['idusuario']}'/>";
-              echo "<button style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;' type='button' onclick='mostrarModalEliminar(" . $producto['idusuario'] . ");'><i class='fa-solid fa-ban fa-lg' style='color: red;'></i></button>";
-              echo "</form>";
-              echo "</td>";
 
               // Botón para modificar
               echo "<td>";
@@ -225,6 +215,14 @@
               echo " style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;'>";
               echo "<i class='fas fa-edit fa-lg' style='color: #005eff;'></i>";
               echo "</button>";
+              echo "</td>";
+
+              // Botón para eliminar
+              echo "<td>";
+              echo "<form id='formEliminar-{$producto['idusuario']}' method='POST' action='../controller/banearUsuarioController.php'>";
+              echo "<input type='hidden' name='idUsuario' value='{$producto['idusuario']}'/>";
+              echo "<button style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;' type='button' onclick='mostrarModalEliminar(" . $producto['idusuario'] . ");'><i class='fa-solid fa-ban fa-lg' style='color: red;'></i></button>";
+              echo "</form>";
               echo "</td>";
 
               //Final de fila
@@ -402,10 +400,6 @@
               <label for="estado" class="form-label"><b>Estado:</b></label>
               <input type="number" class="form-control" id="estado" name="estado">
             </div>
-            <!-- <div class="mb-3">
-              <label for="contrasena" class="form-label"><b>Contraseña:</b></label>
-              <input type="password" class="form-control" id="contrasena" name="contrasena">
-            </div> -->
             <input type="hidden" name="idUsuario" id="idUsuario">
             <div class="d-grid">
               <button class="btn btn-primary" type="submit" value="Upload" style="background-color: #8350F2; border:#8350F2;">Modificar</button>
@@ -416,39 +410,39 @@
     </div>
   </div>
 
-<!-- Modal Detalles Usuario -->
-<div class="modal fade" id="usuarioDetalleModal" tabindex="-1" aria-labelledby="usuarioDetalleLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="usuarioDetalleLabel" style="color: #8350F2;">Detalles del Usuario</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p><strong>Nombre de usuario:</strong> <span id="detalle_nombre_usuario"></span></p>
-        <p><strong>Nombre:</strong> <span id="detalle_nombre"></span></p>
-        <p><strong>Primer Apellido:</strong> <span id="detalle_primer_apellido"></span></p>
-        <p><strong>Segundo Apellido:</strong> <span id="detalle_segundo_apellido"></span></p>
-        <p><strong>DNI:</strong> <span id="detalle_dni"></span></p>
-        <p><strong>Email:</strong> <span id="detalle_email"></span></p>
-        <p><strong>Código Postal:</strong> <span id="detalle_codigo_postal"></span></p>
-        <p><strong>Calle:</strong> <span id="detalle_calle"></span></p>
-        <p><strong>Número Bloque:</strong> <span id="detalle_numero_bloque"></span></p>
-        <p><strong>Piso:</strong> <span id="detalle_piso"></span></p>
-        <p><strong>Teléfono:</strong> <span id="detalle_telefono"></span></p>
-        <p><strong>Activación:</strong> <span id="detalle_activacion"></span></p>
-        <p><strong>Activo:</strong> <span id="detalle_activo"></span></p>
-        <p><strong>Rol:</strong> <span id="detalle_rol"></span></p>
-        <p><strong>Estado:</strong> <span id="detalle_estado"></span></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+  <!-- Modal Detalles Usuario -->
+  <div class="modal fade" id="usuarioDetalleModal" tabindex="-1" aria-labelledby="usuarioDetalleLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="usuarioDetalleLabel" style="color: #8350F2;">Detalles del Usuario</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Nombre de usuario:</strong> <span id="detalle_nombre_usuario"></span></p>
+          <p><strong>Nombre:</strong> <span id="detalle_nombre"></span></p>
+          <p><strong>Primer Apellido:</strong> <span id="detalle_primer_apellido"></span></p>
+          <p><strong>Segundo Apellido:</strong> <span id="detalle_segundo_apellido"></span></p>
+          <p><strong>DNI:</strong> <span id="detalle_dni"></span></p>
+          <p><strong>Email:</strong> <span id="detalle_email"></span></p>
+          <p><strong>Código Postal:</strong> <span id="detalle_codigo_postal"></span></p>
+          <p><strong>Calle:</strong> <span id="detalle_calle"></span></p>
+          <p><strong>Número Bloque:</strong> <span id="detalle_numero_bloque"></span></p>
+          <p><strong>Piso:</strong> <span id="detalle_piso"></span></p>
+          <p><strong>Teléfono:</strong> <span id="detalle_telefono"></span></p>
+          <p><strong>Activación:</strong> <span id="detalle_activacion"></span></p>
+          <p><strong>Activo:</strong> <span id="detalle_activo"></span></p>
+          <p><strong>Rol:</strong> <span id="detalle_rol"></span></p>
+          <p><strong>Estado:</strong> <span id="detalle_estado"></span></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Modal de baneo de usuario -->
+  <!-- Modal de baneo de usuario -->
   <div class="modal fade" id="confirmacionBanearModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -539,41 +533,43 @@
 
     //detalles usuario
     $('#usuarioDetalleModal').on('show.bs.modal', function(event) {
-  var button = $(event.relatedTarget);
-  var idUsuario = button.data('idusuario'); // Asegúrate de que este data-attribute está definido correctamente en el HTML
+      var button = $(event.relatedTarget);
+      var idUsuario = button.data('idusuario'); // Asegúrate de que este data-attribute está definido correctamente en el HTML
 
-  $.ajax({
-    url: '../controller/detalleUsuarioAdminController.php', // Asegúrate de que este endpoint está correctamente definido y apunta al script correcto en el servidor
-    type: 'POST',
-    data: { idUsuario: idUsuario },
-    dataType: 'json', // Esperamos una respuesta en formato JSON
-    success: function(usuario) {
-      if (usuario && !usuario.error) {
-        $('#detalle_nombre_usuario').text(usuario.nombre_usuario || 'No disponible');
-        $('#detalle_nombre').text(usuario.nombre || 'No disponible');
-        $('#detalle_primer_apellido').text(usuario.primer_apellido || 'No disponible');
-        $('#detalle_segundo_apellido').text(usuario.segundo_apellido || 'No disponible');
-        $('#detalle_dni').text(usuario.dni || 'No disponible');
-        $('#detalle_email').text(usuario.email || 'No disponible');
-        $('#detalle_codigo_postal').text(usuario.codigo_postal || 'No disponible');
-        $('#detalle_calle').text(usuario.calle || 'No disponible');
-        $('#detalle_numero_bloque').text(usuario.numero_bloque || 'No disponible');
-        $('#detalle_piso').text(usuario.piso || 'No disponible');
-        $('#detalle_telefono').text(usuario.telefono || 'No disponible');
-        $('#detalle_activacion').text(usuario.activacion || 'No disponible');
-        $('#detalle_activo').text(usuario.activo || 'No disponible');
-        $('#detalle_rol').text(usuario.rol || '0');
-        $('#detalle_estado').text(usuario.estado || '0');
+      $.ajax({
+        url: '../controller/detalleUsuarioAdminController.php', // Asegúrate de que este endpoint está correctamente definido y apunta al script correcto en el servidor
+        type: 'POST',
+        data: {
+          idUsuario: idUsuario
+        },
+        dataType: 'json', // Esperamos una respuesta en formato JSON
+        success: function(usuario) {
+          if (usuario && !usuario.error) {
+            $('#detalle_nombre_usuario').text(usuario.nombre_usuario || 'No disponible');
+            $('#detalle_nombre').text(usuario.nombre || 'No disponible');
+            $('#detalle_primer_apellido').text(usuario.primer_apellido || 'No disponible');
+            $('#detalle_segundo_apellido').text(usuario.segundo_apellido || 'No disponible');
+            $('#detalle_dni').text(usuario.dni || 'No disponible');
+            $('#detalle_email').text(usuario.email || 'No disponible');
+            $('#detalle_codigo_postal').text(usuario.codigo_postal || 'No disponible');
+            $('#detalle_calle').text(usuario.calle || 'No disponible');
+            $('#detalle_numero_bloque').text(usuario.numero_bloque || 'No disponible');
+            $('#detalle_piso').text(usuario.piso || 'No disponible');
+            $('#detalle_telefono').text(usuario.telefono || 'No disponible');
+            $('#detalle_activacion').text(usuario.activacion || 'No disponible');
+            $('#detalle_activo').text(usuario.activo || 'No');
+            $('#detalle_rol').text(usuario.rol || '0');
+            $('#detalle_estado').text(usuario.estado || '0');
 
-      } else {
-        console.error('No se pudo cargar la información del usuario.');
-      }
-    },
-    error: function(xhr, status, error) {
-      console.error('Error en la solicitud AJAX: ' + error);
-    }
-  });
-});
+          } else {
+            console.error('No se pudo cargar la información del usuario.');
+          }
+        },
+        error: function(xhr, status, error) {
+          console.error('Error en la solicitud AJAX: ' + error);
+        }
+      });
+    });
   </script>
 </body>
 

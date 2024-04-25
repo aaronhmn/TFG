@@ -2,54 +2,51 @@
 namespace model;
 
 use \model\utils;
-use \model\usuarioModel;
+use \model\Usuario;
 
 require_once("../model/utils.php");
 require_once("../model/usuarioModel.php");
 
-$mensaje = null;
-
 session_start();
-include("../view/verificarView.php");
+// Verifica si el usuario está logueado con un email en sesión
+if (!isset($_SESSION['email'])) {
+    header("Location: loginController.php");  // Redirecciona si no hay email en sesión
+    exit();
+}
 
+$mensaje = null;
+$conexPDO = utils::conectar();
+$gestorUsu = new Usuario(); 
+$correo = $_SESSION['email'];
 
-//if (isset($_POST['email']) && isset($_POST['activacion'])) {
+// Obtener datos del usuario usando el correo de la sesión
+$usuario = $gestorUsu->getUsuario($correo, $conexPDO);
 
-    $conexPDO2 = utils::conectar();
+if ($usuario) {
+    $codigoActivacion = $usuario['activacion'];
+    echo "<script>console.log('Código de activación: $codigoActivacion');</script>";
 
-    $gestorUsu2 = new Usuario(); 
-    $correo2 = $_SESSION['email'];
-
-    $usuario2 = $gestorUsu2->getUsuario($correo2, $conexPDO2);
-
-    $codigo = $usuario2['activacion'];
-    echo "<script>console.log($codigo)</script>";
-
-    // Solo se ejecutará cuando reciba una petición del login
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-        $codigo = $_POST['inputCodigo'];
-        ValidarCodigo($codigo);
+    // Procesar el formulario cuando se envía
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['inputCodigo'])) {
+        $codigoIngresado = $_POST['inputCodigo'];
+        validarCodigo($codigoIngresado, $codigoActivacion, $correo, $conexPDO);
     }
-//}
+} else {
+    $mensaje = "Error al obtener información del usuario.";
+    // Considera manejar este error de manera adecuada
+}
 
-function ValidarCodigo($codigo) {
-    $conexPDO = utils::conectar();
-
-    if ($conexPDO == true) {
-        $usuario = array();
-        $gestorUsu = new Usuario(); // Asegúrate de que el espacio de nombres sea correcto
-        $direccion = $_SESSION['email'];
-        $usuario = $gestorUsu->getUsuario($direccion, $conexPDO);
-
-        if ($usuario["activacion"] == $codigo) {
-            echo "Código Correcto";
-            $gestorUsu->ActivarUsuario($direccion, $conexPDO);
-            header("Location: ../controller/loginController.php");
-            exit();
-        } else {
-            echo "Código Erróneo";
-        }
+function validarCodigo($codigoIngresado, $codigoActivacion, $correo, $conexPDO) {
+    if ($codigoIngresado == $codigoActivacion) {
+        // Activar el usuario si el código es correcto
+        $gestorUsu = new Usuario();
+        $gestorUsu->activarUsuario($correo, $conexPDO);
+        header("Location: loginController.php");
+        exit();
+    } else {
+        echo "<script>alert('Código incorrecto. Intenta de nuevo.');</script>";
     }
 }
+
+include("../view/verificarView.php");
 ?>

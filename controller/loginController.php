@@ -1,52 +1,53 @@
 <?php
-
 namespace model;
 
 use \model\utils;
-use \model\usuarioModel;
+use \model\Usuario;
 
 require_once("../model/utils.php");
 require_once("../model/usuarioModel.php");
-$mensaje = null;
 
+session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['email']) && isset($_POST['contrasena'])) {
-        $email = $_POST['email'];
-        $contraseña = $_POST['contrasena'];
+    $email = $_POST['email'] ?? null;
+    $password = $_POST['contrasena'] ?? null;
 
-        session_start();  // Asegúrate de iniciar sesión aquí
+    $conexPDO = utils::conectar();
+    if ($conexPDO) {
+        $gestorUsu = new Usuario();
+        $resultado = $gestorUsu->getUsuario($email, $conexPDO);
 
-        $conexPDO = utils::conectar();
-        if ($conexPDO) {
-            $gestorUsu = new Usuario();
-            $resultado = $gestorUsu->getUsuario($email, $conexPDO);
-
-            if (is_array($resultado) && isset($resultado["salt"])) {
-                $usuario["contrasena"] = crypt($contraseña, '$6$rounds=5000$' . $resultado["salt"] . '$');
-
-                if ($usuario["contrasena"] == $resultado["contrasena"] && $resultado["estado"] != 1) {
-                    $_SESSION['email'] = $email;
-                    $_SESSION['nombre_usuario'] = $resultado['nombre_usuario'];
-                    $_SESSION['rol'] = $resultado['rol'];
-                    $_SESSION['login'] = true;
-
-                    if ($resultado["activo"] == 0) {
-                        header("Location: ../controller/verificarController.php");
-                        exit();
-                    } else if ($resultado["rol"] == 0) {
-                        header("Location: ../controller/inicioController.php");
-                        exit();
-                    } else if ($resultado["rol"] == 1) {
-                        header("Location: ../controller/inicioAdminController.php");
-                        exit();
-                    }
-                } else {
-                    $mensaje = 'Tu cuenta puede estar baneada o los datos ingresados son incorrectos.';
-                }
-            } else {
-                $mensaje = 'Error de autenticación.';
+        if ($resultado && password_verify($password, $resultado["contrasena"])) {
+            if ($resultado["activo"] == 0) {
+                // Usuario no activo, redirigir a la página de verificación
+                $_SESSION['email'] = $email; // Guardar email en sesión para usar en la verificación
+                header("Location: ../controller/verificarController.php");
+                exit();
             }
+
+            // Usuario activo, establecer datos de sesión y redirigir según el rol
+            $_SESSION['id_usuario'] = $resultado['idusuario'];
+            $_SESSION['email'] = $resultado['email'];
+            $_SESSION['nombre'] = $resultado['nombre'];
+            $_SESSION['nombre_usuario'] = $resultado['nombre_usuario'];
+            $_SESSION['rol'] = $resultado['rol'];
+            $_SESSION['login'] = true;
+
+            // Redirige según el rol
+            if ($resultado["rol"] == 0) {
+                header("Location: ../controller/inicioController.php");
+                exit();
+            } else if ($resultado["rol"] == 1) {
+                header("Location: ../controller/inicioAdminController.php");
+                exit();
+            }
+        } else {
+            $mensaje = 'Credenciales incorrectas o cuenta no encontrada.';
+            // Manejar error de autenticación
         }
+    } else {
+        $mensaje = 'Error al conectar con la base de datos.';
+        // Manejar error de conexión
     }
 }
 
