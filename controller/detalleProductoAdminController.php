@@ -39,14 +39,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idProducto'])) {
     $producto = $gestorProducto->getProductoId($idProducto, $conexPDO);
 
     $gestorMarca = new marca();
-    $marcas = $gestorMarca->getMarcas($conexPDO);
+    $marca = $gestorMarca->getMarcaId($producto['id_marca'], $conexPDO);
 
     $gestorCategoria = new categoria();
-    $categorias = $gestorCategoria->getCategorias($conexPDO);
+    $categoria = $gestorCategoria->getCategoriaId($producto['id_categoria'], $conexPDO);
+
+    // Compilar la respuesta con todos los datos
+    $respuesta = [
+        'idproducto' => $producto['idproducto'],
+        'nombre' => $producto['nombre'],
+        'precio' => $producto['precio'],
+        'descripcion' => $producto['descripcion'],
+        'especificacion' => $producto['especificacion'],
+        'stock' => $producto['stock'],
+        'ruta_imagen' => $producto['ruta_imagen'],
+        'marca' => $marca ? $marca['nombre_marca'] : 'Marca no especificada',
+        'categoria' => $categoria ? $categoria['nombre_categoria'] : 'Categoría no especificada'
+    ];
     
     // Verificar si se obtuvieron los datos correctamente
-    if ($producto) {
-        echo json_encode($producto);
+    if ($respuesta) {
+        echo json_encode($respuesta);
     } else {
         echo json_encode(['error' => 'Producto no encontrado']);
     }

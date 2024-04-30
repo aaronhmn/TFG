@@ -146,7 +146,7 @@
                             print("<td style='padding-top: 14px;' scope='row'><b>" . $datosProducto["idproducto"] . "</b></td>\n");
                             //Nombre
                             print("<td style='padding-top: 14px;'>");
-                            print("<a href='#' class='text-primary' data-bs-toggle='modal' data-bs-target='#productoDetalleModal' data-idusuario='" . $datosProducto['idproducto'] . "'>");
+                            print("<a href='#' class='text-primary' data-bs-toggle='modal' data-bs-target='#productoDetalleModal' data-idproducto='" . $datosProducto['idproducto'] . "'>");
                             print(htmlspecialchars(truncarTexto($datosProducto["nombre"], 20)));
                             print("</a>");
                             print("</td>\n");
@@ -304,14 +304,22 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p><strong>Nombre:</strong> <span id="detalle_nombre"></span></p>
-                    <p><strong>Precio:</strong> <span id="detalle_precio"></span></p>
-                    <p><strong>Segundo Apellido:</strong> <span id="detalle_segundo_apellido"></span></p>
-                    <p><strong>Descripcion:</strong> <span id="detalle_descripcion"></span></p>
-                    <p><strong>Especificacion:</strong> <span id="detalle_especificacion"></span></p>
-                    <p><strong>Código Postal:</strong> <span id="detalle_codigo_postal"></span></p>
-                    <p><strong>Stock:</strong> <span id="detalle_stock"></span></p>
-                    <p><strong>Ruta de Imagen:</strong> <span id="detalle_ruta_imagen"></span></p>
+                    <p><strong>Nombre:</strong></p>
+                    <span id="detalle_nombre"></span><hr>
+                    <p><strong>Precio:</strong></p>
+                    <span id="detalle_precio"></span>€<hr>
+                    <p><strong>Categoría:</strong></p>
+                    <span id="detalle_categoria"></span><hr>
+                    <p><strong>Descripcion:</strong></p>
+                    <span id="detalle_descripcion"></span><hr>
+                    <p><strong>Especificacion:</strong></p>
+                    <span id="detalle_especificacion"></span><hr>
+                    <p><strong>Marca:</strong></p>
+                    <span id="detalle_marca"></span><hr>
+                    <p><strong>Stock:</strong></p>
+                    <span id="detalle_stock"></span><hr>
+                    <p><strong>Imágenes:</strong></p>
+                    <span id="detalle_imagenes"></span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -368,25 +376,32 @@
         //detalles producto
         $('#productoDetalleModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
-            var idProducto = button.data('idProducto'); // Asegúrate de que este data-attribute está definido correctamente en el HTML
+            var idProducto = button.data('idproducto');
 
             $.ajax({
-                url: '../controller/detalleProductoAdminController.php', // Asegúrate de que este endpoint está correctamente definido y apunta al script correcto en el servidor
+                url: '../controller/detalleProductoAdminController.php',
                 type: 'POST',
                 data: {
                     idProducto: idProducto
                 },
-                dataType: 'json', // Esperamos una respuesta en formato JSON
+                dataType: 'json',
                 success: function(producto) {
                     if (producto && !producto.error) {
                         $('#detalle_nombre').text(producto.nombre || 'No disponible');
                         $('#detalle_precio').text(producto.precio || 'No disponible');
-                        $('#detalle_segundo_apellido').text(producto.segundo_apellido || 'No disponible');
-                        $('#detalle_descipcion').text(producto.descripcion || 'No disponible');
+                        $('#detalle_categoria').text(producto.categoria || 'No disponible');
+                        $('#detalle_descripcion').text(producto.descripcion || 'No disponible');
                         $('#detalle_especificacion').text(producto.especificacion || 'No disponible');
-                        $('#detalle_codigo_postal').text(producto.codigo_postal || 'No disponible');
+                        $('#detalle_marca').text(producto.marca || 'No disponible');
                         $('#detalle_stock').text(producto.stock || 'No disponible');
-                        $('#detalle_ruta_imagen').text(producto.ruta_imagen || 'No disponible');
+
+                        // Suponiendo que las imágenes están separadas por comas
+                        var imagenesHtml = '';
+                        var imagenes = producto.ruta_imagen.split(',');
+                        imagenes.forEach(function(imagen) {
+                            imagenesHtml += '<img src="' + imagen.trim() + '" class="img-fluid" style="max-width: 100px; margin-right: 5px;">';
+                        });
+                        $('#detalle_imagenes').html(imagenesHtml);
 
                     } else {
                         console.error('No se pudo cargar la información del producto.');
