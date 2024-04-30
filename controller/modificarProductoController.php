@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET["idProducto"])) {
 } elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $idProducto = $_POST["idProducto"];
     $gestorProducto = new producto();
-    
+
     // Recuperar la información del producto antes de actualizar
     $productoActual = $gestorProducto->getProductoId($idProducto, $conexPDO);
 
@@ -99,4 +99,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET["idProducto"])) {
     // Redirigir al usuario o recargar la información
     include("../view/modificarProductoView.php");
 }
-?>
