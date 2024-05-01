@@ -415,25 +415,40 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="usuarioDetalleLabel" style="color: #8350F2;">Detalles del Usuario</h5>
+          <h3 class="modal-title" id="usuarioDetalleLabel" style="color: #8350F2;">Detalles del Usuario</h3>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p><strong>Nombre de usuario:</strong> <span id="detalle_nombre_usuario"></span></p>
-          <p><strong>Nombre:</strong> <span id="detalle_nombre"></span></p>
-          <p><strong>Primer Apellido:</strong> <span id="detalle_primer_apellido"></span></p>
-          <p><strong>Segundo Apellido:</strong> <span id="detalle_segundo_apellido"></span></p>
-          <p><strong>DNI:</strong> <span id="detalle_dni"></span></p>
-          <p><strong>Email:</strong> <span id="detalle_email"></span></p>
-          <p><strong>Código Postal:</strong> <span id="detalle_codigo_postal"></span></p>
-          <p><strong>Calle:</strong> <span id="detalle_calle"></span></p>
-          <p><strong>Número Bloque:</strong> <span id="detalle_numero_bloque"></span></p>
-          <p><strong>Piso:</strong> <span id="detalle_piso"></span></p>
-          <p><strong>Teléfono:</strong> <span id="detalle_telefono"></span></p>
-          <p><strong>Activación:</strong> <span id="detalle_activacion"></span></p>
-          <p><strong>Activo:</strong> <span id="detalle_activo"></span></p>
-          <p><strong>Rol:</strong> <span id="detalle_rol"></span></p>
-          <p><strong>Estado:</strong> <span id="detalle_estado"></span></p>
+          <p style="color: #8350F2;">Nombre de usuario:</p>
+          <span id="detalle_nombre_usuario"></span><hr>
+          <p style="color: #8350F2;">Nombre:</p>
+          <span id="detalle_nombre"></span><hr>
+          <p style="color: #8350F2;">Primer Apellido:</p>
+          <span id="detalle_primer_apellido"></span><hr>
+          <p style="color: #8350F2;">Segundo Apellido:</p>
+          <span id="detalle_segundo_apellido"></span><hr>
+          <p style="color: #8350F2;">DNI:</p>
+          <span id="detalle_dni"></span><hr>
+          <p style="color: #8350F2;">Email:</p>
+          <span id="detalle_email"></span><hr>
+          <p style="color: #8350F2;">Código Postal:</p>
+          <span id="detalle_codigo_postal"></span><hr>
+          <p style="color: #8350F2;">Calle:</p>
+          <span id="detalle_calle"></span><hr>
+          <p style="color: #8350F2;">Número Bloque:</p>
+          <span id="detalle_numero_bloque"></span><hr>
+          <p style="color: #8350F2;">Piso:</p>
+          <span id="detalle_piso"></span><hr>
+          <p style="color: #8350F2;">Teléfono:</p>
+          <span id="detalle_telefono"></span><hr>
+          <p style="color: #8350F2;">Activación:</p>
+          <span id="detalle_activacion"></span><hr>
+          <p style="color: #8350F2;">Activo:</p>
+          <span id="detalle_activo"></span><hr>
+          <p style="color: #8350F2;">Rol:</p>
+          <span id="detalle_rol"></span><hr>
+          <p style="color: #8350F2;">Estado:</p>
+          <span id="detalle_estado"></span><hr>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

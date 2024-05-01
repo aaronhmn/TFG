@@ -7,7 +7,6 @@ use \model\marca;
 use \model\categoria;
 use \model\utils;
 
-// Incluir los modelos necesarios
 require_once("../model/productoModel.php");
 require_once("../model/marcaModel.php");
 require_once("../model/categoriaModel.php");
@@ -15,7 +14,6 @@ require_once("../model/utils.php");
 
 session_start();
 
-// Verificar si el usuario está logueado y es administrador
 if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'] != 1) {
     header('Location: ../view/noAutorizadoView.php');
     exit();
@@ -23,47 +21,33 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'
 
 $conexPDO = utils::conectar();
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET["idProducto"])) {
-    $gestorProducto = new producto();
-    $producto = $gestorProducto->getProductoId($_GET["idProducto"], $conexPDO);
+$gestorProducto = new Producto();
+$gestorMarca = new Marca();
+$gestorCategoria = new Categoria();
 
-    $gestorMarca = new marca();
-    $marcas = $gestorMarca->getMarcas($conexPDO);
-
-    $gestorCategoria = new categoria();
-    $categorias = $gestorCategoria->getCategorias($conexPDO);
-
-    include("../view/modificarProductoView.php");
-} elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $idProducto = $_POST["idProducto"];
-    $gestorProducto = new producto();
-
-    // Recuperar la información del producto antes de actualizar
-    $productoActual = $gestorProducto->getProductoId($idProducto, $conexPDO);
-
-    // Array para mantener los datos del producto a actualizar
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $producto = [
-        "idproducto" => $_POST["idProducto"],
+        "idproducto" => $_POST["idproducto"],
         "nombre" => $_POST["nombre"],
         "precio" => $_POST["precio"],
         "id_categoria" => $_POST["id_categoria"],
         "descripcion" => $_POST["descripcion"],
         "especificacion" => $_POST["especificacion"],
         "id_marca" => $_POST["id_marca"],
-        "stock" => $_POST["stock"]
+        "stock" => $_POST["stock"],
+        "ruta_imagen" => $gestorProducto->getProductoId($_POST["idproducto"], $conexPDO)['ruta_imagen']
     ];
 
     // Verificar si se han enviado nuevas imágenes
     if (!empty($_FILES['inputImagen']['name'][0])) {
-        // Eliminar imágenes antiguas
-        $rutasAntiguas = explode(',', $productoActual['ruta_imagen']);
+        $rutasAntiguas = explode(',', $producto['ruta_imagen']);
         foreach ($rutasAntiguas as $rutaAntigua) {
             if (file_exists($rutaAntigua)) {
                 unlink($rutaAntigua); // Borrar la imagen del servidor
             }
         }
 
-        $imagenesRutas = []; // Inicializa una lista para las nuevas imágenes
+        $imagenesRutas = [];
         foreach ($_FILES['inputImagen']['name'] as $key => $name) {
             $imageType = $_FILES['inputImagen']['type'][$key];
             if (substr($imageType, 0, 5) == "image") {
@@ -88,14 +72,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET["idProducto"])) {
             }
         }
         $producto["ruta_imagen"] = implode(',', $imagenesRutas);
-    } else {
-        // Conservar la ruta de la imagen existente
-        $producto["ruta_imagen"] = $productoActual["ruta_imagen"];
     }
 
-    // Actualizar el producto en la base de datos
-    $gestorProducto->updateProducto($producto, $conexPDO);
+    $resultado = $gestorProducto->updateProducto($producto, $conexPDO);
 
-    // Redirigir al usuario o recargar la información
-    include("../view/modificarProductoView.php");
+    if ($resultado) {
+        $_SESSION['mensaje'] = "El producto ha sido modificado correctamente.";
+        $_SESSION['tipo_mensaje'] = "success";
+    } else {
+        $_SESSION['mensaje'] = "No se realizaron cambios en el producto.";
+        $_SESSION['tipo_mensaje'] = "warning";
+    }
+    header('Location: ../controller/productosAdminController.php');
+    exit();
+} else if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET["idproducto"])) {
+    $producto = $gestorProducto->getProductoId($_GET["idproducto"], $conexPDO);
+    $marcas = $gestorMarca->getMarcas($conexPDO);
+    $categorias = $gestorCategoria->getCategorias($conexPDO);
+
+    /* include("../view/modificarProductoView.php"); */
 }
+
+?>

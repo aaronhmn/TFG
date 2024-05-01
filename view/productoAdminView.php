@@ -193,19 +193,19 @@
                             /* print("</tr>\n"); */
 
                             echo "<td>";
-                            echo "<button data-bs-toggle='modal' data-bs-target='#modificarProductoModal'";
-                            echo " data-id='" . htmlspecialchars($datosProducto['idproducto'], ENT_QUOTES) . "'";
-                            echo " data-nombre='" . htmlspecialchars($datosProducto['nombre'], ENT_QUOTES) . "'";
-                            echo " data-precio='" . htmlspecialchars($datosProducto['precio'], ENT_QUOTES) . "'";
-                            /* echo " data-segundoapellido='" . htmlspecialchars($datosProducto['segundo_apellido'], ENT_QUOTES) . "'"; */
-                            echo " data-descripcion='" . htmlspecialchars($datosProducto['descripcion'], ENT_QUOTES) . "'";
-                            echo " data-especificacion='" . htmlspecialchars($datosProducto['especificacion'], ENT_QUOTES) . "'";
-                            /* echo " data-nombreusuario='" . htmlspecialchars($datosProducto['nombre_usuario'], ENT_QUOTES) . "'"; */
-                            echo " data-stock='" . htmlspecialchars($datosProducto['stock'], ENT_QUOTES) . "'";
-                            echo " data-ruta_imagen='" . htmlspecialchars($datosProducto['ruta_imagen'], ENT_QUOTES) . "'";
-                            echo " style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;'>";
-                            echo "<i class='fas fa-edit fa-lg' style='color: #005eff;'></i>";
-                            echo "</button>";
+                            echo "<button data-bs-toggle='modal' data-bs-target='#modificarProductoModal'"
+                                . " data-id='" . htmlspecialchars($datosProducto['idproducto'], ENT_QUOTES) . "'"
+                                . " data-nombre='" . htmlspecialchars($datosProducto['nombre'], ENT_QUOTES) . "'"
+                                . " data-precio='" . htmlspecialchars($datosProducto['precio'], ENT_QUOTES) . "'"
+                                . " data-stock='" . htmlspecialchars($datosProducto['stock'], ENT_QUOTES) . "'"
+                                . " data-categoria='" . htmlspecialchars($datosProducto['id_categoria'], ENT_QUOTES) . "'"
+                                . " data-marca='" . htmlspecialchars($datosProducto['id_marca'], ENT_QUOTES) . "'"
+                                . " data-descripcion='" . htmlspecialchars($datosProducto['descripcion'], ENT_QUOTES) . "'"
+                                . " data-especificacion='" . htmlspecialchars($datosProducto['especificacion'], ENT_QUOTES) . "'"
+                                . " data-imagenes='" . htmlspecialchars($datosProducto['ruta_imagen'], ENT_QUOTES) . "'"
+                                . " style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;'>"
+                                . "<i class='fas fa-edit fa-lg' style='color: #005eff;'></i>"
+                                . "</button>";
                             echo "</td>";
                         }
                         ?>
@@ -273,12 +273,12 @@
 
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label"><b>Descripción:</b></label>
-                            <textarea class="form-control" name="inputDescripcion" rows="5"></textarea>
+                            <textarea class="form-control" name="inputDescripcion" rows="10"></textarea>
                         </div>
 
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label"><b>Especificacion:</b></label>
-                            <textarea class="form-control" name="inputEspecificacion" rows="5"></textarea>
+                            <textarea class="form-control" name="inputEspecificacion" rows="10"></textarea>
                         </div>
 
                         <div class="mb-3">
@@ -295,30 +295,105 @@
         </div>
     </div>
 
+    <!-- Modal Modificar Producto -->
+    <div class="modal fade" id="modificarProductoModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modalLabel" style="color: #8350F2;">Modificar producto</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="../controller/modificarProductoController.php" enctype="multipart/form-data">
+                        <input type="hidden" name="idproducto" id="idproducto" value="<?php echo $producto['idproducto']; ?>">
+
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label"><b>Nombre:</b></label>
+                            <input type="text" class="form-control" id="nombre" name="nombre">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="precio" class="form-label"><b>Precio:</b></label>
+                                <input type="number" step="0.01" class="form-control" id="precio" name="precio">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="stock" class="form-label"><b>Stock:</b></label>
+                                <input type="number" class="form-control" id="stock" name="stock">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="selectCategoria" class="form-label"><b>Categoria:</b></label>
+                                <select class="form-select" name="id_categoria" id="selectCategoria">
+                                    <option value="" selected disabled>Elija una categoría</option>
+                                    <?php foreach ($categorias as $categoria) : ?>
+                                        <option value="<?= $categoria['idcategoria'] ?>"><?= htmlspecialchars($categoria['nombre_categoria']) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="selectMarca" class="form-label"><b>Marca:</b></label>
+                                <select class="form-select" name="id_marca" id="selectMarca">
+                                    <option value="" selected disabled>Elija una marca</option>
+                                    <?php foreach ($marcas as $marca) : ?>
+                                        <option value="<?= $marca['idmarca'] ?>"><?= htmlspecialchars($marca['nombre_marca']) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="descripcion" class="form-label"><b>Descripción:</b></label>
+                            <textarea class="form-control" id="descripcion" name="descripcion" rows="10"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="especificacion" class="form-label"><b>Especificacion:</b></label>
+                            <textarea class="form-control" id="especificacion" name="especificacion" rows="10"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputImagen" class="form-label"><b>Inserta las imágenes:</b></label>
+                            <input type="file" class="form-control" id="inputImagen" name="inputImagen[]" multiple>
+                            <div id="currentImagesContainer" style="margin-top: 20px;"></div>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary" type="submit" value="Upload" style="background-color: #8350F2; border:#8350F2;">Modificar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Detalles Usuario -->
     <div class="modal fade" id="productoDetalleModal" tabindex="-1" aria-labelledby="productoDetalleLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="productoDetalleLabel" style="color: #8350F2;">Detalles del Producto</h5>
+                    <h3 class="modal-title" id="productoDetalleLabel" style="color: #8350F2;">Detalles del Producto</h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p><strong>Nombre:</strong></p>
-                    <span id="detalle_nombre"></span><hr>
-                    <p><strong>Precio:</strong></p>
-                    <span id="detalle_precio"></span>€<hr>
-                    <p><strong>Categoría:</strong></p>
-                    <span id="detalle_categoria"></span><hr>
-                    <p><strong>Descripcion:</strong></p>
-                    <span id="detalle_descripcion"></span><hr>
-                    <p><strong>Especificacion:</strong></p>
-                    <span id="detalle_especificacion"></span><hr>
-                    <p><strong>Marca:</strong></p>
-                    <span id="detalle_marca"></span><hr>
-                    <p><strong>Stock:</strong></p>
-                    <span id="detalle_stock"></span><hr>
-                    <p><strong>Imágenes:</strong></p>
+                    <p style="color: #8350F2;">Nombre:</p>
+                    <span id="detalle_nombre"></span>
+                    <hr>
+                    <p style="color: #8350F2;">Precio:</p>
+                    <span id="detalle_precio"></span>€
+                    <hr>
+                    <p style="color: #8350F2;">Categoría:</p>
+                    <span id="detalle_categoria"></span>
+                    <hr>
+                    <p style="color: #8350F2;">Descripcion:</p>
+                    <span id="detalle_descripcion"></span>
+                    <hr>
+                    <p style="color: #8350F2;">Especificacion:</p>
+                    <span id="detalle_especificacion"></span>
+                    <hr>
+                    <p style="color: #8350F2;">Marca:</p>
+                    <span id="detalle_marca"></span>
+                    <hr>
+                    <p style="color: #8350F2;">Stock:</p>
+                    <span id="detalle_stock"></span>
+                    <hr>
+                    <p style="color: #8350F2;">Imágenes:</p>
                     <span id="detalle_imagenes"></span>
                 </div>
                 <div class="modal-footer">
@@ -327,6 +402,8 @@
             </div>
         </div>
     </div>
+
+
 
     <!-- Modal de Confirmación de Eliminación -->
     <div class="modal fade" id="confirmacionEliminarModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
@@ -372,6 +449,53 @@
             };
             modal.show();
         }
+
+        //modificar producto       
+        $('#modificarProductoModal').on('show.bs.modal', function(event) {
+    var button = $(event.relatedTarget); // Botón que activó el modal
+    var id = button.data('id');
+    var nombre = button.data('nombre');
+    var precio = button.data('precio');
+    var stock = button.data('stock');
+    var categoria = button.data('categoria');
+    var marca = button.data('marca');
+    var descripcion = button.data('descripcion');
+    var especificacion = button.data('especificacion');
+    var imagenes = button.data('imagenes').split(',');
+    var imagesContainer = $('#currentImagesContainer');
+    imagesContainer.empty();
+
+    var modal = $(this);
+    modal.find('#idproducto').val(id);
+    modal.find('#nombre').val(nombre);
+    modal.find('#precio').val(precio);
+    modal.find('#stock').val(stock);
+    modal.find('#selectCategoria').val(categoria);
+    modal.find('#selectMarca').val(marca);
+    modal.find('#descripcion').val(descripcion);
+    modal.find('#especificacion').val(especificacion);
+
+    imagenes.forEach(function(imagen) {
+        var imgHtml = $('<img>').attr('src', imagen.trim()).css('max-width', '100px').css('margin-right', '5px').css('margin-bottom', '5px');
+        imagesContainer.append(imgHtml);
+    });
+});
+
+// Actualizar visualización de imágenes al seleccionar nuevas
+function updateImageDisplay(files) {
+    var imagesContainer = $('#currentImagesContainer');
+    imagesContainer.empty();
+    if (files.length > 0) {
+        Array.from(files).forEach(file => {
+            var imgElement = document.createElement('img');
+            imgElement.style.maxWidth = '100px';
+            imgElement.style.marginRight = '5px';
+            imgElement.style.marginBottom = '5px';
+            imgElement.src = URL.createObjectURL(file);
+            imagesContainer.append(imgElement);
+        });
+    }
+}
 
         //detalles producto
         $('#productoDetalleModal').on('show.bs.modal', function(event) {
