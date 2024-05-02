@@ -9,24 +9,86 @@ if (session_status() == PHP_SESSION_NONE) {
 use \model\utils;
 use \model\usuario;
 
-//Añadimos el código del modelo
+// Incluir las definiciones de las clases del modelo
 require_once("../model/utils.php");
 require_once("../model/usuarioModel.php");
-$mensaje = null;
 
 $usuarioModel = new Usuario();
 $conexPDO = utils::conectar();
 
-// Suponiendo que 'id_usuario' es guardado en la sesión al momento del login
-$idUsuario = $_SESSION['email'] ?? null;
+$mensaje = ''; // Para almacenar mensajes que se mostrarán al usuario
 
-if (isset($_SESSION['id_usuario'])) {
-    $datosUsuario = $usuarioModel->getUsuarioId($_SESSION['id_usuario'], $conexPDO);
-    include("../view/perfilView.php");
-} else {
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['id_usuario'])) {
     // Redirigir al login si no hay ID de usuario en la sesión
     header("Location: ../view/loginView.php");
     exit();
 }
+
+// Intentar cargar los datos del usuario de la base de datos
+$datosUsuario = $usuarioModel->getUsuarioId($_SESSION['id_usuario'], $conexPDO);
+if (!$datosUsuario) {
+    $datosUsuario = [];  // Si no se encuentran datos, usar un arreglo vacío
+    $mensaje = 'No se pudo cargar la información del perfil.';
+}
+
+// Comprobar si se enviaron datos del formulario por POST para actualizar el perfil
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Recolectar datos del formulario asegurándose de manejar posibles valores nulos
+    $nombre = $_POST['nombre'] ?? '';
+    $nombre_usuario = $_POST['nombre_usuario'] ?? '';
+    $primerApellido = $_POST['primer_apellido'] ?? '';
+    $segundoApellido = $_POST['segundo_apellido'] ?? '';
+    $dni = $_POST['dni'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $telefono = $_POST['telefono'] ?? '';
+    $codigo_postal = $_POST['codigo_postal'] ?? '';
+    $calle = $_POST['calle'] ?? '';
+    $numero_bloque = $_POST['numero_bloque'] ?? '';
+    $piso = $_POST['piso'] ?? '';
+
+    // Crear el array de datos del usuario para la actualización
+    $usuario = [
+        'idusuario' => $_SESSION['id_usuario'],
+        'nombre' => $nombre,
+        'nombre_usuario' => $nombre_usuario,
+        'primer_apellido' => $primerApellido,
+        'segundo_apellido' => $segundoApellido,
+        'dni' => $dni,
+        'email' => $email,
+        'telefono' => $telefono,
+        'codigo_postal' => $codigo_postal,
+        'calle' => $calle,
+        'numero_bloque' => $numero_bloque,
+        'piso' => $piso,
+        'activo' => true, // Asumiendo que se quiere mantener al usuario como activo
+    ];
+
+    // Intentar actualizar los datos del usuario en la base de datos
+    $resultado = $usuarioModel->updateUsuario($usuario, $conexPDO);
+    if ($resultado) {
+        $mensaje = "Perfil actualizado correctamente.";
+        // Recargar los datos del usuario para reflejar los cambios
+        $datosUsuario = $usuarioModel->getUsuarioId($_SESSION['id_usuario'], $conexPDO);
+    } else {
+        $mensaje = "Error al actualizar el perfil.";
+    }
+
+    if ($resultado != null) {
+        $_SESSION['mensaje'] = "El perfil ha sido modificado correctamente.";
+        $_SESSION['tipo_mensaje'] = "success";
+        header('Location: ../controller/perfilController.php');
+        exit();
+    } else {
+        $_SESSION['mensaje'] = "Error al modificar el perfil.";
+        $_SESSION['tipo_mensaje'] = "danger";
+        // Si decides redireccionar de todos modos o manejar de otra forma
+        header('Location: ../controller/perfilController.php');
+        exit();
+    }
+}
+
+// Incluir la vista que presenta la información del usuario
+include("../view/perfilView.php");
 
 ?>

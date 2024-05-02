@@ -212,6 +212,7 @@ class Usuario
                 $result = $sentencia->execute();
             } catch (PDOException $e) {
                 print("Error al acceder a BD" . $e->getMessage());
+                return false;
             }
         }
 
