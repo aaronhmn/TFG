@@ -34,8 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Verificar si la nueva contraseña y la confirmación coinciden
     if ($contrasenaNueva !== $contrasenaConfirmar) {
-        $_SESSION['error'] = "La nueva contraseña y la confirmación no coinciden.";
-        header("Location: ../view/cambioContraseñaView.php");
+        $_SESSION['mensaje'] = "Las nuevas contraseñas no coinciden";
+        $_SESSION['tipo_mensaje'] = "danger";
+        header("Location: ../controller/cambioContraseñaController.php");
         exit();
     }
 
@@ -51,8 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Comparar la contraseña actual almacenada con la proporcionada por el usuario
     if ($hashContrasenaActual !== $usuarioActual['contrasena']) {
         // La contraseña actual proporcionada no coincide con la almacenada en la base de datos
-        $_SESSION['error'] = "La contraseña actual es incorrecta.";
-        header("Location: ../view/cambioContraseñaView.php");
+        $_SESSION['mensaje'] = "La contraseña actual es incorrecta.";
+        $_SESSION['tipo_mensaje'] = "danger";
+        header("Location: ../controller/cambioContraseñaController.php");
         exit();
     }
 

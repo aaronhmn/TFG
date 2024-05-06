@@ -61,7 +61,7 @@
             <label for="nombre" class="visually-hidden">Contraseña Nueva</label>
             <input type="password" class="form-control" id="contrasenaConfirmar" name="contrasenaConfirmar" placeholder="Repetir nueva contraseña" required/>
           </div>
-
+          
           <button class="btn btn-primary col-4" type="reset" style="background-color: rgb(168, 168, 168); margin-right: 15px; border: none;">
             Cancelar
           </button>
