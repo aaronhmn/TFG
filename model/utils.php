@@ -91,6 +91,24 @@ class Utils {
         }
       }
 
+      // Método para cambiar la contraseña
+    public function cambiarContrasena($idUsuario, $contrasenaNueva, $conexPDO) {
+      if ($conexPDO != null && isset($idUsuario)) {
+          try {
+              $salt = self::generar_salt(10); // Genera una nueva sal
+              $hash = password_hash($contrasenaNueva . $salt, PASSWORD_DEFAULT); // Combina la contraseña y la sal antes de hashear
+              $sentencia = $conexPDO->prepare("UPDATE genesis.usuario SET contrasena = ?, salt = ? WHERE idusuario = ?");
+              $sentencia->bindParam(1, $hash);
+              $sentencia->bindParam(2, $salt);
+              $sentencia->bindParam(3, $idUsuario, PDO::PARAM_INT);
+              return $sentencia->execute();
+          } catch (PDOException $e) {
+              print("Error al cambiar la contraseña: " . $e->getMessage());
+          }
+      }
+      return false;
+  }
+
       //Funcion que envia el correo de registro
       /*public static function correo_registro($usuario)
       {

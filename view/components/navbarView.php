@@ -137,10 +137,6 @@ if (session_status() == PHP_SESSION_NONE) {
         <li>
           <a href="../controller/loginController.php"><b>Iniciar Sesión</b></a>
         </li>
-
-        <!--Si el usuario esta logueado esta opcion se ocultara y aparecera el icono del perfil que cuando este sin loguear estará oculto-->
-        <a href="../controller/carritoController.php"><i class="fas fa-shopping-cart fa-lg"></i></a>
-        <!--si el usuario esta logueado estara visible, si no, estara oculto-->
       </ul>
     </nav>
   <?php

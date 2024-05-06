@@ -34,27 +34,38 @@
       </div>
 
       <div class="col-md-8 col-sm-12" style="background-color: #fff; margin: 10px">
-        <form class="row g-3" style="margin: 10px">
+      <form class="row g-3" style="margin: 10px" action="../controller/cambioContraseñaController.php" method="POST">
+      <?php
+    if (isset($_SESSION['mensaje'])) {
+      echo "<div class='alert alert-{$_SESSION['tipo_mensaje']} alert-dismissible fade show' role='alert'>
+            {$_SESSION['mensaje']}
+            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+          </div>";
+      // Limpia los mensajes después de mostrarlos
+      unset($_SESSION['mensaje']);
+      unset($_SESSION['tipo_mensaje']);
+    }
+    ?>
           <div class="col-6" style="display: flex; align-items: center;">
             <h2 style="color: #ffa500"><b>Cambio de contraseña</b></h2>
           </div>
           <div class="col-12">
             <label for="nombre" class="visually-hidden">Contraseña Actual</label>
-            <input type="password" class="form-control" id="contraseña" placeholder="Contraseña actual" />
+            <input type="password" class="form-control" id="contrasenaActual" name="contrasenaActual" placeholder="Contraseña actual" required/>
           </div>
           <div class="col-12">
             <label for="nombre" class="visually-hidden">Contraseña Nueva</label>
-            <input type="password" class="form-control" id="contraseñaNueva" placeholder="Nueva contraseña" />
+            <input type="password" class="form-control" id="contrasenaNueva" name="contrasenaNueva" placeholder="Nueva contraseña" required/>
           </div>
           <div class="col-12">
             <label for="nombre" class="visually-hidden">Contraseña Nueva</label>
-            <input type="password" class="form-control" id="contraseñaNueva" placeholder="Repetir nueva contraseña" />
+            <input type="password" class="form-control" id="contrasenaConfirmar" name="contrasenaConfirmar" placeholder="Repetir nueva contraseña" required/>
           </div>
 
-          <button class="btn btn-primary col-4" type="submit" style="background-color: rgb(168, 168, 168); margin-right: 15px; border: none;">
+          <button class="btn btn-primary col-4" type="reset" style="background-color: rgb(168, 168, 168); margin-right: 15px; border: none;">
             Cancelar
           </button>
-          <button class="btn btn-primary col-4" type="reset" style="background-color: #8350f2; border: none;">
+          <button class="btn btn-primary col-4" type="submit" style="background-color: #8350f2; border: none;">
             Guardar
           </button>
         </form>
@@ -66,16 +77,12 @@
   <?php include '../controller/footerController.php'; ?>
 
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <script>
-document.getElementById('cancelButton').addEventListener('click', function() {
-    var alertContainer = document.getElementById('alertContainer');
-    var alertHTML = '<div class="alert alert-warning alert-dismissible fade show" role="alert">' +
-                    'La operación ha sido cancelada correctamente.' +
-                    '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-                    '</div>';
-    alertContainer.innerHTML = alertHTML;
-});
-</script>
+
+  </script>
 </body>
+
 </html>

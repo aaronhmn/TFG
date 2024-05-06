@@ -154,9 +154,6 @@ namespace views;
                   <a class="link-footer" href="../controller/loginController.php">Login</a>
                 </li>
                 <li class="li-footer">
-                  <a class="link-footer" href="../controller/carritoController.php">Carrito</a>
-                </li>
-                <li class="li-footer">
                   <a class="link-footer" href="../controller/tiendaController.php">Tienda</a>
                 </li>
               </div>

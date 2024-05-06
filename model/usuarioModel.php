@@ -1,4 +1,5 @@
 <?php
+
 namespace model;
 
 require_once("utils.php");
@@ -195,7 +196,7 @@ class Usuario
                 $sentencia->bindParam(":primer_apellido", $usuario["primer_apellido"]);
                 $sentencia->bindParam(":segundo_apellido", $usuario["segundo_apellido"]);
                 $sentencia->bindParam(":dni", $usuario["dni"]);
-                $sentencia->bindParam(":email", $usuario["email"]);               
+                $sentencia->bindParam(":email", $usuario["email"]);
                 $sentencia->bindParam(":nombre_usuario", $usuario["nombre_usuario"]);
                 $sentencia->bindParam(":codigo_postal", $usuario["codigo_postal"]);
                 $sentencia->bindParam(":calle", $usuario["calle"]);
@@ -207,7 +208,7 @@ class Usuario
                 $sentencia->bindParam(":rol", $usuario["rol"]);
                 $sentencia->bindParam(":estado", $usuario["estado"]);
                 /* $sentencia->bindParam(":contrasena", $usuario["contrasena"]); */
-                
+
                 //Ejecutamos la sentencia
                 $result = $sentencia->execute();
             } catch (PDOException $e) {
@@ -223,7 +224,7 @@ class Usuario
     {
         $result = null;
         $activo = 1;
-        $email2 = $email; 
+        $email2 = $email;
 
         echo $email2;
 
@@ -232,7 +233,7 @@ class Usuario
             try {
                 //Preparamos la sentencia
                 $sentencia = $conexPDO->prepare("UPDATE genesis.usuario SET activo=? WHERE email=?");
-                
+
 
                 //Asociamos los valores a los parametros de la sentencia sql
                 $sentencia->bindParam(1, $activo, PDO::PARAM_INT);
@@ -241,8 +242,6 @@ class Usuario
 
                 //Ejecutamos la sentencia
                 $result = $sentencia->execute();
-
-
             } catch (PDOException $e) {
                 print("Error al acceder a BD" . $e->getMessage());
             }
@@ -251,55 +250,55 @@ class Usuario
         return $result;
     }
 
-    function cambiarContraseña($usuario, $conexPDO)
-    {
-        $result = null;
-
-            try {
-                //Preparamos la sentencia
-                $sentencia = $conexPDO->prepare("UPDATE genesis.usuario SET activo=?, contrasena=?, salt=? WHERE email=?");
-
-                //Asociamos los valores a los parametros de la sentencia sql
-                $sentencia->bindParam(1, $usuario["activo"], PDO::PARAM_INT);
-                $sentencia->bindParam(2, $usuario["contrasena"]);
-                $sentencia->bindParam(3, $usuario["salt"]);
-                $sentencia->bindParam(4, $usuario["email"]);
-                //Ejecutamos la sentencia
-                $result = $sentencia->execute();
-            } catch (PDOException $e) {
-                print("Error al acceder a BD" . $e->getMessage());
-            }
-
-        return $result;
-    }
-
-    function BanUsuarioPorId($idUsuario, $conexPDO)
+    function cambiarContraseña($email, $nuevaContrasena, $nuevaSalt, $conexPDO)
 {
     $result = null;
 
-    if (isset($idUsuario) && is_numeric($idUsuario) && $conexPDO != null) {
-        try {
-            // Primero, obtenemos el estado actual del usuario (si está baneado o no)
-            $sentencia = $conexPDO->prepare("SELECT estado FROM genesis.usuario WHERE idusuario = ?");
-            $sentencia->bindParam(1, $idUsuario, PDO::PARAM_INT);
-            $sentencia->execute();
-            $usuario = $sentencia->fetch(PDO::FETCH_ASSOC);
+    try {
+        //Preparamos la sentencia
+        $sentencia = $conexPDO->prepare("UPDATE genesis.usuario SET contrasena=?, salt=? WHERE email=?");
 
-            if ($usuario) {
-                // Invertimos el estado: si es 0 (activo), lo ponemos a 1 (baneado), y viceversa.
-                $nuevoEstado = $usuario['estado'] == 0 ? 1 : 0;
+        //Asociamos los valores a los parametros de la sentencia sql
+        $sentencia->bindParam(1, $nuevaContrasena);
+        $sentencia->bindParam(2, $nuevaSalt);
+        $sentencia->bindParam(3, $email);
 
-                // Actualizamos el estado del usuario en la base de datos
-                $sentencia = $conexPDO->prepare("UPDATE genesis.usuario SET estado = ? WHERE idusuario = ?");
-                $sentencia->bindParam(1, $nuevoEstado, PDO::PARAM_INT);
-                $sentencia->bindParam(2, $idUsuario, PDO::PARAM_INT);
-                $result = $sentencia->execute();
-            }
-        } catch (PDOException $e) {
-            print("Error al cambiar el estado de baneo del usuario: " . $e->getMessage());
-        }
+        //Ejecutamos la sentencia
+        $result = $sentencia->execute();
+    } catch (PDOException $e) {
+        print("Error al acceder a BD" . $e->getMessage());
     }
 
     return $result;
 }
+
+    function BanUsuarioPorId($idUsuario, $conexPDO)
+    {
+        $result = null;
+
+        if (isset($idUsuario) && is_numeric($idUsuario) && $conexPDO != null) {
+            try {
+                // Primero, obtenemos el estado actual del usuario (si está baneado o no)
+                $sentencia = $conexPDO->prepare("SELECT estado FROM genesis.usuario WHERE idusuario = ?");
+                $sentencia->bindParam(1, $idUsuario, PDO::PARAM_INT);
+                $sentencia->execute();
+                $usuario = $sentencia->fetch(PDO::FETCH_ASSOC);
+
+                if ($usuario) {
+                    // Invertimos el estado: si es 0 (activo), lo ponemos a 1 (baneado), y viceversa.
+                    $nuevoEstado = $usuario['estado'] == 0 ? 1 : 0;
+
+                    // Actualizamos el estado del usuario en la base de datos
+                    $sentencia = $conexPDO->prepare("UPDATE genesis.usuario SET estado = ? WHERE idusuario = ?");
+                    $sentencia->bindParam(1, $nuevoEstado, PDO::PARAM_INT);
+                    $sentencia->bindParam(2, $idUsuario, PDO::PARAM_INT);
+                    $result = $sentencia->execute();
+                }
+            } catch (PDOException $e) {
+                print("Error al cambiar el estado de baneo del usuario: " . $e->getMessage());
+            }
+        }
+
+        return $result;
+    }
 }
