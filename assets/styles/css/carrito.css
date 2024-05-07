@@ -1,0 +1,42 @@
+    /* Estilo para las celdas de la tabla */
+    .table td {
+        vertical-align: middle;
+        /* Alinea el contenido de las celdas verticalmente al centro */
+      }
+  
+      /* Estilos específicos para el botón de eliminar */
+      .btn-eliminar {
+        padding: 0.375rem 0.75rem;
+        /* Ajusta el padding para que el botón no sea demasiado grande */
+        font-size: 0.875rem;
+        /* Ajusta el tamaño de la fuente dentro del botón si es necesario */
+        line-height: 1;
+        /* Establece la altura de la línea para compactar el contenido del botón */
+        border-radius: 0.25rem;
+        /* Asegura bordes redondeados moderados */
+        border: none;
+        /* Elimina el borde para un aspecto más limpio */
+        background-color: #dc3545 !important;
+        /* Color de fondo rojo para indicar acción de eliminar */
+        color: white !important;
+        /* Texto blanco para alto contraste */
+      }
+  
+      /* Estilo para el hover del botón */
+      .btn-eliminar:hover {
+        background-color: #c82333 !important;
+        /* Un tono más oscuro de rojo para el hover */
+      }
+  
+      /* Estilo para el icono dentro del botón */
+      .btn-eliminar i {
+        margin: 0;
+        /* Elimina cualquier margen alrededor del icono */
+      }
+       .cantidad{
+        color: #fff;
+        background-color: #8350f2;
+        width: 20px;
+        border: none;
+        border-radius: 5% !important;
+       }

@@ -97,7 +97,10 @@ if (session_status() == PHP_SESSION_NONE) {
             }
             ?>
           </div>
-          <a href="../controller/carritoController.php"><i class="fas fa-shopping-cart fa-lg"></i></a>
+          <a href="../controller/carritoController.php">
+            <i class="fas fa-shopping-cart fa-lg"></i>
+            <span id="cart-count" class="cart-count">0</span>
+          </a>
         </ul>
       </nav>
 
@@ -145,6 +148,19 @@ if (session_status() == PHP_SESSION_NONE) {
   ?>
 
   <br /><br /><br /><br /><br />
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    actualizarContadorCarrito();
+});
+
+function actualizarContadorCarrito() {
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || {};
+    const totalItems = Object.values(carrito).reduce((total, producto) => total + producto.cantidad, 0);
+    const contador = document.getElementById('cart-count');
+    if (contador) contador.textContent = totalItems;
+}
+  </script>
 
 </body>
 

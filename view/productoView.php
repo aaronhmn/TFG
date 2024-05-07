@@ -83,7 +83,7 @@ namespace views;
           <div class="col">
             <div class="d-flex align-items-center">
               <!-- <input class="mas-productos" type="number" value="1" min="1"> -->
-              <button class="boton-carrito">Añadir al Carrito<i class="fas fa-shopping-cart" style="color: white; margin-left: 10px;"></i></button>
+              <button class="boton-carrito" id="add-to-cart" data-id="<?= $productos['idproducto'] ?>" data-nombre="<?= $productos['nombre'] ?>" data-precio="<?= $productos['precio'] ?>">Añadir al Carrito<i class="fas fa-shopping-cart" style="color: white; margin-left: 10px;"></i></button>
               <button class="boton-fav ms-2">Añadir a Favorito<i class="fas fa-heart" style="color: white; margin-left: 10px;"></i></button>
             </div>
           </div>
@@ -146,8 +146,8 @@ namespace views;
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-
   <script src="../assets/js/producto.js"></script>
+  
 </body>
 
 </html>

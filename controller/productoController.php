@@ -3,13 +3,16 @@ namespace model;
 
 use \model\utils;
 use \model\productoModel;
+use \model\carrito;
+
 
 //Añadimos el código del modelo
 require_once("../model/utils.php");
 require_once("../model/productoModel.php");
+require_once("../model/carritoModel.php");
 $mensaje = null;
 
-$gestorProducto = new producto(); // Asegúrate de que el nombre de la clase es correcto
+$gestorProducto = new producto();
 $conexPDO = utils::conectar();
 
 // Verificamos que el ID del producto está presente y es válido
