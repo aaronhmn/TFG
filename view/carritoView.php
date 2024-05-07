@@ -25,78 +25,38 @@ namespace views;
   <?php include '../controller/navbarController.php'; ?>
 
   <div class="container" style="margin-top: 50px; margin-bottom: 50px;">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Producto</th>
-          <th scope="col">Precio</th>
-          <th scope="col">Cantidad</th>
-          <th scope="col">Precio Subtotal</th>
-          <th style="text-align:center;" scope="col">Eliminar</th>
-        </tr>
-      </thead>
-      <tbody>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th style="background-color: #8350f2; color: white;" scope="col">Producto</th>
+            <th style="background-color: #8350f2; color: white;" scope="col">Precio</th>
+            <th style="background-color: #8350f2; color: white;" scope="col">Cantidad</th>
+            <th style="background-color: #8350f2; color: white;" scope="col">Precio Subtotal</th>
+            <th style="background-color: #8350f2; color: white; text-align:center;" scope="col">Acción</th>
+          </tr>
+        </thead>
+        <tbody id="carrito-body">
+        </tbody>
+      </table>
+    </div>
+    <div id="pagination-container"></div><br>
+    <div class="info">
+      <form action="../controller/pedidoController.php">
+      <button type="submit" id="realizarPedidoBtn" class="pedido">Realizar pedido</button>
+      </form>
+    <div class="precio-total1"><b>Precio Total: </b><b><span class="precio-total2" id="precio-total">0 €</span></b></div>
+    </div>
 
-      </tbody>
-    </table>
-    <div>Precio Total: <span id="precio-total">0 €</span></div>
   </div><br>
 
   <!--FOOTER-->
   <?php include '../controller/footerController.php'; ?>
 
-  <script>
-window.onload = function() {
-  cargarCarrito();
-}
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-function cargarCarrito() {
-  const carrito = JSON.parse(localStorage.getItem('carrito')) || {};
-  const tbody = document.querySelector('tbody');
-  tbody.innerHTML = ''; // Limpia la tabla antes de rellenarla
-  let total = 0;
-
-  Object.keys(carrito).forEach(id => {
-    const producto = carrito[id];
-    const subtotal = (producto.precio * producto.cantidad).toFixed(2);
-    total += parseFloat(subtotal); // Suma al total
-
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${producto.nombre}</td>
-                    <td>${producto.precio} €</td>
-                    <td>
-                      <button class="cantidad" onclick="cambiarCantidad('${id}', -1)">-</button>
-                      ${producto.cantidad}
-                      <button class="cantidad" onclick="cambiarCantidad('${id}', 1)">+</button>
-                    </td>
-                    <td>${subtotal} €</td>
-                    <td style="text-align:center;"><button onclick="eliminarDelCarrito('${id}')" class="btn btn-eliminar"><i class="fa fa-trash"></i></button></td>`;
-    tbody.appendChild(tr);
-  });
-
-  document.getElementById('precio-total').textContent = `${total.toFixed(2)} €`; // Actualiza el precio total
-}
-
-function cambiarCantidad(id, cambio) {
-  const carrito = JSON.parse(localStorage.getItem('carrito'));
-  if (carrito[id]) {
-    carrito[id].cantidad += cambio;
-    if (carrito[id].cantidad < 1) {
-      delete carrito[id]; // Elimina el producto si la cantidad es menor a 1
-    } else {
-      localStorage.setItem('carrito', JSON.stringify(carrito));
-    }
-    cargarCarrito(); // Recarga el carrito para reflejar los cambios
-  }
-}
-
-function eliminarDelCarrito(id) {
-  const carrito = JSON.parse(localStorage.getItem('carrito'));
-  delete carrito[id];
-  localStorage.setItem('carrito', JSON.stringify(carrito));
-  cargarCarrito(); // Recarga la página para actualizar la tabla
-}
-</script>
+  <script src="../assets/js/carrito.js"></script>
 </body>
 
 </html>
