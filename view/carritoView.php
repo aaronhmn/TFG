@@ -17,7 +17,7 @@ namespace views;
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
 
-  <title>Página de Contacto - Genesis</title>
+  <title>Página de Carrito - Genesis</title>
 </head>
 
 <body style="background-color: #e6e6fa">
