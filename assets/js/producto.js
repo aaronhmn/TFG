@@ -71,34 +71,57 @@
 
 //*Carrito con localstorage
 document.addEventListener('DOMContentLoaded', function() {
-  var addToCartButton = document.getElementById('add-to-cart');
+  const addToCartButton = document.getElementById('add-to-cart');
   if (addToCartButton) {
-      addToCartButton.addEventListener('click', function() {
-          const productoId = this.getAttribute('data-id');
-          const nombre = this.getAttribute('data-nombre');
-          const precio = parseFloat(this.getAttribute('data-precio'));
-
-          let carrito = JSON.parse(localStorage.getItem('carrito')) || {};
-          if (carrito[productoId]) {
-              carrito[productoId].cantidad++;
-          } else {
-              carrito[productoId] = {
-                  nombre: nombre,
-                  precio: precio,
-                  cantidad: 1
-              };
-          }
-
-          localStorage.setItem('carrito', JSON.stringify(carrito));
-          alert('Producto añadido al carrito');
-          actualizarContadorCarrito();  // Actualiza el contador inmediatamente
-      });
+      addToCartButton.addEventListener('click', addProductToCart);
   }
 });
+
+function addProductToCart() {
+  const productoId = this.getAttribute('data-id');
+  const nombre = this.getAttribute('data-nombre');
+  const precio = parseFloat(this.getAttribute('data-precio'));
+
+  let carrito = JSON.parse(localStorage.getItem('carrito')) || {};
+
+  if (carrito[productoId]) {
+      carrito[productoId].cantidad++;
+      showAlert('Cantidad del producto actualizada en el carrito.', 'success');
+  } else {
+      carrito[productoId] = {
+          nombre: nombre,
+          precio: precio,
+          cantidad: 1
+      };
+      showAlert('Producto añadido al carrito.', 'success');
+  }
+
+  localStorage.setItem('carrito', JSON.stringify(carrito));
+  actualizarContadorCarrito();  // Actualiza el contador inmediatamente
+}
+
+function showAlert(message, type) {
+  const alertPlaceholder = document.getElementById('alertPlaceholder');
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = [
+      `<div class="alert alert-${type} alert-dismissible fade show" role="alert">`,
+      `${message}`,
+      '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+      '</div>'
+  ].join('');
+
+  alertPlaceholder.append(wrapper);
+
+  setTimeout(() => {
+      wrapper.remove();
+  }, 4000); // Las alertas desaparecerán después de 4 segundos
+}
 
 function actualizarContadorCarrito() {
   const carrito = JSON.parse(localStorage.getItem('carrito')) || {};
   const totalItems = Object.values(carrito).reduce((total, producto) => total + producto.cantidad, 0);
   const contador = document.getElementById('cart-count');
-  if (contador) contador.textContent = totalItems;
+  if (contador) {
+      contador.textContent = totalItems;
+  }
 }

@@ -78,7 +78,7 @@ namespace views;
             </div>
           </div>
         </div>
-
+        <div id="alertPlaceholder" class="mt-5"></div>
         <div class="row mt-5">
           <div class="col">
             <div class="d-flex align-items-center">
