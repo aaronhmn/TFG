@@ -1,9 +1,12 @@
 <?php
-
 namespace views;
 
 if (session_status() == PHP_SESSION_NONE) {
-  session_start();
+  session_start([
+      'cookie_lifetime' => 86400, // 1 día, ajusta según necesidad
+      'cookie_secure' => true,
+      'cookie_httponly' => true
+  ]);
 }
 ?>
 

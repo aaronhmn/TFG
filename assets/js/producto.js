@@ -21,14 +21,6 @@
     }
   }
 
-  //?Transform value
-  let value = 0
-  //?trail index number
-  let trailValue = 0
-  //?interval (Duration)
-  let interval = 4000
-
-
   //*Galeria Producto
   //?recogo la id de la imagen grande
   let mainImg = document.getElementById('mainImg');

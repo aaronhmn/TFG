@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <div class="col-md-8 col-sm-12" style="background-color: #fff; margin: 10px">
+      <div class="col-md-8 col-sm-12" style="background-color: #fff; margin: 5px">
         <form class="row g-3" style="margin: 10px; margin-right: 0px; margin-left: -5px;" method="POST" action="../controller/perfilController.php">
         <?php
     if (isset($_SESSION['mensaje'])) {

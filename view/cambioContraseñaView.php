@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <div class="col-md-8 col-sm-12" style="background-color: #fff; margin: 10px">
+      <div class="col-md-8 col-sm-12" style="background-color: #fff; margin: 5px">
       <form class="row g-3" style="margin: 10px" action="../controller/cambioContraseñaController.php" method="POST">
       <?php
     if (isset($_SESSION['mensaje'])) {
@@ -46,6 +46,7 @@
       unset($_SESSION['tipo_mensaje']);
     }
     ?>
+    <div id="alertContainer"></div>
           <div class="col-6" style="display: flex; align-items: center;">
             <h2 style="color: #ffa500"><b>Cambio de contraseña</b></h2>
           </div>
@@ -62,7 +63,7 @@
             <input type="password" class="form-control" id="contrasenaConfirmar" name="contrasenaConfirmar" placeholder="Repetir nueva contraseña" required/>
           </div>
           
-          <button class="btn btn-primary col-4" type="reset" style="background-color: rgb(168, 168, 168); margin-right: 15px; border: none;">
+          <button class="btn btn-primary col-4" id="cancelButton" type="reset" style="background-color: rgb(168, 168, 168); margin-right: 15px; border: none;">
             Cancelar
           </button>
           <button class="btn btn-primary col-4" type="submit" style="background-color: #8350f2; border: none;">
@@ -81,7 +82,14 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <script>
-
+    document.getElementById('cancelButton').addEventListener('click', function() {
+    var alertContainer = document.getElementById('alertContainer');
+    var alertHTML = '<div class="alert alert-warning alert-dismissible fade show" role="alert">' +
+                    'La modificación ha sido cancelada correctamente.' +
+                    '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
+                    '</div>';
+    alertContainer.innerHTML = alertHTML;
+});
   </script>
 </body>
 

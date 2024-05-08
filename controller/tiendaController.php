@@ -3,7 +3,7 @@
     namespace model;
 
     use \model\utils;
-    use \model\productoModel;
+    use \model\producto;
 
     //Añadimos el código del modelo
     require_once("../model/utils.php");
