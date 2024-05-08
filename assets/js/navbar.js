@@ -1,3 +1,4 @@
+//*CARRITO
 document.addEventListener('DOMContentLoaded', function() {
     actualizarContadorCarrito();
   });
@@ -9,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (contador) contador.textContent = totalItems;
   }
 
+  //*BUSCADOR
   $(document).ready(function() {
   $('#formBusqueda').submit(function(event) {
       event.preventDefault();
