@@ -157,7 +157,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
   <br /><br /><br /><br /><br />
 
-  <script src="/assets/js/navbar.js"></script>
+  <script src="../assets/js/navbar.js"></script>
 
 </body>
 

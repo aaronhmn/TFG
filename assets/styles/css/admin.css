@@ -175,4 +175,24 @@ body{
     box-shadow: 0 0 0 0.25rem rgba(131, 80, 242, 0.5) !important;
 }
 
+.enlace-cards{
+    text-decoration: none;
+}
+
+.badge-custom {
+    background-color: #ffa500;
+    color: #fff; /* Cambia el color del texto a blanco si es necesario */
+}
+
+.enlace-cards .card {
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    border: 2px solid #8350F2;
+}
+
+.enlace-cards .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+
 

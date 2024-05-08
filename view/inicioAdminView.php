@@ -79,6 +79,74 @@
             </ul>
         </nav><br>
         <hr style="border-top: 2px solid #8350F2;"><br>
+
+        <div class="row g-5 justify-content-center">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                <a href="../controller/usuariosAdminController.php" class="enlace-cards">
+                    <div class="card" style="width: 14rem; text-align: center; margin: auto; border: 2px solid #8350F2;">
+                        <div class="icon-container" style="font-size: 4rem; margin-top: 20px;">
+                            <i class="fas fa-user" style="color: #8350F2;"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><b>Usuarios</b> <span class="badge badge-custom"><?= $usuarios ?></span></h5>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                <a href="../controller/productosAdminController.php" class="enlace-cards">
+                    <div class="card" style="width: 14rem; text-align: center; margin: auto; border: 2px solid #8350F2;">
+                        <div class="icon-container" style="font-size: 4rem; margin-top: 20px;">
+                            <i class="fas fa-briefcase" style="color: #8350F2;"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><b>Productos</b> <span class="badge badge-custom"><?= $productos ?></span></h5>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                <a href="../controller/categoriasAdminController.php" class="enlace-cards">
+                    <div class="card" style="width: 14rem; text-align: center; margin: auto; border: 2px solid #8350F2;">
+                        <div class="icon-container" style="font-size: 4rem; margin-top: 20px;">
+                            <i class="fas fa-list-alt" style="color: #8350F2;"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><b>Categorías</b> <span class="badge badge-custom"><?= $categorias ?></span></h5>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                <a href="../controller/marcasAdminController.php" class="enlace-cards">
+                    <div class="card" style="width: 14rem; text-align: center; margin: auto; border: 2px solid #8350F2;">
+                        <div class="icon-container" style="font-size: 4rem; margin-top: 20px;">
+                            <i class="fa-solid fa-flag" style="color: #8350F2;"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><b>Marcas</b> <span class="badge badge-custom"><?= $marcas ?></span></h5>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                <a href="#" class="enlace-cards">
+                    <div class="card" style="width: 14rem; text-align: center; margin: auto; border: 2px solid #8350F2;">
+                        <div class="icon-container" style="font-size: 4rem; margin-top: 20px;">
+                            <i class="fas fa-shipping-fast" style="color: #8350F2;"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><b>Pedidos</b></h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
     </div>
 
 </body>

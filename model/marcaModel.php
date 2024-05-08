@@ -157,6 +157,21 @@ class marca{
         }
     }
 
+    public function contarMarcas($conexPDO) {
+        if ($conexPDO != null) {
+            try {
+                $sentencia = $conexPDO->prepare("SELECT COUNT(*) AS total FROM genesis.marca");
+                $sentencia->execute();
+                $resultado = $sentencia->fetch(PDO::FETCH_ASSOC);
+                return $resultado['total'];
+            } catch (PDOException $e) {
+                print("Error al contar marcas: " . $e->getMessage());
+                return 0; // Devuelve 0 en caso de error
+            }
+        }
+        return 0; // Si no hay conexión, retorna 0
+    }
+
 }
 
 ?>
