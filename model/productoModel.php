@@ -238,6 +238,17 @@ class producto
         }
         return 0; // Retornar 0 si no hay valoraciones o si ocurre un error
     }
+
+    public function getProductosPorNombre($conexPDO, $nombre) {
+        try {
+            $stmt = $conexPDO->prepare("SELECT * FROM genesis.producto WHERE nombre LIKE ?");
+            $stmt->execute(['%' . $nombre . '%']);
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            print("Error al acceder a BD" . $e->getMessage());
+            return [];
+        }
+    }
 }
 
 function getCategorias($conexPDO)
@@ -267,3 +278,4 @@ function getMarcas($conexPDO)
         }
     }
 }
+

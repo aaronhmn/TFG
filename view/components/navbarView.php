@@ -1,11 +1,12 @@
 <?php
+
 namespace views;
 
 if (session_status() == PHP_SESSION_NONE) {
   session_start([
-      'cookie_lifetime' => 86400, // 1 día, ajusta según necesidad
-      'cookie_secure' => true,
-      'cookie_httponly' => true
+    'cookie_lifetime' => 86400, // 1 día, ajusta según necesidad
+    'cookie_secure' => true,
+    'cookie_httponly' => true
   ]);
 }
 ?>
@@ -17,6 +18,7 @@ if (session_status() == PHP_SESSION_NONE) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../assets/styles/css/navbar.css">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body style="background-color: #e6e6fa">
@@ -32,9 +34,9 @@ if (session_status() == PHP_SESSION_NONE) {
         </div>
 
         <div class="nav-busqueda">
-          <form action="">
-            <input type="search" name="busqueda" id="busqueda" placeholder="Buscar" />
-            <button type="submit" style="display: flex; align-items: center; justify-content: center;">
+          <form action="../controller/tiendaController.php" method="GET">
+            <input type="search" name="busqueda" id="busqueda" placeholder="Buscar" required>
+            <button type="submit">
               <i class="fas fa-search" style="color: #8350f2"></i>
             </button>
           </form>
@@ -86,7 +88,7 @@ if (session_status() == PHP_SESSION_NONE) {
             if ($rol === 1) {
             ?>
               <ul class="dropdown-menu" aria-labelledby="userIcon" id="dropdownMenu">
-              <li><a class="dropdown-item" href="../controller/perfilController.php"><i class="fa-solid fa-gear fa-sm" style="margin-right: 5px;"></i>Mi perfil</a></li>
+                <li><a class="dropdown-item" href="../controller/perfilController.php"><i class="fa-solid fa-gear fa-sm" style="margin-right: 5px;"></i>Mi perfil</a></li>
                 <li><a class="dropdown-item" href="../controller/misPedidosController.php" style="margin-top: 5px;"><i class="fa-solid fa-bag-shopping fa-sm" style="margin-right: 5px;"></i>Mis Pedidos</a></li>
                 <li><a class="dropdown-item" href="../controller/favoritosController.php" style="margin-top: 5px;"><i class="fa-solid fa-heart fa-sm" style="margin-right: 5px;"></i>Lista de Favoritos</a></li>
                 <li><a class='dropdown-item' href='../controller/inicioAdminController.php' style='margin-top: 5px;'><i class='fas fa-tachometer-alt' style='margin-right: 5px;'></i>Dashboard</a></li>
@@ -121,9 +123,9 @@ if (session_status() == PHP_SESSION_NONE) {
       </div>
 
       <div class="nav-busqueda">
-        <form action="">
-          <input type="search" name="busqueda" id="busqueda" placeholder="Buscar" />
-          <button type="submit" style="display: flex; align-items: center; justify-content: center;">
+        <form action="../controller/tiendaController.php" method="GET">
+          <input type="search" name="busqueda" id="busqueda" placeholder="Buscar" required>
+          <button type="submit">
             <i class="fas fa-search" style="color: #8350f2"></i>
           </button>
         </form>
@@ -157,15 +159,47 @@ if (session_status() == PHP_SESSION_NONE) {
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-    actualizarContadorCarrito();
-});
+      actualizarContadorCarrito();
+    });
 
-function actualizarContadorCarrito() {
-    const carrito = JSON.parse(localStorage.getItem('carrito')) || {};
-    const totalItems = Object.values(carrito).reduce((total, producto) => total + producto.cantidad, 0);
-    const contador = document.getElementById('cart-count');
-    if (contador) contador.textContent = totalItems;
-}
+    function actualizarContadorCarrito() {
+      const carrito = JSON.parse(localStorage.getItem('carrito')) || {};
+      const totalItems = Object.values(carrito).reduce((total, producto) => total + producto.cantidad, 0);
+      const contador = document.getElementById('cart-count');
+      if (contador) contador.textContent = totalItems;
+    }
+
+    $(document).ready(function() {
+    $('#formBusqueda').submit(function(event) {
+        event.preventDefault();
+        var query = $('#busqueda').val();
+        if (query.length > 2) {
+            $.ajax({
+                url: "../controller/tiendaController.php",
+                type: "GET",
+                data: {
+                    busqueda: query
+                },
+                dataType: 'html',
+                success: function(data) {
+                    if (data.includes('<!-- NO_RESULTS -->')) {
+                        // Muestra la alerta, sin borrar los productos existentes
+                        $('#alertContainer').html('<div class="alert alert-warning" role="alert">No se encontraron productos que coincidan con su búsqueda.</div>');
+                    } else {
+                        // Actualiza el contenedor con los nuevos productos
+                        $('#productosContainer').html(data);
+                        $('#alertContainer').empty(); // Limpia cualquier alerta previa
+                    }
+                },
+                error: function() {
+                    $('#productosContainer').html('<p>Error al procesar la búsqueda.</p>');
+                }
+            });
+        } else {
+            $('#productosContainer').html('<p>Introduce al menos 3 caracteres para buscar.</p>');
+        }
+    });
+});
   </script>
 
 </body>

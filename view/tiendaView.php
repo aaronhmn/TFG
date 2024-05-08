@@ -133,7 +133,13 @@
 
       <!-- Columna de la derecha con cards -->
       <div class="col-md-12 col-xl-9">
-        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-4">
+      <?php if (!empty($mensajeAlerta)): ?>
+        <div class="alert alert-warning alert-dismissible fade show alerta-sobre-productos" role="alert">
+            <?php echo $mensajeAlerta; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
+        <div id="productosContainer" class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-xl-4">
           <!-- Iterar sobre cada producto y mostrar su información en una tarjeta -->
           <?php if (isset($productos) && is_array($productos)): ?>
             <?php foreach ($productos as $producto) : ?>

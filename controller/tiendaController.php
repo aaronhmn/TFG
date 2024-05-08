@@ -1,19 +1,25 @@
 <?php
 
-    namespace model;
+namespace model;
 
-    use \model\utils;
-    use \model\producto;
+use \model\utils;
+use \model\producto;
 
-    //Añadimos el código del modelo
-    require_once("../model/utils.php");
-    require_once("../model/productoModel.php");
-    $mensaje=null;
+require_once("../model/utils.php");
+require_once("../model/productoModel.php");
 
-    $gestorProducto = new producto();
-    $conexPDO = utils::conectar();
-    $productos = $gestorProducto->getProductos($conexPDO);
+$gestorProducto = new producto();
+$conexPDO = utils::conectar();
 
-    include("../view/tiendaView.php");
+$busqueda = isset($_GET['busqueda']) ? $_GET['busqueda'] : null;
+$productos = $busqueda ? $gestorProducto->getProductosPorNombre($conexPDO, $busqueda) : $gestorProducto->getProductos($conexPDO);
+
+$mensajeAlerta = "";
+if (empty($productos) && $busqueda) {
+    $productos = $gestorProducto->getProductos($conexPDO); // Cargar todos los productos si la búsqueda no encuentra nada
+    $mensajeAlerta = "No se encontraron productos que coincidan con su búsqueda.";
+}
+
+include("../view/tiendaView.php");
 
 ?>
