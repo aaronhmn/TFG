@@ -33,7 +33,7 @@ function cargarCarrito() {
                 <button class="cantidad" onclick="cambiarCantidad('${id}', 1)">+</button>
             </td>
             <td>${subtotal} €</td>
-            <td style="text-align:center;"><button onclick="eliminarDelCarrito('${id}')" class="btn btn-eliminar"><i class="fa fa-trash"></i></button></td>
+            <td><button onclick="eliminarDelCarrito('${id}')" class="btn btn-eliminar"><i class="fa fa-trash"></i></button></td>
         `;
         tbody.appendChild(tr);
     });

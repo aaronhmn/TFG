@@ -111,15 +111,25 @@ nav {
 
   .dropdown-menu {
     min-width: 220px;
-    max-height: 230px !important;
     background-color: #8350f2;
     border: 2px solid #e6e6fa;
     display: none;
     position: absolute;
-    top: calc(100% + 18px) !important; /* 10px por debajo del icono de usuario */
-    left: 50% !important; /* Centrar horizontalmente */
-    transform: translateX(-50%) !important; /* Alinear al centro */
+    top: calc(100% + 18px);
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
   }
+
+  /* Estilos específicos para el menú del cliente */
+.dropdown-menu-cliente {
+  min-height: 188px; /* Altura específica para el cliente */
+}
+
+/* Estilos específicos para el menú del admin */
+.dropdown-menu-admin {
+  min-height: 230px; /* Altura que ya tienes en tu CSS */
+}
 
   .dropdown-menu a.dropdown-item {
     border: none;
@@ -144,14 +154,12 @@ nav {
   /* Estilo de la flecha */
   .dropdown-toggle::after {
     font-family: "Font Awesome 6 Solid";
-    /* Usamos la versión gratuita de Font Awesome */
     transition: transform 0.3s ease;
     margin-left: 0.25rem;
   }
 
   .dropdown-toggle[aria-expanded="true"]::after {
-    transform: rotate(180deg);
-    /* Girar la flecha hacia arriba */
+    transform: rotate(180deg); /* Girar la flecha hacia arriba */
   }
 
   @media (max-width: 1400px) {
