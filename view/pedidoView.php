@@ -29,7 +29,7 @@ namespace views;
       <!-- Columna del formulario para ingresar datos -->
       <div class="col-md-5">
         <form class="mt-4">
-          <h4 style="color: #8350F2;"><b>Detalles del pedido</b></h4>
+          <h4 style="color: #8350F2;"><b>Detalles de tus datos</b></h4>
           <!-- Tus campos de formulario aquí -->
           <div class="col-8 mt-3">
             <label for="nombre"><b>Nombre:</b></label>
@@ -72,16 +72,15 @@ namespace views;
 
       <!-- Columna de información del carrito -->
       <div class="col-md-7">
-        <div class="mt-4" id="carrito-detalles">
-        <h4 class="mb-4" style="color: #8350F2;"><b>Detalles del carrito</b></h4>
-          <!-- Aquí se inyectará dinámicamente el contenido del carrito -->
-          <table class="table">
+        <div class="table-responsive mt-4" id="carrito-detalles">
+        <h4 class="mb-4" style="color: #8350F2;"><b>Detalles del pedido</b></h4>
+          <table class="table table-striped">
             <thead>
               <tr>
-                <th>Producto</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>Subtotal</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Subtotal</th>
               </tr>
             </thead>
             <tbody id="carrito-body"></tbody>

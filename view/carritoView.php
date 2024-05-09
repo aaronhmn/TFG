@@ -36,8 +36,7 @@ namespace views;
             <th style="background-color: #8350f2; color: white; text-align:center;" scope="col">Acción</th>
           </tr>
         </thead>
-        <tbody id="carrito-body">
-        </tbody>
+        <tbody id="carrito-body"></tbody>
       </table>
     </div>
     <div id="pagination-container"></div><br>
