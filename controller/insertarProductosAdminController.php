@@ -2,8 +2,9 @@
 
 namespace model;
 
-session_start();
-
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 use \model\utils;
 use \model\producto;

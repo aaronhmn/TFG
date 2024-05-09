@@ -2,6 +2,9 @@
 
     namespace model;
 
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
 
     use \model\utils;
     use \model\usuarioModel;

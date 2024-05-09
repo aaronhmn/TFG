@@ -12,7 +12,9 @@ require_once("../model/marcaModel.php");
 require_once("../model/categoriaModel.php");
 require_once("../model/utils.php");
 
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'] != 1) {
     header('Location: ../view/noAutorizadoView.php');

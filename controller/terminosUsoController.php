@@ -2,7 +2,6 @@
 
     namespace model;
 
-
     use \model\utils;
     use \model\usuarioModel;
 

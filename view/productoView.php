@@ -80,15 +80,26 @@ namespace views;
         </div>
         <div id="alertPlaceholder" class="mt-5"></div>
         <?php if (isset($_SESSION['login']) && $_SESSION['login']): ?>
-          <div class="row mt-5">
-            <div class="col">
-              <div class="d-flex align-items-center">
+    <!-- Usuario logueado, mostrar botones con funcionalidad normal -->
+    <div class="row mt-5">
+        <div class="col">
+            <div class="d-flex align-items-center">
                 <button class="boton-carrito" id="add-to-cart" data-id="<?= $productos['idproducto'] ?>" data-nombre="<?= $productos['nombre'] ?>" data-precio="<?= $productos['precio'] ?>">Añadir al Carrito<i class="fas fa-shopping-cart" style="color: white; margin-left: 10px;"></i></button>
                 <button class="boton-fav ms-2">Añadir a Favorito<i class="fas fa-heart" style="color: white; margin-left: 10px;"></i></button>
-              </div>
             </div>
-          </div>
-        <?php endif; ?>
+        </div>
+    </div>
+<?php else: ?>
+    <!-- Usuario no logueado, mostrar botones que redirigen al login -->
+    <div class="row mt-5">
+        <div class="col">
+            <div class="d-flex align-items-center">
+                <button class="boton-carrito" onclick="window.location.href='../controller/loginController.php'">Añadir al Carrito<i class="fas fa-shopping-cart" style="color: white; margin-left: 10px;"></i></button>
+                <button class="boton-fav ms-2" onclick="window.location.href='../controller/loginController.php'">Añadir a Favorito<i class="fas fa-heart" style="color: white; margin-left: 10px;"></i></button>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
 
         <div class="row mt-5">
           <div class="col">

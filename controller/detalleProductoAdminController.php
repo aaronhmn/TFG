@@ -2,7 +2,9 @@
 
 namespace controller;
 
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 require_once("../model/productoModel.php");
 require_once("../model/categoriaModel.php");
