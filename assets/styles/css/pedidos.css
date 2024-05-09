@@ -46,7 +46,7 @@
     vertical-align: middle;
   }
 
-@media (max-width: 768px) { /* Ajusta el punto de ruptura según tus necesidades */
+  @media (max-width: 768px) { /* Ajusta el punto de ruptura según tus necesidades */
     .table-responsive table,
     .table-responsive thead,
     .table-responsive tbody,
@@ -94,5 +94,4 @@
     .table-responsive td:nth-of-type(2):before { content: "Precio"; }
     .table-responsive td:nth-of-type(3):before { content: "Cantidad"; }
     .table-responsive td:nth-of-type(4):before { content: "Precio Subtotal"; }
-    .table-responsive td:nth-of-type(5):before { content: "Acción"; }
   }

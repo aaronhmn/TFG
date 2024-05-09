@@ -3,8 +3,8 @@ namespace model;
 
 use \model\utils;
 use \model\carrito;
-use \model\productoModel;
-use \model\usuarioModel;
+use \model\producto;
+use \model\usuario;
 
 //Añadimos el código del modelo
 require_once("../model/utils.php");

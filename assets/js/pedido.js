@@ -53,15 +53,14 @@ function cargarCarrito() {
         const subtotal = (producto.precio * producto.cantidad).toFixed(2);
         total += parseFloat(subtotal);
 
-        const row = `
-            <tr>
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
                 <td>${producto.nombre}</td>
                 <td>${producto.precio.toFixed(2)} €</td>
                 <td>${producto.cantidad}</td>
-                <td>${subtotal} €</td>
-            </tr>
+                <td>${subtotal} €</td> 
         `;
-        tbody.innerHTML += row;
+        tbody.appendChild(tr);
     });
 
     document.getElementById('precio-total').textContent = total.toFixed(2) + ' €';
