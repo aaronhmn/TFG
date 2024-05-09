@@ -1,13 +1,13 @@
-  // Función para desplazarse suavemente hacia arriba
+  //* Función para desplazarse suavemente hacia arriba
   function scrollToTop() {
-    // Desplazamiento suave hacia arriba
+    //* Desplazamiento suave hacia arriba
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
     });
   }
 
-  // Mostrar/ocultar el botón al hacer scroll
+  //* Mostrar/ocultar el botón al hacer scroll
   window.onscroll = function() {
     scrollFunction();
   };
