@@ -400,6 +400,15 @@
               <label for="estado" class="form-label"><b>Estado:</b></label>
               <input type="number" class="form-control" id="estado" name="estado">
             </div>
+            <div class="mb-3">
+              <label for="contrasenaNueva" class="form-label"><b>Nueva Contraseña:</b></label>
+              <input type="password" class="form-control" id="contrasenaNueva" name="contrasenaNueva">
+            </div>
+
+            <div class="mb-3">
+              <label for="contrasenaConfirmar" class="form-label"><b>Confirmar Nueva Contraseña:</b></label>
+              <input type="password" class="form-control" id="contrasenaConfirmar" name="contrasenaConfirmar">
+            </div>
             <input type="hidden" name="idUsuario" id="idUsuario">
             <div class="d-grid">
               <button class="btn btn-primary" type="submit" value="Upload" style="background-color: #8350F2; border:#8350F2;">Modificar</button>
@@ -420,35 +429,50 @@
         </div>
         <div class="modal-body">
           <p style="color: #8350F2;">Nombre de usuario:</p>
-          <span id="detalle_nombre_usuario"></span><hr>
+          <span id="detalle_nombre_usuario"></span>
+          <hr>
           <p style="color: #8350F2;">Nombre:</p>
-          <span id="detalle_nombre"></span><hr>
+          <span id="detalle_nombre"></span>
+          <hr>
           <p style="color: #8350F2;">Primer Apellido:</p>
-          <span id="detalle_primer_apellido"></span><hr>
+          <span id="detalle_primer_apellido"></span>
+          <hr>
           <p style="color: #8350F2;">Segundo Apellido:</p>
-          <span id="detalle_segundo_apellido"></span><hr>
+          <span id="detalle_segundo_apellido"></span>
+          <hr>
           <p style="color: #8350F2;">DNI:</p>
-          <span id="detalle_dni"></span><hr>
+          <span id="detalle_dni"></span>
+          <hr>
           <p style="color: #8350F2;">Email:</p>
-          <span id="detalle_email"></span><hr>
+          <span id="detalle_email"></span>
+          <hr>
           <p style="color: #8350F2;">Código Postal:</p>
-          <span id="detalle_codigo_postal"></span><hr>
+          <span id="detalle_codigo_postal"></span>
+          <hr>
           <p style="color: #8350F2;">Calle:</p>
-          <span id="detalle_calle"></span><hr>
+          <span id="detalle_calle"></span>
+          <hr>
           <p style="color: #8350F2;">Número Bloque:</p>
-          <span id="detalle_numero_bloque"></span><hr>
+          <span id="detalle_numero_bloque"></span>
+          <hr>
           <p style="color: #8350F2;">Piso:</p>
-          <span id="detalle_piso"></span><hr>
+          <span id="detalle_piso"></span>
+          <hr>
           <p style="color: #8350F2;">Teléfono:</p>
-          <span id="detalle_telefono"></span><hr>
+          <span id="detalle_telefono"></span>
+          <hr>
           <p style="color: #8350F2;">Activación:</p>
-          <span id="detalle_activacion"></span><hr>
+          <span id="detalle_activacion"></span>
+          <hr>
           <p style="color: #8350F2;">Activo:</p>
-          <span id="detalle_activo"></span><hr>
+          <span id="detalle_activo"></span>
+          <hr>
           <p style="color: #8350F2;">Rol:</p>
-          <span id="detalle_rol"></span><hr>
+          <span id="detalle_rol"></span>
+          <hr>
           <p style="color: #8350F2;">Estado:</p>
-          <span id="detalle_estado"></span><hr>
+          <span id="detalle_estado"></span>
+          <hr>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

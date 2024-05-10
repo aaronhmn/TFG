@@ -67,6 +67,20 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'
         $gestorUsuario = new Usuario();
         $resultado=$gestorUsuario->updateUsuario($usuario, $conexPDO);
 
+        // Cambio de contraseña solo si se proporcionan ambos campos de contraseña y son iguales
+    if (!empty($_POST['contrasenaNueva']) && !empty($_POST['contrasenaConfirmar']) && $_POST['contrasenaNueva'] === $_POST['contrasenaConfirmar']) {
+        $nuevaSalt = Utils::generar_salt(16);
+        $nuevaContrasenaHash = crypt($_POST['contrasenaNueva'], '$6$rounds=5000$' . $nuevaSalt . '$');
+        if ($gestorUsuario->cambiarContraseñaPorId($_POST["idUsuario"], $nuevaContrasenaHash, $nuevaSalt, $conexPDO)) {
+            $_SESSION['mensaje'] .= " y la contraseña ha sido actualizada correctamente.";
+        } else {
+            $_SESSION['mensaje'] .= " pero no se pudo actualizar la contraseña.";
+        }
+    } elseif (!empty($_POST['contrasenaNueva']) || !empty($_POST['contrasenaConfirmar'])) {
+        $_SESSION['mensaje'] = "Error: Las contraseñas no coinciden o están incompletas.";
+        $_SESSION['tipo_mensaje'] = "danger";
+    }
+
         if ($resultado != null) {
             $_SESSION['mensaje'] = "El usuario ha sido modificado correctamente.";
             $_SESSION['tipo_mensaje'] = "success";

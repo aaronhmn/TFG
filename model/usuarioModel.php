@@ -272,6 +272,19 @@ class Usuario
     return $result;
 }
 
+public function cambiarContraseñaPorId($idUsuario, $nuevaContrasena, $nuevaSalt, $conexPDO) {
+    try {
+        $sentencia = $conexPDO->prepare("UPDATE genesis.usuario SET contrasena=?, salt=? WHERE idusuario=?");
+        $sentencia->bindParam(1, $nuevaContrasena);
+        $sentencia->bindParam(2, $nuevaSalt);
+        $sentencia->bindParam(3, $idUsuario);
+        return $sentencia->execute();
+    } catch (PDOException $e) {
+        print("Error al actualizar contraseña: " . $e->getMessage());
+        return false;
+    }
+}
+
     function BanUsuarioPorId($idUsuario, $conexPDO)
     {
         $result = null;
