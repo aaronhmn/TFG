@@ -71,25 +71,21 @@ class categoria{
         return $result;
     }
 
-    function delCategoria($idCategoria, $conexPDO)
-    {
-        $result = null;
-        if (isset($idCategoria) && is_numeric($idCategoria)) {
-            if ($conexPDO != null) {
-                try {
-                    //Borramos el cliente asociado a dicho id
-                    $sentencia = $conexPDO->prepare("DELETE  FROM genesis.categoria where idcategoria=?");
-                    //Asociamos a cada interrogacion el valor que queremos en su lugar
-                    $sentencia->bindParam(1, $idCategoria);
-                    //Ejecutamos la sentencia
-                    $result = $sentencia->execute();
-                } catch (PDOException $e) {
-                    print("Error al borrar" . $e->getMessage());
-                }
+    public function delCategoria($idCategoria, $conexPDO) {
+        if (!$this->verificarProductosCategoria($idCategoria, $conexPDO)) {
+            try {
+                $stmt = $conexPDO->prepare("DELETE FROM categoria WHERE id_categoria = :idCategoria");
+                $stmt->bindParam(':idCategoria', $idCategoria, PDO::PARAM_INT);
+                return $stmt->execute();
+            } catch (PDOException $e) {
+                // Manejo del error
+                error_log("Error al eliminar categoría: " . $e->getMessage());
+                return null;
             }
+        } else {
+            // Devuelve false si hay productos asociados a la categoría
+            return false;
         }
-
-        return $result;
     }
 
 
@@ -170,6 +166,20 @@ class categoria{
             }
         }
         return 0; // Si no hay conexión, retorna 0
+    }
+
+    public function verificarProductosCategoria($idCategoria, $conexPDO) {
+        try {
+            $stmt = $conexPDO->prepare("SELECT COUNT(*) as cantidad FROM producto WHERE id_categoria = :idCategoria");
+            $stmt->bindParam(':idCategoria', $idCategoria, PDO::PARAM_INT);
+            $stmt->execute();
+            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $resultado['cantidad'] > 0;
+        } catch (PDOException $e) {
+            // Manejo del error
+            error_log("Error en consulta: " . $e->getMessage());
+            return false;
+        }
     }
 
 }

@@ -26,22 +26,21 @@ $categoria = array();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $idMarca = $_POST["idMarca"];
 
-    //Nos conectamos a la Bd
+    // Conexión a la BD
     $conexPDO = utils::conectar();
     $gestorMarca = new Marca();
     $resultado = $gestorMarca->delMarca($idMarca, $conexPDO);
 
-    //Para verificar si todo funcionó correctamente
-    if ($resultado != null) {
+    if ($resultado === false) {
+        $_SESSION['mensaje'] = "No se puede eliminar la marca porque está asociada con uno o más productos.";
+        $_SESSION['tipo_mensaje'] = "danger";
+    } elseif ($resultado) {
         $_SESSION['mensaje'] = "La marca ha sido borrada correctamente.";
         $_SESSION['tipo_mensaje'] = "success";
-        header('Location: ../controller/marcasAdminController.php');
-        exit();
     } else {
         $_SESSION['mensaje'] = "Error al borrar la marca.";
         $_SESSION['tipo_mensaje'] = "danger";
-        // Si decides redireccionar de todos modos o manejar de otra forma
-        header('Location: ../controller/marcasAdminController.php');
-        exit();
     }
+    header('Location: ../controller/marcasAdminController.php');
+    exit();
 }

@@ -1,50 +1,36 @@
-  //* Función para desplazarse suavemente hacia arriba
-  function scrollToTop() {
-    //* Desplazamiento suave hacia arriba
-    window.scrollTo({
+// Función para desplazarse suavemente hacia arriba
+function scrollToTop() {
+  window.scrollTo({
       top: 0,
       behavior: 'smooth'
-    });
-  }
+  });
+}
 
-  //* Mostrar/ocultar el botón al hacer scroll
-  window.onscroll = function() {
-    scrollFunction();
-  };
+// Mostrar/ocultar el botón al hacer scroll
+window.onscroll = function() {
+  scrollFunction();
+};
 
-  function scrollFunction() {
-    const btnSubir = document.getElementById('btnSubir');
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+function scrollFunction() {
+  const btnSubir = document.getElementById('btnSubir');
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
       btnSubir.style.display = 'block';
-    } else {
+  } else {
       btnSubir.style.display = 'none';
-    }
   }
+}
 
-  //* Select Tienda
-  const opcionMenu = document.querySelector(".select-menu"),
-          selectBtn = opcionMenu.querySelector(".select-btn"),
-          opciones = opcionMenu.querySelectorAll(".opcion"),
-          selectBtn_texto = opcionMenu.querySelector(".selectBtn-texto");
+// Funciones que dependen del DOM completamente cargado
+document.addEventListener('DOMContentLoaded', function() {
+  // Filtros responsive - manejo del botón de mostrar/ocultar filtros
+  const toggleBtn = document.getElementById('toggleFiltrosBtn');
+  const filtroColumna = document.getElementById('filtroColumna');
 
-  selectBtn.addEventListener("click", () => opcionMenu.classList.toggle("active"));
-
-  opciones.forEach(opcion =>{
-    opcion.addEventListener("click", () =>{
-      let opcionSeleccionada = opcion.querySelector(".opcion-texto").innerText;
-      selectBtn_texto.innerText = opcionSeleccionada;
-
-      opcionMenu.classList.remove("active");
-    })
-  })
-
-  //?filtros responsive
-  $(document).ready(function () {
-    //? Manejador de clic para el botón de mostrar/ocultar filtros
-    $("#toggleFiltrosBtn").click(function () {
-        $("#filtroColumna").toggleClass("d-none");
-        $("#filtroColumna").toggleClass("active");  //? Añade esta línea
-        var buttonText = $("#toggleFiltrosBtn").text();
-        $("#toggleFiltrosBtn").text(buttonText === "Mostrar Filtros" ? "Ocultar Filtros" : "Mostrar Filtros");
-    });
+  if (toggleBtn && filtroColumna) {
+      toggleBtn.addEventListener('click', function() {
+          filtroColumna.classList.toggle('d-none');
+          filtroColumna.classList.toggle('active');
+          toggleBtn.textContent = toggleBtn.textContent === "Mostrar Filtros" ? "Ocultar Filtros" : "Mostrar Filtros";
+      });
+  }
 });

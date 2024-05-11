@@ -246,6 +246,26 @@ class producto
         }
         return 0; // Si no hay conexión, retorna 0
     }
+
+    public function getProductosFiltrados($conexPDO, $ordenPrecio)
+{
+    $query = "SELECT * FROM genesis.producto WHERE 1=1";
+    $params = [];
+
+    // Orden de precios
+    if ($ordenPrecio === 'menorMayor') {
+        $query .= " ORDER BY precio ASC";
+    } elseif ($ordenPrecio === 'mayorMenor') {
+        $query .= " ORDER BY precio DESC";
+    }
+
+    $stmt = $conexPDO->prepare($query);
+    $stmt->execute($params);
+    $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Retorna los productos encontrados
+    return $productos;
+}
 }
 
 function getCategorias($conexPDO)

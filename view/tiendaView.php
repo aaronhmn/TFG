@@ -38,27 +38,27 @@
           <div class="mb-4">
             <h3 class="titulo-check"><b>Categorías</b></h3>
             <div class="contenedor-check">
-              <input class="check" type="checkbox" value="" id="ordenador">
+              <input class="check" type="checkbox" value="ordenador" id="ordenador">
               <label class="form-check-label" for="ordenador">Ordenadores</label>
             </div>
             <div class="contenedor-check">
-              <input class="check" type="checkbox" value="" id="portatil">
+              <input class="check" type="checkbox" data-tipo="categoria" value="portatil" id="portatil">
               <label class="form-check-label" for="portatil">Portátiles</label>
             </div>
             <div class="contenedor-check">
-              <input class="check" type="checkbox" value="" id="monitor">
+              <input class="check" type="checkbox" data-tipo="categoria" value="monitor" id="monitor">
               <label class="form-check-label" for="monitor">Monitores</label>
             </div>
             <div class="contenedor-check">
-              <input class="check" type="checkbox" value="" id="auricular">
+              <input class="check" type="checkbox" data-tipo="categoria" value="auricular" id="auricular">
               <label class="form-check-label" for="auricular">Auriculares</label>
             </div>
             <div class="contenedor-check">
-              <input class="check" type="checkbox" value="" id="teclado">
+              <input class="check" type="checkbox" data-tipo="categoria" value="teclado" id="teclado">
               <label class="form-check-label" for="teclado">Teclados</label>
             </div>
             <div class="contenedor-check">
-              <input class="check" type="checkbox" value="" id="raton">
+              <input class="check" type="checkbox" data-tipo="categoria" value="raton" id="raton">
               <label class="form-check-label" for="raton">Ratones</label>
             </div>
           </div>
@@ -66,62 +66,46 @@
           <!-- Filtro por precios con un select -->
           <div class="mb-4">
             <h3 class="titulo-check"><b>Precios</b></h3>
-            <div class="select-menu">
-              <div class="select-btn">
-                <span class="selectBtn-texto">Selecciona el orden</span>
-                <i class="fa-solid fa-angle-down" style="color: #8350F2;"></i>
-              </div>
-
-              <ul class="opciones">
-                <li class="opcion">
-                  <span class="opcion-texto">Por defecto</span>
-                </li>
-                <li class="opcion">
-                  <span class="opcion-texto">De menor a mayor</span>
-                </li>
-                <li class="opcion">
-                  <span class="opcion-texto">De mayor a menor</span>
-                </li>
-              </ul>
-            </div><!--<br>-->
-
-            <!--<label class="pb-2" for="rangoPrecio">Rango de precios:</label>
-                        <input type="range" class="form-range" id="customRange" min="0" max="100" step="1" style="max-width: 70%;">-->
+            <select name="ordenPrecio" class="form-select" aria-label="Ordenar precios">
+    <option value="porDefecto" <?php echo (isset($_GET['ordenPrecio']) && $_GET['ordenPrecio'] == 'porDefecto') ? 'selected' : ''; ?>>Selecciona el orden</option>
+    <option value="menorMayor" <?php echo (isset($_GET['ordenPrecio']) && $_GET['ordenPrecio'] == 'menorMayor') ? 'selected' : ''; ?>>De menor a mayor</option>
+    <option value="mayorMenor" <?php echo (isset($_GET['ordenPrecio']) && $_GET['ordenPrecio'] == 'mayorMenor') ? 'selected' : ''; ?>>De mayor a menor</option>
+</select>
           </div>
 
           <!-- Filtros por marcas con checkboxes -->
           <div class="mb-4">
             <h3 class="titulo-check"><b>Marcas</b></h3>
             <div class="contenedor-check">
-              <input class="check" type="checkbox" value="" id="logitech">
+              <input class="check" type="checkbox" data-tipo="marca" value="logitech" id="logitech">
               <label class="form-check-label" for="logitech">Logitech</label>
             </div>
             <div class="contenedor-check">
-              <input class="check" type="checkbox" value="" id="msi">
+              <input class="check" type="checkbox" data-tipo="marca" value="msi" id="msi">
               <label class="form-check-label" for="msi">MSI</label>
             </div>
             <div class="contenedor-check">
-              <input class="check" type="checkbox" value="" id="amd">
+              <input class="check" type="checkbox" data-tipo="marca" value="amd" id="amd">
               <label class="form-check-label" for="amd">AMD</label>
             </div>
             <div class="contenedor-check">
-              <input class="check" type="checkbox" value="" id="nvidia">
+              <input class="check" type="checkbox" data-tipo="marca" value="nvidia" id="nvidia">
               <label class="form-check-label" for="nvidia">Nvidia</label>
             </div>
             <div class="contenedor-check">
-              <input class="check" type="checkbox" value="" id="intel">
+              <input class="check" type="checkbox" data-tipo="marca" value="intel" id="intel">
               <label class="form-check-label" for="intel">Intel</label>
             </div>
             <div class="contenedor-check">
-              <input class="check" type="checkbox" value="" id="asus">
+              <input class="check" type="checkbox" data-tipo="marca" value="asus" id="asus">
               <label class="form-check-label" for="asus">Asus</label>
             </div>
             <div class="contenedor-check">
-              <input class="check" type="checkbox" value="" id="zowie">
+              <input class="check" type="checkbox" data-tipo="marca" value="zowie" id="zowie">
               <label class="form-check-label" for="zowie">Zowie</label>
             </div>
             <div class="contenedor-check">
-              <input class="check" type="checkbox" value="" id="razer">
+              <input class="check" type="checkbox" data-tipo="marca" value="razer" id="razer">
               <label class="form-check-label" for="razer">Razer</label>
             </div>
           </div>
@@ -144,7 +128,7 @@
           <?php if (isset($productos) && is_array($productos)) : ?>
             <?php foreach ($productos as $producto) : ?>
               <div class="col mb-4">
-                <div class="tarjeta-producto">
+                <div class="tarjeta-producto" data-categoria="<?= $producto['id_categoria'] ?>" data-marca="<?= $producto['id_marca'] ?>" data-precio="<?= $producto['precio'] ?>">
                   <?php $prueba = explode(",", $producto['ruta_imagen']); ?>
                   <a href="../controller/productoController.php?id=<?= $producto['idproducto'] ?>"><img class="img-producto" src="<?= $prueba[0] ?>" alt="<?= $producto['nombre'] ?>"></a>
                   <a href="../controller/productoController.php?id=<?= $producto['idproducto'] ?>">
@@ -182,9 +166,8 @@
   <!--FOOTER-->
   <?php include '../controller/footerController.php'; ?>
 
-  <script src="../assets/js/tienda.js"></script>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="../assets/js/tienda.js"></script>
 </body>
 
 </html>

@@ -27,22 +27,21 @@ $categoria = array();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $idCategoria = $_POST["idCategoria"];
 
-    //Nos conectamos a la Bd
+    // Conexión a la BD
     $conexPDO = utils::conectar();
     $gestorCategoria = new Categoria();
     $resultado = $gestorCategoria->delCategoria($idCategoria, $conexPDO);
 
-    //Para verificar si todo funcionó correctamente
-    if ($resultado != null) {
-        $_SESSION['mensaje'] = "La categoria ha sido borrada correctamente.";
-        $_SESSION['tipo_mensaje'] = "success";
-        header('Location: ../controller/categoriasAdminController.php');
-        exit();
-    } else {
-        $_SESSION['mensaje'] = "Error al borrar la categoria.";
+    if ($resultado === false) {
+        $_SESSION['mensaje'] = "No se puede eliminar la categoría porque está asociada con uno o más productos.";
         $_SESSION['tipo_mensaje'] = "danger";
-        // Si decides redireccionar de todos modos o manejar de otra forma
-        header('Location: ../controller/categoriasAdminController.php');
-        exit();
+    } elseif ($resultado) {
+        $_SESSION['mensaje'] = "La categoría ha sido borrada correctamente.";
+        $_SESSION['tipo_mensaje'] = "success";
+    } else {
+        $_SESSION['mensaje'] = "Error al borrar la categoría.";
+        $_SESSION['tipo_mensaje'] = "danger";
     }
+    header('Location: ../controller/categoriasAdminController.php');
+    exit();
 }

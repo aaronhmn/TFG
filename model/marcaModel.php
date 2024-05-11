@@ -71,26 +71,22 @@ class marca{
          return $result;
      }
  
-     function delMarca($idMarca, $conexPDO)
-     {
-         $result = null;
-         if (isset($idMarca) && is_numeric($idMarca)) {
-             if ($conexPDO != null) {
-                 try {
-                     //Borramos el cliente asociado a dicho id
-                     $sentencia = $conexPDO->prepare("DELETE  FROM genesis.marca where idmarca=?");
-                     //Asociamos a cada interrogacion el valor que queremos en su lugar
-                     $sentencia->bindParam(1, $idMarca);
-                     //Ejecutamos la sentencia
-                     $result = $sentencia->execute();
-                 } catch (PDOException $e) {
-                     print("Error al borrar" . $e->getMessage());
-                 }
-             }
-         }
- 
-         return $result;
-     }
+     public function delMarca($idMarca, $conexPDO) {
+        if (!$this->verificarProductosMarca($idMarca, $conexPDO)) {
+            try {
+                $stmt = $conexPDO->prepare("DELETE FROM marca WHERE id_marca = :idMarca");
+                $stmt->bindParam(':idMarca', $idMarca, PDO::PARAM_INT);
+                return $stmt->execute();
+            } catch (PDOException $e) {
+                // Manejo del error
+                error_log("Error al eliminar marca: " . $e->getMessage());
+                return null;
+            }
+        } else {
+            // Devuelve false si hay productos asociados a la marca
+            return false;
+        }
+    }
  
  
      function updateMarca($marca, $conexPDO)
@@ -170,6 +166,21 @@ class marca{
             }
         }
         return 0; // Si no hay conexión, retorna 0
+    }
+
+    // Función para verificar si existen productos asociados con una marca
+    public function verificarProductosMarca($idMarca, $conexPDO) {
+        try {
+            $stmt = $conexPDO->prepare("SELECT COUNT(*) as cantidad FROM producto WHERE id_marca = :idMarca");
+            $stmt->bindParam(':idMarca', $idMarca, PDO::PARAM_INT);
+            $stmt->execute();
+            $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $resultado['cantidad'] > 0;
+        } catch (PDOException $e) {
+            // Manejo del error
+            error_log("Error en consulta: " . $e->getMessage());
+            return false;
+        }
     }
 
 }
