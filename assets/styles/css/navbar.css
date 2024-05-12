@@ -120,13 +120,11 @@ a {
   color: #fff;
 }
 
-/* Estilos específicos para el menú del cliente */
-.dropdown-menu-cliente {
+.dropdown-menu-cliente {  /* Estilos específicos para el menú del cliente */
   min-height: 188px;
 }
 
-/* Estilos específicos para el menú del admin */
-.dropdown-menu-admin {
+.dropdown-menu-admin {  /* Estilos específicos para el menú del admin */
   min-height: 230px;
 }
 
@@ -203,13 +201,11 @@ a {
   .dropdown-menu {
     min-width: 220px;
     max-height: 185px;
-    background-color: #e6e6fa; /** este color #D3D3D3 de fondo o el color lavanda */
+    background-color: #e6e6fa;
     border: 3px solid #8350f2;
     display: none;
     position: absolute;
-    top: calc(
-      100% + 18px
-    ) !important; /* 10px por debajo del icono de usuario */
+    top: calc(100% + 18px) !important; /* 10px por debajo del icono de usuario */
     left: 50% !important; /* Centrar horizontalmente */
     transform: translateX(-50%) !important; /* Alinear al centro */
   }
@@ -275,7 +271,6 @@ a {
     border-radius: 10px;
     color: #8350f2;
     font-size: 16px;
-    /* text-align: center; */
     padding-left: 10px;
   }
 
@@ -288,7 +283,6 @@ a {
     position: absolute;
     top: 0;
     right: 0;
-    /* transform: scale(0.9); */
     background: #f2f2f2;
   }
 }
