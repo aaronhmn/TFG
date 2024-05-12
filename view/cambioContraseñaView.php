@@ -51,15 +51,15 @@
             <h2 style="color: #ffa500"><b>Cambio de contraseña</b></h2>
           </div>
           <div class="col-12">
-            <label for="nombre" class="visually-hidden">Contraseña Actual</label>
+            <label for="nombre" class="form-label"><b>Contraseña actual:</b></label>
             <input type="password" class="form-control" id="contrasenaActual" name="contrasenaActual" placeholder="Contraseña actual" required/>
           </div>
           <div class="col-12">
-            <label for="nombre" class="visually-hidden">Contraseña Nueva</label>
+            <label for="nombre" class="form-label"><b>Contraseña nueva:</b></label>
             <input type="password" class="form-control" id="contrasenaNueva" name="contrasenaNueva" placeholder="Nueva contraseña" required/>
           </div>
           <div class="col-12">
-            <label for="nombre" class="visually-hidden">Contraseña Nueva</label>
+            <label for="nombre" class="form-label"><b>Repetir contraseña nueva:</b></label>
             <input type="password" class="form-control" id="contrasenaConfirmar" name="contrasenaConfirmar" placeholder="Repetir nueva contraseña" required/>
           </div>
           
