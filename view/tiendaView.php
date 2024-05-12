@@ -33,85 +33,45 @@
 
       <!-- Columna de la izquierda con filtros -->
       <div class="col-xl-3 d-xl-block d-none" id="filtroColumna">
-        <form>
+        <form action="../controller/tiendaController.php" method="GET">
           <!-- Filtros por categorías con checkboxes -->
           <div class="mb-4">
             <h3 class="titulo-check"><b>Categorías</b></h3>
-            <div class="contenedor-check">
-              <input class="check" type="checkbox" value="ordenador" id="ordenador">
-              <label class="form-check-label" for="ordenador">Ordenadores</label>
-            </div>
-            <div class="contenedor-check">
-              <input class="check" type="checkbox" data-tipo="categoria" value="portatil" id="portatil">
-              <label class="form-check-label" for="portatil">Portátiles</label>
-            </div>
-            <div class="contenedor-check">
-              <input class="check" type="checkbox" data-tipo="categoria" value="monitor" id="monitor">
-              <label class="form-check-label" for="monitor">Monitores</label>
-            </div>
-            <div class="contenedor-check">
-              <input class="check" type="checkbox" data-tipo="categoria" value="auricular" id="auricular">
-              <label class="form-check-label" for="auricular">Auriculares</label>
-            </div>
-            <div class="contenedor-check">
-              <input class="check" type="checkbox" data-tipo="categoria" value="teclado" id="teclado">
-              <label class="form-check-label" for="teclado">Teclados</label>
-            </div>
-            <div class="contenedor-check">
-              <input class="check" type="checkbox" data-tipo="categoria" value="raton" id="raton">
-              <label class="form-check-label" for="raton">Ratones</label>
-            </div>
+            <select name="categoria" class="form-select" aria-label="Filtrar por categoría">
+              <option value="">Todas las categorías</option>
+              <?php foreach ($categorias as $categoria) : ?>
+                <option value="<?= htmlspecialchars($categoria['idcategoria']); ?>" <?= (isset($_GET['categoria']) && $_GET['categoria'] == $categoria['idcategoria']) ? 'selected' : ''; ?>>
+                  <?= htmlspecialchars($categoria['nombre_categoria']); ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
           </div>
 
           <!-- Filtro por precios con un select -->
           <div class="mb-4">
             <h3 class="titulo-check"><b>Precios</b></h3>
             <select name="ordenPrecio" class="form-select" aria-label="Ordenar precios">
-    <option value="porDefecto" <?php echo (isset($_GET['ordenPrecio']) && $_GET['ordenPrecio'] == 'porDefecto') ? 'selected' : ''; ?>>Selecciona el orden</option>
-    <option value="menorMayor" <?php echo (isset($_GET['ordenPrecio']) && $_GET['ordenPrecio'] == 'menorMayor') ? 'selected' : ''; ?>>De menor a mayor</option>
-    <option value="mayorMenor" <?php echo (isset($_GET['ordenPrecio']) && $_GET['ordenPrecio'] == 'mayorMenor') ? 'selected' : ''; ?>>De mayor a menor</option>
-</select>
+              <option value="porDefecto" <?php echo (isset($_GET['ordenPrecio']) && $_GET['ordenPrecio'] == 'porDefecto') ? 'selected' : ''; ?>>Sin orden de precio</option>
+              <option value="menorMayor" <?php echo (isset($_GET['ordenPrecio']) && $_GET['ordenPrecio'] == 'menorMayor') ? 'selected' : ''; ?>>De menor a mayor</option>
+              <option value="mayorMenor" <?php echo (isset($_GET['ordenPrecio']) && $_GET['ordenPrecio'] == 'mayorMenor') ? 'selected' : ''; ?>>De mayor a menor</option>
+            </select>
           </div>
 
           <!-- Filtros por marcas con checkboxes -->
           <div class="mb-4">
             <h3 class="titulo-check"><b>Marcas</b></h3>
-            <div class="contenedor-check">
-              <input class="check" type="checkbox" data-tipo="marca" value="logitech" id="logitech">
-              <label class="form-check-label" for="logitech">Logitech</label>
-            </div>
-            <div class="contenedor-check">
-              <input class="check" type="checkbox" data-tipo="marca" value="msi" id="msi">
-              <label class="form-check-label" for="msi">MSI</label>
-            </div>
-            <div class="contenedor-check">
-              <input class="check" type="checkbox" data-tipo="marca" value="amd" id="amd">
-              <label class="form-check-label" for="amd">AMD</label>
-            </div>
-            <div class="contenedor-check">
-              <input class="check" type="checkbox" data-tipo="marca" value="nvidia" id="nvidia">
-              <label class="form-check-label" for="nvidia">Nvidia</label>
-            </div>
-            <div class="contenedor-check">
-              <input class="check" type="checkbox" data-tipo="marca" value="intel" id="intel">
-              <label class="form-check-label" for="intel">Intel</label>
-            </div>
-            <div class="contenedor-check">
-              <input class="check" type="checkbox" data-tipo="marca" value="asus" id="asus">
-              <label class="form-check-label" for="asus">Asus</label>
-            </div>
-            <div class="contenedor-check">
-              <input class="check" type="checkbox" data-tipo="marca" value="zowie" id="zowie">
-              <label class="form-check-label" for="zowie">Zowie</label>
-            </div>
-            <div class="contenedor-check">
-              <input class="check" type="checkbox" data-tipo="marca" value="razer" id="razer">
-              <label class="form-check-label" for="razer">Razer</label>
-            </div>
+            <select name="marca" class="form-select" aria-label="Filtrar por marca">
+              <option value="">Todas las marcas</option>
+              <?php foreach ($marcas as $marca) : ?>
+                <option value="<?= htmlspecialchars($marca['idmarca']); ?>" <?= (isset($_GET['marca']) && $_GET['marca'] == $marca['idmarca']) ? 'selected' : ''; ?>>
+                  <?= htmlspecialchars($marca['nombre_marca']); ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
           </div>
 
           <button type="submit" class="boton1-filtro mb-3">Aplicar Filtros</button>
-          <button type="submit" class="boton2-filtro">Quitar Filtros</button>
+          <button type="button" class="boton2-filtro" onclick="location.href='../controller/tiendaController.php'">Quitar Filtros</button>
         </form>
       </div>
 

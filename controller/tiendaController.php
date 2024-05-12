@@ -2,36 +2,39 @@
 
 namespace model;
 
-use \model\utils;
-use \model\producto;
-
 require_once("../model/utils.php");
 require_once("../model/productoModel.php");
+require_once("../model/categoriaModel.php");
+require_once("../model/marcaModel.php");
 
-$gestorProducto = new producto();
+$gestorProducto = new Producto();
+$gestorCategoria = new Categoria();
+$gestorMarca = new Marca();
+
 $conexPDO = utils::conectar();
 
+// Obtener categorías y marcas
+$categorias = $gestorCategoria->getCategorias($conexPDO);
+$marcas = $gestorMarca->getMarcas($conexPDO);         // Asegúrate de que esta función exista y funcione correctamente
+
 $ordenPrecio = $_GET['ordenPrecio'] ?? 'porDefecto';
+$categoria = $_GET['categoria'] ?? null;
+$marca = $_GET['marca'] ?? null;
 $busqueda = $_GET['busqueda'] ?? null;
 
-// Iniciar con la obtención de todos los productos o filtrados por precio si está especificado
-if ($ordenPrecio !== 'porDefecto') {
-    $productos = $gestorProducto->getProductosFiltrados($conexPDO, $ordenPrecio);
-} else {
-    $productos = $gestorProducto->getProductos($conexPDO);
-}
+$productos = $gestorProducto->getProductosFiltrados($conexPDO, $ordenPrecio, $categoria, $marca);
 
-// Aplicar búsqueda si hay término de búsqueda especificado
 if (!empty($busqueda)) {
     $productos = $gestorProducto->getProductosPorNombre($conexPDO, $busqueda);
 }
 
-// Verificar si la búsqueda o el filtro devuelve productos vacíos
 $mensajeAlerta = "";
 if (empty($productos)) {
+    $productos = $gestorProducto->getProductos($conexPDO);
     $mensajeAlerta = "No se encontraron productos que coincidan con su búsqueda o filtro.";
 }
 
+// Pasar datos a la vista
 include("../view/tiendaView.php");
 
 ?>

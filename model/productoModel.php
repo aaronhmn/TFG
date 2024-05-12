@@ -221,7 +221,8 @@ class producto
         return $rutasImagenes;
     }
 
-    public function getProductosPorNombre($conexPDO, $nombre) {
+    public function getProductosPorNombre($conexPDO, $nombre)
+    {
         try {
             $stmt = $conexPDO->prepare("SELECT * FROM genesis.producto WHERE nombre LIKE ?");
             $stmt->execute(['%' . $nombre . '%']);
@@ -232,7 +233,8 @@ class producto
         }
     }
 
-    public function contarProductos($conexPDO) {
+    public function contarProductos($conexPDO)
+    {
         if ($conexPDO != null) {
             try {
                 $sentencia = $conexPDO->prepare("SELECT COUNT(*) AS total FROM genesis.producto");
@@ -247,10 +249,25 @@ class producto
         return 0; // Si no hay conexión, retorna 0
     }
 
-    public function getProductosFiltrados($conexPDO, $ordenPrecio)
+    public function getProductosFiltrados($conexPDO, $ordenPrecio, $categoria = null, $marca = null)
 {
     $query = "SELECT * FROM genesis.producto WHERE 1=1";
     $params = [];
+    $paramTypes = [];
+
+    // Agregar filtro por categoría si está presente
+    if (!empty($categoria)) {
+        $query .= " AND id_categoria = ?";
+        $params[] = $categoria;
+        $paramTypes[] = PDO::PARAM_INT; // Asumiendo que id_categoria es un entero
+    }
+
+    // Agregar filtro por marca si está presente
+    if (!empty($marca)) {
+        $query .= " AND id_marca = ?";
+        $params[] = $marca;
+        $paramTypes[] = PDO::PARAM_INT; // Asumiendo que id_marca es un entero
+    }
 
     // Orden de precios
     if ($ordenPrecio === 'menorMayor') {
@@ -260,7 +277,13 @@ class producto
     }
 
     $stmt = $conexPDO->prepare($query);
-    $stmt->execute($params);
+
+    // Asignando los valores a los parámetros de manera segura
+    foreach ($params as $index => $param) {
+        $stmt->bindValue($index + 1, $param, $paramTypes[$index]);
+    }
+
+    $stmt->execute();
     $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // Retorna los productos encontrados
@@ -295,4 +318,3 @@ function getMarcas($conexPDO)
         }
     }
 }
-
