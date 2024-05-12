@@ -36,7 +36,7 @@
         <form action="../controller/tiendaController.php" method="GET">
           <!-- Filtros por categorías con checkboxes -->
           <div class="mb-4">
-            <h3 class="titulo-check"><b>Categorías</b></h3>
+            <h4 class="titulo-check"><b>Categorías:</b></h4>
             <select name="categoria" class="form-select" aria-label="Filtrar por categoría">
               <option value="">Todas las categorías</option>
               <?php foreach ($categorias as $categoria) : ?>
@@ -49,7 +49,7 @@
 
           <!-- Filtro por precios con un select -->
           <div class="mb-4">
-            <h3 class="titulo-check"><b>Precios</b></h3>
+            <h4 class="titulo-check"><b>Precios:</b></h4>
             <select name="ordenPrecio" class="form-select" aria-label="Ordenar precios">
               <option value="porDefecto" <?php echo (isset($_GET['ordenPrecio']) && $_GET['ordenPrecio'] == 'porDefecto') ? 'selected' : ''; ?>>Sin orden de precio</option>
               <option value="menorMayor" <?php echo (isset($_GET['ordenPrecio']) && $_GET['ordenPrecio'] == 'menorMayor') ? 'selected' : ''; ?>>De menor a mayor</option>
@@ -59,7 +59,7 @@
 
           <!-- Filtros por marcas con checkboxes -->
           <div class="mb-4">
-            <h3 class="titulo-check"><b>Marcas</b></h3>
+            <h4 class="titulo-check"><b>Marcas:</b></h4>
             <select name="marca" class="form-select" aria-label="Filtrar por marca">
               <option value="">Todas las marcas</option>
               <?php foreach ($marcas as $marca) : ?>
@@ -70,8 +70,8 @@
             </select>
           </div>
 
-          <button type="submit" class="boton1-filtro mb-3">Aplicar Filtros</button>
-          <button type="button" class="boton2-filtro" onclick="location.href='../controller/tiendaController.php'">Quitar Filtros</button>
+          <button type="submit" class="boton1-filtro mb-3 w-100"><i class="fa-solid fa-check fa-lg" style="margin-right: 10px;"></i>Aplicar Filtros</button>
+          <button type="button" class="boton2-filtro w-100" onclick="location.href='../controller/tiendaController.php'"><i class="fa-solid fa-trash-alt fa-lg" style="margin-right: 10px;"></i>Borrar Filtros</button>
         </form>
       </div>
 
