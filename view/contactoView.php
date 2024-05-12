@@ -30,23 +30,23 @@ namespace views;
         <form class="row g-3" style="margin: 10px">
           <h2 style="color: #8350f2; display:flex; justify-content:center;"><b>Contacto</b></h2>
           <div class="col-12">
-            <label for="nombre"><b>Nombre:</b></label>
+            <label for="nombre" class="form-label"><b>Nombre:</b></label>
             <input type="text" class="form-control input-contacto" id="nombre" name="nombre" value="<?php echo htmlspecialchars($datosUsuario['nombre'] ?? ''); ?>" placeholder="Nombre" />
           </div>
           <div class="col-12">
-            <label for="nombre"><b>Primer Apellido:</b></label>
+            <label for="primer_apellido" class="form-label"><b>Primer Apellido:</b></label>
             <input type="text" class="form-control input-contacto" id="primer_apellido" name="primer_apellido" value="<?php echo htmlspecialchars($datosUsuario['primer_apellido'] ?? ''); ?>"  placeholder="Primer apellido" />
           </div>
           <div class="col-12">
-            <label for="nombre"><b>Segundo Apellido:</b></label>
+            <label for="segundo_apellido" class="form-label"><b>Segundo Apellido:</b></label>
             <input type="text" class="form-control input-contacto" id="segundo_apellido" name="segundo_apellido" value="<?php echo htmlspecialchars($datosUsuario['segundo_apellido'] ?? ''); ?>" placeholder="Segundo apellido" />
           </div>
           <div class="col-12">
-            <label for="email"><b>Email:</b></label>
+            <label for="email" class="form-label"><b>Email:</b></label>
             <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($datosUsuario['email'] ?? ''); ?>" placeholder="Email" />
           </div>
           <div class="mb-3">
-            <label for="mensaje"><b>Mensaje:</b></label>
+            <label for="mensaje" class="form-label"><b>Mensaje:</b></label>
             <textarea class="form-control" placeholder="Escribe tu mensaje" id="mensaje" name="mensaje" rows="12"></textarea>
           </div>
           <button class="btn btn-primary" type="submit" style="background-color: #8350f2; border-color: #8350f2; margin-bottom:10px;">Enviar Mensaje</button>

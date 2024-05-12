@@ -51,47 +51,47 @@
           <h2 style="color: #ffa500;"><b>Edita tu perfil</b></h2>
         </div>
           <div class="col-6">
-            <label for="nombre"><b>Nombre:</b></label>
-            <input type="text" class="form-control input-contacto" id="nombre" name="nombre" value="<?php echo htmlspecialchars($datosUsuario['nombre'] ?? ''); ?>" placeholder="Nombre" />
+            <label for="nombre" class="form-label"><b>Nombre:</b></label>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo htmlspecialchars($datosUsuario['nombre'] ?? ''); ?>" placeholder="Nombre" />
           </div>
           <div class="col-6">
-            <label for="nombreUsuario"><b>Nombre de usuario:</b></label>
+            <label for="nombreUsuario" class="form-label"><b>Nombre de usuario:</b></label>
             <input type="text" class="form-control" id="nombreUsuario" name="nombre_usuario" value="<?php echo htmlspecialchars($datosUsuario['nombre_usuario'] ?? ''); ?>" placeholder="Nombre usuario" />
           </div>
           <div class="col-6">
-            <label for="primerApellido"><b>Primer Apellido:</b></label>
+            <label for="primerApellido" class="form-label"><b>Primer Apellido:</b></label>
             <input type="text" class="form-control" id="primerApellido" name="primer_apellido" value="<?php echo htmlspecialchars($datosUsuario['primer_apellido'] ?? ''); ?>" placeholder="1º Apellido" />
           </div>
           <div class="col-6">
-            <label for="segundoApellido"><b>Segundo Apellido:</b></label>
+            <label for="segundoApellido" class="form-label"><b>Segundo Apellido:</b></label>
             <input type="text" class="form-control" id="segundoApellido" name="segundo_apellido" value="<?php echo htmlspecialchars($datosUsuario['segundo_apellido'] ?? ''); ?>" placeholder="2º Apellido" />
           </div>
           <div class="col-6">
-            <label for="dni"><b>DNI:</b></label>
+            <label for="dni" class="form-label"><b>DNI:</b></label>
             <input type="text" class="form-control" id="dni" name="dni" value="<?php echo htmlspecialchars($datosUsuario['dni'] ?? ''); ?>" placeholder="DNI" />
           </div>
           <div class="col-6">
-            <label for="telefono"><b>Telefono:</b></label>
+            <label for="telefono" class="form-label"><b>Telefono:</b></label>
             <input type="tel" class="form-control" id="telefono" name="telefono" value="<?php echo htmlspecialchars($datosUsuario['telefono'] ?? ''); ?>" placeholder="Telefono" />
           </div>
           <div class="col-6">
-            <label for="codigo_postal"><b>Codigo Postal:</b></label>
+            <label for="codigo_postal" class="form-label"><b>Codigo Postal:</b></label>
             <input type="number" class="form-control" id="codigo_postal" name="codigo_postal" value="<?php echo htmlspecialchars($datosUsuario['codigo_postal'] ?? ''); ?>" placeholder="Codigo Postal" />
           </div>
           <div class="col-6">
-            <label for="calle"><b>Calle:</b></label>
+            <label for="calle" class="form-label"><b>Calle:</b></label>
             <input type="text" class="form-control" id="calle" name="calle" value="<?php echo htmlspecialchars($datosUsuario['calle'] ?? ''); ?>" placeholder="Calle" />
           </div>
           <div class="col-6">
-            <label for="numero_bloque"><b>Numero de bloque:</b></label>
+            <label for="numero_bloque" class="form-label"><b>Numero de bloque:</b></label>
             <input type="number" class="form-control" id="numero_bloque" name="numero_bloque" value="<?php echo htmlspecialchars($datosUsuario['numero_bloque'] ?? ''); ?>" placeholder="Numero de bloque" />
           </div>
           <div class="col-6">
-            <label for="piso"><b>Piso:</b></label>
+            <label for="piso" class="form-label"><b>Piso:</b></label>
             <input type="text" class="form-control" id="piso" name="piso" value="<?php echo htmlspecialchars($datosUsuario['piso'] ?? ''); ?>" placeholder="Piso" />
           </div>
           <div class="col-12">
-            <label for="email"><b>Email:</b></label>
+            <label for="email" class="form-label"><b>Email:</b></label>
             <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($datosUsuario['email'] ?? ''); ?>" placeholder="Email" />
           </div>
 
@@ -105,7 +105,8 @@
   <!--FOOTER-->
   <?php include '../controller/footerController.php'; ?>
 
-  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <script>
 document.getElementById('cancelButton').addEventListener('click', function() {

@@ -20,6 +20,16 @@ input.form-control:focus {
   -webkit-box-shadow: none;
 }
 
+.form-control:focus {
+    border-color: #8350F2 !important;
+    box-shadow: 0 0 0 0.25rem rgba(131, 80, 242, 0.5) !important; 
+}
+
+.form-select:focus {
+    border-color: #8350F2 !important;
+    box-shadow: 0 0 0 0.25rem rgba(131, 80, 242, 0.5) !important;
+}
+
 /*!CHECKBOX DE LOS FILTROS*/
 .check{
     margin-right: 3px;
@@ -61,18 +71,20 @@ form{
     align-items: center;
     justify-content: center;
     padding-right: 50px;
-    /* border: solid 2px #8350f2; */
 }
 
 /*!BOTONES FILTROS*/
 #contenedor-boton-filtro{
     display: flex; 
     align-items: center; 
-    justify-content: center; 
-    margin-bottom: 15px; 
+    margin-bottom: 15px;
+    margin-left: 10px; 
     background-color: white; 
     border-radius: 1.2em;
     box-shadow: 0 10px 20px rgba(0, 0, 0, .15);
+    width: auto;
+    padding: 5px 20px;
+    height: 50px;
 }
 
 #toggleFiltrosBtn{
