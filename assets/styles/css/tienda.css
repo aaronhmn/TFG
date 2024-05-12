@@ -175,6 +175,7 @@ form{
 
 #filtroColumna{
     display: flex;
+    height: 435px;
     align-items: center;
     justify-content: center;
     margin-bottom: 20px; 
@@ -269,7 +270,7 @@ form{
 
 .boton1-filtro{
     border: none;
-    background-color: green;
+    background-color: #8350F2;
     color: white;
     padding: 8px 12px;
     border-radius: 7px;
@@ -279,13 +280,13 @@ form{
 }
 
 .boton1-filtro:hover{
-    background-color: #1a9242;
+    background-color: #6f39e4;
     color: white;
 }
 
 .boton2-filtro{
     border: none;
-    background-color: red;
+    background-color: #ffa500;
     color: white;
     padding: 8px 12px;
     border-radius: 7px;
@@ -295,7 +296,7 @@ form{
 }
 
 .boton2-filtro:hover{
-    background-color: #f84747;
+    background-color: #e69500;
     color: white;
 }
 
