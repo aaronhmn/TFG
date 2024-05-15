@@ -1,15 +1,15 @@
 <?php
 namespace model;
 
-use \model\producto;
+use \model\pedido;
 use \model\utils;
-use \model\marca;
-use \model\categoria;
+use \model\usuario;
+/* use \model\producto; */
 
 //Añadimos el código del modelo
-require_once("../model/productoModel.php");
-require_once("../model/marcaModel.php");
-require_once("../model/categoriaModel.php");
+require_once("../model/pedidoModel.php");
+require_once("../model/usuarioModel.php");
+/* require_once("../model/productoModel.php"); */
 require_once("../model/utils.php");
 $mensaje=null;
 
@@ -30,19 +30,19 @@ function truncarTexto($texto, $maxCaracteres) {
     return $texto;
 }
 
-$gestorProductos = new Producto();
-$gestorMarcas = new Marca();
-$gestorCategorias = new Categoria();
+$gestorPedidos = new Pedido();
+$gestorUsuarios = new Usuario();
+/* $gestorCategorias = new Producto(); */
 
 //Nos conectamos a la Bd
 $conexPDO = utils::conectar();
 //Recolectamos los datos de los productos
-$datosProducto = $gestorProductos->getProductos($conexPDO);
-$marcas = $gestorMarcas->getMarcas($conexPDO);
-$categorias = $gestorCategorias->getCategorias($conexPDO);
+$datosPedido = $gestorPedidos->getPedidos($conexPDO);
+$usuarios = $gestorUsuarios->getUsuarios($conexPDO);
+/* $categorias = $gestorCategorias->getProductos($conexPDO); */
 
 //Paginacion
-$totalProductos = $gestorProductos->getProductos($conexPDO);
+$totalProductos = $gestorPedidos->getPedidos($conexPDO);
 $itemsPorPagina = 10;
 $totalPaginas = ceil(count($totalProductos) / $itemsPorPagina);
 if (isset($_POST['Pag'])) {
@@ -56,7 +56,7 @@ if (isset($_POST['Pag'])) {
 
 try {
     $inicio = ($paginaActual - 1) * $itemsPorPagina;
-    $productosPaginados = array_slice($datosProducto, $inicio, $itemsPorPagina);
+    $pedidosPaginados = array_slice($datosPedido, $inicio, $itemsPorPagina);
 
     include("../view/pedidoAdminView.php");
 } catch (\Throwable $th) {

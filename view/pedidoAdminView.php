@@ -109,15 +109,10 @@
                     <thead>
                         <tr>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Id Pedido</th>
-                            <th style="background-color: #8350F2; color: #fff;" scope="col">Nombre Usuario</th>
-                            <th style="background-color: #8350F2; color: #fff;" scope="col">Precio</th>
-                            <th style="background-color: #8350F2; color: #fff;" scope="col">Categoria</th>
-                            <!--<th style="text-align: center;" scope="col">Descripcion</th>-->
-                            <!--<th style="text-align: center;" scope="col">Especificacion</th>-->
-                            <th style="background-color: #8350F2; color: #fff;" scope="col">Marca</th>
-                            <th style="background-color: #8350F2; color: #fff;" scope="col">Stock</th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Nombre de Usuario</th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Fecha de pedido</th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Precio Total</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col"></th>
-                            <!-- <th style="background-color: #8350F2; color: #fff;" scope="col"></th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -132,53 +127,33 @@
                             return $texto;
                         }
 
-                        foreach ($productosPaginados as $datosProducto) {
+                        foreach ($pedidosPaginados as $datosPedido) {
 
-                            $nombreMarca = $gestorMarcas->getMarcaId($datosProducto["id_marca"], $conexPDO)['nombre_marca'];
-                            $nombreCategoria = $gestorCategorias->getCategoriaId($datosProducto["id_categoria"], $conexPDO)['nombre_categoria'];
+                            $nombreUsuario = $gestorUsuarios->getUsuarioId($datosPedido["id_usuario_pedido"], $conexPDO)['nombre_usuario'];
+                            /* $nombreCategoria = $gestorCategorias->getCategoriaId($datosProducto["id_categoria"], $conexPDO)['nombre_categoria']; */
                             //Comienzo de fila
                             print("<tr style='align-items: center; background-color: gray;'>\n");
 
-                            //Id de producto
-                            print("<td style='padding-top: 14px;' scope='row'><b>" . $datosProducto["idproducto"] . "</b></td>\n");
-                            //Nombre
-                            print("<td style='padding-top: 14px;'>");
-                            print(htmlspecialchars(truncarTexto($datosProducto["nombre"], 20)));
-                            print("</td>\n");
-                            /* print("<td style='padding-top: 14px;'>" . truncarTexto($datosProducto["nombre"], 20) . "</td>\n"); */
-                            //Precio
-                            print("<td style='padding-top: 14px;'>" . $datosProducto["precio"] . "€</td>\n");
-                            //Categoria
-                            print("<td style='padding-top: 14px;'>" . $nombreCategoria . "</td>\n");
-                            //Descripcion
-                            //print("<td style='padding-top: 14px;'>" . $datosProducto[$i]["descripcion"] . "</td>\n");
-                            //Especificacion
-                            //print("<td style='padding-top: 14px;'>" . $datosProducto[$i]["especificacion"] . "</td>\n");
-                            //Marca
-                            print("<td style='padding-top: 14px;'>" . $nombreMarca . "</td>\n");
-                            //Stock
-                            print("<td style='padding-top: 14px;'>" . $datosProducto["stock"] . "</td>\n");
+                            //Id de pedido
+                            print("<td style='padding-top: 14px;' scope='row'><b>" . $datosPedido["idpedido"] . "</b></td>\n");
+                            //Nombre usuario
+                            print("<td style='padding-top: 14px;'>" . $nombreUsuario . "</td>\n");
+                            //Fecha pedido
+                            print("<td style='padding-top: 14px;'>" . $datosPedido["fecha_pedido"] . "</td>\n");
+                            //Precio total
+                            print("<td style='padding-top: 14px;'>" . $datosPedido["precio_total"] . "€</td>\n");
+
 
                             echo "<td>";
-                            echo "<button data-bs-toggle='modal' data-bs-target='#productoDetalleModal' data-idproducto='" . $datosProducto['idproducto'] . "'"
-                                . " data-id='" . htmlspecialchars($datosProducto['idproducto'], ENT_QUOTES) . "'"
-                                . " data-nombre='" . htmlspecialchars($datosProducto['nombre'], ENT_QUOTES) . "'"
-                                . " data-precio='" . htmlspecialchars($datosProducto['precio'], ENT_QUOTES) . "'"
-                                . " data-stock='" . htmlspecialchars($datosProducto['stock'], ENT_QUOTES) . "'"
-                                . " data-categoria='" . htmlspecialchars($datosProducto['id_categoria'], ENT_QUOTES) . "'"
-                                . " data-marca='" . htmlspecialchars($datosProducto['id_marca'], ENT_QUOTES) . "'"
-                                . " data-descripcion='" . htmlspecialchars($datosProducto['descripcion'], ENT_QUOTES) . "'"
-                                . " data-especificacion='" . htmlspecialchars($datosProducto['especificacion'], ENT_QUOTES) . "'"
-                                . " data-imagenes='" . htmlspecialchars($datosProducto['ruta_imagen'], ENT_QUOTES) . "'"
-                                . " style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;'>"
-                                . "<i class='fas fa-eye fa-lg' style='color: #005eff;'></i>"
-                                . "</button>";
+                            echo "<a href='../controller/detallesPedidosAdminController.php?idPedido=" . htmlspecialchars($datosPedido['idpedido'], ENT_QUOTES) . "' class='btn btn-info' style='color: white;'>";
+                            echo "<i class='fas fa-eye'></i> Ver Detalles";
+                            echo "</a>";
                             echo "</td>";
                         }
                         ?>
                     </tbody>
                 </table>
-                <form method="POST" action="../controller/productosAdminController.php">
+                <form method="POST" action="../controller/pedidosAdminController.php">
                     <?php
                     for ($i = 1; $i <= $totalPaginas; $i++) {
                         echo "<button style='margin-left: 7px; margin-bottom: 25px; background-color: #8350F2; color: #fff; border-radius: 50%; width: 40px' name='Pag' value='$i' class='btn'>$i</button>";
@@ -235,18 +210,6 @@
 
 
     <script>
-        //script para borrar lo que haya dentro del modal
-        document.addEventListener("DOMContentLoaded", function() {
-            // Selecciona el modal por su ID
-            var modal = document.getElementById('insertarProductoModal');
-
-            // Escucha el evento 'hidden.bs.modal' que se dispara cuando el modal se ha cerrado
-            modal.addEventListener('hidden.bs.modal', function(event) {
-                // Encuentra el formulario dentro del modal y lo resetea
-                modal.querySelector('form').reset();
-            });
-        });
-
         //detalles producto
         $('#productoDetalleModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);

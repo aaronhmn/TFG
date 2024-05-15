@@ -7,17 +7,17 @@ require_once("utils.php");
 use \PDO;
 use \PDOException;
 
-class pedido
+class detalle_pedido
 {
     /**Funcion que nos devuelve todos los productos */
-    public function getPedidos($conexPDO)
+    public function getDetallesPedidos($conexPDO)
     {
 
         if ($conexPDO != null) {
             try {
                 //Primero introducimos la sentencia a ejecutar con prepare
                 //Ponemos en lugar de valores directamente, interrogaciones
-                $sentencia = $conexPDO->prepare("SELECT * FROM genesis.pedido");
+                $sentencia = $conexPDO->prepare("SELECT * FROM genesis.detalle_pedido");
                 //Ejecutamos la sentencia
                 $sentencia->execute();
 
@@ -31,18 +31,15 @@ class pedido
 
 
     /**
-     * Funcion que nos devuelve todos los productos con paginacion
+     * Funcion que nos devuelve todos los pedidos con paginacion
      * */
-    public function getPedidosPag($conexPDO, $ordAsc, string $campoOrd, int $numPag, int $cantElem)
+    public function getDetallesPedidosPag($conexPDO, $ordAsc, string $campoOrd, int $numPag, int $cantElem)
     {
 
         if ($conexPDO != null) {
             try {
-                //Primero introducimos la sentencia a ejecutar con prepare
-                //Ponemos en lugar de valores directamente, interrogaciones
-
                 //Query inicial
-                $query = "SELECT * FROM genesis.pedido ORDER BY ? ";
+                $query = "SELECT * FROM genesis.detalle_pedido ORDER BY ? ";
 
                 //si esta ordenada descentemente añadimos DESC
                 if (!$ordAsc) $query = $query . "DESC ";
@@ -75,22 +72,15 @@ class pedido
         }
     }
 
-    public function getPedidoId($id, $conexPDO)
+    public function getDetallePedidoId($id, $conexPDO)
     {
         if (isset($id) && is_numeric($id)) {
-
             if ($conexPDO != null) {
                 try {
-                    //Primero introducimos la sentencia a ejecutar con prepare
-                    //Ponemos en lugar de valores directamente, interrogaciones
-                    $sentencia = $conexPDO->prepare("SELECT * FROM genesis.pedido where idpedido=?");
-                    //Asociamos a cada interrogacion el valor que queremos en su lugar
+                    $sentencia = $conexPDO->prepare("SELECT * FROM genesis.detalle_pedido WHERE iddetalle_pedido = ?");
                     $sentencia->bindParam(1, $id);
-                    //Ejecutamos la sentencia
                     $sentencia->execute();
-
-                    //Devolvemos los datos del cliente
-                    return $sentencia->fetch();
+                    return $sentencia->fetchAll();  // Cambiado a fetchAll para recuperar todos los detalles
                 } catch (PDOException $e) {
                     print("Error al acceder a BD" . $e->getMessage());
                 }
@@ -98,23 +88,20 @@ class pedido
         }
     }
 
-    public function addPedido($conexPDO, $idUsuario, $total)
+    public function addDetallePedido($conexPDO, $idPedido, $idProducto, $cantidad, $precio)
     {
-        $result = null;
         if ($conexPDO != null) {
             try {
-                $sql = "INSERT INTO genesis.pedido (fecha_pedido, precio_total, id_usuario_pedido) VALUES (NOW(), :precio_total, :id_usuario_pedido)";
+                $sql = "INSERT INTO genesis.detalle_pedido (id_pedido_dp, id_producto_dp, cantidad, precio) VALUES (:id_pedido_dp, :id_producto_dp, :cantidad, :precio)";
                 $stmt = $conexPDO->prepare($sql);
-                $stmt->bindParam(":precio_total", $total);
-                $stmt->bindParam(":id_usuario_pedido", $idUsuario);
-                $result = $stmt->execute();
-
-                return $conexPDO->lastInsertId();  // Devuelve el ID del pedido creado
+                $stmt->bindParam(":id_pedido_dp", $idPedido);
+                $stmt->bindParam(":id_producto_dp", $idProducto);
+                $stmt->bindParam(":cantidad", $cantidad);
+                $stmt->bindParam(":precio", $precio);
+                $stmt->execute();
             } catch (PDOException $e) {
                 print("Error al acceder a BD: " . $e->getMessage());
-                return false;
             }
         }
-        return $result;
     }
 }
