@@ -56,6 +56,12 @@
                     <span>Marcas</span>
                 </a>
             </li>
+            <li>
+                <a href="../controller/pedidosAdminController.php">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span>Pedidos</span>
+                </a>
+            </li>
         </ul>
     </div>
 
@@ -452,50 +458,50 @@
 
         //modificar producto       
         $('#modificarProductoModal').on('show.bs.modal', function(event) {
-    var button = $(event.relatedTarget); // Botón que activó el modal
-    var id = button.data('id');
-    var nombre = button.data('nombre');
-    var precio = button.data('precio');
-    var stock = button.data('stock');
-    var categoria = button.data('categoria');
-    var marca = button.data('marca');
-    var descripcion = button.data('descripcion');
-    var especificacion = button.data('especificacion');
-    var imagenes = button.data('imagenes').split(',');
-    var imagesContainer = $('#currentImagesContainer');
-    imagesContainer.empty();
+            var button = $(event.relatedTarget); // Botón que activó el modal
+            var id = button.data('id');
+            var nombre = button.data('nombre');
+            var precio = button.data('precio');
+            var stock = button.data('stock');
+            var categoria = button.data('categoria');
+            var marca = button.data('marca');
+            var descripcion = button.data('descripcion');
+            var especificacion = button.data('especificacion');
+            var imagenes = button.data('imagenes').split(',');
+            var imagesContainer = $('#currentImagesContainer');
+            imagesContainer.empty();
 
-    var modal = $(this);
-    modal.find('#idproducto').val(id);
-    modal.find('#nombre').val(nombre);
-    modal.find('#precio').val(precio);
-    modal.find('#stock').val(stock);
-    modal.find('#selectCategoria').val(categoria);
-    modal.find('#selectMarca').val(marca);
-    modal.find('#descripcion').val(descripcion);
-    modal.find('#especificacion').val(especificacion);
+            var modal = $(this);
+            modal.find('#idproducto').val(id);
+            modal.find('#nombre').val(nombre);
+            modal.find('#precio').val(precio);
+            modal.find('#stock').val(stock);
+            modal.find('#selectCategoria').val(categoria);
+            modal.find('#selectMarca').val(marca);
+            modal.find('#descripcion').val(descripcion);
+            modal.find('#especificacion').val(especificacion);
 
-    imagenes.forEach(function(imagen) {
-        var imgHtml = $('<img>').attr('src', imagen.trim()).css('max-width', '100px').css('margin-right', '5px').css('margin-bottom', '5px');
-        imagesContainer.append(imgHtml);
-    });
-});
-
-// Actualizar visualización de imágenes al seleccionar nuevas
-function updateImageDisplay(files) {
-    var imagesContainer = $('#currentImagesContainer');
-    imagesContainer.empty();
-    if (files.length > 0) {
-        Array.from(files).forEach(file => {
-            var imgElement = document.createElement('img');
-            imgElement.style.maxWidth = '100px';
-            imgElement.style.marginRight = '5px';
-            imgElement.style.marginBottom = '5px';
-            imgElement.src = URL.createObjectURL(file);
-            imagesContainer.append(imgElement);
+            imagenes.forEach(function(imagen) {
+                var imgHtml = $('<img>').attr('src', imagen.trim()).css('max-width', '100px').css('margin-right', '5px').css('margin-bottom', '5px');
+                imagesContainer.append(imgHtml);
+            });
         });
-    }
-}
+
+        // Actualizar visualización de imágenes al seleccionar nuevas
+        function updateImageDisplay(files) {
+            var imagesContainer = $('#currentImagesContainer');
+            imagesContainer.empty();
+            if (files.length > 0) {
+                Array.from(files).forEach(file => {
+                    var imgElement = document.createElement('img');
+                    imgElement.style.maxWidth = '100px';
+                    imgElement.style.marginRight = '5px';
+                    imgElement.style.marginBottom = '5px';
+                    imgElement.src = URL.createObjectURL(file);
+                    imagesContainer.append(imgElement);
+                });
+            }
+        }
 
         //detalles producto
         $('#productoDetalleModal').on('show.bs.modal', function(event) {

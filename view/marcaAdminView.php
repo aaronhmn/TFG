@@ -50,6 +50,12 @@
                     <span><b>Marcas</b></span>
                 </a>
             </li>
+            <li>
+                <a href="../controller/pedidosAdminController.php">
+                    <i class="fas fa-shipping-fast"></i>
+                    <span>Pedidos</span>
+                </a>
+            </li>
         </ul>
     </div>
 
