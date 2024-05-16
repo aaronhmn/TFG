@@ -13,11 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Asegura que el botón de PayPal se renderice correctamente
     paypal.Buttons({
         style: {
-            layout:  'horizontal', // horizontal | vertical
-            color:   'gold',       // gold | blue | silver | black
-            shape:   'rect',       // rect | pill
-            label:   'buynow',     // checkout | pay | buynow | paypal | credit
-            size:    'small'       // small | medium | large | responsive
+            layout:  'horizontal',
+            color:   'gold',
+            shape:   'rect',
+            label:   'buynow',
+            size:    'small'
         },
         createOrder: function(data, actions) {
             var total = document.getElementById('precio-total').textContent.replace(' €', '');
@@ -28,14 +28,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 }],
                 application_context: {
-                    shipping_preference: 'NO_SHIPPING' // Sin dirección de envío
+                    shipping_preference: 'NO_SHIPPING'
                 }
             });
         },
         onApprove: function(data, actions) {
             return actions.order.capture().then(function(details) {
-                alert('Pago completado por ' + details.payer.name.given_name + '!');
-                // Aquí puedes agregar lógica para manejar la transacción completada
+                // Mostrar el modal con el nombre del usuario
+                $('#purchaseConfirmationModal').modal('show');
+                document.getElementById('userName').textContent = nombreUsuario; // Usar la variable global
             });
         },
         onError: function(err) {

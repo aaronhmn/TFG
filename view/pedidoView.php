@@ -92,6 +92,24 @@ namespace views;
       </div>
     </div>
   </div><br>
+
+<!-- Modal -->
+<div class="modal fade" id="purchaseConfirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmación de Compra</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Pago completado correctamente. Gracias por su compra, <b><span id="userName"></span></b>.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
   
 
   <!--FOOTER-->
@@ -100,6 +118,9 @@ namespace views;
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://www.paypal.com/sdk/js?client-id=AfJjZTOU8jNeTFumpGdD9neSc0abzt9CrEPcA_BH35PQw6jwuceoOePiex5FD_WQoiXNPgpSqMLu9_Jw&components=buttons&currency=EUR&disable-funding=credit,card"></script>
+  <script>
+    var nombreUsuario = "<?php echo isset($_SESSION['nombre_usuario']) ? htmlspecialchars($_SESSION['nombre_usuario']) : 'Invitado'; ?>";
+</script>
   <script src="../assets/js/pedido.js"></script>
 </body>
 
