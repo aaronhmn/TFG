@@ -2,8 +2,14 @@
 const itemsPorPagina = 5;
 let paginaActual = 1;
 
+function getCarritoKey() {
+    const userId = document.body.getAttribute('data-user-id');
+    return `carrito_${userId}`;
+  }
+
 document.addEventListener('DOMContentLoaded', function() {
     cargarCarrito();
+    actualizarContadorCarrito();
     // Asegura que el botón de PayPal se renderice correctamente
     paypal.Buttons({
         style: {
@@ -39,7 +45,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function cargarCarrito() {
-    const carrito = JSON.parse(localStorage.getItem('carrito')) || {};
+    let carritoKey = getCarritoKey();
+    const carrito = JSON.parse(localStorage.getItem(carritoKey)) || {};
     const keys = Object.keys(carrito);
     const totalItems = keys.length;
     const inicio = (paginaActual - 1) * itemsPorPagina;
@@ -87,22 +94,12 @@ function actualizarPaginacion(totalItems) {
     }
 }
 
-function cambiarCantidad(id, cambio) {
-    const carrito = JSON.parse(localStorage.getItem('carrito'));
-    if (carrito && carrito[id]) {
-        carrito[id].cantidad += cambio;
-        if (carrito[id].cantidad <= 0) {
-            delete carrito[id];
-        }
-        localStorage.setItem('carrito', JSON.stringify(carrito));
-        cargarCarrito();
+function actualizarContadorCarrito() {
+    const carritoKey = getCarritoKey();
+    const carrito = JSON.parse(localStorage.getItem(carritoKey)) || {};
+    const totalItems = Object.values(carrito).reduce((total, producto) => total + producto.cantidad, 0);
+    const contador = document.getElementById('cart-count');
+    if (contador) {
+        contador.textContent = totalItems;
     }
 }
-
-function eliminarDelCarrito(id) {
-    const carrito = JSON.parse(localStorage.getItem('carrito'));
-    delete carrito[id];
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-    cargarCarrito();
-}
-

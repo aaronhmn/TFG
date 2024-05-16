@@ -27,7 +27,7 @@ namespace views;
   <title>Página de Inicio - Genesis</title>
 </head>
 
-<body style="background-color: #e6e6fa">
+<body style="background-color: #e6e6fa" <?php if (isset($_SESSION['id_usuario'])) echo 'data-user-id="' . $_SESSION['id_usuario'] . '"'; ?>>
 
   <!--NAV DE LA PAGINA-->
   <?php include '../controller/navbarController.php'; ?>

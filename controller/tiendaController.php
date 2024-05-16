@@ -2,6 +2,10 @@
 
 namespace model;
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once("../model/utils.php");
 require_once("../model/productoModel.php");
 require_once("../model/categoriaModel.php");

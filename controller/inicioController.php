@@ -2,6 +2,9 @@
 
     namespace model;
 
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
 
     use \model\utils;
     use \model\usuarioModel;
@@ -10,6 +13,8 @@
     require_once("../model/utils.php");
     require_once("../model/usuarioModel.php");
     $mensaje=null;
+
+    $conexPDO = utils::conectar();
 
     include("../view/inicioView.php");
 

@@ -34,3 +34,24 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   }
 });
+
+//*CARRITO
+document.addEventListener('DOMContentLoaded', function() {
+  actualizarContadorCarrito();
+});
+
+function getCarritoKey() {
+  const userId = document.body.getAttribute('data-user-id');
+  return `carrito_${userId}`;
+}
+
+function actualizarContadorCarrito() {
+  const carritoKey = getCarritoKey();
+  const carrito = JSON.parse(localStorage.getItem(carritoKey)) || {};
+  const totalItems = Object.values(carrito).reduce((total, producto) => total + producto.cantidad, 0);
+  const contador = document.getElementById('cart-count');
+  if (contador) {
+      contador.textContent = totalItems;
+  }
+}
+

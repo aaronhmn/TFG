@@ -3,11 +3,7 @@
 namespace views;
 
 if (session_status() == PHP_SESSION_NONE) {
-  session_start([
-    'cookie_lifetime' => 86400, // 1 día, ajusta según necesidad
-    'cookie_secure' => true,
-    'cookie_httponly' => true
-  ]);
+  session_start();
 }
 ?>
 
@@ -21,7 +17,7 @@ if (session_status() == PHP_SESSION_NONE) {
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
-<body style="background-color: #e6e6fa">
+<body style="background-color: #e6e6fa" >
   <!--NAV DE LA PAGINA-->
   <?php
   if (isset($_SESSION['login'])) {

@@ -10,6 +10,12 @@
     require_once("../model/usuarioModel.php");
     $mensaje=null;
 
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    $conexPDO = utils::conectar();
+
     include("../view/terminosUsoView.php");
 
 ?>

@@ -20,7 +20,7 @@ namespace views;
   <title>Página de Carrito - Genesis</title>
 </head>
 
-<body style="background-color: #e6e6fa">
+<body style="background-color: #e6e6fa" data-user-id="<?php echo $_SESSION['id_usuario']; ?>">
   <!--NAV DE LA PAGINA-->
   <?php include '../controller/navbarController.php'; ?>
 
@@ -42,9 +42,9 @@ namespace views;
     <div id="pagination-container"></div><br>
     <div class="info">
       <form action="../controller/pedidoController.php">
-      <button type="submit" id="realizarPedidoBtn" class="pedido">Realizar pedido</button>
+        <button type="submit" id="realizarPedidoBtn" class="pedido">Realizar pedido</button>
       </form>
-    <div class="precio-total1"><b>Precio Total: </b><b><span class="precio-total2" id="precio-total">0 €</span></b></div>
+      <div class="precio-total1"><b>Precio Total: </b><b><span class="precio-total2" id="precio-total">0 €</span></b></div>
     </div>
 
   </div><br>
@@ -53,8 +53,7 @@ namespace views;
   <?php include '../controller/footerController.php'; ?>
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/carrito.js"></script>
 </body>
 

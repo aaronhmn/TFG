@@ -15,7 +15,7 @@
   <title>Perfil - Genesis</title>
 </head>
 
-<body style="background-color: #e6e6fa">
+<body style="background-color: #e6e6fa" data-user-id="<?php echo $_SESSION['id_usuario']; ?>">
   <!--NAV DE LA PAGINA-->
   <?php include '../controller/navbarController.php'; ?>
 
@@ -101,12 +101,14 @@
       </div>
     </div>
   </div>
+  <button onclick="scrollToTop()" id="btnSubir" title="Ir arriba"><i class="fa-solid fa-arrow-up fa-xl" style="color: #ffffff; align-items:center;"></i></button>
 
   <!--FOOTER-->
   <?php include '../controller/footerController.php'; ?>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../assets/js/main.js"></script>
 
   <script>
 document.getElementById('cancelButton').addEventListener('click', function() {

@@ -15,7 +15,7 @@
   <title>Cambiar contraseña - Genesis</title>
 </head>
 
-<body style="background-color: #e6e6fa">
+<body style="background-color: #e6e6fa" data-user-id="<?php echo $_SESSION['id_usuario']; ?>">
   <!--NAV DE LA PAGINA-->
   <?php include '../controller/navbarController.php'; ?>
 
@@ -74,12 +74,14 @@
     </div>
   </div>
 
+  <button onclick="scrollToTop()" id="btnSubir" title="Ir arriba"><i class="fa-solid fa-arrow-up fa-xl" style="color: #ffffff; align-items:center;"></i></button>
   <!--FOOTER-->
   <?php include '../controller/footerController.php'; ?>
 
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="../assets/js/main.js"></script>
 
   <script>
     document.getElementById('cancelButton').addEventListener('click', function() {

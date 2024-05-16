@@ -2,6 +2,10 @@
 
 namespace controller;
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Asegúrate de que los namespaces y rutas sean correctos
 require_once("../model/utils.php");
 require_once("../model/usuarioModel.php");
@@ -14,12 +18,8 @@ use model\Producto;
 // Inicializar la conexión a la base de datos
 $conexPDO = utils::conectar();
 
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
 // Obtener el ID del usuario desde la sesión
-$idUsuario = $_SESSION['id_usuario'] ?? null;
+$idUsuario = $_SESSION['id_usuario'];
 
 $usuarioModel = new Usuario();
 $productoModel = new Producto();

@@ -1,5 +1,5 @@
 //*CARRITO
-document.addEventListener('DOMContentLoaded', function() {
+/* document.addEventListener('DOMContentLoaded', function() {
     actualizarContadorCarrito();
   });
 
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const contador = document.getElementById('cart-count');
     if (contador) contador.textContent = totalItems;
   }
-
+ */
   //*BUSCADOR
   $(document).ready(function() {
   $('#formBusqueda').submit(function(event) {

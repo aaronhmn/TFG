@@ -2,9 +2,14 @@
 const itemsPorPagina = 10;
 let paginaActual = 1;
 
+function getCarritoKey() {
+    const userId = document.body.getAttribute('data-user-id');
+    return `carrito_${userId}`;
+  }
 // Carga los productos del carrito desde localStorage y actualiza la vista
 function cargarCarrito() {
-    const carrito = JSON.parse(localStorage.getItem('carrito')) || {};
+    let carritoKey = getCarritoKey();
+    const carrito = JSON.parse(localStorage.getItem(carritoKey)) || {};
     const keys = Object.keys(carrito);
     const totalItems = keys.length;
     const inicio = (paginaActual - 1) * itemsPorPagina;
@@ -66,8 +71,9 @@ function actualizarPaginacion(totalItems) {
 
 // Actualiza el contador de ítems en el icono del carrito
 function actualizarContadorCarrito() {
-    const carrito = JSON.parse(localStorage.getItem('carrito')) || {};
-    const totalItems = Object.values(carrito).reduce((acc, {cantidad}) => acc + cantidad, 0);
+    const carritoKey = getCarritoKey();
+    const carrito = JSON.parse(localStorage.getItem(carritoKey)) || {};
+    const totalItems = Object.values(carrito).reduce((total, producto) => total + producto.cantidad, 0);
     const contador = document.getElementById('cart-count');
     if (contador) {
         contador.textContent = totalItems;
@@ -76,24 +82,27 @@ function actualizarContadorCarrito() {
 
 // Cambia la cantidad de un producto específico
 function cambiarCantidad(id, cambio) {
-    const carrito = JSON.parse(localStorage.getItem('carrito'));
+    const carritoKey = getCarritoKey();  // Usar la clave correcta del carrito
+    const carrito = JSON.parse(localStorage.getItem(carritoKey));
     if (carrito && carrito[id]) {
         carrito[id].cantidad += cambio;
+        // Asegurarse de que la cantidad no sea menor que 1
         if (carrito[id].cantidad < 1) {
-            delete carrito[id];
-        } else {
-            localStorage.setItem('carrito', JSON.stringify(carrito));
+            carrito[id].cantidad = 1;  // Establecer la cantidad mínima como 1
         }
+        localStorage.setItem(carritoKey, JSON.stringify(carrito));  // Guardar usando la clave correcta
         cargarCarrito();
+        actualizarContadorCarrito();  // Asegúrate de actualizar el contador del carrito también si es necesario
     }
 }
 
 // Elimina un producto del carrito
 function eliminarDelCarrito(id) {
-    const carrito = JSON.parse(localStorage.getItem('carrito'));
+    const carritoKey = getCarritoKey();  // Usar la clave correcta del carrito
+    const carrito = JSON.parse(localStorage.getItem(carritoKey));
     if (carrito && carrito.hasOwnProperty(id)) {
         delete carrito[id];
-        localStorage.setItem('carrito', JSON.stringify(carrito));
+        localStorage.setItem(carritoKey, JSON.stringify(carrito));  // Guardar usando la clave correcta
         cargarCarrito();
     }
 }

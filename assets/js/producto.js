@@ -62,7 +62,13 @@
   });
 
 //*Carrito con localstorage
+function getCarritoKey() {
+  const userId = document.body.getAttribute('data-user-id');
+  return `carrito_${userId}`;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+  actualizarContadorCarrito();
   const addToCartButton = document.getElementById('add-to-cart');
   if (addToCartButton) {
       addToCartButton.addEventListener('click', addProductToCart);
@@ -74,7 +80,8 @@ function addProductToCart() {
   const nombre = this.getAttribute('data-nombre');
   const precio = parseFloat(this.getAttribute('data-precio'));
 
-  let carrito = JSON.parse(localStorage.getItem('carrito')) || {};
+  let carritoKey = getCarritoKey();
+  let carrito = JSON.parse(localStorage.getItem(carritoKey)) || {};
 
   if (carrito[productoId]) {
       carrito[productoId].cantidad++;
@@ -88,8 +95,8 @@ function addProductToCart() {
       showAlert('Producto añadido al carrito.', 'success');
   }
 
-  localStorage.setItem('carrito', JSON.stringify(carrito));
-  actualizarContadorCarrito();  // Actualiza el contador inmediatamente
+  localStorage.setItem(carritoKey, JSON.stringify(carrito));
+  actualizarContadorCarrito();
 }
 
 function showAlert(message, type) {
@@ -110,7 +117,8 @@ function showAlert(message, type) {
 }
 
 function actualizarContadorCarrito() {
-  const carrito = JSON.parse(localStorage.getItem('carrito')) || {};
+  const carritoKey = getCarritoKey();
+  const carrito = JSON.parse(localStorage.getItem(carritoKey)) || {};
   const totalItems = Object.values(carrito).reduce((total, producto) => total + producto.cantidad, 0);
   const contador = document.getElementById('cart-count');
   if (contador) {

@@ -26,7 +26,7 @@
 
     <title>Perfil - Genesis</title>
   </head>
-  <body style="background-color: #e6e6fa">
+  <body style="background-color: #e6e6fa" data-user-id="<?php echo $_SESSION['id_usuario']; ?>">
     <!--NAV DE LA PAGINA-->
     <?php 
     session_start();

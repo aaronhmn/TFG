@@ -15,7 +15,7 @@
     <title>Política y privacidad - Genesis</title>
 </head>
 
-<body style="background-color: #E6E6FA;">
+<body style="background-color: #E6E6FA;" <?php if (isset($_SESSION['id_usuario'])) echo 'data-user-id="' . $_SESSION['id_usuario'] . '"'; ?>>
     <!--NAV DE LA PAGINA-->
     <?php include '../controller/navbarController.php'; ?>
 
@@ -69,11 +69,13 @@
         <p>Para ello, el usuario debe consultar las instrucciones y manuales de su navegador para esta información alojados en siguiente link: https://www.Genesis.com/cookies. Ninguna cookie permite extraer información del disco duro del usuario o acceder a información personal. Simplemente asocian el navegador de un ordenador determinado a un código anónimo. La única manera de que la información privada de un usuario forme parte de un archivo cookie, es que el usuario dé personalmente esa información al servidor.</p>
     </div><br><br><br>
 
+    <button onclick="scrollToTop()" id="btnSubir" title="Ir arriba"><i class="fa-solid fa-arrow-up fa-xl" style="color: #ffffff; align-items:center;"></i></button>
 
     <!--FOOTER-->
     <?php include '../controller/footerController.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>
