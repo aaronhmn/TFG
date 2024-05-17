@@ -42,12 +42,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 exit();
             }
         } else {
-            $mensaje = 'Credenciales incorrectas o cuenta no encontrada.';
-            // Manejar error de autenticación
+            $mensaje = 'Email o contraseña incorrecta.';
         }
     } else {
         $mensaje = 'Error al conectar con la base de datos.';
-        // Manejar error de conexión
     }
 }
 

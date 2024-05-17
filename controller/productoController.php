@@ -2,16 +2,11 @@
 namespace model;
 
 use \model\utils;
-use \model\productoModel;
-use \model\carrito;
-use \model\usuario;
-
+use \model\producto;
 
 //Añadimos el código del modelo
 require_once("../model/utils.php");
 require_once("../model/productoModel.php");
-require_once("../model/carritoModel.php");
-require_once("../model/usuarioModel.php");
 $mensaje = null;
 
 if (session_status() == PHP_SESSION_NONE) {

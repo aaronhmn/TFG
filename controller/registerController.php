@@ -2,12 +2,12 @@
 namespace model;
 
 use \model\utils;
-use \model\usuarioModel;
+use \model\usuario;
 
-//Añadimos el código del modelo
+// Añadimos el código del modelo
 require_once("../model/utils.php");
 require_once("../model/usuarioModel.php");
-$mensaje=null;
+$mensaje = null;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
@@ -23,6 +23,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $email = $_POST['email'];
     $nombreUsuario = $_POST['nombre_usuario'];
     $contraseña = $_POST['contrasena'];
+
+    // Validación del número de teléfono
+    if (!preg_match('/^\d{9}$/', $telefono)) {
+        $mensaje = 'El número de teléfono es inválido. Debe tener 9 dígitos.';
+        echo $mensaje;
+        return; // Detener la ejecución si hay error
+    }
+
+    // Validación del DNI
+    if (!preg_match('/^\d{8}[A-Za-z]$/', $dni)) {
+        $mensaje = 'El DNI es inválido. Debe tener 8 dígitos seguidos de una letra.';
+        echo $mensaje;
+        return; // Detener la ejecución si hay error
+    }
+
+    // Validación de la contraseña
+    if (strlen($contraseña) < 6) {
+        $mensaje = 'La contraseña debe tener al menos 6 caracteres.';
+        echo $mensaje;
+        return; // Detener la ejecución si hay error
+    }
 
     $usuario = array();
     $usuario["nombre"] = utils::limpiar_datos($nombre);
@@ -53,11 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     if ($resultado != null)
     {
-        /*$mensaje = "El Usuario se Registro Correctamente";
-        echo ($mensaje);*/
-
         header("Location: ../controller/loginController.php");
-                exit();
+        exit();
     }    
     else
     {
@@ -67,6 +85,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 
 include("../view/registerView.php");
-
 
 ?>

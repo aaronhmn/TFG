@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/styles/css/login.css" />
     <link rel="icon" type="image/vnd.icon" href="../assets/img/genesis logo sin fondo favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,6 +22,14 @@
                 <h2 style="color: #8350f2;">Inicio de Sesión</h2>
                 <img class="logo" src="../assets/img/genesis logo sin fondo.png" alt="logo">
             </div>
+            <div class="alert-container">
+                <?php if (isset($mensaje)) : ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <?php echo htmlspecialchars($mensaje); ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endif; ?>
+            </div><br>
             <form method="POST" action="../controller/loginController.php" id="loginForm" style="margin-top:-40px;">
                 <div class="input-box">
                     <input type="email" id="email" name="email" required placeholder="Email" autocomplete="nope">
@@ -44,6 +52,9 @@
             </form>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
