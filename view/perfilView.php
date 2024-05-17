@@ -72,11 +72,11 @@
           </div>
           <div class="col-6">
             <label for="telefono" class="form-label"><b>Telefono:</b></label>
-            <input type="tel" class="form-control" id="telefono" name="telefono" value="<?php echo htmlspecialchars($datosUsuario['telefono'] ?? ''); ?>" placeholder="Telefono" />
+            <input type="text" class="form-control" id="telefono" name="telefono" value="<?php echo htmlspecialchars($datosUsuario['telefono'] ?? ''); ?>" digitsonly="true" pattern="\d*" placeholder="Telefono" />
           </div>
           <div class="col-6">
             <label for="codigo_postal" class="form-label"><b>Codigo Postal:</b></label>
-            <input type="number" class="form-control" id="codigo_postal" name="codigo_postal" value="<?php echo htmlspecialchars($datosUsuario['codigo_postal'] ?? ''); ?>" placeholder="Codigo Postal" />
+            <input type="text" class="form-control" id="codigo_postal" name="codigo_postal" value="<?php echo htmlspecialchars($datosUsuario['codigo_postal'] ?? ''); ?>" digitsonly="true" placeholder="Codigo Postal" />
           </div>
           <div class="col-6">
             <label for="calle" class="form-label"><b>Calle:</b></label>
@@ -84,7 +84,7 @@
           </div>
           <div class="col-6">
             <label for="numero_bloque" class="form-label"><b>Numero de bloque:</b></label>
-            <input type="number" class="form-control" id="numero_bloque" name="numero_bloque" value="<?php echo htmlspecialchars($datosUsuario['numero_bloque'] ?? ''); ?>" placeholder="Numero de bloque" />
+            <input type="text" class="form-control" id="numero_bloque" name="numero_bloque" value="<?php echo htmlspecialchars($datosUsuario['numero_bloque'] ?? ''); ?>" digitsonly="true" placeholder="Numero de bloque" />
           </div>
           <div class="col-6">
             <label for="piso" class="form-label"><b>Piso:</b></label>
@@ -109,6 +109,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/perfil.js"></script>
 
   <script>
 document.getElementById('cancelButton').addEventListener('click', function() {

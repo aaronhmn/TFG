@@ -38,7 +38,7 @@ namespace views;
                     <input type="text" required placeholder="Segundo Apellido" id="segundo_apellido" name="segundo_apellido" autocomplete="nope">
                 </div>
                 <div class="input-box">
-                    <input type="tel" required placeholder="Teléfono (9 dígitos)" id="telefono" name="telefono" autocomplete="nope">
+                    <input type="text" required placeholder="Teléfono (9 dígitos)" id="telefono" name="telefono" digitsonly="true" autocomplete="nope">
                     <span id="errorTelefono" class="error-message"></span>
                 </div>
                 <div class="input-box">
@@ -59,9 +59,11 @@ namespace views;
                 </div>
                 <div class="input-box">
                     <input type="email" required placeholder="Email" id="email" name="email" autocomplete="nope">
+                    <span id="errorEmail" class="error-message"></span>
                 </div>
                 <div class="input-box">
                     <input type="text" required placeholder="Nombre de usuario" id="nombre_usuario" name="nombre_usuario" autocomplete="nope">
+                    <span id="errorNombre_usuario" class="error-message"></span>
                 </div>
                 <div class="input-box">
                     <input type="password" required placeholder="Contraseña (mínimo 6 carácteres)" id="contrasena" name="contrasena">

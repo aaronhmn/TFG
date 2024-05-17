@@ -1,4 +1,5 @@
 <?php
+
 namespace model;
 
 use \model\utils;
@@ -17,12 +18,13 @@ if (!isset($_SESSION['email'])) {
 }
 
 $conexPDO = utils::conectar();
-$gestorUsu = new Usuario(); 
+$gestorUsu = new Usuario();
 $correo = $_SESSION['email'];
 $usuario = $gestorUsu->getUsuario($correo, $conexPDO);
 
 if ($usuario) {
     $codigoActivacion = $usuario['activacion'];
+    echo "<script>console.log('Código de activación: $codigoActivacion');</script>";
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['inputCodigo'])) {
         $codigoIngresado = $_POST['inputCodigo'];
@@ -32,7 +34,8 @@ if ($usuario) {
     $_SESSION['error'] = "Error al obtener información del usuario.";
 }
 
-function validarCodigo($codigoIngresado, $codigoActivacion, $correo, $conexPDO) {
+function validarCodigo($codigoIngresado, $codigoActivacion, $correo, $conexPDO)
+{
     if ($codigoIngresado == $codigoActivacion) {
         $gestorUsu = new Usuario();
         $gestorUsu->activarUsuario($correo, $conexPDO);
@@ -44,4 +47,3 @@ function validarCodigo($codigoIngresado, $codigoActivacion, $correo, $conexPDO) 
 }
 
 include("../view/verificarView.php");
-?>

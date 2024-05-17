@@ -68,7 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $usuario["activacion"]=utils::generar_codigo_activacion();
     $gestorUsu = new Usuario();
 
-    //Nos conectamos a la Base de Datos
     $conexPDO = utils::conectar();
     $resultado = $gestorUsu->addUsuario($usuario, $conexPDO);
 

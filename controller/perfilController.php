@@ -47,6 +47,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $numero_bloque = $_POST['numero_bloque'] ?? '';
     $piso = $_POST['piso'] ?? '';
 
+    $errores = [];
+
+    // Validar el DNI
+    if (!preg_match('/^\d{8}[A-Za-z]$/', $dni)) {
+        $errores[] = "El DNI debe tener 8 dígitos seguidos de una letra.";
+    }
+
+    // Validar el teléfono
+    if (!preg_match('/^\d{9}$/', $telefono)) {
+        $errores[] = "El número de teléfono debe tener 9 dígitos.";
+    }
+
+    // Validar el email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errores[] = "El email es inválido.";
+    }
+
+    // Si hay errores, prepara una respuesta adecuada o maneja los errores como consideres necesario
+    if (!empty($errores)) {
+        $_SESSION['mensaje'] = "Errores en el formulario: \n" . implode("\n", $errores);
+        $_SESSION['tipo_mensaje'] = "danger";
+        header('Location: ../controller/perfilController.php');
+        exit();
+    }
+
     // Crear el array de datos del usuario para la actualización
     $usuario = [
         'idusuario' => $_SESSION['id_usuario'],
