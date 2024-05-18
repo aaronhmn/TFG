@@ -17,74 +17,71 @@
 
 <body style="background-color: #e6e6fa">
 
-    <div class="sidebar">
-        <div class="logo"></div>
-        <ul class="menu">
-            <li>
-                <a href="../controller/inicioAdminController.php">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span>Dashboard</span>
+<nav class="navbar navbar-dark fixed-top" style="background-color: #8350f2;">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#" id="logo-sidebar"><img src="../assets/img/genesis Logo.png" style="width: 50px;">Marcas</a>
+            <div class="dropdown">
+                <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8350f2; border-color: #8350f2; font-size: 18px;">
+                    <?php
+                    $resultado = $_SESSION['nombre_usuario'];
+                    echo "<b style='color: #fff;'>$resultado</b>";
+                    ?>
                 </a>
-            </li>
-            <li>
-                <a href="../controller/usuariosAdminController.php">
-                    <i class="fas fa-user"></i>
-                    <span>Usuarios</span>
-                </a>
-            </li>
-            <li>
-                <a href="../controller/productosAdminController.php">
-                    <i class="fas fa-briefcase"></i>
-                    <span>Productos</span>
-                </a>
-            </li>
-            <li>
-                <a href="../controller/categoriasAdminController.php">
-                    <i class="fas fa-list-alt"></i>
-                    <span>Categorías</span>
-                </a>
-            </li>
-            <li class="active">
-                <a href="../controller/marcasAdminController.php">
-                    <i class="fa-solid fa-flag"></i>
-                    <span><b>Marcas</b></span>
-                </a>
-            </li>
-            <li>
-                <a href="../controller/pedidosAdminController.php">
-                    <i class="fas fa-shipping-fast"></i>
-                    <span>Pedidos</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-
-    <div class="container" style="max-width: 1600px;"><br><br>
-        <nav class="navbar3">
-            <img class="logo" src="../assets/img/genesis logo sin fondo favicon.png" alt="">
-            <p class="parrafo-logo"><b>Genesis</b></p>
-            <ul>
-                <li>
-                    <h3 style="margin-right: 50px;">Bienvenido
-                        <?php
-                        $resultado = $_SESSION['nombre_usuario'];
-                        print "<b style='color: #8350f2;'>" . $resultado . "</b>";
-                        ?>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+                    <li>
+                        <form action="../controller/inicioController.php" method="POST">
+                            <button class="dropdown-item">
+                                <i class="fas fa-home"></i> Ir a la web
+                            </button>
+                        </form>
+                    </li><hr>
+                    <li>
+                        <form action="../controller/cerrarSesionController.php" method="POST">
+                            <button class="dropdown-item">
+                                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel" style="visibility: visible; background-color: #8350f2;">
+                <div class="offcanvas-header">
+                    <h3 class="offcanvas-title" id="offcanvasDarkNavbarLabel" style="color: white; margin-left: 20px;">
+                    <img src="../assets/img/genesis Logo.png" style="width: 80px; margin-right: 5px; margin-left: -20px;"><b>Menu</b>
                     </h3>
-                </li>
-                <li>
-                    <form action='../controller/inicioController.php' method="POST">
-                        <button class="btn btn-primary home-boton" style="margin-right: 50px; background-color: #8350F2; border-color: #8350F2; border-radius: 4px;"><i class="fas fa-home" style="color: white; margin-right: 8px;"></i><b>Ir a la web</b></button>
-                    </form>
-                </li>
-                <li>
-                    <form action='../controller/cerrarSesionController.php' method="POST">
-                        <button class="btn btn-danger"><i class="fas fa-sign-out" style="color: white; margin-right: 8px;"></i><b>Cerrar Sesión</b></button>
-                    </form>
-                </li>
-            </ul>
-        </nav><br>
-        <hr style="border-top: 2px solid #8350F2;"><br>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <hr style="color: #fff;">
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav flex-grow-1 pe-3" style="margin-left: 20px;">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="../controller/inicioAdminController.php"><i class="fas fa-tachometer-alt fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Inicio</span></a>
+                        </li>
+                        <li class="nav-item mt-4">
+                            <a class="nav-link active" href="../controller/usuariosAdminController.php"><i class="fas fa-user fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Usuarios</span></a>
+                        </li>
+                        <li class="nav-item mt-4">
+                            <a class="nav-link active" href="../controller/productosAdminController.php"><i class="fas fa-briefcase fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Productos</span></a>
+                        </li>
+                        <li class="nav-item mt-4">
+                            <a class="nav-link active" href="../controller/categoriasAdminController.php"><i class="fas fa-list-alt fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Categorías</span></a>
+                        </li>
+                        <li class="nav-item mt-4" id="active">
+                            <a class="nav-link active" href="../controller/marcasAdminController.php"><i class="fa-solid fa-flag fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Marcas</span></a>
+                        </li>
+                        <li class="nav-item mt-4">
+                            <a class="nav-link active" href="#"><i class="fas fa-shipping-fast fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">pedidos</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5" style="max-width: 1600px;"><br><br>
 
         <div class="navbar2">
             <ul>
@@ -108,9 +105,9 @@
         }
         ?>
 
-        <div class="row">
-            <div class="col-lg-12 col-sm-12">
-                <table class="table">
+        <div class="row" style="margin-right: 0;">
+            <div class="col-lg-12 col-sm-12 table-responsive">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Id</th>

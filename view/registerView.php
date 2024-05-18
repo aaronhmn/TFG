@@ -29,48 +29,48 @@ namespace views;
             </div>
             <form method="POST" action="../controller/registerController.php" style="margin-top:-40px;">
                 <div class="input-box">
-                    <input type="text" required placeholder="Nombre" id="nombre" name="nombre" autocomplete="nope">
+                    <input type="text" required placeholder="Nombre *" id="nombre" name="nombre" autocomplete="nope">
                 </div>
                 <div class="input-box">
-                    <input type="text" required placeholder="Primer Apellido" id="primer_apellido" name="primer_apellido" autocomplete="nope">
+                    <input type="text" required placeholder="Primer Apellido *" id="primer_apellido" name="primer_apellido" autocomplete="nope">
                 </div>
                 <div class="input-box">
-                    <input type="text" required placeholder="Segundo Apellido" id="segundo_apellido" name="segundo_apellido" autocomplete="nope">
+                    <input type="text" required placeholder="Segundo Apellido *" id="segundo_apellido" name="segundo_apellido" autocomplete="nope">
                 </div>
                 <div class="input-box">
-                    <input type="text" required placeholder="Teléfono (9 dígitos)" id="telefono" name="telefono" digitsonly="true" autocomplete="nope">
+                    <input type="text" required placeholder="Teléfono (9 dígitos) *" id="telefono" name="telefono" digitsonly="true" autocomplete="nope">
                     <span id="errorTelefono" class="error-message"></span>
                 </div>
                 <div class="input-box">
-                    <input type="text" required placeholder="DNI (8 dígitos y una letra)" id="dni" name="dni" autocomplete="nope">
+                    <input type="text" required placeholder="DNI (8 dígitos y una letra) *" id="dni" name="dni" autocomplete="nope">
                     <span id="errorDNI" class="error-message"></span>
                 </div>
                 <div class="input-box">
-                <input type="text" required placeholder="Código Postal" id="codigo_postal" name="codigo_postal" digitsonly="true" autocomplete="nope">
+                <input type="text" required placeholder="Código Postal" id="codigo_postal *" name="codigo_postal" digitsonly="true" autocomplete="nope">
                 </div>
                 <div class="input-box">
-                    <input type="text" required placeholder="Nombre de la calle o avenida" id="calle" name="calle" autocomplete="nope">
+                    <input type="text" required placeholder="Nombre de la calle o avenida *" id="calle" name="calle" autocomplete="nope">
                 </div>
                 <div class="input-box">
-                <input type="text" required placeholder="Número del bloque o casa" id="numero_bloque" name="numero_bloque" digitsonly="true" autocomplete="nope">
+                <input type="text" required placeholder="Número del bloque o casa *" id="numero_bloque" name="numero_bloque" digitsonly="true" autocomplete="nope">
                 </div>
                 <div class="input-box">
                     <input type="text" placeholder="Piso" id="piso" name="piso" autocomplete="nope">
                 </div>
                 <div class="input-box">
-                    <input type="email" required placeholder="Email" id="email" name="email" autocomplete="nope">
+                    <input type="email" required placeholder="Email *" id="email" name="email" autocomplete="nope">
                     <span id="errorEmail" class="error-message"></span>
                 </div>
                 <div class="input-box">
-                    <input type="text" required placeholder="Nombre de usuario" id="nombre_usuario" name="nombre_usuario" autocomplete="nope">
+                    <input type="text" required placeholder="Nombre de usuario *" id="nombre_usuario" name="nombre_usuario" autocomplete="nope">
                     <span id="errorNombre_usuario" class="error-message"></span>
                 </div>
                 <div class="input-box">
-                    <input type="password" required placeholder="Contraseña (mínimo 6 carácteres)" id="contrasena" name="contrasena">
+                    <input type="password" required placeholder="Contraseña (mínimo 6 carácteres) *" id="contrasena" name="contrasena">
                     <span id="errorContrasena" class="error-message"></span>
                 </div>
                 <div class="input-box">
-                    <input type="password" required placeholder="Repetir Contraseña" id="contrasena2" name="contrasena2">
+                    <input type="password" required placeholder="Repetir Contraseña *" id="contrasena2" name="contrasena2">
                     <span id="errorContrasena2" class="error-message"></span>
                 </div>
                 <button type="submit" class="btn">Registrarse</button>

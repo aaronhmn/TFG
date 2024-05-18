@@ -194,5 +194,82 @@ body{
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
+.navbar-toggler {
+    padding: var(--bs-navbar-toggler-padding-y) var(--bs-navbar-toggler-padding-x);
+    font-size: var(--bs-navbar-toggler-font-size);
+    line-height: 1;
+    color: var(--bs-navbar-color);
+    background-color: transparent;
+    border: 2px solid var(--bs-navbar-toggler-border-color) !important;
+    border-radius: var(--bs-navbar-toggler-border-radius);
+    transition: var(--bs-navbar-toggler-transition);
+}
+
+.navbar-dark, .navbar[data-bs-theme=dark] {
+    --bs-navbar-color: rgba(255, 255, 255, 1);
+    --bs-navbar-hover-color: rgba(255, 255, 255, 1);
+    --bs-navbar-disabled-color: rgba(255, 255, 255, 1);
+    --bs-navbar-active-color: #fff;
+    --bs-navbar-brand-color: #fff;
+    --bs-navbar-brand-hover-color: #fff;
+    --bs-navbar-toggler-border-color: rgba(255, 255, 255, 1) !important;
+    --bs-navbar-toggler-icon-bg: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e);
+}
+
+.navbar-toggler-icon {
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+#logo-sidebar{
+    font-size: 24px;
+}
+
+#active{
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #00000049;
+}
+
+.nav-item{
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.nav-item:hover {
+    background-color: #08080823;
+}
+
+.dropdown-menu{
+    background-color: #e4e4e4 !important;
+    border: 2px solid #525151 !important;
+}
+
+.dropdown-item{
+    background-color: #e4e4e4 !important;
+    font-size: 18px;
+    height: 50px;
+}
+
+.dropdown-item:hover{
+    background-color: #cacaca !important;
+    color: #000 !important;
+}
+
+.table td {
+    vertical-align: middle;
+  }
+
+@media (max-width: 374px) {
+    #logo-sidebar{
+        display: none;
+    }
+}
 
 
