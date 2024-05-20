@@ -37,6 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Mostrar el modal con el nombre del usuario
                 $('#purchaseConfirmationModal').modal('show');
                 document.getElementById('userName').textContent = nombreUsuario; // Usar la variable global
+        
+                // Envía los datos del carrito al servidor
+                enviarDatosCarrito();
             });
         },
         onError: function(err) {
@@ -103,4 +106,31 @@ function actualizarContadorCarrito() {
     if (contador) {
         contador.textContent = totalItems;
     }
+}
+
+function enviarDatosCarrito() {
+    let carritoKey = getCarritoKey();
+    const carrito = JSON.parse(localStorage.getItem(carritoKey));
+    const datosCarrito = Object.values(carrito);
+
+    fetch('../controller/procesarPedidoController.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datosCarrito)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Respuesta del servidor no fue OK');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Success:', data);
+        // Aquí puedes redireccionar o mostrar un mensaje de éxito.
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 }
