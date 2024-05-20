@@ -38,7 +38,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($idPedido) {
             // Inserta los detalles del pedido
             foreach ($datos as $item) {
-                $detallePedidoModel->addDetallePedido($conexPDO, $idPedido, $idProducto, $cantidad, $precio, $precioSubtotal);
+                $idProducto = $item['id_producto_dp'];  // Este campo debe coincidir exactamente con el nombre que envías desde JS
+                $cantidad = $item['cantidad'];
+                $precio = $item['precio'];
+                $precioSubtotal = $cantidad * $precio;
+                $resultado = $detallePedidoModel->addDetallePedido($conexPDO, $idPedido, $idProducto, $cantidad, $precio, $precioSubtotal);
+                if (!$resultado) {
+                    echo json_encode(['success' => false, 'message' => 'Error al insertar detalle de pedido']);
+                    exit;
+                }
             }
             echo json_encode(['success' => true, 'message' => 'Pedido realizado con éxito']);
         } else {

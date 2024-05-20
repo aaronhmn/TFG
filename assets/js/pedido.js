@@ -111,7 +111,11 @@ function actualizarContadorCarrito() {
 function enviarDatosCarrito() {
     let carritoKey = getCarritoKey();
     const carrito = JSON.parse(localStorage.getItem(carritoKey));
-    const datosCarrito = Object.values(carrito);
+    const datosCarrito = Object.values(carrito).map(item => ({
+        id_producto_dp: item.id,  // Asegúrate de que esta clave sea la correcta
+        cantidad: item.cantidad,
+        precio: item.precio
+    }));
 
     fetch('../controller/procesarPedidoController.php', {
         method: 'POST',
@@ -120,15 +124,10 @@ function enviarDatosCarrito() {
         },
         body: JSON.stringify(datosCarrito)
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Respuesta del servidor no fue OK');
-        }
-        return response.json();
-    })
+    .then(response => response.json())
     .then(data => {
         console.log('Success:', data);
-        // Aquí puedes redireccionar o mostrar un mensaje de éxito.
+        // Aquí puedes gestionar el redireccionamiento o la confirmación visual
     })
     .catch((error) => {
         console.error('Error:', error);
