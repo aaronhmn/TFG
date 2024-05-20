@@ -75,27 +75,18 @@ class pedido
         }
     }
 
-    public function getPedidoId($id, $conexPDO)
-    {
+    public function getPedidoId($id, $conexPDO) {
         if (isset($id) && is_numeric($id)) {
-
-            if ($conexPDO != null) {
-                try {
-                    //Primero introducimos la sentencia a ejecutar con prepare
-                    //Ponemos en lugar de valores directamente, interrogaciones
-                    $sentencia = $conexPDO->prepare("SELECT * FROM genesis.pedido where idpedido=?");
-                    //Asociamos a cada interrogacion el valor que queremos en su lugar
-                    $sentencia->bindParam(1, $id);
-                    //Ejecutamos la sentencia
-                    $sentencia->execute();
-
-                    //Devolvemos los datos del cliente
-                    return $sentencia->fetch();
-                } catch (PDOException $e) {
-                    print("Error al acceder a BD" . $e->getMessage());
-                }
+            try {
+                $stmt = $conexPDO->prepare("SELECT * FROM genesis.pedido WHERE idpedido = ?");
+                $stmt->bindParam(1, $id, PDO::PARAM_INT);
+                $stmt->execute();
+                return $stmt->fetch(PDO::FETCH_ASSOC);  // fetch() para obtener solo un registro
+            } catch (PDOException $e) {
+                print("Error al acceder a BD" . $e->getMessage());
             }
         }
+        return null; // Devuelve null si no hay datos o el id no es válido
     }
 
     public function addPedido($conexPDO, $idUsuario, $total)

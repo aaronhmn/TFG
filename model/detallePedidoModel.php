@@ -33,44 +33,28 @@ class detalle_pedido
     /**
      * Funcion que nos devuelve todos los pedidos con paginacion
      * */
-    public function getDetallesPedidosPag($conexPDO, $ordAsc, string $campoOrd, int $numPag, int $cantElem)
-    {
+    public function getDetallesPedidosPag($conexPDO, $idPedido, $ordAsc, string $campoOrd, int $numPag, int $cantElem)
+{
+    if ($conexPDO != null) {
+        try {
+            $query = "SELECT * FROM genesis.detalle_pedido WHERE id_pedido_dp = :idPedido ORDER BY {$campoOrd} ";
+            if (!$ordAsc) $query .= "DESC ";
 
-        if ($conexPDO != null) {
-            try {
-                //Query inicial
-                $query = "SELECT * FROM genesis.detalle_pedido ORDER BY ? ";
+            $query .= "LIMIT :limit OFFSET :offset";
 
-                //si esta ordenada descentemente añadimos DESC
-                if (!$ordAsc) $query = $query . "DESC ";
+            $stmt = $conexPDO->prepare($query);
+            $stmt->bindParam(':idPedido', $idPedido, PDO::PARAM_INT);
+            $stmt->bindParam(':limit', $cantElem, PDO::PARAM_INT);
+            $stmt->bindValue(':offset', ($numPag - 1) * $cantElem, PDO::PARAM_INT);
 
-                //Añadimos a la query la cantidad de elementos por página con LIMIT
-                //Y desde que página empieza con OFFSET
-                $query = $query . "LIMIT ? OFFSET ?";
+            $stmt->execute();
 
-                $sentencia = $conexPDO->prepare($query);
-                //el primer parametro es el campo a ordenar
-                $sentencia->bindParam(1, $campoOrd);
-                //El segundo parametro es la cantidad de elementos por pagina
-                $sentencia->bindParam(2, $cantElem, PDO::PARAM_INT);
-                //El tercer parametro es desde que registro empieza a partir de la
-                //pagina actual
-                $offset = ($numPag - 1) * $cantElem;
-                if ($numPag != 1)
-                    $offset++;
-
-                $sentencia->bindParam(3, $offset, PDO::PARAM_INT);
-
-                //Ejecutamos la sentencia
-                $sentencia->execute();
-
-                //Devolvemos los datos del cliente
-                return $sentencia->fetchAll();
-            } catch (PDOException $e) {
-                print("Error al acceder a BD" . $e->getMessage());
-            }
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            print("Error al acceder a BD" . $e->getMessage());
         }
     }
+}
 
     public function getDetallePedidoId($id, $conexPDO)
     {
