@@ -37,15 +37,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Mostrar el modal con el nombre del usuario
                 $('#purchaseConfirmationModal').modal('show');
                 document.getElementById('userName').textContent = nombreUsuario; // Usar la variable global
-        
+    
                 // Envía los datos del carrito al servidor
                 enviarDatosCarrito();
+                // Limpiar el carrito
+                limpiarCarrito();
             });
         },
         onError: function(err) {
             console.error('Error al procesar el pago con PayPal:', err);
         }
     }).render('#paypal-button-container');
+    $('#purchaseConfirmationModal').on('hidden.bs.modal', function () {
+        window.location.href = "../controller/misPedidosController.php";
+    });
 });
 
 function cargarCarrito() {
@@ -132,4 +137,10 @@ function enviarDatosCarrito() {
     .catch((error) => {
         console.error('Error:', error);
     });
+}
+
+function limpiarCarrito() {
+    let carritoKey = getCarritoKey();
+    localStorage.removeItem(carritoKey);
+    actualizarContadorCarrito(); // Actualizar el contador visual en la interfaz
 }
