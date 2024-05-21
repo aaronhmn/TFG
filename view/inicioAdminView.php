@@ -148,7 +148,7 @@
                             <i class="fas fa-shipping-fast" style="color: #8350F2;"></i>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title"><b>Pedidos</b></h5>
+                            <h5 class="card-title"><b>Pedidos</b> <span class="badge badge-custom"><?= $pedidos ?></span></h5>
                         </div>
                     </div>
                 </a>

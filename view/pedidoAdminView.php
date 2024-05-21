@@ -79,22 +79,10 @@
         </div>
     </nav>
 
-    <div class="container mt-5" style="max-width: 1600px;"><br><br>
-        <br>
-        <?php
-        if (isset($_SESSION['mensaje'])) {
-            echo "<div class='alert alert-{$_SESSION['tipo_mensaje']} alert-dismissible fade show' role='alert'>
-            {$_SESSION['mensaje']}
-            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-          </div>";
-            // Limpia los mensajes después de mostrarlos
-            unset($_SESSION['mensaje']);
-            unset($_SESSION['tipo_mensaje']);
-        }
-        ?>
-        <div class="row">
-            <div class="col-lg-12 col-sm-12">
-                <table class="table">
+    <div class="container mt-5" style="max-width: 1600px;"><br><br><br>
+        <div class="row" style="margin: 0;">
+            <div class="col-lg-12 col-sm-12 table-responsive">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Id Pedido</th>

@@ -17,42 +17,45 @@
 
 <body style="background-color: #e6e6fa">
 
-<nav class="navbar navbar-dark fixed-top" style="background-color: #8350f2;">
+    <nav class="navbar navbar-dark fixed-top" style="background-color: #8350f2;">
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
-                aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-brand" href="../controller/inicioAdminController.php" id="logo-sidebar"><img src="../assets/img/genesis Logo.png" style="width: 50px;">Genesis</a>
             <div class="dropdown">
                 <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8350f2; border-color: #8350f2; font-size: 18px;">
-                <?php
+                    <?php
                     $resultado = $_SESSION['nombre_usuario'];
                     echo "<b style='color: #fff;'>$resultado</b>";
                     ?>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                    <li><form action="../controller/inicioController.php" method="POST">
-                        <button class="dropdown-item">
-                            <i class="fas fa-home"></i> Ir a la web
-                        </button>
-                    </form></li><hr>
-                    <li><form action="../controller/cerrarSesionController.php" method="POST">
-                        <button class="dropdown-item">
-                            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-                        </button>
-                    </form></li>
+                    <li>
+                        <form action="../controller/inicioController.php" method="POST">
+                            <button class="dropdown-item">
+                                <i class="fas fa-home"></i> Ir a la web
+                            </button>
+                        </form>
+                    </li>
+                    <hr>
+                    <li>
+                        <form action="../controller/cerrarSesionController.php" method="POST">
+                            <button class="dropdown-item">
+                                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                            </button>
+                        </form>
+                    </li>
                 </ul>
             </div>
             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel" style="visibility: visible; background-color: #8350f2;">
                 <div class="offcanvas-header">
                     <h3 class="offcanvas-title" id="offcanvasDarkNavbarLabel" style="color: white; margin-left: 20px;">
-                    <img src="../assets/img/genesis Logo.png" style="width: 80px; margin-right: 5px; margin-left: -20px;"><b>Menu</b>
+                        <img src="../assets/img/genesis Logo.png" style="width: 80px; margin-right: 5px; margin-left: -20px;"><b>Menu</b>
                     </h3>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                        aria-label="Close"></button>
-                </div><hr style="color: #fff;">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <hr style="color: #fff;">
                 <div class="offcanvas-body">
                     <ul class="navbar-nav flex-grow-1 pe-3" style="margin-left: 20px;">
                         <li class="nav-item">
@@ -79,21 +82,20 @@
         </div>
     </nav>
 
-    <div class="container mt-5" style="max-width: 1600px;"><br><br>
-        <?php
-        if (isset($_SESSION['mensaje'])) {
-            echo "<div class='alert alert-{$_SESSION['tipo_mensaje']} alert-dismissible fade show' role='alert'>
-            {$_SESSION['mensaje']}
-            <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-          </div>";
-            // Limpia los mensajes después de mostrarlos
-            unset($_SESSION['mensaje']);
-            unset($_SESSION['tipo_mensaje']);
-        }
-        ?>
-        <div class="row">
-            <div class="col-lg-12 col-sm-12">
-                <table class="table">
+    <div class="container mt-5" style="max-width: 1600px;"><br><br><br>
+        <br>
+        <div class="row" style="margin: 0;">
+        <div class="navbar2">
+            <ul>
+                <li>
+                    <a href="../controller/pedidosAdminController.php" class="btn btn-info" style="color: white; background-color: #8350F2; border-color: #8350F2;">
+                        <i class="fas fa-arrow-left" style="margin-right: 3px;"></i> Volver atrás
+                    </a>
+                </li>
+            </ul>
+        </div>
+            <div class="col-lg-12 col-sm-12 table-responsive mt-4">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Id Detalle</th>
@@ -104,9 +106,9 @@
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Precio Subtotal</th>
                         </tr>
                     </thead>
-                    <tbody> 
-                        <?php foreach ($detalles as $detalle) : 
-                            $nombreProducto = $productoModel->getProductoId($detalle['id_producto_dp'], $conexPDO)['nombre'];?>
+                    <tbody>
+                        <?php foreach ($detalles as $detalle) :
+                            $nombreProducto = $productoModel->getProductoId($detalle['id_producto_dp'], $conexPDO)['nombre']; ?>
                             <tr>
                                 <td style='padding-top: 14px;'><?php echo htmlspecialchars($detalle['iddetalle_pedido']); ?></td>
                                 <td style='padding-top: 14px;'><?php echo htmlspecialchars($detalle['id_pedido_dp']); ?></td>
