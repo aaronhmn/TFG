@@ -79,8 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function addProductToCart() {
   const productoId = this.getAttribute('data-id');
-  console.log('Producto ID:', productoId);  // Verificar qué se está capturando
-
   const nombre = this.getAttribute('data-nombre');
   const precio = parseFloat(this.getAttribute('data-precio'));
 
@@ -100,6 +98,7 @@ function addProductToCart() {
 
   localStorage.setItem(carritoKey, JSON.stringify(carrito));
   actualizarContadorCarrito();
+  showAlert('Producto añadido al carrito','success');
 }
 
 function showAlert(message, type) {
@@ -113,6 +112,9 @@ function showAlert(message, type) {
   ].join('');
 
   alertPlaceholder.append(wrapper);
+
+  // Asegúrate de que la alerta se muestre en la pantalla visible
+  alertPlaceholder.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
   setTimeout(() => {
       wrapper.remove();

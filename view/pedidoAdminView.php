@@ -122,8 +122,8 @@
 
 
                             echo "<td>";
-                            echo "<a href='../controller/detallesPedidoAdminController.php?idPedido=" . htmlspecialchars($datosPedido['idpedido'], ENT_QUOTES) . "' class='btn btn-info' style='color: white;'>";
-                            echo "<i class='fas fa-eye'></i> Ver Detalles";
+                            echo "<a href='../controller/detallesPedidoAdminController.php?idPedido=" . htmlspecialchars($datosPedido['idpedido'], ENT_QUOTES) . "'>";
+                            echo "<i class='fas fa-eye fa-xl' style='color: #8350f2'></i>";
                             echo "</a>";
                             echo "</td>";
                         }
