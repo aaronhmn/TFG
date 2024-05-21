@@ -123,4 +123,31 @@ class pedido
         }
         return 0; // Si no hay conexión, retorna 0
     }
+
+    public function getPedidosPorUsuario($usuarioId, $conexPDO, $pagina = 1, $registrosPorPagina = 10) {
+        $inicio = ($pagina - 1) * $registrosPorPagina;
+        try {
+            $sentencia = $conexPDO->prepare("SELECT * FROM genesis.pedido WHERE id_usuario_pedido = ? LIMIT ?, ?");
+            $sentencia->bindParam(1, $usuarioId, PDO::PARAM_INT);
+            $sentencia->bindParam(2, $inicio, PDO::PARAM_INT);
+            $sentencia->bindParam(3, $registrosPorPagina, PDO::PARAM_INT);
+            $sentencia->execute();
+            return $sentencia->fetchAll();
+        } catch (PDOException $e) {
+            print("Error al acceder a BD" . $e->getMessage());
+            return [];  // Devuelve un arreglo vacío en caso de error
+        }
+    }
+
+    public function contarPedidosPorUsuario($usuarioId, $conexPDO) {
+        try {
+            $sentencia = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.pedido WHERE id_usuario_pedido = ?");
+            $sentencia->bindParam(1, $usuarioId, PDO::PARAM_INT);
+            $sentencia->execute();
+            return $sentencia->fetchColumn();
+        } catch (PDOException $e) {
+            print("Error al contar pedidos: " . $e->getMessage());
+            return 0;
+        }
+    }
 }

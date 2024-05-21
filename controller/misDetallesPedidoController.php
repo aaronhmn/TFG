@@ -15,8 +15,8 @@ use model\utils;
 session_start();
 
 // Asegúrate de que el usuario esté autorizado
-if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'] != 1) {
-    header('Location: ../view/noAutorizadoView.php');
+if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
+    header('Location: ../view/loginView.php');
     exit();
 }
 
@@ -53,8 +53,8 @@ if (isset($_GET['idPedido'])) {
 
     $detalles = $gestorDetallesPedido->getDetallesPedidosPag($conexPDO, $idPedido, $paginaActual, $itemsPorPagina);
 
-    include("../view/detallePedidoAdminView.php");
+    include("../view/misDetallesPedidoView.php");
 } else {
-    header('Location: ../view/pedidoAdminView.php'); // Redirigir si no hay ID de pedido
+    header('Location: ../view/misPedidosView.php'); // Redirigir si no hay ID de pedido
 }
 ?>

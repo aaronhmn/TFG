@@ -68,52 +68,21 @@
       box-shadow: 0 0 0 0.25rem rgba(131, 80, 242, 0.5) !important;
   }
 
-  @media (max-width: 768px) { /* Ajusta el punto de ruptura según tus necesidades */
-    .table-responsive table,
-    .table-responsive thead,
-    .table-responsive tbody,
-    .table-responsive th,
-    .table-responsive td,
-    .table-responsive tr { 
-      display: block; 
-    }
-  
-    /* Ocultar los encabezados de la tabla en dispositivos móviles */
-    .table-responsive thead tr {
-      position: absolute;
-      top: -9999px;
-      left: -9999px;
-    }
-  
-    .table-responsive tr { 
-      margin-bottom: 10px;
-      border: 1px solid #ddd;
-    }
-  
-    /* Hacer que las celdas se vean como filas */
-    .table-responsive td {
-      border: none;
-      border-bottom: 1px solid #ddd; 
-      position: relative;
-      padding-left: 50%;
-      text-align: left;
-    }
-  
-    /* Agregar etiquetas a cada celda con el nombre de la columna correspondiente */
-    .table-responsive td:before { 
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      width: 45%;
-      padding-right: 10px;
-      white-space: nowrap;
-      font-weight: bold;
-      text-align: left;
-    }
-  
-    /* Usar los atributos data-* para insertar el contenido antes de las celdas */
-    .table-responsive td:nth-of-type(1):before { content: "Producto"; }
-    .table-responsive td:nth-of-type(2):before { content: "Precio"; }
-    .table-responsive td:nth-of-type(3):before { content: "Cantidad"; }
-    .table-responsive td:nth-of-type(4):before { content: "Precio Subtotal"; }
-  }
+  .navbar2{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar2 ul{
+    flex: 2;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0;
+}
+
+.navbar2 ul li{
+    list-style: none;
+}

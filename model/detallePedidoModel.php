@@ -33,28 +33,27 @@ class detalle_pedido
     /**
      * Funcion que nos devuelve todos los pedidos con paginacion
      * */
-    public function getDetallesPedidosPag($conexPDO, $idPedido, $ordAsc, string $campoOrd, int $numPag, int $cantElem)
-{
-    if ($conexPDO != null) {
+    public function getDetallesPedidosPag($conexPDO, $idPedido, $pagina, $registrosPorPagina) {
+        $inicio = ($pagina - 1) * $registrosPorPagina;
+        $sql = "SELECT dp.*, p.nombre AS nombre_producto 
+                FROM genesis.detalle_pedido dp
+                JOIN genesis.producto p ON dp.id_producto_dp = p.idproducto
+                WHERE dp.id_pedido_dp = :idPedido 
+                ORDER BY dp.iddetalle_pedido ASC 
+                LIMIT :inicio, :registrosPorPagina";
+    
         try {
-            $query = "SELECT * FROM genesis.detalle_pedido WHERE id_pedido_dp = :idPedido ORDER BY {$campoOrd} ";
-            if (!$ordAsc) $query .= "DESC ";
-
-            $query .= "LIMIT :limit OFFSET :offset";
-
-            $stmt = $conexPDO->prepare($query);
+            $stmt = $conexPDO->prepare($sql);
             $stmt->bindParam(':idPedido', $idPedido, PDO::PARAM_INT);
-            $stmt->bindParam(':limit', $cantElem, PDO::PARAM_INT);
-            $stmt->bindValue(':offset', ($numPag - 1) * $cantElem, PDO::PARAM_INT);
-
+            $stmt->bindParam(':inicio', $inicio, PDO::PARAM_INT);
+            $stmt->bindParam(':registrosPorPagina', $registrosPorPagina, PDO::PARAM_INT);
             $stmt->execute();
-
-            return $stmt->fetchAll();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            print("Error al acceder a BD" . $e->getMessage());
+            error_log("Error al obtener detalles de pedido: " . $e->getMessage());
+            return [];
         }
     }
-}
 
     public function getDetallePedidoId($id, $conexPDO)
     {
@@ -85,6 +84,18 @@ class detalle_pedido
             return $conexPDO->lastInsertId();  // Esto ayudará a verificar si el insert realmente añadió un registro
         } catch (PDOException $e) {
             return "Error al insertar detalle: " . $e->getMessage();  // Más detalle sobre el error
+        }
+    }
+
+    public function contarDetallesPorPedido($idPedido, $conexPDO) {
+        try {
+            $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.detalle_pedido WHERE id_pedido_dp = ?");
+            $stmt->bindParam(1, $idPedido, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            error_log("Error al contar detalles: " . $e->getMessage());
+            return 0;
         }
     }
 }
