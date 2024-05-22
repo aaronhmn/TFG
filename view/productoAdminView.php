@@ -23,7 +23,7 @@
     }
     ?>
 
-<nav class="navbar navbar-dark fixed-top" style="background-color: #8350f2;">
+    <nav class="navbar navbar-dark fixed-top" style="background-color: #8350f2;">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -43,7 +43,8 @@
                                 <i class="fas fa-home"></i> Ir a la web
                             </button>
                         </form>
-                    </li><hr>
+                    </li>
+                    <hr>
                     <li>
                         <form action="../controller/cerrarSesionController.php" method="POST">
                             <button class="dropdown-item">
@@ -56,7 +57,7 @@
             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel" style="visibility: visible; background-color: #8350f2;">
                 <div class="offcanvas-header">
                     <h3 class="offcanvas-title" id="offcanvasDarkNavbarLabel" style="color: white; margin-left: 20px;">
-                    <img src="../assets/img/genesis Logo.png" style="width: 80px; margin-right: 5px; margin-left: -20px;"><b>Menu</b>
+                        <img src="../assets/img/genesis Logo.png" style="width: 80px; margin-right: 5px; margin-left: -20px;"><b>Menu</b>
                     </h3>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
@@ -276,12 +277,12 @@
 
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label"><b>Descripción:</b></label>
-                            <textarea class="form-control" name="inputDescripcion" rows="10"></textarea>
+                            <textarea class="form-control" name="inputDescripcion" rows="10" style="resize: none;"></textarea>
                         </div>
 
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label"><b>Especificacion:</b></label>
-                            <textarea class="form-control" name="inputEspecificacion" rows="10"></textarea>
+                            <textarea class="form-control" name="inputEspecificacion" rows="10" style="resize: none;"></textarea>
                         </div>
 
                         <div class="mb-3">
@@ -384,11 +385,15 @@
                     <p style="color: #8350F2;">Categoría:</p>
                     <span id="detalle_categoria"></span>
                     <hr>
-                    <p style="color: #8350F2;">Descripcion:</p>
-                    <span id="detalle_descripcion"></span>
+                    <div style="white-space: pre-wrap; margin-top: -45px; margin-bottom: -45px;">
+                        <p style="color: #8350F2;">Descripcion:</p>
+                        <span id="detalle_descripcion" style="margin-top: -45px;"></span>
+                    </div>
                     <hr>
-                    <p style="color: #8350F2;">Especificacion:</p>
-                    <span id="detalle_especificacion"></span>
+                    <div style="white-space: pre-wrap; margin-top: -45px; margin-bottom: -45px;">
+                        <p style="color: #8350F2;">Especificacion:</p>
+                        <span id="detalle_especificacion" style="margin-top: -45px;"></span>
+                    </div>
                     <hr>
                     <p style="color: #8350F2;">Marca:</p>
                     <span id="detalle_marca"></span>
@@ -429,7 +434,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
 
     <script>
         //script para borrar lo que haya dentro del modal

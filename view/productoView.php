@@ -74,7 +74,7 @@ namespace views;
               </button>
             </h2>
             <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-              <div class="accordion-body"><?= $productos['descripcion'] ?></div>
+              <div style="white-space: pre-wrap;" class="accordion-body"><?= $productos['descripcion'] ?></div>
             </div>
           </div>
         </div>
@@ -143,7 +143,7 @@ namespace views;
         </li>
       </ul>
       <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" style="background-color: white;"><?= $productos['especificacion'] ?></div>
+        <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" style="background-color: white; white-space: pre-wrap;"><?= $productos['especificacion'] ?></div>
         <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" style="background-color: white;">Comentarios y valoracion de prueba.</div>
       </div>
     </div>

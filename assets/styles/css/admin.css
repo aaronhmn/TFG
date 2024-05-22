@@ -266,6 +266,13 @@ body{
     vertical-align: middle;
   }
 
+  #productoDetalleModal span {
+    display: block; /* o inline-block según necesites */
+    margin: 0;
+    padding: 0;
+    text-indent: 0;
+}
+
 @media (max-width: 374px) {
     #logo-sidebar{
         display: none;

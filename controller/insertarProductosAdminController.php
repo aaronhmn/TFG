@@ -26,7 +26,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'
     exit();
 }
 
-include("../view/insertarProductoAdminView.php");
+/* include("../view/insertarProductoAdminView.php"); */
 
 // Solo se ejecutará cuando reciba una petición del registro
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
