@@ -1,5 +1,5 @@
 // Constantes para la paginación
-const itemsPorPagina = 10;
+const itemsPorPagina = 5;
 let paginaActual = 1;
 
 function getCarritoKey() {

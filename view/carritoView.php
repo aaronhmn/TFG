@@ -25,6 +25,7 @@ namespace views;
   <?php include '../controller/navbarController.php'; ?>
 
   <div class="container" style="margin-top: 50px; margin-bottom: 50px;">
+  <h3 style="color: #ffa500;"><b>Mi carrito</b></h3><br>
     <div class="table-responsive">
       <table class="table table-striped">
         <thead>

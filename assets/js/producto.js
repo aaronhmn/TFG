@@ -61,7 +61,7 @@
     });
   });
 
-//*Carrito con localstorage
+//*CARRITO CON lOCAL STORAGE
 function getCarritoKey() {
   const userId = document.body.getAttribute('data-user-id');
   return `carrito_${userId}`;
@@ -129,4 +129,60 @@ function actualizarContadorCarrito() {
   if (contador) {
       contador.textContent = totalItems;
   }
+}
+
+//*LISTA DE FAVORITOS CON LOCAL STORAGE
+
+function getFavoritosKey() {
+  const userId = document.body.getAttribute('data-user-id');
+  return `favoritos_${userId}`;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const addToFavButton = document.getElementById('add-to-fav');
+  if (addToFavButton) {
+      addToFavButton.addEventListener('click', function() {
+          addProductToFavorites.call(this);
+      });
+  }
+});
+
+function addProductToFavorites() {
+  const productoId = this.getAttribute('data-id');
+  const nombre = this.getAttribute('data-nombre');
+  const precio = parseFloat(this.getAttribute('data-precio'));
+  const imagen = this.getAttribute('data-imagen'); // Recuperar la imagen desde el botón
+
+  let favoritosKey = getFavoritosKey();
+  let favoritos = JSON.parse(localStorage.getItem(favoritosKey)) || {};
+
+  if (!favoritos[productoId]) {
+      favoritos[productoId] = {
+          id: productoId,
+          nombre: nombre,
+          precio: precio,
+          imagen: imagen // Guardar la imagen
+      };
+      localStorage.setItem(favoritosKey, JSON.stringify(favoritos));
+      showAlert('Producto añadido a favoritos', 'success');
+  } else {
+      showAlert('Este producto ya está en favoritos', 'warning');
+  }
+}
+
+function showAlert(message, type) {
+  const alertPlaceholder = document.getElementById('alertPlaceholder');
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = [
+      `<div class="alert alert-${type} alert-dismissible fade show" role="alert">`,
+      `${message}`,
+      '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+      '</div>'
+  ].join('');
+
+  alertPlaceholder.append(wrapper);
+
+  setTimeout(() => {
+      wrapper.remove();
+  }, 4000);
 }
