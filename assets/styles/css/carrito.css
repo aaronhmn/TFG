@@ -85,6 +85,18 @@
     background-color: #2A8F5A;
 }
 
+.table tbody tr {
+  margin-bottom: 5px !important;
+  margin-top: 5px !important;
+  border-bottom: 15px solid #e6e6fa !important;
+  border-top: 15px solid #e6e6fa !important;
+}
+
+.table td, .table th {
+  padding-top: 14px !important;
+  padding-bottom: 14px !important;
+}
+
 @media (max-width: 768px) { /* Ajusta el punto de ruptura según tus necesidades */
     .table-responsive table,
     .table-responsive thead,
@@ -133,5 +145,5 @@
     .table-responsive td:nth-of-type(2):before { content: "Precio"; }
     .table-responsive td:nth-of-type(3):before { content: "Cantidad"; }
     .table-responsive td:nth-of-type(4):before { content: "Precio Subtotal"; }
-    .table-responsive td:nth-of-type(5):before { content: "Acción"; }
+    .table-responsive td:nth-of-type(5):before { content: "Eliminar"; }
   }

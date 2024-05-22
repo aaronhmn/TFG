@@ -34,7 +34,7 @@ namespace views;
             <th style="background-color: #8350f2; color: white;" scope="col">Precio</th>
             <th style="background-color: #8350f2; color: white;" scope="col">Cantidad</th>
             <th style="background-color: #8350f2; color: white;" scope="col">Precio Subtotal</th>
-            <th style="background-color: #8350f2; color: white;" scope="col">Acción</th>
+            <th style="background-color: #8350f2; color: white;" scope="col">Eliminar</th>
           </tr>
         </thead>
         <tbody id="carrito-body"></tbody>
