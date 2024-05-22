@@ -30,7 +30,7 @@ $conexPDO = utils::conectar();
 $productos = $productoModel->getProductos($conexPDO);
 
 // Inicializa variables para la paginación
-$itemsPorPagina = 10;
+$itemsPorPagina = 5;
 $paginaActual = $_GET['Pag'] ?? 1;  // Usa el operador de fusión de null para tomar el valor de $_GET o 1 como predeterminado
 $totalDetalles = count($gestorDetallesPedido->getDetallesPedidos($conexPDO));  // Este método debería contar todos los detalles, no cargarlos todos en memoria
 $totalPaginas = ceil($totalDetalles / $itemsPorPagina);
