@@ -119,10 +119,10 @@
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Nombre</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Precio</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Categoria</th>
-                            <!--<th style="text-align: center;" scope="col">Descripcion</th>-->
-                            <!--<th style="text-align: center;" scope="col">Especificacion</th>-->
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Marca</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Stock</th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Estado</th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col"></th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col"></th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col"></th>
                         </tr>
@@ -154,47 +154,32 @@
                             print(htmlspecialchars(truncarTexto($datosProducto["nombre"], 20)));
                             print("</a>");
                             print("</td>\n");
-                            /* print("<td style='padding-top: 14px;'>" . truncarTexto($datosProducto["nombre"], 20) . "</td>\n"); */
                             //Precio
                             print("<td style='padding-top: 14px;'>" . $datosProducto["precio"] . "€</td>\n");
                             //Categoria
                             print("<td style='padding-top: 14px;'>" . $nombreCategoria . "</td>\n");
-                            //Descripcion
-                            //print("<td style='padding-top: 14px;'>" . $datosProducto[$i]["descripcion"] . "</td>\n");
-                            //Especificacion
-                            //print("<td style='padding-top: 14px;'>" . $datosProducto[$i]["especificacion"] . "</td>\n");
-                            //Marca
                             print("<td style='padding-top: 14px;'>" . $nombreMarca . "</td>\n");
                             //Stock
                             print("<td style='padding-top: 14px;'>" . $datosProducto["stock"] . "</td>\n");
+                            //Stock
+                            print("<td style='padding-top: 14px;'>" . $datosProducto["estado"] . "</td>\n");
 
+                            // Ocultar producto
+                            echo "<td style='text-align: end;'>";
+                            echo "<form method='POST' action='../controller/ocultarProductoController.php'>";
+                            echo "<input type='hidden' name='idProducto' value='{$datosProducto['idproducto']}'/>";
+                            echo "<button type='submit' class='btn " . ($datosProducto['estado'] == 1 ? 'btn-secondary' : 'btn-primary') . "'>";
+                            echo ($datosProducto['estado'] == 1 ? 'Mostrar' : 'Ocultar') . "</button>";
+                            echo "</form>";
+                            echo "</td>";
 
                             // Botón para eliminar
-                            echo "<td>";
+                            echo "<td style='text-align: center;'>";
                             echo "<form id='formEliminar-{$datosProducto['idproducto']}' method='POST' action='../controller/borrarProductoController.php'>";
                             echo "<input type='hidden' name='idProducto' value='{$datosProducto['idproducto']}'/>";
                             echo "<button style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;' type='button' onclick='mostrarModalEliminar(" . $datosProducto['idproducto'] . ");'><i class='fa-solid fa-trash-alt fa-lg' style='color: red;'></i></button>";
                             echo "</form>";
                             echo "</td>";
-
-                            // Botón para modificar
-                            /* print("<td>\n");
-                            print("<form method='GET' action='../controller/modificarProductoController.php'>");
-                            print("<input type='hidden' name='idProducto' value='" . $datosProducto["idproducto"] . "'/>");
-                            print("<input type='hidden' name='nombre' value='" . $datosProducto["nombre"] . "'/>");
-                            print("<input type='hidden' name='precio' value='" . $datosProducto["precio"] . "'/>");
-                            print("<input type='hidden' name='id_categoria' value='" . $nombreCategoria . "'/>");
-                            print("<input type='hidden' name='descripcion' value='" . $datosProducto["descripcion"] . "'/>");
-                            print("<input type='hidden' name='especificacion' value='" . $datosProducto["especificacion"] . "'/>");
-                            print("<input type='hidden' name='id_marca' value='" . $nombreMarca . "'/>");
-                            print("<input type='hidden' name='stock' value='" . $datosProducto["stock"] . "'/>");
-                            print("<input type='hidden' name='ruta_imagen' value='" . $datosProducto["ruta_imagen"] . "'/>");
-
-                            print("<button name='modificar' style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;' value='false' ><i class='fas fa-edit fa-lg' style='color: #005eff;'></i></button>");
-                            print("</form>");
-                            print("</td>\n"); */
-                            //Final de fila
-                            /* print("</tr>\n"); */
 
                             echo "<td>";
                             echo "<button data-bs-toggle='modal' data-bs-target='#modificarProductoModal'"
@@ -206,6 +191,7 @@
                                 . " data-marca='" . htmlspecialchars($datosProducto['id_marca'], ENT_QUOTES) . "'"
                                 . " data-descripcion='" . htmlspecialchars($datosProducto['descripcion'], ENT_QUOTES) . "'"
                                 . " data-especificacion='" . htmlspecialchars($datosProducto['especificacion'], ENT_QUOTES) . "'"
+                                . " data-estado='" . htmlspecialchars($datosProducto['estado'], ENT_QUOTES) . "'"
                                 . " data-imagenes='" . htmlspecialchars($datosProducto['ruta_imagen'], ENT_QUOTES) . "'"
                                 . " style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;'>"
                                 . "<i class='fas fa-edit fa-lg' style='color: #005eff;'></i>"
@@ -354,6 +340,10 @@
                             <textarea class="form-control" id="especificacion" name="especificacion" rows="10"></textarea>
                         </div>
                         <div class="mb-3">
+                            <label for="estado" class="form-label"><b>Estado:</b></label>
+                            <input type="number" class="form-control" id="estado" name="estado">
+                        </div>
+                        <div class="mb-3">
                             <label for="inputImagen" class="form-label"><b>Inserta las imágenes:</b></label>
                             <input type="file" class="form-control" id="inputImagen" name="inputImagen[]" multiple>
                             <div id="currentImagesContainer" style="margin-top: 20px;"></div>
@@ -400,6 +390,9 @@
                     <hr>
                     <p style="color: #8350F2;">Stock:</p>
                     <span id="detalle_stock"></span>
+                    <hr>
+                    <p style="color: #8350F2;">Estado:</p>
+                    <span id="detalle_estado"></span>
                     <hr>
                     <p style="color: #8350F2;">Imágenes:</p>
                     <span id="detalle_imagenes"></span>
@@ -468,6 +461,7 @@
             var marca = button.data('marca');
             var descripcion = button.data('descripcion');
             var especificacion = button.data('especificacion');
+            var estado = button.data('estado');
             var imagenes = button.data('imagenes').split(',');
             var imagesContainer = $('#currentImagesContainer');
             imagesContainer.empty();
@@ -481,6 +475,7 @@
             modal.find('#selectMarca').val(marca);
             modal.find('#descripcion').val(descripcion);
             modal.find('#especificacion').val(especificacion);
+            modal.find('#estado').val(estado);
 
             imagenes.forEach(function(imagen) {
                 var imgHtml = $('<img>').attr('src', imagen.trim()).css('max-width', '100px').css('margin-right', '5px').css('margin-bottom', '5px');
@@ -525,6 +520,7 @@
                         $('#detalle_especificacion').text(producto.especificacion || 'No disponible');
                         $('#detalle_marca').text(producto.marca || 'No disponible');
                         $('#detalle_stock').text(producto.stock || 'No disponible');
+                        $('#detalle_estado').text(producto.estado || 'Disponible');
 
                         // Suponiendo que las imágenes están separadas por comas
                         var imagenesHtml = '';

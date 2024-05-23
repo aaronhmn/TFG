@@ -4,7 +4,6 @@ namespace model;
 use \model\productoModel;
 use \model\utils;
 
-// Añadimos el código del modelo
 require_once("../model/productoModel.php");
 require_once("../model/utils.php");
 
@@ -12,7 +11,6 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Verificar si el usuario está logueado y si es administrador
 if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'] != 1) {
     header('Location: ../view/noAutorizadoView.php');
     exit();
@@ -20,29 +18,30 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $idProducto = $_POST["idProducto"];
-
-    // Nos conectamos a la Bd
     $conexPDO = utils::conectar();
 
-    // Recuperar las rutas de las imágenes antes de eliminar el producto
     $gestorProducto = new Producto();
+
+    // Recuperar las rutas de las imágenes antes de intentar eliminar el producto
     $rutasImagenes = $gestorProducto->getImagenesPorProducto($idProducto, $conexPDO);
 
-    // Verificar si se recuperaron las rutas de las imágenes
-    if ($rutasImagenes) {
+    // Intenta eliminar el producto
+    if ($gestorProducto->delProducto($idProducto, $conexPDO)) {
+        // Si la eliminación fue exitosa, proceder a eliminar las imágenes del servidor
         foreach ($rutasImagenes as $rutaImagen) {
             if (file_exists($rutaImagen)) {
-                unlink($rutaImagen); // Eliminar la imagen del servidor
-            } else {
-                // Manejar el caso en que el archivo no exista. Puede ser simplemente un registro en un log.
+                unlink($rutaImagen);
             }
         }
+        $_SESSION['mensaje'] = "Producto eliminado exitosamente.";
+        $_SESSION['tipo_mensaje'] = "success";
+    } else {
+        // Si falla la eliminación del producto, mostrar mensaje de error
+        $_SESSION['mensaje'] = "No se puede eliminar el producto, está asociado a un pedido.";
+        $_SESSION['tipo_mensaje'] = "danger";
     }
 
-    // Después de eliminar las imágenes, proceder a eliminar el producto
-    $gestorProducto->delProducto($idProducto, $conexPDO);
-
-    // Redirigir al administrador de productos
+    // Redirigir de vuelta a la página de administración de productos
     header("Location: ../controller/productosAdminController.php");
     exit();
 }

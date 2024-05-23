@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idProducto'])) {
 
     // Crear una instancia del modelo Usuario
     $gestorProducto = new Producto();
-    $producto = $gestorProducto->getProductoId($idProducto, $conexPDO);
+    $producto = $gestorProducto->getProductoIdAdmin($idProducto, $conexPDO);
 
     $gestorMarca = new marca();
     $marca = $gestorMarca->getMarcaId($producto['id_marca'], $conexPDO);
