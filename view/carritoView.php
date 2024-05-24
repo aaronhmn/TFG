@@ -26,6 +26,7 @@ namespace views;
 
   <div class="container" style="margin-top: 50px; margin-bottom: 50px;">
   <h3 style="color: #ffa500;"><b>Mi carrito</b></h3><br>
+  <div id="alertPlaceholder"></div>
     <div class="table-responsive">
       <table class="table table-striped">
         <thead>
@@ -43,7 +44,7 @@ namespace views;
     <div id="pagination-container"></div><br>
     <div class="info">
       <form action="../controller/pedidoController.php">
-        <button type="submit" id="realizarPedidoBtn" class="pedido">Realizar pedido</button>
+      <button type="button" id="realizarPedidoBtn" class="pedido" onclick="verificarDisponibilidadYRealizarPedido()">Realizar pedido</button>
       </form>
       <div class="precio-total1"><b>Precio Total: </b><b><span class="precio-total2" id="precio-total">0 €</span></b></div>
     </div>

@@ -107,5 +107,51 @@ function eliminarDelCarrito(id) {
     }
 }
 
+async function verificarDisponibilidadYRealizarPedido() {
+    const carritoKey = getCarritoKey();
+    const carrito = JSON.parse(localStorage.getItem(carritoKey));
+    const ids = Object.keys(carrito);
+
+    try {
+        const response = await fetch('../controller/comprobarDisponibilidadController.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(ids)
+        });
+        const productos = await response.json();
+
+        const productosNoDisponibles = productos.filter(p => !p.disponible);
+
+        if (productosNoDisponibles.length > 0) {
+            // Mostrar alerta con los nombres de los productos no disponibles
+            const nombresNoDisponibles = productosNoDisponibles.map(p => p.nombre).join(', ');
+            showAlert(`Los siguientes productos no están disponibles y no pueden ser pedidos: ${nombresNoDisponibles}`, 'warning');
+            return; // Detiene el proceso si hay productos no disponibles
+        }
+
+        // Procede con la creación del pedido si todos los productos están disponibles
+        realizarPedido();
+    } catch (error) {
+        console.error('Error al verificar la disponibilidad de los productos:', error);
+    }
+}
+
+function realizarPedido() {
+    console.log("Todos los productos están disponibles. Procediendo con el pedido.");
+    // Aquí puedes redirigir al usuario o hacer otra lógica de negocio
+    window.location.href = '../controller/pedidoController.php';
+}
+
+function showAlert(message, type) {
+    const alertPlaceholder = document.getElementById('alertPlaceholder');
+    if (!alertPlaceholder) return;
+    alertPlaceholder.innerHTML = `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>`;
+}
+
 // Cargar el carrito al cargar la página
 window.onload = cargarCarrito;

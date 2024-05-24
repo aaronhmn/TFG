@@ -16,7 +16,7 @@ class Utils {
         $conPDO=null;
         try 
         {
-            require_once("../global.php");
+            require_once("../config/database/global.php");
             $conPDO = new PDO("mysql:host=".$DB_SERVER.";port=".$DB_PORT.";dbname=".$DB_SCHEMA, $DB_USER, $DB_PASSWD);
             return $conPDO;
          } 

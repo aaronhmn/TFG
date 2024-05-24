@@ -161,28 +161,30 @@
                             print("<td style='padding-top: 14px;'>" . $nombreMarca . "</td>\n");
                             //Stock
                             print("<td style='padding-top: 14px;'>" . $datosProducto["stock"] . "</td>\n");
-                            //Stock
-                            print("<td style='padding-top: 14px;'>" . $datosProducto["estado"] . "</td>\n");
+                            //Estado
+                            $estadoTexto = $datosProducto["estado"] == 0 ? 'Disponible' : 'Oculto';
+                            print("<td style='padding-top: 14px;'>" . $estadoTexto . "</td>\n");
 
                             // Ocultar producto
-                            echo "<td style='text-align: end;'>";
+                            echo "<td style='text-align: end/*  */;'>";
                             echo "<form method='POST' action='../controller/ocultarProductoController.php'>";
                             echo "<input type='hidden' name='idProducto' value='{$datosProducto['idproducto']}'/>";
-                            echo "<button type='submit' class='btn " . ($datosProducto['estado'] == 1 ? 'btn-secondary' : 'btn-primary') . "'>";
-                            echo ($datosProducto['estado'] == 1 ? 'Mostrar' : 'Ocultar') . "</button>";
+                            // Añade clases para centrar verticalmente y ajusta con estilos si es necesario
+                            echo "<button type='submit' class='btn btn-link p-0 align-middle' style='vertical-align: middle;'>";
+                            echo ($datosProducto['estado'] == 1 ? '<i class="fas fa-eye fa-lg text-secondary"></i>' : '<i class="fas fa-eye-slash fa-lg text-primary"></i>');
+                            echo "</button>";
                             echo "</form>";
                             echo "</td>";
 
                             // Botón para eliminar
                             echo "<td style='text-align: center;'>";
-                            echo "<form id='formEliminar-{$datosProducto['idproducto']}' method='POST' action='../controller/borrarProductoController.php'>";
-                            echo "<input type='hidden' name='idProducto' value='{$datosProducto['idproducto']}'/>";
-                            echo "<button style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;' type='button' onclick='mostrarModalEliminar(" . $datosProducto['idproducto'] . ");'><i class='fa-solid fa-trash-alt fa-lg' style='color: red;'></i></button>";
-                            echo "</form>";
+                            echo "<button class='btn btn-link p-0 align-middle' onclick='mostrarModalEliminar({$datosProducto["idproducto"]});' style='vertical-align: middle;'>";
+                            echo "<i class='fas fa-trash-alt fa-lg text-danger'></i>";
+                            echo "</button>";
                             echo "</td>";
 
                             echo "<td>";
-                            echo "<button data-bs-toggle='modal' data-bs-target='#modificarProductoModal'"
+                            echo "<button class='btn btn-link p-0 align-middle' data-bs-toggle='modal' data-bs-target='#modificarProductoModal'"
                                 . " data-id='" . htmlspecialchars($datosProducto['idproducto'], ENT_QUOTES) . "'"
                                 . " data-nombre='" . htmlspecialchars($datosProducto['nombre'], ENT_QUOTES) . "'"
                                 . " data-precio='" . htmlspecialchars($datosProducto['precio'], ENT_QUOTES) . "'"
@@ -191,7 +193,7 @@
                                 . " data-marca='" . htmlspecialchars($datosProducto['id_marca'], ENT_QUOTES) . "'"
                                 . " data-descripcion='" . htmlspecialchars($datosProducto['descripcion'], ENT_QUOTES) . "'"
                                 . " data-especificacion='" . htmlspecialchars($datosProducto['especificacion'], ENT_QUOTES) . "'"
-                                . " data-estado='" . htmlspecialchars($datosProducto['estado'], ENT_QUOTES) . "'"
+                                /* . " data-estado='" . htmlspecialchars($datosProducto['estado'], ENT_QUOTES) . "'" */
                                 . " data-imagenes='" . htmlspecialchars($datosProducto['ruta_imagen'], ENT_QUOTES) . "'"
                                 . " style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;'>"
                                 . "<i class='fas fa-edit fa-lg' style='color: #005eff;'></i>"
@@ -340,10 +342,6 @@
                             <textarea class="form-control" id="especificacion" name="especificacion" rows="10"></textarea>
                         </div>
                         <div class="mb-3">
-                            <label for="estado" class="form-label"><b>Estado:</b></label>
-                            <input type="number" class="form-control" id="estado" name="estado">
-                        </div>
-                        <div class="mb-3">
                             <label for="inputImagen" class="form-label"><b>Inserta las imágenes:</b></label>
                             <input type="file" class="form-control" id="inputImagen" name="inputImagen[]" multiple>
                             <div id="currentImagesContainer" style="margin-top: 20px;"></div>
@@ -390,9 +388,6 @@
                     <hr>
                     <p style="color: #8350F2;">Stock:</p>
                     <span id="detalle_stock"></span>
-                    <hr>
-                    <p style="color: #8350F2;">Estado:</p>
-                    <span id="detalle_estado"></span>
                     <hr>
                     <p style="color: #8350F2;">Imágenes:</p>
                     <span id="detalle_imagenes"></span>
@@ -520,7 +515,6 @@
                         $('#detalle_especificacion').text(producto.especificacion || 'No disponible');
                         $('#detalle_marca').text(producto.marca || 'No disponible');
                         $('#detalle_stock').text(producto.stock || 'No disponible');
-                        $('#detalle_estado').text(producto.estado || 'Disponible');
 
                         // Suponiendo que las imágenes están separadas por comas
                         var imagenesHtml = '';
