@@ -27,7 +27,7 @@ namespace views;
   <div class="container" style="margin-top: 50px; margin-bottom: 100px;">
     <div class="row" style="margin-right: 0px;">
       <div class="col-xl-8 col-sm-12" style="background-color: #fff; margin: 6px; border-radius: 12px;">
-        <form class="row g-3" style="margin: 10px">
+        <form class="row g-3" action="../controller/contactoController.php" method="post" style="margin: 10px">
           <h2 style="color: #8350f2; display:flex; justify-content:center;"><b>Contacto</b></h2>
           <div class="col-12">
             <label for="nombre" class="form-label"><b>Nombre:</b></label>
@@ -83,6 +83,8 @@ namespace views;
       </div>
     </div>
   </div>
+
+  <button onclick="scrollToTop()" id="btnSubir" title="Ir arriba"><i class="fa-solid fa-arrow-up fa-xl" style="color: #ffffff; align-items:center;"></i></button>
 
   <!--FOOTER-->
   <?php include '../controller/footerController.php'; ?>
