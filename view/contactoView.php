@@ -20,7 +20,7 @@ namespace views;
   <title>Página de Contacto - Genesis</title>
 </head>
 
-<body style="background-color: #e6e6fa" data-user-id="<?php echo $_SESSION['id_usuario']; ?>">
+<body style="background-color: #e6e6fa" data-user-id="<?php echo isset($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : 'usuario-no-logueado'; ?>">
   <!--NAV DE LA PAGINA-->
   <?php include '../controller/navbarController.php'; ?>
 
@@ -28,26 +28,40 @@ namespace views;
     <div class="row" style="margin-right: 0px;">
       <div class="col-xl-8 col-sm-12" style="background-color: #fff; margin: 6px; border-radius: 12px;">
         <form class="row g-3" action="../controller/contactoController.php" method="post" style="margin: 10px">
+              <!-- Alertas de Bootstrap -->
+      <?php if (isset($_SESSION['message'])) : ?>
+        <div class="alert alert-<?php echo $_SESSION['message_type']; ?> alert-dismissible fade show" role="alert">
+          <?php echo $_SESSION['message']; ?>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          <!-- <span aria-hidden="true">&times;</span> -->
+          </button>
+        </div>
+        <?php
+        // Limpiar los mensajes de la sesión para no mostrarlos después de refrescar
+        unset($_SESSION['message']);
+        unset($_SESSION['message_type']);
+        ?>
+      <?php endif; ?>
           <h2 style="color: #8350f2; display:flex; justify-content:center;"><b>Contacto</b></h2>
           <div class="col-12">
             <label for="nombre" class="form-label"><b>Nombre:</b></label>
-            <input type="text" class="form-control input-contacto" id="nombre" name="nombre" value="<?php echo htmlspecialchars($datosUsuario['nombre'] ?? ''); ?>" placeholder="Nombre" />
+            <input type="text" class="form-control input-contacto" id="nombre" name="nombre" value="<?php echo htmlspecialchars($datosUsuario['nombre'] ?? ''); ?>" required placeholder="Nombre" />
           </div>
           <div class="col-12">
             <label for="primer_apellido" class="form-label"><b>Primer Apellido:</b></label>
-            <input type="text" class="form-control input-contacto" id="primer_apellido" name="primer_apellido" value="<?php echo htmlspecialchars($datosUsuario['primer_apellido'] ?? ''); ?>"  placeholder="Primer apellido" />
+            <input type="text" class="form-control input-contacto" id="primer_apellido" name="primer_apellido" value="<?php echo htmlspecialchars($datosUsuario['primer_apellido'] ?? ''); ?>" required placeholder="Primer apellido" />
           </div>
           <div class="col-12">
             <label for="segundo_apellido" class="form-label"><b>Segundo Apellido:</b></label>
-            <input type="text" class="form-control input-contacto" id="segundo_apellido" name="segundo_apellido" value="<?php echo htmlspecialchars($datosUsuario['segundo_apellido'] ?? ''); ?>" placeholder="Segundo apellido" />
+            <input type="text" class="form-control input-contacto" id="segundo_apellido" name="segundo_apellido" value="<?php echo htmlspecialchars($datosUsuario['segundo_apellido'] ?? ''); ?>" required placeholder="Segundo apellido" />
           </div>
           <div class="col-12">
             <label for="email" class="form-label"><b>Email:</b></label>
-            <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($datosUsuario['email'] ?? ''); ?>" placeholder="Email" />
+            <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($datosUsuario['email'] ?? ''); ?>" required placeholder="Email" />
           </div>
           <div class="mb-3">
             <label for="mensaje" class="form-label"><b>Mensaje:</b></label>
-            <textarea class="form-control" placeholder="Escribe tu mensaje" id="mensaje" name="mensaje" rows="12"></textarea>
+            <textarea class="form-control" placeholder="Escribe tu mensaje" id="mensaje" name="mensaje" rows="12" required></textarea>
           </div>
           <button class="btn btn-primary" type="submit" style="background-color: #8350f2; border-color: #8350f2; margin-bottom:10px;">Enviar Mensaje</button>
         </form>
@@ -89,7 +103,10 @@ namespace views;
   <!--FOOTER-->
   <?php include '../controller/footerController.php'; ?>
 
-  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
   <script src="../assets/js/main.js"></script>
 </body>
 
