@@ -49,13 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $mail->setFrom($email, $nombre);
         $mail->addReplyTo($email, $nombre);
         $mail->addAddress('aaronhelices@gmail.com', 'Admin-Genesis');
-
-        // Mark the email as important
-        $mail->Priority = 1;
-        $mail->AddCustomHeader("X-Priority: 1");
-        $mail->AddCustomHeader("X-MSMail-Priority: High");
-        $mail->AddCustomHeader("Importance: High");
-
+        
         $mail->isHTML(true);
         $mail->Subject = 'Nuevo mensaje de contacto';
         $mail->Body = "<b>De:</b> $nombre $primer_apellido $segundo_apellido <br><b>Email:</b> $email<br><b>Mensaje:</b><br>$mensaje";
