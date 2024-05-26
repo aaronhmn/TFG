@@ -124,7 +124,7 @@
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Estado</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col"></th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col"></th>
-                            <!-- <th style="background-color: #8350F2; color: #fff;" scope="col"></th> -->
+                            <th style="background-color: #8350F2; color: #fff;" scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -171,17 +171,18 @@
                             echo "<input type='hidden' name='idProducto' value='{$datosProducto['idproducto']}'/>";
                             // Añade clases para centrar verticalmente y ajusta con estilos si es necesario
                             echo "<button type='submit' class='btn btn-link p-0 align-middle' style='vertical-align: middle;'>";
-                            echo ($datosProducto['estado'] == 1 ? '<i class="fas fa-eye fa-lg text-secondary"></i>' : '<i class="fas fa-eye-slash fa-lg text-danger"></i>');
+                            echo ($datosProducto['estado'] == 1 ? '<i class="fas fa-eye fa-lg text-secondary"></i>' : '<i class="fas fa-eye-slash fa-lg text-primary"></i>');
                             echo "</button>";
                             echo "</form>";
                             echo "</td>";
 
                             // Botón para eliminar
-                            /* echo "<td style='text-align: center;'>";
-                            echo "<button class='btn btn-link p-0 align-middle' onclick='mostrarModalEliminar({$datosProducto["idproducto"]});' style='vertical-align: middle;'>";
-                            echo "<i class='fas fa-trash-alt fa-lg text-danger'></i>";
-                            echo "</button>";
-                            echo "</td>"; */
+                            echo "<td style='text-align: center;'>";
+                            echo "<form id='formEliminar-{$datosProducto['idproducto']}' method='POST' action='../controller/borrarProductoController.php'>";
+                            echo "<input type='hidden' name='idProducto' value='{$datosProducto['idproducto']}'/>";
+                            echo "<button class='btn btn-link p-0 align-middle' style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;' type='button' onclick='mostrarModalEliminar(" . $datosProducto['idproducto'] . ");'><i class='fa-solid fa-trash-alt fa-lg' style='color: red;'></i></button>";
+                            echo "</form>";
+                            echo "</td>";
 
                             echo "<td>";
                             echo "<button class='btn btn-link p-0 align-middle' data-bs-toggle='modal' data-bs-target='#modificarProductoModal'"
@@ -403,22 +404,22 @@
 
     <!-- Modal de Confirmación de Eliminación -->
     <div class="modal fade" id="confirmacionEliminarModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="modalLabel" style="color: #8350F2;"><b>Confirmar Eliminación</b></h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <b>¿Estás seguro de que deseas eliminar este producto?</b>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger" id="confirmarEliminar">Eliminar</button>
-                </div>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalLabel" style="color: #8350F2;"><b>Confirmar Eliminación</b></h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <b>¿Estás seguro de que deseas eliminar este producto?</b>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmarEliminar">Eliminar</button>
             </div>
         </div>
     </div>
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
