@@ -26,7 +26,7 @@ namespace views;
             <div class="encabezado">
                 <h2 style="color: #8350f2;">Crear una cuenta</h2>
                 <img class="logo" src="../assets/img/genesis logo sin fondo.png" alt="logo">
-            </div>
+            </div><br><br>
             <form method="POST" action="../controller/registerController.php" style="margin-top:-40px;">
                 <div class="input-box">
                     <input type="text" required placeholder="Nombre *" id="nombre" name="nombre" autocomplete="nope">

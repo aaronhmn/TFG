@@ -19,7 +19,6 @@ body {
   background-color: transparent;
   border: 2px solid #8350f2;
   border-radius: 20px;
-  backdrop-filter: blur(20px);
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -162,4 +161,22 @@ input:-moz-autofill:hover,
 input:-moz-autofill:focus,
 input:-moz-autofill:active {
   box-shadow: 0 0 0 30px #e6e6fa inset !important;
+}
+
+@media (max-width: 505px){
+  .wrapper {
+    position: relative;
+    width: 500px;
+    height: 600px !important;
+    background-color: transparent;
+    border: 0px solid #8350f2;
+    border-radius: 0px;
+    box-shadow: 0 0 0px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .logo{
+    display: none;
+  }
 }

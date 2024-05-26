@@ -19,7 +19,7 @@
     <div class="wrapper">
         <div class="form-box login">
             <div class="encabezado">
-                <h2 style="color: #8350f2;">Inicio de Sesión</h2>
+                <h2 style="color: #8350f2;"><b>Inicio de Sesión</b></h2>
                 <img class="logo" src="../assets/img/genesis logo sin fondo.png" alt="logo">
             </div>
             <div class="alert-container">

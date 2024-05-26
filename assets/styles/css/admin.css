@@ -276,7 +276,7 @@ body {
   text-indent: 0;
 }
 
-.btn-primary{
+/* .btn-primary{
     background-color:#8350f200 !important;
     border-color: #8350f200 !important;
 }
@@ -284,7 +284,7 @@ body {
 .btn-primary:hover{
     background-color:#7749db00 !important;
     border-color: #7749db00 !important;
-}
+} */
 
 .btn-secondary{
   background-color:#8350f200 !important;

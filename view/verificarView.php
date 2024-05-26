@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificar</title>
+    <title>Página de verificacion - Genesis</title>
     <link rel="stylesheet" href="../assets/styles/css/login.css" />
+    <link rel="icon" type="image/vnd.icon" href="../assets/img/genesis logo sin fondo favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -38,6 +39,7 @@
                 <div class="registrarse">
                     <p><a href="../controller/inicioController.php"> Volver a inicio</a></p>
                 </div>
+                <h4 style="color: #ffa500; margin-top: 40px;">¡Código de activación enviado a tu correo!</h4>
             </form>
         </div>
     </div>

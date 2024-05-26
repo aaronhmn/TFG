@@ -1,15 +1,20 @@
 <?php
+
 namespace model;
 
 use \model\utils;
 use \model\usuario;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 // Añadimos el código del modelo
 require_once("../model/utils.php");
 require_once("../model/usuarioModel.php");
+require '../config/PHPMailer/PHPMailer.php';
+require '../config/PHPMailer/SMTP.php';
 $mensaje = null;
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $nombre = $_POST['nombre'];
     $primerApellido = $_POST['primer_apellido'];
@@ -61,28 +66,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     //Generamos una salt de 16 posiciones
     $salt = utils::generar_salt(16);
     $usuario["salt"] = $salt;
-    $usuario["contrasena"] = crypt($contraseña,'$6$rounds=5000$'.$salt.'$');
+    $usuario["contrasena"] = crypt($contraseña, '$6$rounds=5000$' . $salt . '$');
 
     $usuario["activo"] = 0;
 
-    $usuario["activacion"]=utils::generar_codigo_activacion();
+    $usuario["activacion"] = utils::generar_codigo_activacion();
     $gestorUsu = new Usuario();
 
     $conexPDO = utils::conectar();
     $resultado = $gestorUsu->addUsuario($usuario, $conexPDO);
 
-    if ($resultado != null)
-    {
-        header("Location: ../controller/loginController.php");
-        exit();
-    }    
-    else
-    {
+    if ($resultado) {
+        // Envío del correo con el código de activación
+        $mail = new PHPMailer(true);
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'aaronhelices@gmail.com';
+            $mail->Password = 'tbof yhhl ebok fsqp';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            $mail->setFrom('aaronhelices@gmail.com', 'Admin-Genesis');
+            $mail->addAddress($usuario["email"], $usuario["nombre"]);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Codigo de Activacion de Cuenta';
+            $mail->Body    = "Hola {$usuario["nombre"]},<br>Gracias por registrarte en <strong>Genesis</strong>. Tu codigo de activacion es: <strong>{$usuario["activacion"]}</strong>. Por favor, introduce este codigo en nuestra pagina para activar tu cuenta.";
+
+            $mail->send();
+            echo 'Mensaje de verificación enviado';
+            header("Location: ../controller/loginController.php");
+            exit();
+        } catch (Exception $e) {
+            echo 'El mensaje no pudo ser enviado. Error: ' . $mail->ErrorInfo;
+        }
+    } else {
         $mensaje = "Ha habido un fallo al acceder a la Base de Datos";
         echo ($mensaje);
     }
 }
 
 include("../view/registerView.php");
-
-?>
