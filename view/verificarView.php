@@ -24,7 +24,7 @@
             <div class="encabezado">
                 <h2 style="color: #8350f2;">Activar cuenta</h2>
                 <img class="logo" src="../assets/img/genesis logo sin fondo.png" alt="logo">
-            </div>
+            </div><br><br><br>
             <form method="POST" action="../controller/verificarController.php" style="margin-top:-40px;">
                 <div class="input-box">
                     <input type="text" name="inputCodigo" id="inputCodigo" aria-describedby="codigoHelp" placeholder="Código de activación" autocomplete="off" pattern="\d*" maxlength="4">

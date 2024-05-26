@@ -245,180 +245,174 @@
     </div><br>
   </div>
 
-  <!-- Modal Insertar Usuario -->
-  <div class="modal fade" id="insertarUsuarioModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="modal-title" id="modalLabel" style="color: #8350F2;">Insertar nuevo usuario</h3>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <!-- Aquí va el formulario de inserción de producto -->
-          <form method="POST" action="../controller/insertarUsuariosAdminController.php" enctype="multipart/form-data">
-            <div class="mb-3">
-              <label style="color: #000;" for="inputNombre" class="form-label"><b>Nombre:</b></label>
-              <input type="text" class="form-control" name="inputNombre" aria-describedby="emailHelp">
-            </div>
-
-            <div class="mb-3">
-              <label style="color: #000;" for="inputPrimerApellido" class="form-label"><b>Primer Apellido:</b></label>
-              <input type="text" class="form-control" name="inputPrimerApellido" aria-describedby="emailHelp">
-            </div>
-
-            <div class="mb-3">
-              <label style="color: #000;" for="inputSegundoApellido" class="form-label"><b>Segundo Apellido:</b></label>
-              <input type="text" class="form-control" name="inputSegundoApellido" aria-describedby="emailHelp">
-            </div>
-
-            <div class="mb-3">
-              <label style="color: #000;" for="inputTelefono" class="form-label"><b>Telefono:</b></label>
-              <input type="tel" class="form-control" name="inputTelefono" aria-describedby="emailHelp">
-            </div>
-
-            <div class="mb-3">
-              <label style="color: #000;" for="inputDNI" class="form-label"><b>DNI:</b></label>
-              <input type="text" class="form-control" name="inputDNI" aria-describedby="emailHelp">
-            </div>
-
-            <div class="mb-3">
-              <label style="color: #000;" for="inputCodigoPostal" class="form-label"><b>Código Postal:</b></label>
-              <input type="number" class="form-control" name="inputCodigoPostal" aria-describedby="emailHelp">
-            </div>
-
-            <div class="mb-3">
-              <label style="color: #000;" for="inputCalle" class="form-label"><b>Nombre de la calle o avenida:</b></label>
-              <input type="text" class="form-control" name="inputCalle" aria-describedby="emailHelp">
-            </div>
-
-            <div class="mb-3">
-              <label style="color: #000;" for="inputNumeroBloque" class="form-label"><b>Número del bloque o de la casa:</b></label>
-              <input type="number" class="form-control" name="inputNumeroBloque" aria-describedby="emailHelp">
-            </div>
-
-            <div class="mb-3">
-              <label style="color: #000;" for="inputPiso" class="form-label"><b>Piso:</b></label>
-              <input type="text" class="form-control" name="inputPiso" aria-describedby="emailHelp">
-            </div>
-
-            <div class="mb-3">
-              <label style="color: #000;" for="inputEmail" class="form-label"><b>Email:</b></label>
-              <input type="email" class="form-control" name="inputEmail" aria-describedby="emailHelp">
-            </div>
-
-            <div class="mb-3">
-              <label style="color: #000;" for="inputUsuario" class="form-label"><b>Nombre de usuario:</b></label>
-              <input type="text" class="form-control" name="inputUsuario" aria-describedby="emailHelp">
-            </div>
-
-            <div class="mb-3">
-              <label style="color: #000;" for="inputPassword" class="form-label"><b>Contraseña:</b></label>
-              <input type="password" class="form-control" name="inputPassword">
-            </div>
-
-            <div class="mb-3">
-              <label style="color: #000;" for="inputPassword2" class="form-label"><b>Repetir Contraseña:</b></label>
-              <input type="password" class="form-control" name="inputPassword2">
-            </div>
-
-            <div class="d-grid">
-              <button style="background-color: #8350F2; color: #fff" class="btn" type="submit">Insertar</button>
-            </div>
-          </form>
-        </div>
+<!-- Modal Insertar Usuario -->
+<div class="modal fade" id="insertarUsuarioModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalLabel" style="color: #8350F2;">Insertar nuevo usuario</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulario de inserción con campos ocultos -->
+        <form method="POST" action="../controller/insertarUsuariosAdminController.php" enctype="multipart/form-data">
+          <div style="display:none">
+            <input type="text" autocomplete="username">
+            <input type="password" autocomplete="new-password">
+          </div>
+          <div class="mb-3">
+            <label style="color: #000;" for="inputNombre" class="form-label"><b>Nombre:</b></label>
+            <input type="text" class="form-control" name="inputNombre" autocomplete="off" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label style="color: #000;" for="inputPrimerApellido" class="form-label"><b>Primer Apellido:</b></label>
+            <input type="text" class="form-control" name="inputPrimerApellido" autocomplete="off" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label style="color: #000;" for="inputSegundoApellido" class="form-label"><b>Segundo Apellido:</b></label>
+            <input type="text" class="form-control" name="inputSegundoApellido" autocomplete="off" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label style="color: #000;" for="inputTelefono" class="form-label"><b>Telefono:</b></label>
+            <input type="tel" class="form-control" name="inputTelefono" autocomplete="off" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label style="color: #000;" for="inputDNI" class="form-label"><b>DNI:</b></label>
+            <input type="text" class="form-control" name="inputDNI" autocomplete="off" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label style="color: #000;" for="inputCodigoPostal" class="form-label"><b>Código Postal:</b></label>
+            <input type="number" class="form-control" name="inputCodigoPostal" autocomplete="off" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label style="color: #000;" for="inputCalle" class="form-label"><b>Nombre de la calle o avenida:</b></label>
+            <input type="text" class="form-control" name="inputCalle" autocomplete="off" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label style="color: #000;" for="inputNumeroBloque" class="form-label"><b>Número del bloque o de la casa:</b></label>
+            <input type="number" class="form-control" name="inputNumeroBloque" autocomplete="off" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label style="color: #000;" for="inputPiso" class="form-label"><b>Piso:</b></label>
+            <input type="text" class="form-control" name="inputPiso" autocomplete="off" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label style="color: #000;" for="inputEmail" class="form-label"><b>Email:</b></label>
+            <input type="email" class="form-control" name="inputEmail" autocomplete="off" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label style="color: #000;" for="inputUsuario" class="form-label"><b>Nombre de usuario:</b></label>
+            <input type="text" class="form-control" name="inputUsuario" autocomplete="new-username" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label style="color: #000;" for="inputPassword" class="form-label"><b>Contraseña:</b></label>
+            <input type="password" class="form-control" name="inputPassword" autocomplete="new-password">
+          </div>
+          <div class="mb-3">
+            <label style="color: #000;" for="inputPassword2" the form-label"><b>Repetir Contraseña:</b></label>
+            <input type="password" class="form-control" name="inputPassword2" autocomplete="new-password">
+          </div>
+          <div class="d-grid">
+            <button style="background-color: #8350F2; color: #fff" class="btn" type="submit">Insertar</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Modal Modificar Usuario -->
-  <div class="modal fade" id="modificarUsuarioModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="modal-title" id="modalLabel" style="color: #8350F2;"><b>Modificar usuario</b></h3>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <!-- Formulario de modificación de usuario -->
-          <form method="POST" action="../controller/modificarUsuarioController.php" enctype="multipart/form-data">
-            <div class="mb-3">
-              <label for="nombre_usuario" class="form-label"><b>Nombre de usuario:</b></label>
-              <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" required>
-            </div>
-            <div class="mb-3">
-              <label for="nombre" class="form-label"><b>Nombre:</b></label>
-              <input type="text" class="form-control" id="nombre" name="nombre">
-            </div>
-            <div class="mb-3">
-              <label for="primer_apellido" class="form-label"><b>Primer Apellido:</b></label>
-              <input type="text" class="form-control" id="primer_apellido" name="primer_apellido">
-            </div>
-            <div class="mb-3">
-              <label for="segundo_apellido" class="form-label"><b>Segundo Apellido:</b></label>
-              <input type="text" class="form-control" id="segundo_apellido" name="segundo_apellido">
-            </div>
-            <div class="mb-3">
-              <label for="dni" class="form-label"><b>DNI:</b></label>
-              <input type="text" class="form-control" id="dni" name="dni">
-            </div>
-            <div class="mb-3">
-              <label for="email" class="form-label"><b>Email:</b></label>
-              <input type="email" class="form-control" id="email" name="email">
-            </div>
-            <div class="mb-3">
-              <label for="codigo_postal" class="form-label"><b>Código Postal:</b></label>
-              <input type="number" class="form-control" id="codigo_postal" name="codigo_postal">
-            </div>
-            <div class="mb-3">
-              <label for="calle" class="form-label"><b>Calle:</b></label>
-              <input type="text" class="form-control" id="calle" name="calle">
-            </div>
-            <div class="mb-3">
-              <label for="numero_bloque" class="form-label"><b>Número de bloque o casa:</b></label>
-              <input type="number" class="form-control" id="numero_bloque" name="numero_bloque">
-            </div>
-            <div class="mb-3">
-              <label for="piso" class="form-label"><b>Piso:</b></label>
-              <input type="text" class="form-control" id="piso" name="piso">
-            </div>
-            <div class="mb-3">
-              <label for="telefono" class="form-label"><b>Teléfono:</b></label>
-              <input type="tel" class="form-control" id="telefono" name="telefono">
-            </div>
-            <div class="mb-3">
-              <label for="activacion" class="form-label"><b>Activación:</b></label>
-              <input type="number" class="form-control" id="activacion" name="activacion">
-            </div>
-            <div class="mb-3">
-              <label for="activo" class="form-label"><b>Activo:</b></label>
-              <input type="number" class="form-control" id="activo" name="activo">
-            </div>
-            <div class="mb-3">
-              <label for="rol" class="form-label"><b>Rol:</b></label>
-              <input type="number" class="form-control" id="rol" name="rol">
-            </div>
-            <div class="mb-3">
-              <label for="estado" class="form-label"><b>Estado:</b></label>
-              <input type="number" class="form-control" id="estado" name="estado">
-            </div>
-            <div class="mb-3">
-              <label for="contrasenaNueva" class="form-label"><b>Nueva Contraseña:</b></label>
-              <input type="password" class="form-control" id="contrasenaNueva" name="contrasenaNueva">
-            </div>
-
-            <div class="mb-3">
-              <label for="contrasenaConfirmar" class="form-label"><b>Confirmar Nueva Contraseña:</b></label>
-              <input type="password" class="form-control" id="contrasenaConfirmar" name="contrasenaConfirmar">
-            </div>
-            <input type="hidden" name="idUsuario" id="idUsuario">
-            <div class="d-grid">
-              <button class="btn btn-primary" type="submit" value="Upload" style="background-color: #8350F2; border:#8350F2;">Modificar</button>
-            </div>
-          </form>
-        </div>
+<!-- Modal Modificar Usuario -->
+<div class="modal fade" id="modificarUsuarioModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modalLabel" style="color: #8350F2;"><b>Modificar usuario</b></h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulario de modificación de usuario con campos ocultos -->
+        <form method="POST" action="../controller/modificarUsuarioController.php" enctype="multipart/form-data">
+          <div style="display:none">
+            <input type="text" autocomplete="username">
+            <input type="password" autocomplete="new-password">
+          </div>
+          <div class="mb-3">
+            <label for="nombre_usuario" class="form-label"><b>Nombre de usuario:</b></label>
+            <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" required autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label for="nombre" class="form-label"><b>Nombre:</b></label>
+            <input type="text" class="form-control" id="nombre" name="nombre" autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label for="primer_apellido" class="form-label"><b>Primer Apellido:</b></label>
+            <input type="text" class="form-control" id="primer_apellido" name="primer_apellido" autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label for="segundo_apellido" class="form-label"><b>Segundo Apellido:</b></label>
+            <input type="text" class="form-control" id="segundo_apellido" name="segundo_apellido" autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label for="dni" class="form-label"><b>DNI:</b></label>
+            <input type="text" class="form-control" id="dni" name="dni" autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label"><b>Email:</b></label>
+            <input type="email" class="form-control" id="email" name="email" autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label for="codigo_postal" class="form-label"><b>Código Postal:</b></label>
+            <input type="number" class="form-control" id="codigo_postal" name="codigo_postal" autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label for="calle" class="form-label"><b>Calle:</b></label>
+            <input type="text" class="form-control" id="calle" name="calle" autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label for="numero_bloque" class="form-label"><b>Número de bloque o casa:</b></label>
+            <input type="number" class="form-control" id="numero_bloque" name="numero_bloque" autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label for="piso" class="form-label"><b>Piso:</b></label>
+            <input type="text" class="form-control" id="piso" name="piso" autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label for="telefono" class="form-label"><b>Teléfono:</b></label
+            <input type="tel" class="form-control" id="telefono" name="telefono" autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label for="activacion" class="form-label"><b>Activación:</b></label>
+            <input type="number" class="form-control" id="activacion" name="activacion" autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label for="activo" class="form-label"><b>Activo:</b></label>
+            <input type="number" class="form-control" id="activo" name="activo" autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label for="rol" class="form-label"><b>Rol:</b></label>
+            <input type="number" class="form-control" id="rol" name="rol" autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label for="estado" class="form-label"><b>Estado:</b></label>
+            <input type="number" class="form-control" id="estado" name="estado" autocomplete="off">
+          </div>
+          <div class="mb-3">
+            <label for="contrasenaNueva" class="form-label"><b>Nueva Contraseña:</b></label>
+            <input type="password" class="form-control" id="contrasenaNueva" name="contrasenaNueva" autocomplete="new-password">
+          </div>
+          <div class="mb-3">
+            <label for="contrasenaConfirmar" class="form-label"><b>Confirmar Nueva Contraseña:</b></label>
+            <input type="password" class="form-control" id="contrasenaConfirmar" name="contrasenaConfirmar" autocomplete="new-password">
+          </div>
+          <input type="hidden" name="idUsuario" id="idUsuario">
+          <div class="d-grid">
+            <button class="btn btn-primary" type="submit" value="Upload" style="background-color: #8350F2; border:#8350F2;">Modificar</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+</div>
 
   <!-- Modal Detalles Usuario -->
   <div class="modal fade" id="usuarioDetalleModal" tabindex="-1" aria-labelledby="usuarioDetalleLabel" aria-hidden="true">
