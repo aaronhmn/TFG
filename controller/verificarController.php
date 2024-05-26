@@ -24,7 +24,6 @@ $usuario = $gestorUsu->getUsuario($correo, $conexPDO);
 
 if ($usuario) {
     $codigoActivacion = $usuario['activacion'];
-    echo "<script>console.log('Código de activación: $codigoActivacion');</script>";
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['inputCodigo'])) {
         $codigoIngresado = $_POST['inputCodigo'];
