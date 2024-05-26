@@ -124,7 +124,7 @@
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Estado</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col"></th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col"></th>
-                            <th style="background-color: #8350F2; color: #fff;" scope="col"></th>
+                            <!-- <th style="background-color: #8350F2; color: #fff;" scope="col"></th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -171,17 +171,17 @@
                             echo "<input type='hidden' name='idProducto' value='{$datosProducto['idproducto']}'/>";
                             // Añade clases para centrar verticalmente y ajusta con estilos si es necesario
                             echo "<button type='submit' class='btn btn-link p-0 align-middle' style='vertical-align: middle;'>";
-                            echo ($datosProducto['estado'] == 1 ? '<i class="fas fa-eye fa-lg text-secondary"></i>' : '<i class="fas fa-eye-slash fa-lg text-primary"></i>');
+                            echo ($datosProducto['estado'] == 1 ? '<i class="fas fa-eye fa-lg text-secondary"></i>' : '<i class="fas fa-eye-slash fa-lg text-danger"></i>');
                             echo "</button>";
                             echo "</form>";
                             echo "</td>";
 
                             // Botón para eliminar
-                            echo "<td style='text-align: center;'>";
+                            /* echo "<td style='text-align: center;'>";
                             echo "<button class='btn btn-link p-0 align-middle' onclick='mostrarModalEliminar({$datosProducto["idproducto"]});' style='vertical-align: middle;'>";
                             echo "<i class='fas fa-trash-alt fa-lg text-danger'></i>";
                             echo "</button>";
-                            echo "</td>";
+                            echo "</td>"; */
 
                             echo "<td>";
                             echo "<button class='btn btn-link p-0 align-middle' data-bs-toggle='modal' data-bs-target='#modificarProductoModal'"

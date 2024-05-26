@@ -17,67 +17,70 @@
 
 <body style="background-color: #e6e6fa">
 
-<nav class="navbar navbar-dark fixed-top" style="background-color: #8350f2;">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="../controller/inicioAdminController.php" id="logo-sidebar"><img src="../assets/img/genesis Logo.png" style="width: 50px;">Genesis</a>
-            <div class="dropdown">
-                <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8350f2; border-color: #8350f2; font-size: 18px;">
-                <?php
-                    $resultado = $_SESSION['nombre_usuario'];
-                    echo "<b style='color: #fff;'>$resultado</b>";
-                    ?>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                    <li><form action="../controller/inicioController.php" method="POST">
-                        <button class="dropdown-item">
-                            <i class="fas fa-home"></i> Ir a la web
-                        </button>
-                    </form></li><hr>
-                    <li><form action="../controller/cerrarSesionController.php" method="POST">
-                        <button class="dropdown-item">
-                            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-                        </button>
-                    </form></li>
-                </ul>
-            </div>
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel" style="visibility: visible; background-color: #8350f2;">
-                <div class="offcanvas-header">
-                    <h3 class="offcanvas-title" id="offcanvasDarkNavbarLabel" style="color: white; margin-left: 20px;">
-                    <img src="../assets/img/genesis Logo.png" style="width: 80px; margin-right: 5px; margin-left: -20px;"><b>Menu</b>
-                    </h3>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                        aria-label="Close"></button>
-                </div><hr style="color: #fff;">
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav flex-grow-1 pe-3" style="margin-left: 20px;">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="../controller/inicioAdminController.php"><i class="fas fa-tachometer-alt fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Inicio</span></a>
-                        </li>
-                        <li class="nav-item mt-4" id="active">
-                            <a class="nav-link active" href="../controller/usuariosAdminController.php"><i class="fas fa-user fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Usuarios</span></a>
-                        </li>
-                        <li class="nav-item mt-4">
-                            <a class="nav-link active" href="../controller/productosAdminController.php"><i class="fas fa-briefcase fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Productos</span></a>
-                        </li>
-                        <li class="nav-item mt-4">
-                            <a class="nav-link active" href="../controller/categoriasAdminController.php"><i class="fas fa-list-alt fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Categorías</span></a>
-                        </li>
-                        <li class="nav-item mt-4">
-                            <a class="nav-link active" href="../controller/marcasAdminController.php"><i class="fa-solid fa-flag fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Marcas</span></a>
-                        </li>
-                        <li class="nav-item mt-4">
-                            <a class="nav-link active" href="../controller/pedidosAdminController.php"><i class="fas fa-shipping-fast fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">pedidos</span></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+  <nav class="navbar navbar-dark fixed-top" style="background-color: #8350f2;">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="../controller/inicioAdminController.php" id="logo-sidebar"><img src="../assets/img/genesis Logo.png" style="width: 50px;">Genesis</a>
+      <div class="dropdown">
+        <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8350f2; border-color: #8350f2; font-size: 18px;">
+          <?php
+          $resultado = $_SESSION['nombre_usuario'];
+          echo "<b style='color: #fff;'>$resultado</b>";
+          ?>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+          <li>
+            <form action="../controller/inicioController.php" method="POST">
+              <button class="dropdown-item">
+                <i class="fas fa-home"></i> Ir a la web
+              </button>
+            </form>
+          </li>
+          <hr>
+          <li>
+            <form action="../controller/cerrarSesionController.php" method="POST">
+              <button class="dropdown-item">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+              </button>
+            </form>
+          </li>
+        </ul>
+      </div>
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel" style="visibility: visible; background-color: #8350f2;">
+        <div class="offcanvas-header">
+          <h3 class="offcanvas-title" id="offcanvasDarkNavbarLabel" style="color: white; margin-left: 20px;">
+            <img src="../assets/img/genesis Logo.png" style="width: 80px; margin-right: 5px; margin-left: -20px;"><b>Menu</b>
+          </h3>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-    </nav>
+        <hr style="color: #fff;">
+        <div class="offcanvas-body">
+          <ul class="navbar-nav flex-grow-1 pe-3" style="margin-left: 20px;">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="../controller/inicioAdminController.php"><i class="fas fa-tachometer-alt fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Inicio</span></a>
+            </li>
+            <li class="nav-item mt-4" id="active">
+              <a class="nav-link active" href="../controller/usuariosAdminController.php"><i class="fas fa-user fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Usuarios</span></a>
+            </li>
+            <li class="nav-item mt-4">
+              <a class="nav-link active" href="../controller/productosAdminController.php"><i class="fas fa-briefcase fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Productos</span></a>
+            </li>
+            <li class="nav-item mt-4">
+              <a class="nav-link active" href="../controller/categoriasAdminController.php"><i class="fas fa-list-alt fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Categorías</span></a>
+            </li>
+            <li class="nav-item mt-4">
+              <a class="nav-link active" href="../controller/marcasAdminController.php"><i class="fa-solid fa-flag fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Marcas</span></a>
+            </li>
+            <li class="nav-item mt-4">
+              <a class="nav-link active" href="../controller/pedidosAdminController.php"><i class="fas fa-shipping-fast fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">pedidos</span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
 
   <!--<div class="main-content">-->
   <div id="aviso" class="modal" tabindex="-1" role="dialog">
@@ -170,28 +173,12 @@
               print("<td style=' padding-top: 14px;'>" . $producto["dni"] . "</td>\n");
               //Email
               print("<td style=' padding-top: 14px;'>" . $producto["email"] . "</td>\n");
-              //Codigo Postal
-              /* print("<td style=' padding-top: 14px;'>" . $producto["codigo_postal"] . "</td>\n"); */
-              //Calle
-              /* print("<td style=' padding-top: 14px;'>" . $producto["calle"] . "</td>\n"); */
-              //Numero del Bloque o casa
-              /* print("<td style=' padding-top: 14px;'>" . $producto["numero_bloque"] . "</td>\n"); */
-              //Piso
-              /*  if ($producto["piso"] != null) {
-                print("<td style=' padding-top: 14px;'>" . $producto["piso"] . "</td>\n");
-              } else {
-                print("<td style=' padding-top: 14px;'>nulo</td>\n");
-              } */
-              //Telefono
-              /* print("<td style=' padding-top: 14px;'>" . $producto["telefono"] . "</td>\n"); */
-              //Estado de activación
-              /* print("<td style=' padding-top: 14px;'>" . $producto["activacion"] . "</td>\n"); */
               //Activo
-              print("<td style=' padding-top: 14px;'>" . $producto["activo"] . "</td>\n");
+              echo "<td style='padding-top: 14px;'>" . ($producto["activo"] == 1 ? 'Sí' : 'No') . "</td>";
               //Rol
-              print("<td style=' padding-top: 14px;'>" . $producto["rol"] . "</td>\n");
+              echo "<td style='padding-top: 14px;'>" . ($producto["rol"] == 1 ? 'Admin' : 'Cliente') . "</td>";
               //Estado
-              print("<td style=' padding-top: 14px;'>" . $producto["estado"] . "</td>\n");
+              echo "<td style='padding-top: 14px;'>" . ($producto["estado"] == 1 ? 'Baneado' : 'Habilitado') . "</td>";
 
               // Botón para modificar
               echo "<td>";
@@ -245,174 +232,178 @@
     </div><br>
   </div>
 
-<!-- Modal Insertar Usuario -->
-<div class="modal fade" id="insertarUsuarioModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="modalLabel" style="color: #8350F2;">Insertar nuevo usuario</h3>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Formulario de inserción con campos ocultos -->
-        <form method="POST" action="../controller/insertarUsuariosAdminController.php" enctype="multipart/form-data">
-          <div style="display:none">
-            <input type="text" autocomplete="username">
-            <input type="password" autocomplete="new-password">
-          </div>
-          <div class="mb-3">
-            <label style="color: #000;" for="inputNombre" class="form-label"><b>Nombre:</b></label>
-            <input type="text" class="form-control" name="inputNombre" autocomplete="off" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label style="color: #000;" for="inputPrimerApellido" class="form-label"><b>Primer Apellido:</b></label>
-            <input type="text" class="form-control" name="inputPrimerApellido" autocomplete="off" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label style="color: #000;" for="inputSegundoApellido" class="form-label"><b>Segundo Apellido:</b></label>
-            <input type="text" class="form-control" name="inputSegundoApellido" autocomplete="off" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label style="color: #000;" for="inputTelefono" class="form-label"><b>Telefono:</b></label>
-            <input type="tel" class="form-control" name="inputTelefono" autocomplete="off" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label style="color: #000;" for="inputDNI" class="form-label"><b>DNI:</b></label>
-            <input type="text" class="form-control" name="inputDNI" autocomplete="off" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label style="color: #000;" for="inputCodigoPostal" class="form-label"><b>Código Postal:</b></label>
-            <input type="number" class="form-control" name="inputCodigoPostal" autocomplete="off" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label style="color: #000;" for="inputCalle" class="form-label"><b>Nombre de la calle o avenida:</b></label>
-            <input type="text" class="form-control" name="inputCalle" autocomplete="off" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label style="color: #000;" for="inputNumeroBloque" class="form-label"><b>Número del bloque o de la casa:</b></label>
-            <input type="number" class="form-control" name="inputNumeroBloque" autocomplete="off" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label style="color: #000;" for="inputPiso" class="form-label"><b>Piso:</b></label>
-            <input type="text" class="form-control" name="inputPiso" autocomplete="off" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label style="color: #000;" for="inputEmail" class="form-label"><b>Email:</b></label>
-            <input type="email" class="form-control" name="inputEmail" autocomplete="off" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label style="color: #000;" for="inputUsuario" class="form-label"><b>Nombre de usuario:</b></label>
-            <input type="text" class="form-control" name="inputUsuario" autocomplete="new-username" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label style="color: #000;" for="inputPassword" class="form-label"><b>Contraseña:</b></label>
-            <input type="password" class="form-control" name="inputPassword" autocomplete="new-password">
-          </div>
-          <div class="mb-3">
-            <label style="color: #000;" for="inputPassword2" the form-label"><b>Repetir Contraseña:</b></label>
-            <input type="password" class="form-control" name="inputPassword2" autocomplete="new-password">
-          </div>
-          <div class="d-grid">
-            <button style="background-color: #8350F2; color: #fff" class="btn" type="submit">Insertar</button>
-          </div>
-        </form>
+  <!-- Modal Insertar Usuario -->
+  <div class="modal fade" id="insertarUsuarioModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modalLabel" style="color: #8350F2;">Insertar nuevo usuario</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Formulario de inserción con campos ocultos -->
+          <form method="POST" action="../controller/insertarUsuariosAdminController.php" enctype="multipart/form-data">
+            <div style="display:none">
+              <input type="text" autocomplete="username">
+              <input type="password" autocomplete="new-password">
+            </div>
+            <div class="mb-3">
+              <label style="color: #000;" for="inputNombre" class="form-label"><b>Nombre:</b></label>
+              <input type="text" class="form-control" name="inputNombre" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label style="color: #000;" for="inputPrimerApellido" class="form-label"><b>Primer Apellido:</b></label>
+              <input type="text" class="form-control" name="inputPrimerApellido" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label style="color: #000;" for="inputSegundoApellido" class="form-label"><b>Segundo Apellido:</b></label>
+              <input type="text" class="form-control" name="inputSegundoApellido" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label style="color: #000;" for="inputTelefono" class="form-label"><b>Telefono:</b></label>
+              <input type="tel" class="form-control" name="inputTelefono" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label style="color: #000;" for="inputDNI" class="form-label"><b>DNI:</b></label>
+              <input type="text" class="form-control" name="inputDNI" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label style="color: #000;" for="inputCodigoPostal" class="form-label"><b>Código Postal:</b></label>
+              <input type="number" class="form-control" name="inputCodigoPostal" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label style="color: #000;" for="inputCalle" class="form-label"><b>Nombre de la calle o avenida:</b></label>
+              <input type="text" class="form-control" name="inputCalle" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label style="color: #000;" for="inputNumeroBloque" class="form-label"><b>Número del bloque o de la casa:</b></label>
+              <input type="number" class="form-control" name="inputNumeroBloque" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label style="color: #000;" for="inputPiso" class="form-label"><b>Piso:</b></label>
+              <input type="text" class="form-control" name="inputPiso" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label style="color: #000;" for="inputEmail" class="form-label"><b>Email:</b></label>
+              <input type="email" class="form-control" name="inputEmail" autocomplete="off" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label style="color: #000;" for="inputUsuario" class="form-label"><b>Nombre de usuario:</b></label>
+              <input type="text" class="form-control" name="inputUsuario" autocomplete="new-username" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label style="color: #000;" for="inputPassword" class="form-label"><b>Contraseña:</b></label>
+              <input type="password" class="form-control" name="inputPassword" autocomplete="new-password">
+            </div>
+            <div class="mb-3">
+              <label style="color: #000;" for="inputPassword2" the form-label"><b>Repetir Contraseña:</b></label>
+              <input type="password" class="form-control" name="inputPassword2" autocomplete="new-password">
+            </div>
+            <div class="d-grid">
+              <button style="background-color: #8350F2; color: #fff" class="btn" type="submit">Insertar</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Modal Modificar Usuario -->
-<div class="modal fade" id="modificarUsuarioModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="modalLabel" style="color: #8350F2;"><b>Modificar usuario</b></h3>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Formulario de modificación de usuario con campos ocultos -->
-        <form method="POST" action="../controller/modificarUsuarioController.php" enctype="multipart/form-data">
-          <div style="display:none">
-            <input type="text" autocomplete="username">
-            <input type="password" autocomplete="new-password">
-          </div>
-          <div class="mb-3">
-            <label for="nombre_usuario" class="form-label"><b>Nombre de usuario:</b></label>
-            <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" required autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="nombre" class="form-label"><b>Nombre:</b></label>
-            <input type="text" class="form-control" id="nombre" name="nombre" autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="primer_apellido" class="form-label"><b>Primer Apellido:</b></label>
-            <input type="text" class="form-control" id="primer_apellido" name="primer_apellido" autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="segundo_apellido" class="form-label"><b>Segundo Apellido:</b></label>
-            <input type="text" class="form-control" id="segundo_apellido" name="segundo_apellido" autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="dni" class="form-label"><b>DNI:</b></label>
-            <input type="text" class="form-control" id="dni" name="dni" autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label"><b>Email:</b></label>
-            <input type="email" class="form-control" id="email" name="email" autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="codigo_postal" class="form-label"><b>Código Postal:</b></label>
-            <input type="number" class="form-control" id="codigo_postal" name="codigo_postal" autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="calle" class="form-label"><b>Calle:</b></label>
-            <input type="text" class="form-control" id="calle" name="calle" autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="numero_bloque" class="form-label"><b>Número de bloque o casa:</b></label>
-            <input type="number" class="form-control" id="numero_bloque" name="numero_bloque" autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="piso" class="form-label"><b>Piso:</b></label>
-            <input type="text" class="form-control" id="piso" name="piso" autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="telefono" class="form-label"><b>Teléfono:</b></label
-            <input type="tel" class="form-control" id="telefono" name="telefono" autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="activacion" class="form-label"><b>Activación:</b></label>
-            <input type="number" class="form-control" id="activacion" name="activacion" autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="activo" class="form-label"><b>Activo:</b></label>
-            <input type="number" class="form-control" id="activo" name="activo" autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="rol" class="form-label"><b>Rol:</b></label>
-            <input type="number" class="form-control" id="rol" name="rol" autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="estado" class="form-label"><b>Estado:</b></label>
-            <input type="number" class="form-control" id="estado" name="estado" autocomplete="off">
-          </div>
-          <div class="mb-3">
-            <label for="contrasenaNueva" class="form-label"><b>Nueva Contraseña:</b></label>
-            <input type="password" class="form-control" id="contrasenaNueva" name="contrasenaNueva" autocomplete="new-password">
-          </div>
-          <div class="mb-3">
-            <label for="contrasenaConfirmar" class="form-label"><b>Confirmar Nueva Contraseña:</b></label>
-            <input type="password" class="form-control" id="contrasenaConfirmar" name="contrasenaConfirmar" autocomplete="new-password">
-          </div>
-          <input type="hidden" name="idUsuario" id="idUsuario">
-          <div class="d-grid">
-            <button class="btn btn-primary" type="submit" value="Upload" style="background-color: #8350F2; border:#8350F2;">Modificar</button>
-          </div>
-        </form>
+  <!-- Modal Modificar Usuario -->
+  <div class="modal fade" id="modificarUsuarioModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modalLabel" style="color: #8350F2;"><b>Modificar usuario</b></h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Formulario de modificación de usuario con campos ocultos -->
+          <form method="POST" action="../controller/modificarUsuarioController.php" enctype="multipart/form-data">
+            <div style="display:none">
+              <input type="text" autocomplete="username">
+              <input type="password" autocomplete="new-password">
+            </div>
+            <div class="mb-3">
+              <label for="nombre_usuario" class="form-label"><b>Nombre de usuario:</b></label>
+              <input type="text" class="form-control" id="nombre_usuario" name="nombre_usuario" required autocomplete="off">
+            </div>
+            <div class="mb-3">
+              <label for="nombre" class="form-label"><b>Nombre:</b></label>
+              <input type="text" class="form-control" id="nombre" name="nombre" autocomplete="off">
+            </div>
+            <div class="mb-3">
+              <label for="primer_apellido" class="form-label"><b>Primer Apellido:</b></label>
+              <input type="text" class="form-control" id="primer_apellido" name="primer_apellido" autocomplete="off">
+            </div>
+            <div class="mb-3">
+              <label for="segundo_apellido" class="form-label"><b>Segundo Apellido:</b></label>
+              <input type="text" class="form-control" id="segundo_apellido" name="segundo_apellido" autocomplete="off">
+            </div>
+            <div class="mb-3">
+              <label for="dni" class="form-label"><b>DNI:</b></label>
+              <input type="text" class="form-control" id="dni" name="dni" autocomplete="off">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label"><b>Email:</b></label>
+              <input type="email" class="form-control" id="email" name="email" autocomplete="off">
+            </div>
+            <div class="mb-3">
+              <label for="codigo_postal" class="form-label"><b>Código Postal:</b></label>
+              <input type="number" class="form-control" id="codigo_postal" name="codigo_postal" autocomplete="off">
+            </div>
+            <div class="mb-3">
+              <label for="calle" class="form-label"><b>Calle:</b></label>
+              <input type="text" class="form-control" id="calle" name="calle" autocomplete="off">
+            </div>
+            <div class="mb-3">
+              <label for="numero_bloque" class="form-label"><b>Número de bloque o casa:</b></label>
+              <input type="number" class="form-control" id="numero_bloque" name="numero_bloque" autocomplete="off">
+            </div>
+            <div class="mb-3">
+              <label for="piso" class="form-label"><b>Piso:</b></label>
+              <input type="text" class="form-control" id="piso" name="piso" autocomplete="off">
+            </div>
+            <div class="mb-3">
+              <label for="telefono" class="form-label"><b>Teléfono:</b></label <input type="tel" class="form-control" id="telefono" name="telefono" autocomplete="off">
+            </div>
+            <div class="mb-3">
+              <label for="activacion" class="form-label"><b>Activación:</b></label>
+              <input type="number" class="form-control" id="activacion" name="activacion" autocomplete="off">
+            </div>
+            <!-- Desplegable para Activo -->
+            <div class="mb-3">
+              <label for="activo" class="form-label"><b>Activo:</b></label>
+              <select class="form-select" id="activo" name="activo">
+                <option value="0" <?= $producto['activo'] == 0 ? 'selected' : '' ?>>No</option>
+                <option value="1" <?= $producto['activo'] == 1 ? 'selected' : '' ?>>Sí</option>
+
+              </select>
+            </div>
+            <!-- Desplegable para Rol -->
+            <div class="mb-3">
+              <label for="rol" class="form-label"><b>Rol:</b></label>
+              <select class="form-select" id="rol" name="rol">
+                <option value="0" <?= $producto['rol'] == 0 ? 'selected' : '' ?>>Cliente</option>
+                <option value="1" <?= $producto['rol'] == 1 ? 'selected' : '' ?>>Admin</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="contrasenaNueva" class="form-label"><b>Nueva Contraseña:</b></label>
+              <input type="password" class="form-control" id="contrasenaNueva" name="contrasenaNueva" autocomplete="new-password">
+            </div>
+            <div class="mb-3">
+              <label for="contrasenaConfirmar" class="form-label"><b>Confirmar Nueva Contraseña:</b></label>
+              <input type="password" class="form-control" id="contrasenaConfirmar" name="contrasenaConfirmar" autocomplete="new-password">
+            </div>
+            <input type="hidden" name="idUsuario" id="idUsuario">
+            <div class="d-grid">
+              <button class="btn btn-primary" type="submit" value="Upload" style="background-color: #8350F2; border:#8350F2;">Modificar</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   <!-- Modal Detalles Usuario -->
   <div class="modal fade" id="usuarioDetalleModal" tabindex="-1" aria-labelledby="usuarioDetalleLabel" aria-hidden="true">
@@ -591,9 +582,9 @@
             $('#detalle_piso').text(usuario.piso || 'No disponible');
             $('#detalle_telefono').text(usuario.telefono || 'No disponible');
             $('#detalle_activacion').text(usuario.activacion || 'No disponible');
-            $('#detalle_activo').text(usuario.activo || 'No');
-            $('#detalle_rol').text(usuario.rol || '0');
-            $('#detalle_estado').text(usuario.estado || '0');
+            $('#detalle_activo').text(usuario.activo == 1 ? 'Sí' : 'No');
+            $('#detalle_rol').text(usuario.rol == 1 ? 'Admin' : 'Cliente');
+            $('#detalle_estado').text(usuario.estado == 1 ? 'Baneado' : 'Habilitado');;
 
           } else {
             console.error('No se pudo cargar la información del usuario.');
