@@ -1,66 +1,59 @@
 <?php
+// Namespace y dependencias
 namespace model;
 
-use \model\utils;
-use \model\usuarioModel;
-
-//Añadimos el código del modelo
 require_once("../model/utils.php");
 require_once("../model/usuarioModel.php");
-$mensaje=null;
+require '../config/PHPMailer/PHPMailer.php';
+require '../config/PHPMailer/SMTP.php';
 
-include("../view/olvidarContraseñaView.php");
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use \model\Usuario;
+use \model\utils;
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+session_start();
 
-    $nombre = $_POST['nombre'];
-    $primerApellido = $_POST['primer_apellido'];
-    $segundoApellido = $_POST['segundo_apellido'];
-    $telefono = $_POST['telefono'];
-    $dni = $_POST['dni'];
-    $direccion = $_POST['direccion'];
+// Verificar método POST y existencia de email
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
     $email = $_POST['email'];
-    $nombreUsuario = $_POST['nombre_usuario'];
-    $contraseña = $_POST['contrasena'];
-
-    $usuario = array();
-    $usuario["nombre"] = utils::limpiar_datos($nombre);
-    $usuario["primer_apellido"] = utils::limpiar_datos($primerApellido);
-    $usuario["segundo_apellido"] = utils::limpiar_datos($segundoApellido);
-    $usuario["telefono"] = utils::limpiar_datos($telefono);
-    $usuario["dni"] = utils::limpiar_datos($dni);
-    $usuario["direccion"] = utils::limpiar_datos($direccion);
-    $usuario["email"] = utils::limpiar_datos($email);
-    $usuario["nombre_usuario"] = utils::limpiar_datos($nombreUsuario);
-
-    //Generamos una salt de 16 posiciones
-    $salt = utils::generar_salt(16);
-    $usuario["salt"] = $salt;
-    $usuario["contrasena"] = crypt($contraseña,'$6$rounds=5000$'.$salt.'$');
-
-    $usuario["activo"] = 0;
-
-    $usuario["activacion"]=utils::generar_codigo_activacion();
-    $gestorUsu = new Usuario();
-
-    //Nos conectamos a la Base de Datos
     $conexPDO = utils::conectar();
-    $resultado = $gestorUsu->addUsuario($usuario, $conexPDO);
+    $usuarioModel = new Usuario();
+    $usuario = $usuarioModel->getUsuario($email, $conexPDO);
 
-    if ($resultado != null)
-    {
-        /*$mensaje = "El Usuario se Registro Correctamente";
-        echo ($mensaje);*/
+    if ($usuario) {
+        $_SESSION['email_usuario_recuperacion'] = $email;  // Guardar correo en sesión
+        $url = "http://localhost/tfg%201.0/view/recuperarContrase%C3%B1aView.php?email=$email";
+        $mail = new PHPMailer(true);
 
-        header("Location: ../controller/loginController.php");
-                exit();
-    }    
-    else
-    {
-        $mensaje = "Ha habido un fallo al acceder a la Base de Datos";
-        echo ($mensaje);
+        try {
+            // Configuración de PHPMailer
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'aaronhelices@gmail.com';
+            $mail->Password = 'tbof yhhl ebok fsqp';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+
+            $mail->setFrom('aaronhelices@gmail.com', 'Admin-Genesis');
+            $mail->addAddress($email);
+            $mail->isHTML(true);
+            $mail->Subject = 'Recuperacion de cuenta';
+            $mail->Body = "Hola, para cambiar tu contraseña por favor haz clic en el siguiente enlace: <a href=\"$url\">Cambiar contraseña</a>";
+
+            $mail->send();
+            $_SESSION['mensaje'] = '<div class="alert alert-success" role="alert">Mensaje de recuperación enviado con éxito.</div>';
+        } catch (Exception $e) {
+            $_SESSION['mensaje'] = '<div class="alert alert-danger" role="alert">El mensaje no pudo ser enviado. Mailer Error: ' . $mail->ErrorInfo . '</div>';
+        }
+    } else {
+        $_SESSION['mensaje'] = '<div class="alert alert-warning" role="alert">No existe un usuario con ese correo electrónico.</div>';
     }
+    header("Location: ../view/olvidarContraseñaView.php");
+    exit();
 }
 
-
+// Incluir la vista de olvido de contraseña si no se hace POST
+include("../view/olvidarContraseñaView.php");
 ?>
