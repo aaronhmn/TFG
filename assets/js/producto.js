@@ -68,37 +68,49 @@ function getCarritoKey() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-  actualizarContadorCarrito();
   const addToCartButton = document.getElementById('add-to-cart');
   if (addToCartButton) {
       addToCartButton.addEventListener('click', function() {
-          addProductToCart.call(this);
+          const stock = parseInt(this.getAttribute('data-stock'));
+          if (stock > 0) {
+              addProductToCart.call(this);
+          } else {
+              showAlert('Este producto no tiene stock disponible.', 'warning');
+          }
       });
   }
+  actualizarContadorCarrito();
 });
 
 function addProductToCart() {
   const productoId = this.getAttribute('data-id');
   const nombre = this.getAttribute('data-nombre');
   const precio = parseFloat(this.getAttribute('data-precio'));
+  const stock = parseInt(this.getAttribute('data-stock'));
 
   let carritoKey = getCarritoKey();
   let carrito = JSON.parse(localStorage.getItem(carritoKey)) || {};
 
   if (carrito[productoId]) {
-      carrito[productoId].cantidad++;
+      if (carrito[productoId].cantidad < stock) {
+          carrito[productoId].cantidad++;
+      } else {
+          showAlert('No puedes añadir más unidades de este producto. Stock máximo alcanzado.', 'warning');
+          return;
+      }
   } else {
       carrito[productoId] = {
-          id: productoId,  // Asegúrate que el ID se está añadiendo correctamente
+          id: productoId,
           nombre: nombre,
           precio: precio,
-          cantidad: 1
+          cantidad: 1,
+          stock: stock // Asegúrate de añadir esta línea
       };
   }
 
   localStorage.setItem(carritoKey, JSON.stringify(carrito));
   actualizarContadorCarrito();
-  showAlert('Producto añadido al carrito','success');
+  showAlert('Producto añadido al carrito', 'success');
 }
 
 function showAlert(message, type) {

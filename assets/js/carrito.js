@@ -82,17 +82,29 @@ function actualizarContadorCarrito() {
 
 // Cambia la cantidad de un producto específico
 function cambiarCantidad(id, cambio) {
-    const carritoKey = getCarritoKey();  // Usar la clave correcta del carrito
+    const carritoKey = getCarritoKey();
     const carrito = JSON.parse(localStorage.getItem(carritoKey));
+
     if (carrito && carrito[id]) {
-        carrito[id].cantidad += cambio;
-        // Asegurarse de que la cantidad no sea menor que 1
-        if (carrito[id].cantidad < 1) {
-            carrito[id].cantidad = 1;  // Establecer la cantidad mínima como 1
+        const nuevaCantidad = carrito[id].cantidad + cambio;
+
+        // Comprobar que la nueva cantidad no exceda el stock disponible
+        if (nuevaCantidad > carrito[id].stock) {
+            showAlert('No puedes añadir más unidades de este producto. Stock máximo alcanzado.', 'warning');
+            return; // Detener el incremento porque excede el stock
         }
-        localStorage.setItem(carritoKey, JSON.stringify(carrito));  // Guardar usando la clave correcta
+
+        // Comprobar que la cantidad no sea menor que 1
+        if (nuevaCantidad < 1) {
+            showAlert('No puedes reducir la cantidad a menos de uno.', 'warning');
+            return; // Detener la reducción porque es menor que 1
+        }
+
+        // Actualizar la cantidad si está dentro de los límites permitidos
+        carrito[id].cantidad = nuevaCantidad;
+        localStorage.setItem(carritoKey, JSON.stringify(carrito));
         cargarCarrito();
-        actualizarContadorCarrito();  // Asegúrate de actualizar el contador del carrito también si es necesario
+        actualizarContadorCarrito();
     }
 }
 
@@ -146,11 +158,19 @@ function realizarPedido() {
 
 function showAlert(message, type) {
     const alertPlaceholder = document.getElementById('alertPlaceholder');
-    if (!alertPlaceholder) return;
-    alertPlaceholder.innerHTML = `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
-        ${message}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>`;
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = [
+        `<div class="alert alert-${type} alert-dismissible fade show" role="alert">`,
+        `${message}`,
+        '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+        '</div>'
+    ].join('');
+
+    alertPlaceholder.append(wrapper);
+
+    setTimeout(() => {
+        wrapper.remove();
+    }, 4000); // Las alertas desaparecerán después de 4 segundos
 }
 
 // Cargar el carrito al cargar la página

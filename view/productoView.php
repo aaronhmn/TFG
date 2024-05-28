@@ -24,14 +24,14 @@ namespace views;
 </head>
 
 <body style="background-color: #e6e6fa" <?php if (isset($_SESSION['id_usuario'])) echo 'data-user-id="' . $_SESSION['id_usuario'] . '"'; ?>>
-    <!--NAV DE LA PAGINA-->
-    <?php include '../controller/navbarController.php'; ?>
+  <!--NAV DE LA PAGINA-->
+  <?php include '../controller/navbarController.php'; ?>
 
   <div class="container sproduct mt-5">
     <div class="row">
       <div class="col-lg-5 col-md-12 col-12 mb-5">
-      <?php $prueba = explode(",", $productos['ruta_imagen']); ?>
-        <img class="img-fluid w-100" src="<?= $prueba[0] ?>"  id="mainImg" alt="<?= $productos['nombre'] ?>">
+        <?php $prueba = explode(",", $productos['ruta_imagen']); ?>
+        <img class="img-fluid w-100" src="<?= $prueba[0] ?>" id="mainImg" alt="<?= $productos['nombre'] ?>">
 
         <div class="small-img-group pt-2">
           <div class="small-img-col selected">
@@ -63,16 +63,16 @@ namespace views;
             <i class="fa fa-star"></i>
           </div>
           <h6 class="stock"><b>
-        <?php
-        if ($productos['stock'] > 10) {
-            echo '| <span>En stock</span> |';
-        } elseif ($productos['stock'] > 0) {
-            echo '| <span>Poco stock</span> |';
-        } else {
-            echo '| <span style="color: red;">Sin stock</span> |';
-        }
-        ?>
-      </b></h6>
+              <?php
+              if ($productos['stock'] > 10) {
+                echo '| <span>En stock</span> |';
+              } elseif ($productos['stock'] > 0) {
+                echo '| <span>Poco stock</span> |';
+              } else {
+                echo '| <span style="color: red;">Sin stock</span> |';
+              }
+              ?>
+            </b></h6>
         </div>
         <h2 class="precio mt-4"><b><?= $productos['precio'] ?> €</b></h2>
 
@@ -89,27 +89,29 @@ namespace views;
           </div>
         </div>
         <div id="alertPlaceholder" class="mt-5"></div>
-        <?php if (isset($_SESSION['login']) && $_SESSION['login']): ?>
-    <!-- Usuario logueado, mostrar botones con funcionalidad normal -->
-    <div class="row mt-5">
-        <div class="col">
-            <div class="d-flex align-items-center">
-                <button class="boton-carrito" id="add-to-cart" data-id="<?= $productos['idproducto'] ?>" data-nombre="<?= $productos['nombre'] ?>" data-precio="<?= $productos['precio'] ?>">Añadir al Carrito<i class="fas fa-shopping-cart" style="color: white; margin-left: 10px;"></i></button>
+        <?php if (isset($_SESSION['login']) && $_SESSION['login']) : ?>
+          <!-- Usuario logueado, mostrar botones con funcionalidad normal -->
+          <div class="row mt-5">
+            <div class="col">
+              <div class="d-flex align-items-center">
+                <button class="boton-carrito" id="add-to-cart" data-id="<?= $productos['idproducto'] ?>" data-nombre="<?= $productos['nombre'] ?>" data-precio="<?= $productos['precio'] ?>" data-stock="<?= $productos['stock'] ?>">
+                  Añadir al Carrito<i class="fas fa-shopping-cart" style="color: white; margin-left: 10px;"></i>
+                </button>
                 <button class="boton-fav ms-2" id="add-to-fav" data-id="<?= $productos['idproducto'] ?>" data-nombre="<?= htmlspecialchars($productos['nombre'], ENT_QUOTES) ?>" data-precio="<?= htmlspecialchars($productos['precio'], ENT_QUOTES) ?>" data-imagen="<?= htmlspecialchars($prueba[0], ENT_QUOTES) ?>">Añadir a Favorito<i class="fas fa-heart" style="color: white; margin-left: 10px;"></i></button>
+              </div>
             </div>
-        </div>
-    </div>
-<?php else: ?>
-    <!-- Usuario no logueado, mostrar botones que redirigen al login -->
-    <div class="row mt-5">
-        <div class="col">
-            <div class="d-flex align-items-center">
+          </div>
+        <?php else : ?>
+          <!-- Usuario no logueado, mostrar botones que redirigen al login -->
+          <div class="row mt-5">
+            <div class="col">
+              <div class="d-flex align-items-center">
                 <button class="boton-carrito" onclick="window.location.href='../controller/loginController.php'">Añadir al Carrito<i class="fas fa-shopping-cart" style="color: white; margin-left: 10px;"></i></button>
                 <button class="boton-fav ms-2" onclick="window.location.href='../controller/loginController.php'">Añadir a Favorito<i class="fas fa-heart" style="color: white; margin-left: 10px;"></i></button>
+              </div>
             </div>
-        </div>
-    </div>
-<?php endif; ?>
+          </div>
+        <?php endif; ?>
 
         <div class="row mt-5">
           <div class="col">
@@ -169,7 +171,7 @@ namespace views;
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   <script src="../assets/js/producto.js"></script>
-  
+
 </body>
 
 </html>
