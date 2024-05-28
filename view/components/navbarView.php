@@ -153,7 +153,16 @@ if (session_status() == PHP_SESSION_NONE) {
 
   <br /><br /><br /><br /><br />
 
-  <script src="../assets/js/navbar.js"></script>
+  <script>
+$(document).ready(function() {
+    // Evento que se activa antes de que el formulario se envíe
+    $('form').on('submit', function(e) {
+        // Limpiar el campo de búsqueda, eliminando espacios en blanco al inicio y al final
+        var searchInput = $('#busqueda');
+        searchInput.val($.trim(searchInput.val()));
+    });
+});
+</script>
 
 </body>
 
