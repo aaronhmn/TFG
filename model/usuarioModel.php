@@ -130,7 +130,7 @@ class Usuario
         if (isset($usuario) && $conexPDO != null) {
             try {
                 //Preparamos la sentencia
-                $sentencia = $conexPDO->prepare("INSERT INTO genesis.usuario (nombre, primer_apellido, segundo_apellido, dni, email, contrasena, nombre_usuario, codigo_postal, calle, numero_bloque, piso, telefono, salt, activacion, activo) VALUES ( :nombre, :primer_apellido, :segundo_apellido, :dni, :email, :contrasena, :nombre_usuario, :codigo_postal, :calle, :numero_bloque, :piso, :telefono, :salt, :activacion, :activo)");
+                $sentencia = $conexPDO->prepare("INSERT INTO genesis.usuario (nombre, primer_apellido, segundo_apellido, dni, email, contrasena, nombre_usuario, codigo_postal, calle, numero_bloque, piso, telefono, salt, activacion, activo, rol) VALUES ( :nombre, :primer_apellido, :segundo_apellido, :dni, :email, :contrasena, :nombre_usuario, :codigo_postal, :calle, :numero_bloque, :piso, :telefono, :salt, :activacion, :activo, :rol)");
 
                 //Asociamos los valores a los parametros de la sentencia sql (A la izquierda el parámetro y a la derecha los valores como están en la base de datos)
                 $sentencia->bindParam(":nombre", $usuario["nombre"]);
@@ -148,7 +148,7 @@ class Usuario
                 $sentencia->bindParam(":salt", $usuario["salt"]);
                 $sentencia->bindParam(":activacion", $usuario["activacion"]);
                 $sentencia->bindParam(":activo", $usuario["activo"]);
-
+                $sentencia->bindParam(":rol", $usuario["rol"]);
 
                 //Ejecutamos la sentencia
                 $result = $sentencia->execute();

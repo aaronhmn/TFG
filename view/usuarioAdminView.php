@@ -249,35 +249,35 @@
             </div>
             <div class="mb-3">
               <label style="color: #000;" for="inputNombre" class="form-label"><b>Nombre:</b></label>
-              <input type="text" class="form-control" name="inputNombre" autocomplete="off" aria-describedby="emailHelp">
+              <input type="text" class="form-control" name="inputNombre" autocomplete="off" aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
               <label style="color: #000;" for="inputPrimerApellido" class="form-label"><b>Primer Apellido:</b></label>
-              <input type="text" class="form-control" name="inputPrimerApellido" autocomplete="off" aria-describedby="emailHelp">
+              <input type="text" class="form-control" name="inputPrimerApellido" autocomplete="off" aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
               <label style="color: #000;" for="inputSegundoApellido" class="form-label"><b>Segundo Apellido:</b></label>
-              <input type="text" class="form-control" name="inputSegundoApellido" autocomplete="off" aria-describedby="emailHelp">
+              <input type="text" class="form-control" name="inputSegundoApellido" autocomplete="off" aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
               <label style="color: #000;" for="inputTelefono" class="form-label"><b>Telefono:</b></label>
-              <input type="tel" class="form-control" name="inputTelefono" autocomplete="off" aria-describedby="emailHelp">
+              <input type="tel" class="form-control" name="inputTelefono" autocomplete="off" aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
               <label style="color: #000;" for="inputDNI" class="form-label"><b>DNI:</b></label>
-              <input type="text" class="form-control" name="inputDNI" autocomplete="off" aria-describedby="emailHelp">
+              <input type="text" class="form-control" name="inputDNI" autocomplete="off" aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
               <label style="color: #000;" for="inputCodigoPostal" class="form-label"><b>Código Postal:</b></label>
-              <input type="number" class="form-control" name="inputCodigoPostal" autocomplete="off" aria-describedby="emailHelp">
+              <input type="number" min=0 class="form-control" name="inputCodigoPostal" autocomplete="off" aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
               <label style="color: #000;" for="inputCalle" class="form-label"><b>Nombre de la calle o avenida:</b></label>
-              <input type="text" class="form-control" name="inputCalle" autocomplete="off" aria-describedby="emailHelp">
+              <input type="text" class="form-control" name="inputCalle" autocomplete="off" aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
               <label style="color: #000;" for="inputNumeroBloque" class="form-label"><b>Número del bloque o de la casa:</b></label>
-              <input type="number" class="form-control" name="inputNumeroBloque" autocomplete="off" aria-describedby="emailHelp">
+              <input type="number" min=0 class="form-control" name="inputNumeroBloque" autocomplete="off" aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
               <label style="color: #000;" for="inputPiso" class="form-label"><b>Piso:</b></label>
@@ -285,19 +285,33 @@
             </div>
             <div class="mb-3">
               <label style="color: #000;" for="inputEmail" class="form-label"><b>Email:</b></label>
-              <input type="email" class="form-control" name="inputEmail" autocomplete="off" aria-describedby="emailHelp">
+              <input type="email" class="form-control" name="inputEmail" autocomplete="off" aria-describedby="emailHelp" required>
             </div>
             <div class="mb-3">
               <label style="color: #000;" for="inputUsuario" class="form-label"><b>Nombre de usuario:</b></label>
-              <input type="text" class="form-control" name="inputUsuario" autocomplete="new-username" aria-describedby="emailHelp">
+              <input type="text" class="form-control" name="inputUsuario" autocomplete="new-username" aria-describedby="emailHelp" required>
+            </div>
+            <div class="mb-3">
+              <label for="inputActivo" class="form-label"><b>Activo:</b></label>
+              <select class="form-select" id="inputActivo" name="inputActivo">
+                <option value="0">No</option>
+                <option value="1">Sí</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="inputRol" class="form-label"><b>Rol:</b></label>
+              <select class="form-select" id="inputRol" name="inputRol">
+                <option value="0">Cliente</option>
+                <option value="1">Admin</option>
+              </select>
             </div>
             <div class="mb-3">
               <label style="color: #000;" for="inputPassword" class="form-label"><b>Contraseña:</b></label>
-              <input type="password" class="form-control" name="inputPassword" autocomplete="new-password">
+              <input type="password" class="form-control" name="inputPassword" autocomplete="new-password" required>
             </div>
             <div class="mb-3">
               <label style="color: #000;" for="inputPassword2" the form-label"><b>Repetir Contraseña:</b></label>
-              <input type="password" class="form-control" name="inputPassword2" autocomplete="new-password">
+              <input type="password" class="form-control" name="inputPassword2" autocomplete="new-password" required>
             </div>
             <div class="d-grid">
               <button style="background-color: #8350F2; color: #fff" class="btn" type="submit">Insertar</button>
@@ -329,42 +343,43 @@
             </div>
             <div class="mb-3">
               <label for="nombre" class="form-label"><b>Nombre:</b></label>
-              <input type="text" class="form-control" id="nombre" name="nombre" autocomplete="off">
+              <input type="text" class="form-control" id="nombre" name="nombre" required autocomplete="off">
             </div>
             <div class="mb-3">
               <label for="primer_apellido" class="form-label"><b>Primer Apellido:</b></label>
-              <input type="text" class="form-control" id="primer_apellido" name="primer_apellido" autocomplete="off">
+              <input type="text" class="form-control" id="primer_apellido" name="primer_apellido" required autocomplete="off">
             </div>
             <div class="mb-3">
               <label for="segundo_apellido" class="form-label"><b>Segundo Apellido:</b></label>
-              <input type="text" class="form-control" id="segundo_apellido" name="segundo_apellido" autocomplete="off">
+              <input type="text" class="form-control" id="segundo_apellido" name="segundo_apellido" required autocomplete="off">
             </div>
             <div class="mb-3">
               <label for="dni" class="form-label"><b>DNI:</b></label>
-              <input type="text" class="form-control" id="dni" name="dni" autocomplete="off">
+              <input type="text" class="form-control" id="dni" name="dni" required autocomplete="off">
             </div>
             <div class="mb-3">
               <label for="email" class="form-label"><b>Email:</b></label>
-              <input type="email" class="form-control" id="email" name="email" autocomplete="off">
+              <input type="email" class="form-control" id="email" name="email" required autocomplete="off">
             </div>
             <div class="mb-3">
               <label for="codigo_postal" class="form-label"><b>Código Postal:</b></label>
-              <input type="number" class="form-control" id="codigo_postal" name="codigo_postal" autocomplete="off">
+              <input type="number" min=0 class="form-control" id="codigo_postal" name="codigo_postal" required autocomplete="off">
             </div>
             <div class="mb-3">
               <label for="calle" class="form-label"><b>Calle:</b></label>
-              <input type="text" class="form-control" id="calle" name="calle" autocomplete="off">
+              <input type="text" class="form-control" id="calle" name="calle" required autocomplete="off">
             </div>
             <div class="mb-3">
               <label for="numero_bloque" class="form-label"><b>Número de bloque o casa:</b></label>
-              <input type="number" class="form-control" id="numero_bloque" name="numero_bloque" autocomplete="off">
+              <input type="number" min=0 class="form-control" id="numero_bloque" name="numero_bloque" required autocomplete="off">
             </div>
             <div class="mb-3">
               <label for="piso" class="form-label"><b>Piso:</b></label>
               <input type="text" class="form-control" id="piso" name="piso" autocomplete="off">
             </div>
             <div class="mb-3">
-              <label for="telefono" class="form-label"><b>Teléfono:</b></label <input type="tel" class="form-control" id="telefono" name="telefono" autocomplete="off">
+              <label for="telefono" class="form-label"><b>Teléfono:</b></label> 
+              <input type="tel" class="form-control" id="telefono" name="telefono" required autocomplete="off">
             </div>
             <div class="mb-3">
               <label for="activacion" class="form-label"><b>Activación:</b></label>
@@ -490,6 +505,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+  <script src="../assets/js/usuarioAdmin.js"></script>
 
   <script>
     //script para borrar lo que haya dentro del modal

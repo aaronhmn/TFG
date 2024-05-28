@@ -35,6 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $piso = $_POST['inputPiso'];
     $email = $_POST['inputEmail'];
     $usuario = $_POST['inputUsuario'];
+    $activo = $_POST['inputActivo'];
+    $rol = $_POST['inputRol'];
     $contraseña = $_POST['inputPassword'];
 
     $datosUsuario = array();
@@ -48,6 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $datosUsuario["numero_bloque"] = utils::limpiar_datos($numeroBloque);
     $datosUsuario["piso"] = utils::limpiar_datos($piso);
     $datosUsuario["email"] = utils::limpiar_datos($email);
+    $datosUsuario["activo"] = utils::limpiar_datos($activo);
+    $datosUsuario["rol"] = utils::limpiar_datos($rol);
     $datosUsuario["nombre_usuario"] = utils::limpiar_datos($usuario);
 
     //Generamos una salt de 16 posiciones
@@ -55,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $datosUsuario["salt"] = $salt;
     $datosUsuario["contrasena"] = crypt($contraseña,'$6$rounds=5000$'.$salt.'$');
 
-    $datosUsuario["activo"] = 0;
+    /* $datosUsuario["activo"] = 0; */
 
     $datosUsuario["activacion"]=utils::generar_codigo_activacion();
     $gestorUsu = new Usuario();

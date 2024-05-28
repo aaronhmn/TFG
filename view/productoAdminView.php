@@ -229,24 +229,24 @@
                     <form method="POST" action="../controller/insertarProductosAdminController.php" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="inputNombre" class="form-label"><b>Nombre:</b></label>
-                            <input type="text" class="form-control" name="inputNombre" aria-describedby="emailHelp">
+                            <input type="text" class="form-control" name="inputNombre" aria-describedby="emailHelp" required>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="inputPrecio" class="form-label"><b>Precio:</b></label>
-                                <input type="number" step="0.01" class="form-control" name="inputPrecio" aria-describedby="emailHelp">
+                                <input type="number" min=0 step="0.01" class="form-control" name="inputPrecio" aria-describedby="emailHelp" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="inputStock" class="form-label"><b>Stock:</b></label>
-                                <input type="number" class="form-control" name="inputStock" aria-describedby="emailHelp">
+                                <input type="number" min=0 class="form-control" name="inputStock" aria-describedby="emailHelp" required>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="selectCategoria" class="form-label"><b>Categoria:</b></label>
-                                <select class="form-select" name="inputCategoria" id="selectCategoria">
+                                <select class="form-select" name="inputCategoria" id="selectCategoria" required>
                                     <option value="" selected disabled>Elija una categoría</option>
                                     <?php foreach ($categorias as $categoria) : ?>
                                         <option value="<?= $categoria['idcategoria'] ?>"><?= htmlspecialchars($categoria['nombre_categoria']) ?></option>
@@ -255,7 +255,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="selectMarca" class="form-label"><b>Marca:</b></label>
-                                <select class="form-select" name="inputMarca" id="selectMarca">
+                                <select class="form-select" name="inputMarca" id="selectMarca" required>
                                     <option value="" selected disabled>Elija una marca</option>
                                     <?php foreach ($marcas as $marca) : ?>
                                         <option value="<?= $marca['idmarca'] ?>"><?= htmlspecialchars($marca['nombre_marca']) ?></option>
@@ -266,17 +266,17 @@
 
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label"><b>Descripción:</b></label>
-                            <textarea class="form-control" name="inputDescripcion" rows="10" style="resize: none;"></textarea>
+                            <textarea class="form-control" name="inputDescripcion" rows="10" style="resize: none;" required></textarea>
                         </div>
 
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label"><b>Especificacion:</b></label>
-                            <textarea class="form-control" name="inputEspecificacion" rows="10" style="resize: none;"></textarea>
+                            <textarea class="form-control" name="inputEspecificacion" rows="10" style="resize: none;" required></textarea>
                         </div>
 
                         <div class="mb-3">
                             <label for="inputImagen" class="form-label"><b>Inserta las imágenes:</b></label>
-                            <input type="file" class="form-control" id="inputImagen" name="inputImagen[]" multiple>
+                            <input type="file" class="form-control" id="inputImagen" name="inputImagen[]" multiple required>
                         </div>
 
                         <div class="d-grid">
@@ -302,22 +302,22 @@
 
                         <div class="mb-3">
                             <label for="nombre" class="form-label"><b>Nombre:</b></label>
-                            <input type="text" class="form-control" id="nombre" name="nombre">
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="precio" class="form-label"><b>Precio:</b></label>
-                                <input type="number" step="0.01" class="form-control" id="precio" name="precio">
+                                <input type="number" min=0 step="0.01" class="form-control" id="precio" name="precio" required>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="stock" class="form-label"><b>Stock:</b></label>
-                                <input type="number" class="form-control" id="stock" name="stock">
+                                <input type="number" min=0 class="form-control" id="stock" name="stock" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="selectCategoria" class="form-label"><b>Categoria:</b></label>
-                                <select class="form-select" name="id_categoria" id="selectCategoria">
+                                <select class="form-select" name="id_categoria" id="selectCategoria" required>
                                     <option value="" selected disabled>Elija una categoría</option>
                                     <?php foreach ($categorias as $categoria) : ?>
                                         <option value="<?= $categoria['idcategoria'] ?>"><?= htmlspecialchars($categoria['nombre_categoria']) ?></option>
@@ -326,7 +326,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="selectMarca" class="form-label"><b>Marca:</b></label>
-                                <select class="form-select" name="id_marca" id="selectMarca">
+                                <select class="form-select" name="id_marca" id="selectMarca" required>
                                     <option value="" selected disabled>Elija una marca</option>
                                     <?php foreach ($marcas as $marca) : ?>
                                         <option value="<?= $marca['idmarca'] ?>"><?= htmlspecialchars($marca['nombre_marca']) ?></option>
@@ -336,11 +336,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="descripcion" class="form-label"><b>Descripción:</b></label>
-                            <textarea class="form-control" id="descripcion" name="descripcion" rows="10"></textarea>
+                            <textarea class="form-control" id="descripcion" name="descripcion" rows="10" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="especificacion" class="form-label"><b>Especificacion:</b></label>
-                            <textarea class="form-control" id="especificacion" name="especificacion" rows="10"></textarea>
+                            <textarea class="form-control" id="especificacion" name="especificacion" rows="10" required></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="inputImagen" class="form-label"><b>Inserta las imágenes:</b></label>
