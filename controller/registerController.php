@@ -2,6 +2,10 @@
 
 namespace model;
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 use \model\utils;
 use \model\usuario;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -15,6 +19,8 @@ require '../config/PHPMailer/SMTP.php';
 $mensaje = null;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Aplicar trim a todos los valores de entrada para limpiarlos
+    $_POST = array_map('trim', $_POST);
 
     $nombre = $_POST['nombre'];
     $primerApellido = $_POST['primer_apellido'];
@@ -28,6 +34,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
     $nombreUsuario = $_POST['nombre_usuario'];
     $contraseña = $_POST['contrasena'];
+
+    $gestorUsu = new Usuario();
+
+    $conexPDO = utils::conectar();
+
+    // Verificar si el email ya existe
+    if ($gestorUsu->existeEmail($email, $conexPDO)) {
+        $_SESSION['error'] = 'Este email ya está registrado.';
+        header("Location: ../view/registerView.php");
+        exit();
+    }
+
+    // Verificar si el nombre de usuario ya existe
+    if ($gestorUsu->existeNombreUsuario($nombreUsuario, $conexPDO)) {
+        $_SESSION['error'] = 'Este nombre de usuario ya está en uso.';
+        header("Location: ../view/registerView.php");
+        exit();
+    }
 
     // Validación del número de teléfono
     if (!preg_match('/^\d{9}$/', $telefono)) {
@@ -71,9 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $usuario["activo"] = 0;
 
     $usuario["activacion"] = utils::generar_codigo_activacion();
-    $gestorUsu = new Usuario();
 
-    $conexPDO = utils::conectar();
     $resultado = $gestorUsu->addUsuario($usuario, $conexPDO);
 
     if ($resultado) {

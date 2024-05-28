@@ -329,4 +329,34 @@ public function cambiarContraseñaPorId($idUsuario, $nuevaContrasena, $nuevaSalt
         }
         return 0; // Si no hay conexión, retorna 0
     }
+
+    public function existeEmail($email, $conexPDO) {
+        if ($conexPDO != null) {
+            try {
+                $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.usuario WHERE email = :email");
+                $stmt->bindParam(':email', $email);
+                $stmt->execute();
+                return $stmt->fetchColumn() > 0;
+            } catch (PDOException $e) {
+                error_log("Error al verificar email: " . $e->getMessage());
+                return false; // Considera cómo manejar los errores correctamente
+            }
+        }
+        return false;
+    }
+
+    public function existeNombreUsuario($nombreUsuario, $conexPDO) {
+        if ($conexPDO != null) {
+            try {
+                $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.usuario WHERE nombre_usuario = :nombre_usuario");
+                $stmt->bindParam(':nombre_usuario', $nombreUsuario);
+                $stmt->execute();
+                return $stmt->fetchColumn() > 0;
+            } catch (PDOException $e) {
+                error_log("Error al verificar nombre_usuario: " . $e->getMessage());
+                return false; // Considera cómo manejar los errores correctamente
+            }
+        }
+        return false;
+    }
 }

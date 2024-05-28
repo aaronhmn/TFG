@@ -34,6 +34,8 @@ if (!$datosUsuario) {
 
 // Comprobar si se enviaron datos del formulario por POST para actualizar el perfil
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Aplicar trim a todos los valores de entrada para limpiarlos
+    $_POST = array_map('trim', $_POST);
     // Recolectar datos del formulario asegurándose de manejar posibles valores nulos
     $nombre = $_POST['nombre'] ?? '';
     $nombre_usuario = $_POST['nombre_usuario'] ?? '';
