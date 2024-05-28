@@ -136,12 +136,6 @@
               <th style="background-color: #8350F2; color: #fff;" scope="col">Segundo Apellido</th>
               <th style="background-color: #8350F2; color: #fff;" scope="col">DNI</th>
               <th style="background-color: #8350F2; color: #fff;" scope="col">Correo Electrónico</th>
-              <!-- <th style="background-color: #8350F2; color: #fff;" scope="col">Código Postal</th> -->
-              <!-- <th style="background-color: #8350F2; color: #fff;" scope="col">Calle</th>
-              <th style="background-color: #8350F2; color: #fff;" scope="col">Número Bloque</th>
-              <th style="background-color: #8350F2; color: #fff;" scope="col">Piso</th> -->
-              <!-- <th style="background-color: #8350F2; color: #fff;" scope="col">Teléfono</th> -->
-              <!-- <th style="background-color: #8350F2; color: #fff;" scope="col">Activación</th> -->
               <th style="background-color: #8350F2; color: #fff;" scope="col">Activo</th>
               <th style="background-color: #8350F2; color: #fff;" scope="col">Rol</th>
               <th style="background-color: #8350F2; color: #fff;" scope="col">Estado</th>
@@ -205,7 +199,7 @@
               echo "</button>";
               echo "</td>";
 
-              // Botón para eliminar
+              // Botón para banear
               echo "<td>";
               echo "<form id='formEliminar-{$producto['idusuario']}' method='POST' action='../controller/banearUsuarioController.php'>";
               echo "<input type='hidden' name='idUsuario' value='{$producto['idusuario']}'/>";
@@ -613,7 +607,7 @@
         }
       });
     });
-    
+
     document.addEventListener('DOMContentLoaded', function() {
     // Verificar si existe un mensaje de error en la sesión y mostrarlo
     <?php if (isset($_SESSION['error'])): ?>
