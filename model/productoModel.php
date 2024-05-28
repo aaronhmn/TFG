@@ -11,17 +11,17 @@ class producto
 {
     /**Funcion que nos devuelve todos los productos */
     public function getProductos($conexPDO)
-{
-    if ($conexPDO != null) {
-        try {
-            $sentencia = $conexPDO->prepare("SELECT * FROM genesis.producto");
-            $sentencia->execute();
-            return $sentencia->fetchAll();
-        } catch (PDOException $e) {
-            print("Error al acceder a BD" . $e->getMessage());
+    {
+        if ($conexPDO != null) {
+            try {
+                $sentencia = $conexPDO->prepare("SELECT * FROM genesis.producto");
+                $sentencia->execute();
+                return $sentencia->fetchAll();
+            } catch (PDOException $e) {
+                print("Error al acceder a BD" . $e->getMessage());
+            }
         }
     }
-}
 
 
 
@@ -75,36 +75,36 @@ class producto
     }
 
     public function getProductoId($id, $conexPDO)
-{
-    if (isset($id) && is_numeric($id)) {
-        if ($conexPDO != null) {
-            try {
-                $sentencia = $conexPDO->prepare("SELECT * FROM genesis.producto WHERE idproducto=? AND estado = 0");
-                $sentencia->bindParam(1, $id);
-                $sentencia->execute();
-                return $sentencia->fetch();
-            } catch (PDOException $e) {
-                print("Error al acceder a BD" . $e->getMessage());
+    {
+        if (isset($id) && is_numeric($id)) {
+            if ($conexPDO != null) {
+                try {
+                    $sentencia = $conexPDO->prepare("SELECT * FROM genesis.producto WHERE idproducto=? AND estado = 0");
+                    $sentencia->bindParam(1, $id);
+                    $sentencia->execute();
+                    return $sentencia->fetch();
+                } catch (PDOException $e) {
+                    print("Error al acceder a BD" . $e->getMessage());
+                }
             }
         }
     }
-}
 
-public function getProductoIdAdmin($id, $conexPDO)
-{
-    if (isset($id) && is_numeric($id)) {
-        if ($conexPDO != null) {
-            try {
-                $sentencia = $conexPDO->prepare("SELECT * FROM genesis.producto WHERE idproducto=?");
-                $sentencia->bindParam(1, $id);
-                $sentencia->execute();
-                return $sentencia->fetch();
-            } catch (PDOException $e) {
-                print("Error al acceder a BD" . $e->getMessage());
+    public function getProductoIdAdmin($id, $conexPDO)
+    {
+        if (isset($id) && is_numeric($id)) {
+            if ($conexPDO != null) {
+                try {
+                    $sentencia = $conexPDO->prepare("SELECT * FROM genesis.producto WHERE idproducto=?");
+                    $sentencia->bindParam(1, $id);
+                    $sentencia->execute();
+                    return $sentencia->fetch();
+                } catch (PDOException $e) {
+                    print("Error al acceder a BD" . $e->getMessage());
+                }
             }
         }
     }
-}
 
     function addProducto($producto, $conexPDO)
     {
@@ -255,42 +255,42 @@ public function getProductoIdAdmin($id, $conexPDO)
     }
 
     public function getProductosFiltrados($conexPDO, $ordenPrecio, $categoria = null, $marca = null)
-{
-    $query = "SELECT * FROM genesis.producto WHERE estado = 0";
+    {
+        $query = "SELECT * FROM genesis.producto WHERE estado = 0";
 
-    $params = [];
-    $paramTypes = [];
+        $params = [];
+        $paramTypes = [];
 
-    // Agregar filtro por categoría si está presente
-    if (!empty($categoria)) {
-        $query .= " AND id_categoria = ?";
-        $params[] = $categoria;
-        $paramTypes[] = PDO::PARAM_INT;
+        // Agregar filtro por categoría si está presente
+        if (!empty($categoria)) {
+            $query .= " AND id_categoria = ?";
+            $params[] = $categoria;
+            $paramTypes[] = PDO::PARAM_INT;
+        }
+
+        // Agregar filtro por marca si está presente
+        if (!empty($marca)) {
+            $query .= " AND id_marca = ?";
+            $params[] = $marca;
+            $paramTypes[] = PDO::PARAM_INT;
+        }
+
+        // Orden de precios
+        if ($ordenPrecio === 'menorMayor') {
+            $query .= " ORDER BY precio ASC";
+        } elseif ($ordenPrecio === 'mayorMenor') {
+            $query .= " ORDER BY precio DESC";
+        }
+
+        $stmt = $conexPDO->prepare($query);
+
+        foreach ($params as $index => $param) {
+            $stmt->bindValue($index + 1, $param, $paramTypes[$index]);
+        }
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    // Agregar filtro por marca si está presente
-    if (!empty($marca)) {
-        $query .= " AND id_marca = ?";
-        $params[] = $marca;
-        $paramTypes[] = PDO::PARAM_INT;
-    }
-
-    // Orden de precios
-    if ($ordenPrecio === 'menorMayor') {
-        $query .= " ORDER BY precio ASC";
-    } elseif ($ordenPrecio === 'mayorMenor') {
-        $query .= " ORDER BY precio DESC";
-    }
-
-    $stmt = $conexPDO->prepare($query);
-
-    foreach ($params as $index => $param) {
-        $stmt->bindValue($index + 1, $param, $paramTypes[$index]);
-    }
-
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
 
     public function ocultarProducto($idProducto, $conexPDO)
     {
@@ -306,6 +306,20 @@ public function getProductoIdAdmin($id, $conexPDO)
             }
         }
         return false;
+    }
+
+    function updateStock($idProducto, $cantidad, $conexPDO)
+    {
+        try {
+            $sql = "UPDATE genesis.producto SET stock = stock - :cantidad WHERE idproducto = :idproducto AND stock >= :cantidad";
+            $stmt = $conexPDO->prepare($sql);
+            $stmt->bindParam(":cantidad", $cantidad, PDO::PARAM_INT);
+            $stmt->bindParam(":idproducto", $idProducto, PDO::PARAM_INT);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            print("Error al actualizar el stock del producto: " . $e->getMessage());
+            return false;
+        }
     }
 }
 

@@ -9,10 +9,13 @@ error_reporting(0);
 require_once("../model/utils.php");
 require_once("../model/pedidoModel.php");
 require_once("../model/detallePedidoModel.php");
+require_once("../model/productoModel.php");
 
 use \model\utils;
 use model\pedido;
 use model\detalle_pedido;
+use model\producto;
+use model\Usuario;
 
 session_start();
 
@@ -24,12 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $idUsuario = $_SESSION['id_usuario'];
         $pedidoModel = new pedido();
         $detallePedidoModel = new detalle_pedido();
+        $productoModel = new producto();
 
         // Conexión a la base de datos
         $conexPDO = utils::conectar();
 
         // Inserta el pedido
-        $total = array_sum(array_map(function($item) {
+        $total = array_sum(array_map(function ($item) {
             return $item['precio'] * $item['cantidad'];
         }, $datos));
 
@@ -47,6 +51,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo json_encode(['success' => false, 'message' => 'Error al insertar detalle de pedido']);
                     exit;
                 }
+
+                // Actualizar el stock del producto
+                $resultadoStock = $productoModel->updateStock($idProducto, $cantidad, $conexPDO);
+                if (!$resultadoStock) {
+                    echo json_encode(['success' => false, 'message' => 'Error al actualizar el stock del producto']);
+                    exit;
+                }
             }
             echo json_encode(['success' => true, 'message' => 'Pedido realizado con éxito']);
         } else {
@@ -56,4 +67,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo json_encode(['success' => false, 'message' => 'No hay datos de carrito o usuario no identificado']);
     }
 }
-?>

@@ -62,7 +62,17 @@ namespace views;
             <i class="fa fa-star"></i>
             <i class="fa fa-star"></i>
           </div>
-          <h6 class="stock"><b>| En stock |</b></h6>
+          <h6 class="stock"><b>
+        <?php
+        if ($productos['stock'] > 10) {
+            echo '| <span>En stock</span> |';
+        } elseif ($productos['stock'] > 0) {
+            echo '| <span>Poco stock</span> |';
+        } else {
+            echo '| <span style="color: red;">Sin stock</span> |';
+        }
+        ?>
+      </b></h6>
         </div>
         <h2 class="precio mt-4"><b><?= $productos['precio'] ?> €</b></h2>
 
