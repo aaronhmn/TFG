@@ -49,6 +49,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $numero_bloque = $_POST['numero_bloque'] ?? '';
     $piso = $_POST['piso'] ?? '';
 
+    // Verificar si el email o el nombre de usuario ya están registrados
+    if ($usuarioModel->existeEmail($email, $conexPDO) && $email !== $datosUsuario['email']) {
+        $_SESSION['mensaje'] = 'Este email ya está registrado.';
+        $_SESSION['tipo_mensaje'] = 'danger';
+        header('Location: ../controller/perfilController.php');
+        exit();
+    }
+
+    if ($usuarioModel->existeNombreUsuario($nombre_usuario, $conexPDO) && $nombre_usuario !== $datosUsuario['nombre_usuario']) {
+        $_SESSION['mensaje'] = 'Este nombre de usuario ya está en uso.';
+        $_SESSION['tipo_mensaje'] = 'danger';
+        header('Location: ../controller/perfilController.php');
+        exit();
+    }
+
     $errores = [];
 
     // Validar el DNI

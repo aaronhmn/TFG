@@ -17,7 +17,7 @@ if (session_status() == PHP_SESSION_NONE) {
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
-<body style="background-color: #e6e6fa" >
+<body style="background-color: #e6e6fa">
   <!--NAV DE LA PAGINA-->
   <?php
   if (isset($_SESSION['login'])) {
@@ -154,15 +154,15 @@ if (session_status() == PHP_SESSION_NONE) {
   <br /><br /><br /><br /><br />
 
   <script>
-$(document).ready(function() {
-    // Evento que se activa antes de que el formulario se envíe
-    $('form').on('submit', function(e) {
+    $(document).ready(function() {
+      // Evento que se activa antes de que el formulario se envíe
+      $('form').on('submit', function(e) {
         // Limpiar el campo de búsqueda, eliminando espacios en blanco al inicio y al final
         var searchInput = $('#busqueda');
         searchInput.val($.trim(searchInput.val()));
+      });
     });
-});
-</script>
+  </script>
 
 </body>
 
