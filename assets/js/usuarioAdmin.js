@@ -45,4 +45,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Llamar a la función de validación para ambos formularios
     validateForm(formInsertar);
     validateForm(formModificar);
+
+    const digitOnlyInputs = document.querySelectorAll('input[digitsonly]');
+    digitOnlyInputs.forEach(input => {
+        input.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+    });
 });
+

@@ -261,7 +261,7 @@
             </div>
             <div class="mb-3">
               <label style="color: #000;" for="inputTelefono" class="form-label"><b>Telefono:</b></label>
-              <input type="tel" class="form-control" name="inputTelefono" autocomplete="off" aria-describedby="emailHelp" required>
+              <input type="tel" class="form-control" name="inputTelefono" autocomplete="off" aria-describedby="emailHelp" digitsonly="true" required>
             </div>
             <div class="mb-3">
               <label style="color: #000;" for="inputDNI" class="form-label"><b>DNI:</b></label>
@@ -269,7 +269,7 @@
             </div>
             <div class="mb-3">
               <label style="color: #000;" for="inputCodigoPostal" class="form-label"><b>Código Postal:</b></label>
-              <input type="number" min=0 class="form-control" name="inputCodigoPostal" autocomplete="off" aria-describedby="emailHelp" required>
+              <input type="number" min=0 class="form-control" name="inputCodigoPostal" autocomplete="off" aria-describedby="emailHelp" digitsonly="true" required>
             </div>
             <div class="mb-3">
               <label style="color: #000;" for="inputCalle" class="form-label"><b>Nombre de la calle o avenida:</b></label>
@@ -277,7 +277,7 @@
             </div>
             <div class="mb-3">
               <label style="color: #000;" for="inputNumeroBloque" class="form-label"><b>Número del bloque o de la casa:</b></label>
-              <input type="number" min=0 class="form-control" name="inputNumeroBloque" autocomplete="off" aria-describedby="emailHelp" required>
+              <input type="number" min=0 class="form-control" name="inputNumeroBloque" autocomplete="off" aria-describedby="emailHelp" digitsonly="true" required>
             </div>
             <div class="mb-3">
               <label style="color: #000;" for="inputPiso" class="form-label"><b>Piso:</b></label>
@@ -294,6 +294,7 @@
             <div class="mb-3">
               <label for="inputActivo" class="form-label"><b>Activo:</b></label>
               <select class="form-select" id="inputActivo" name="inputActivo">
+                <option value="" selected disabled>Elige una opción</option>
                 <option value="0">No</option>
                 <option value="1">Sí</option>
               </select>
@@ -301,6 +302,7 @@
             <div class="mb-3">
               <label for="inputRol" class="form-label"><b>Rol:</b></label>
               <select class="form-select" id="inputRol" name="inputRol">
+              <option value="" selected disabled>Elige una opción</option>
                 <option value="0">Cliente</option>
                 <option value="1">Admin</option>
               </select>
@@ -363,7 +365,7 @@
             </div>
             <div class="mb-3">
               <label for="codigo_postal" class="form-label"><b>Código Postal:</b></label>
-              <input type="number" min=0 class="form-control" id="codigo_postal" name="codigo_postal" required autocomplete="off">
+              <input type="number" min=0 class="form-control" id="codigo_postal" name="codigo_postal" digitsonly="true" required autocomplete="off">
             </div>
             <div class="mb-3">
               <label for="calle" class="form-label"><b>Calle:</b></label>
@@ -371,7 +373,7 @@
             </div>
             <div class="mb-3">
               <label for="numero_bloque" class="form-label"><b>Número de bloque o casa:</b></label>
-              <input type="number" min=0 class="form-control" id="numero_bloque" name="numero_bloque" required autocomplete="off">
+              <input type="number" min=0 class="form-control" id="numero_bloque" name="numero_bloque" digitsonly="true" required autocomplete="off">
             </div>
             <div class="mb-3">
               <label for="piso" class="form-label"><b>Piso:</b></label>
@@ -379,7 +381,7 @@
             </div>
             <div class="mb-3">
               <label for="telefono" class="form-label"><b>Teléfono:</b></label> 
-              <input type="tel" class="form-control" id="telefono" name="telefono" required autocomplete="off">
+              <input type="tel" class="form-control" id="telefono" name="telefono" digitsonly="true" required autocomplete="off">
             </div>
             <div class="mb-3">
               <label for="activacion" class="form-label"><b>Activación:</b></label>
