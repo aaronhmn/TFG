@@ -54,6 +54,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $datosUsuario["rol"] = utils::limpiar_datos($rol);
     $datosUsuario["nombre_usuario"] = utils::limpiar_datos($usuario);
 
+    $gestorUsu = new Usuario();
+    //Nos conectamos a la Base de Datos
+    $conexPDO = utils::conectar();
+
+    // Verificar si el email ya existe
+    if ($gestorUsu->existeEmail($email, $conexPDO)) {
+        $_SESSION['error'] = 'Este email ya está registrado.';
+        header("Location: ../controller/usuariosAdminController.php");
+        exit();
+    }
+    
+    // Verificar si el nombre de usuario ya existe
+    if ($gestorUsu->existeNombreUsuario($usuario, $conexPDO)) {
+        $_SESSION['error'] = 'Este nombre de usuario ya está en uso.';
+        header("Location: ../controller/usuariosAdminController.php");
+        exit();
+    }
+
     //Generamos una salt de 16 posiciones
     $salt = utils::generar_salt(16);
     $datosUsuario["salt"] = $salt;
@@ -62,10 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     /* $datosUsuario["activo"] = 0; */
 
     $datosUsuario["activacion"]=utils::generar_codigo_activacion();
-    $gestorUsu = new Usuario();
 
-    //Nos conectamos a la Base de Datos
-    $conexPDO = utils::conectar();
     $resultado = $gestorUsu->addUsuario($datosUsuario, $conexPDO);
 
     //Para verificar si todo funcionó correctamente

@@ -613,6 +613,14 @@
         }
       });
     });
+    
+    document.addEventListener('DOMContentLoaded', function() {
+    // Verificar si existe un mensaje de error en la sesión y mostrarlo
+    <?php if (isset($_SESSION['error'])): ?>
+        alert("<?php echo $_SESSION['error']; ?>");
+        <?php unset($_SESSION['error']); // Limpiar mensaje de error de la sesión ?>
+    <?php endif; ?>
+});
   </script>
 </body>
 
