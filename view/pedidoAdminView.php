@@ -130,7 +130,7 @@
                         ?>
                     </tbody>
                 </table>
-                <form method="POST" action="../controller/misPedidosController.php">
+                <form method="POST" action="../controller/pedidosAdminController.php">
                     <?php
                     for ($i = 1; $i <= $totalPaginas; $i++) {
                         echo "<button style='margin-left: 7px; margin-bottom: 25px; background-color: #8350F2; color: #fff; border-radius: 50%; width: 40px' name='Pag' value='$i' class='btn'>$i</button>";
