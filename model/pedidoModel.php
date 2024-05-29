@@ -78,7 +78,13 @@ class pedido
     public function getPedidoId($id, $conexPDO) {
         if (isset($id) && is_numeric($id)) {
             try {
-                $stmt = $conexPDO->prepare("SELECT * FROM genesis.pedido WHERE idpedido = ?");
+                // Se asume que la tabla de usuarios se llama 'usuarios' y que está relacionada por 'id'
+                $stmt = $conexPDO->prepare("
+                    SELECT p.*, u.nombre, u.primer_apellido, u.segundo_apellido, u.dni, u.telefono, u.codigo_postal, u.calle, u.numero_bloque, u.piso
+                    FROM genesis.pedido p
+                    JOIN genesis.usuario u ON p.id_usuario_pedido = u.idusuario
+                    WHERE p.idpedido = ?
+                ");
                 $stmt->bindParam(1, $id, PDO::PARAM_INT);
                 $stmt->execute();
                 return $stmt->fetch(PDO::FETCH_ASSOC);  // fetch() para obtener solo un registro
@@ -88,7 +94,6 @@ class pedido
         }
         return null; // Devuelve null si no hay datos o el id no es válido
     }
-
     public function addPedido($conexPDO, $idUsuario, $total)
     {
         $result = null;

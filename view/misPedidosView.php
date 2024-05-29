@@ -30,6 +30,7 @@
                             <th style="background-color: #8350F2; color: #fff;">Fecha Pedido</th>
                             <th style="background-color: #8350F2; color: #fff;">Precio Total</th>
                             <th style="background-color: #8350F2; color: #fff;">Ver detalles</th>
+                            <th style="background-color: #8350F2; color: #fff;">Descargar factura</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +40,7 @@
                             <td><?php echo htmlspecialchars($pedido['fecha_pedido']); ?></td>
                             <td><?php echo htmlspecialchars($pedido['precio_total']); ?>€</td>
                             <td><a href="../controller/misDetallesPedidoController.php?idPedido=<?php echo $pedido['idpedido']; ?>"><i class='fas fa-eye fa-xl' style='color: #8350f2'></i></a></td>
+                            <td><a href="../controller/descargarFacturaController.php?idPedido=<?php echo $pedido['idpedido']; ?>"><i class='fas fa-file-pdf fa-xl' style='color: red'></i></a></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
