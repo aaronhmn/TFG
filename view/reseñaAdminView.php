@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
 
-    <title>Pedidos - Dashboard</title>
+    <title>Reseñas - Dashboard</title>
 </head>
 
 <body style="background-color: #e6e6fa">
@@ -70,10 +70,10 @@
                         <li class="nav-item mt-4">
                             <a class="nav-link active" href="../controller/marcasAdminController.php"><i class="fa-solid fa-flag fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Marcas</span></a>
                         </li>
-                        <li class="nav-item mt-4" id="active">
+                        <li class="nav-item mt-4">
                             <a class="nav-link active" href="../controller/pedidosAdminController.php"><i class="fas fa-shipping-fast fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Pedidos</span></a>
                         </li>
-                        <li class="nav-item mt-4">
+                        <li class="nav-item mt-4" id="active">
                             <a class="nav-link active" href="../controller/reseñasAdminController.php"><i class="fas fa-comments fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Reseñas</span></a>
                         </li>
                     </ul>
@@ -88,11 +88,12 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th style="background-color: #8350F2; color: #fff;" scope="col">Id Pedido</th>
-                            <th style="background-color: #8350F2; color: #fff;" scope="col">Nombre de Usuario</th>
-                            <th style="background-color: #8350F2; color: #fff;" scope="col">Fecha de pedido</th>
-                            <th style="background-color: #8350F2; color: #fff;" scope="col">Precio Total</th>
-                            <th style="background-color: #8350F2; color: #fff;" scope="col"></th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Id Reseña</th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Fecha de la reseña</th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Nombre del usuario</th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Nombre del producto</th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Valoración</th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Ver comentario</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -107,33 +108,30 @@
                             return $texto;
                         }
 
-                        foreach ($pedidosPaginados as $datosPedido) {
+                        foreach ($reseñasPaginados as $datosReseña) {
 
-                            $nombreUsuario = $gestorUsuarios->getUsuarioId($datosPedido["id_usuario_pedido"], $conexPDO)['nombre_usuario'];
-                            /* $nombreCategoria = $gestorCategorias->getCategoriaId($datosProducto["id_categoria"], $conexPDO)['nombre_categoria']; */
+                            $nombreUsuario = $gestorUsuarios->getUsuarioId($datosReseña["id_usuario_resena"], $conexPDO)['nombre_usuario'];
+                            $nombreProducto = $gestorProductos->getProductoId($datosReseña["id_producto_resena"], $conexPDO)['nombre'];
                             //Comienzo de fila
                             print("<tr style='align-items: center; background-color: gray;'>\n");
 
-                            //Id de pedido
-                            print("<td style='padding-top: 14px;' scope='row'><b>" . $datosPedido["idpedido"] . "</b></td>\n");
+                            //Id de reseña
+                            print("<td style='padding-top: 14px;' scope='row'><b>" . $datosReseña["idresena"] . "</b></td>\n");
+                            //Fecha pedido
+                            print("<td style='padding-top: 14px;'>" . $datosReseña["fecha_resena"] . "</td>\n");
                             //Nombre usuario
                             print("<td style='padding-top: 14px;'>" . $nombreUsuario . "</td>\n");
-                            //Fecha pedido
-                            print("<td style='padding-top: 14px;'>" . $datosPedido["fecha_pedido"] . "</td>\n");
-                            //Precio total
-                            print("<td style='padding-top: 14px;'>" . $datosPedido["precio_total"] . "€</td>\n");
-
-
-                            echo "<td>";
-                            echo "<a href='../controller/detallesPedidoAdminController.php?idPedido=" . htmlspecialchars($datosPedido['idpedido'], ENT_QUOTES) . "'>";
-                            echo "<i class='fas fa-eye fa-xl' style='color: #8350f2'></i>";
-                            echo "</a>";
-                            echo "</td>";
+                            //Nombre producto
+                            print("<td style='padding-top: 14px;'>" . $nombreProducto . "</td>\n");
+                            //Valoracion
+                            print("<td style='padding-top: 14px;'>" . $datosReseña["valoracion"] . "</td>\n");
+                            //Comentario
+                            print"<td style='padding-top: 14px;'><button class='btn btn-default' style='border: none;' onclick='mostrarComentario(\"" . addslashes($datosReseña["comentario"]) . "\")'><i class='fas fa-eye fa-xl' style='color: #8350f2'></i></button></td>\n";
                         }
                         ?>
                     </tbody>
                 </table>
-                <form method="POST" action="../controller/pedidosAdminController.php">
+                <form method="POST" action="../controller/reseñasAdminController.php">
                     <?php
                     for ($i = 1; $i <= $totalPaginas; $i++) {
                         echo "<button style='margin-left: 7px; margin-bottom: 25px; background-color: #8350F2; color: #fff; border-radius: 50%; width: 40px' name='Pag' value='$i' class='btn'>$i</button>";
@@ -145,9 +143,32 @@
         </div>
     </div>
 
+    <!-- Modal -->
+<div class="modal fade" id="comentarioModal" tabindex="-1" aria-labelledby="comentarioModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="comentarioModalLabel" style="color: #8350F2;">Comentario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Aquí se añadirá el comentario -->
+      </div>
+    </div>
+  </div>
+</div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+    
+    <script>
+function mostrarComentario(comentario) {
+  const modalBody = document.querySelector('#comentarioModal .modal-body');
+  modalBody.textContent = comentario; // Usa textContent para evitar inyección de HTML
+  const modal = new bootstrap.Modal(document.getElementById('comentarioModal'));
+  modal.show();
+}
+</script>
 
 </body>
 

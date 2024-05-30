@@ -74,6 +74,10 @@
     box-shadow: 0 0 0 0.2rem rgba(109, 65, 202, 0.5) !important; /* Color de sombra ligeramente más claro */
 }
 
+.accordion-item button.accordion-button {
+    box-shadow: 0 0 0 0.2rem rgba(109, 65, 202, 0.5) !important;
+}
+
 .mas-productos {
     width: 48px;
     height: 38px;
@@ -139,33 +143,20 @@
 }
 
 .info-producto{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 60px;
+    background-color: #fff;
 }
 
-.tab-content {
-    width: 100%;
-    max-width: 100%;
-    text-align: center;
+.contenedor-comentarios{
+    margin: 20px;
 }
 
-.nav-pills {
-    justify-content: center; /* Centrar los botones de las pestañas */
+.card {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
+    transition: 0.3s !important;
 }
 
-.nav-link {
-    margin: 0 10px; /* Ajustar el espacio entre los elementos */
-}
-
-.nav-link b {
-   font-size: 18px;
-}
-
-.info-producto .nav-link.active, .info-producto .nav-link:focus {
-    background-color: #8350f2 !important; /* Cambiar el color de fondo de los botones cuando están activos, con foco o en hover */
-    color: white !important; /* Cambiar el color del texto cuando están activos */
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2) !important;
 }
 
 @media(max-width:1400px){

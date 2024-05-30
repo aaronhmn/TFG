@@ -79,15 +79,29 @@ namespace views;
         <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
           <div class="accordion-item">
             <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne1" aria-expanded="false" aria-controls="flush-collapseOne1">
                 <b>Descripción</b>
               </button>
             </h2>
-            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+            <div id="flush-collapseOne1" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
               <div style="white-space: pre-wrap;" class="accordion-body"><?= $productos['descripcion'] ?></div>
             </div>
           </div>
         </div>
+
+        <div class="accordion accordion-flush mt-4" id="accordionFlushExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne2" aria-expanded="false" aria-controls="flush-collapseOne2">
+                <b>Especifiaciones</b>
+              </button>
+            </h2>
+            <div id="flush-collapseOne2" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+              <div style="white-space: pre-wrap;" class="accordion-body"><?= $productos['especificacion'] ?></div>
+            </div>
+          </div>
+        </div>
+
         <div id="alertPlaceholder" class="mt-5"></div>
         <?php if (isset($_SESSION['login']) && $_SESSION['login']) : ?>
           <!-- Usuario logueado, mostrar botones con funcionalidad normal -->
@@ -143,20 +157,32 @@ namespace views;
           </div>
         </div>
       </div>
-    </div>
+    </div><br><br>
 
-    <div class="info-producto">
-      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-        <li class="nav-item" role="presentation">
-          <button class="nav-link active" id="pills-especificacion-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" style="color: #8350f2;"><b>Especificación</b></button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link" id="pills-comentario-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" style="color: #8350f2;"><b>Comentarios</b></button>
-        </li>
-      </ul>
-      <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" style="background-color: white; white-space: pre-wrap;"><?= $productos['especificacion'] ?></div>
-        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" style="background-color: white;">Comentarios y valoracion de prueba.</div>
+    <!-- Contenedor Principal de Comentarios y Valoraciones -->
+    <div class="contenedor-comentarios mt-5">
+      <h2 class="text-center mb-4" style="color: #ffa500;"><b>Comentarios y Valoraciones</b></h2>
+      <button class="btn btn-primary mb-3 w-100" style="background-color: #8350f2; border-color:#8350f2;">Realizar reseña</button>
+      <!-- Grid de Comentarios -->
+      <div class="row row-cols-1 row-cols-lg-2 g-4">
+        <?php for ($i = 0; $i < 6; $i++) : ?>
+          <div class="col">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title"><b>Nombre Usuario</b></h5>
+                <div class="estrellas">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+                <p class="card-text mt-2">Este es un comentario sobre el producto. Muestra satisfacción o inconformidades del usuario.</p>
+                <p>2024/05/30</p>
+              </div>
+            </div>
+          </div>
+        <?php endfor; ?>
       </div>
     </div>
   </div>

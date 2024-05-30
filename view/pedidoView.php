@@ -33,41 +33,44 @@ namespace views;
           <!-- Tus campos de formulario aquí -->
           <div class="col-12 mt-3">
             <label for="nombre" class="form-label"><b>Nombre:</b></label>
-            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" value="<?php echo htmlspecialchars($datosUsuario['nombre'] ?? ''); ?>" />
+            <input type="text" disabled class="form-control" id="nombre" name="nombre" placeholder="Nombre" value="<?php echo htmlspecialchars($datosUsuario['nombre'] ?? ''); ?>" />
           </div>
           <div class="col-12 mt-3">
             <label for="primerApellido" class="form-label"><b>Primer Apellido:</b></label>
-            <input type="text" class="form-control" id="primerApellido" name="primer_apellido" value="<?php echo htmlspecialchars($datosUsuario['primer_apellido'] ?? ''); ?>" placeholder="1º Apellido" />
+            <input type="text" disabled class="form-control" id="primerApellido" name="primer_apellido" value="<?php echo htmlspecialchars($datosUsuario['primer_apellido'] ?? ''); ?>" placeholder="1º Apellido" />
           </div>
           <div class="col-12 mt-3">
             <label for="segundoApellido" class="form-label"><b>Segundo Apellido:</b></label>
-            <input type="text" class="form-control" id="segundoApellido" name="segundo_apellido" value="<?php echo htmlspecialchars($datosUsuario['segundo_apellido'] ?? ''); ?>" placeholder="2º Apellido" />
+            <input type="text" disabled class="form-control" id="segundoApellido" name="segundo_apellido" value="<?php echo htmlspecialchars($datosUsuario['segundo_apellido'] ?? ''); ?>" placeholder="2º Apellido" />
           </div>
           <div class="col-12 mt-3">
             <label for="dni" class="form-label"><b>DNI:</b></label>
-            <input type="text" class="form-control" id="dni" name="dni" value="<?php echo htmlspecialchars($datosUsuario['dni'] ?? ''); ?>" placeholder="DNI" />
+            <input type="text" disabled class="form-control" id="dni" name="dni" value="<?php echo htmlspecialchars($datosUsuario['dni'] ?? ''); ?>" placeholder="DNI" />
           </div>
           <div class="col-12 mt-3">
             <label for="telefono" class="form-label"><b>Telefono:</b></label>
-            <input type="tel" class="form-control" id="telefono" name="telefono" value="<?php echo htmlspecialchars($datosUsuario['telefono'] ?? ''); ?>" placeholder="Telefono" />
+            <input type="tel" disabled class="form-control" id="telefono" name="telefono" value="<?php echo htmlspecialchars($datosUsuario['telefono'] ?? ''); ?>" placeholder="Telefono" />
           </div>
           <div class="col-12 mt-3">
             <label for="codigo_postal" class="form-label"><b>Codigo Postal:</b></label>
-            <input type="number" class="form-control" id="codigo_postal" name="codigo_postal" value="<?php echo htmlspecialchars($datosUsuario['codigo_postal'] ?? ''); ?>" placeholder="Codigo Postal" />
+            <input type="number" disabled class="form-control" id="codigo_postal" name="codigo_postal" value="<?php echo htmlspecialchars($datosUsuario['codigo_postal'] ?? ''); ?>" placeholder="Codigo Postal" />
           </div>
           <div class="col-12 mt-3">
             <label for="calle" class="form-label"><b>Calle:</b></label>
-            <input type="text" class="form-control" id="calle" name="calle" value="<?php echo htmlspecialchars($datosUsuario['calle'] ?? ''); ?>" placeholder="Calle" />
+            <input type="text" disabled class="form-control" id="calle" name="calle" value="<?php echo htmlspecialchars($datosUsuario['calle'] ?? ''); ?>" placeholder="Calle" />
           </div>
           <div class="col-12 mt-3">
             <label for="numero_bloque" class="form-label"><b>Numero de bloque:</b></label>
-            <input type="number" class="form-control" id="numero_bloque" name="numero_bloque" value="<?php echo htmlspecialchars($datosUsuario['numero_bloque'] ?? ''); ?>" placeholder="Numero de bloque" />
+            <input type="number" disabled class="form-control" id="numero_bloque" name="numero_bloque" value="<?php echo htmlspecialchars($datosUsuario['numero_bloque'] ?? ''); ?>" placeholder="Numero de bloque" />
           </div>
           <div class="col-12 mt-3">
             <label for="piso" class="form-label"><b>Piso:</b></label>
-            <input type="text" class="form-control" id="piso" name="piso" value="<?php echo htmlspecialchars($datosUsuario['piso'] ?? ''); ?>" placeholder="Piso" />
+            <input type="text" disabled class="form-control" id="piso" name="piso" value="<?php echo htmlspecialchars($datosUsuario['piso'] ?? ''); ?>" placeholder="Piso" />
           </div>
         </form>
+        <hr>
+        <p class="mt-3" style="color: #ffa500;"><b>¡Comprueba que tus datos son correctos, los puedes modificar desde tu perfil!</b></p>
+        <button class="btn btn-primary w-100" style="background-color: #8350F2; border-color:#8350F2;"><a href="../controller/perfilController.php" style="color: #fff; text-decoration:none;">Modificar datos</a></button>
       </div>
 
       <!-- Columna de información del carrito -->

@@ -74,7 +74,10 @@
               <a class="nav-link active" href="../controller/marcasAdminController.php"><i class="fa-solid fa-flag fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Marcas</span></a>
             </li>
             <li class="nav-item mt-4">
-              <a class="nav-link active" href="../controller/pedidosAdminController.php"><i class="fas fa-shipping-fast fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">pedidos</span></a>
+              <a class="nav-link active" href="../controller/pedidosAdminController.php"><i class="fas fa-shipping-fast fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Pedidos</span></a>
+            </li>
+            <li class="nav-item mt-4">
+              <a class="nav-link active" href="../controller/reseñasAdminController.php"><i class="fas fa-comments fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Reseñas</span></a>
             </li>
           </ul>
         </div>
@@ -296,7 +299,7 @@
             <div class="mb-3">
               <label for="inputRol" class="form-label"><b>Rol:</b></label>
               <select class="form-select" id="inputRol" name="inputRol">
-              <option value="" selected disabled>Elige una opción</option>
+                <option value="" selected disabled>Elige una opción</option>
                 <option value="0">Cliente</option>
                 <option value="1">Admin</option>
               </select>
@@ -374,7 +377,7 @@
               <input type="text" class="form-control" id="piso" name="piso" autocomplete="off">
             </div>
             <div class="mb-3">
-              <label for="telefono" class="form-label"><b>Teléfono:</b></label> 
+              <label for="telefono" class="form-label"><b>Teléfono:</b></label>
               <input type="tel" class="form-control" id="telefono" name="telefono" digitsonly="true" required autocomplete="off">
             </div>
             <div class="mb-3">
@@ -609,12 +612,13 @@
     });
 
     document.addEventListener('DOMContentLoaded', function() {
-    // Verificar si existe un mensaje de error en la sesión y mostrarlo
-    <?php if (isset($_SESSION['error'])): ?>
+      // Verificar si existe un mensaje de error en la sesión y mostrarlo
+      <?php if (isset($_SESSION['error'])) : ?>
         alert("<?php echo $_SESSION['error']; ?>");
-        <?php unset($_SESSION['error']); // Limpiar mensaje de error de la sesión ?>
-    <?php endif; ?>
-});
+        <?php unset($_SESSION['error']); // Limpiar mensaje de error de la sesión 
+        ?>
+      <?php endif; ?>
+    });
   </script>
 </body>
 

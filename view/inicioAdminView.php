@@ -78,7 +78,10 @@
                             <a class="nav-link active" href="../controller/marcasAdminController.php"><i class="fa-solid fa-flag fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Marcas</span></a>
                         </li>
                         <li class="nav-item mt-4">
-                            <a class="nav-link active" href="../controller/pedidosAdminController.php"><i class="fas fa-shipping-fast fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">pedidos</span></a>
+                            <a class="nav-link active" href="../controller/pedidosAdminController.php"><i class="fas fa-shipping-fast fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Pedidos</span></a>
+                        </li>
+                        <li class="nav-item mt-4">
+                            <a class="nav-link active" href="../controller/reseñasAdminController.php"><i class="fas fa-comments fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Reseñas</span></a>
                         </li>
                     </ul>
                 </div>
@@ -149,6 +152,19 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title"><b>Pedidos</b> <span class="badge badge-custom"><?= $pedidos ?></span></h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 col-xxl-2" style="margin-bottom: 60px;">
+                <a href="../controller/reseñasAdminController.php" class="enlace-cards">
+                    <div class="card" style="width: 14rem; text-align: center; margin: auto; border: 2px solid #8350F2;">
+                        <div class="icon-container" style="font-size: 4rem; margin-top: 20px;">
+                            <i class="fas fa-comments" style="color: #8350F2;"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><b>Reseñas</b> <span class="badge badge-custom"><?= $reseñas ?></span></h5>
                         </div>
                     </div>
                 </a>
