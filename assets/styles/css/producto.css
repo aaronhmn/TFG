@@ -159,6 +159,49 @@
     box-shadow: 0 8px 16px rgba(0,0,0,0.2) !important;
 }
 
+.card-footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+    padding: 0.75rem 1.25rem;
+    background-color: rgba(245, 245, 245, 1);
+    margin-top: auto;
+}
+
+.pagination-container {
+    margin-top: 20px;
+    display: flex; /* Alinea los enlaces horizontalmente */
+    justify-content: center; /* Centra los enlaces horizontalmente */
+  }
+  
+  .pagination-container a.page-link {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    line-height: 35px; /* Centrar texto verticalmente */
+    margin: 0 5px;
+    border-radius: 50%; /* Hace el círculo */
+    background-color: #fff;
+    color: #666;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .pagination-container a.page-link.active {
+    background-color: #8350F2;
+    color: #fff;
+    border-color: #8350F2;
+  }
+  
+  .pagination-container a.page-link:hover {
+    background-color: #6f39e4;
+    color: #fff;
+  }
+  
+  .circle {
+    border-radius: 50%; /* Hace el círculo */
+  }
+
 @media(max-width:1400px){
     .nav-busqueda button{
         position: absolute;

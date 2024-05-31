@@ -56,11 +56,16 @@ namespace views;
         <h3 class="nombre-producto"><b><?= $productos['nombre'] ?></b></h3>
         <div class="contenedor-info mt-4">
           <div class="estrellas">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
+            <?php
+            $numeroEstrellas = round($mediaValoraciones);
+            for ($i = 1; $i <= 5; $i++) { // Asegúrate siempre de mostrar hasta 5 estrellas
+              if ($i <= $numeroEstrellas) {
+                echo '<i class="fas fa-star"></i>'; // Estrella llena
+              } else {
+                echo '<i class="far fa-star"></i>'; // Estrella vacía
+              }
+            }
+            ?>
           </div>
           <h6 class="stock"><b>
               <?php
@@ -162,28 +167,52 @@ namespace views;
     <!-- Contenedor Principal de Comentarios y Valoraciones -->
     <div class="contenedor-comentarios mt-5">
       <h2 class="text-center mb-4" style="color: #ffa500;"><b>Comentarios y Valoraciones</b></h2>
-      <button class="btn btn-primary mb-3 w-100" style="background-color: #8350f2; border-color:#8350f2;">Realizar reseña</button>
-      <!-- Grid de Comentarios -->
+      <div id="alertPlaceholder2"></div>
+      <button class="btn btn-primary mb-3 w-100" style="background-color: #8350f2; border-color:#8350f2;" data-bs-toggle="modal" data-bs-target="#reseñaModal">
+  Realizar reseña
+</button>
+
+      <!-- Mostrar reseñas del producto -->
       <div class="row row-cols-1 row-cols-lg-2 g-4">
-        <?php for ($i = 0; $i < 6; $i++) : ?>
+        <?php foreach ($reseñas as $reseña) : ?>
           <div class="col">
             <div class="card h-100">
               <div class="card-body">
-                <h5 class="card-title"><b>Nombre Usuario</b></h5>
+                <h5 class="card-title"><b><?= htmlspecialchars($reseña['nombre_usuario']) ?></b></h5>
                 <div class="estrellas">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="far fa-star"></i>
-                  <i class="far fa-star"></i>
+                  <?php if ($reseña['valoracion'] !== null) : ?>
+                    <?php for ($i = 1; $i <= 5; $i++) : ?>
+                      <i class="<?= $i <= $reseña['valoracion'] ? 'fas' : 'far' ?> fa-star"></i>
+                    <?php endfor; ?>
+                  <?php endif; ?>
                 </div>
-                <p class="card-text mt-2">Este es un comentario sobre el producto. Muestra satisfacción o inconformidades del usuario.</p>
-                <p>2024/05/30</p>
+                <p class="card-text mt-2"><?= htmlspecialchars($reseña['comentario']) ?></p>
+              </div>
+              <div class="card-footer">
+                <small class="text-muted"><?= date('Y/m/d', strtotime($reseña['fecha_resena'])) ?></small>
               </div>
             </div>
           </div>
-        <?php endfor; ?>
+        <?php endforeach; ?>
       </div>
+
+      <!-- Paginación horizontal con círculos -->
+      <div class="pagination-container d-flex justify-content-center align-items-center my-4 mt-5">
+        <?php if ($paginaActual > 1) : ?>
+          <a href="?id=<?= $id ?>&pagina=<?= $paginaActual - 1 ?>" class="page-link circle"><i class="fa-solid fa-arrow-left"></i></a>
+        <?php endif; ?>
+
+        <?php for ($i = 1; $i <= $totalPaginas; $i++) : ?>
+          <a href="?id=<?= $id ?>&pagina=<?= $i ?>" class="page-link circle <?= ($i == $paginaActual) ? 'active' : ''; ?>">
+            <?= $i ?>
+          </a>
+        <?php endfor; ?>
+
+        <?php if ($paginaActual < $totalPaginas) : ?>
+          <a href="?id=<?= $id ?>&pagina=<?= $paginaActual + 1 ?>" class="page-link circle"><i class="fa-solid fa-arrow-right"></i></a>
+        <?php endif; ?>
+      </div>
+
     </div>
   </div>
 
@@ -194,9 +223,98 @@ namespace views;
   <!--FOOTER-->
   <?php include '../controller/footerController.php'; ?>
 
+<!-- Modal para crear reseña -->
+<div class="modal fade" id="reseñaModal" tabindex="-1" aria-labelledby="reseñaModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reseñaModalLabel" style="color: #8350f2;">Escribe tu reseña</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formReseña" action="../controller/insertarReseñaController.php" method="POST">
+          <input type="hidden" name="idProducto" value="<?= $productos['idproducto'] ?>"> <!-- Asegúrate de tener el ID del producto aquí -->
+          <div class="mb-3">
+            <label for="valoracion" class="form-label">Valoración:</label>
+            <select class="form-select" id="valoracion" name="valoracion" required>
+              <option value="">Selecciona una valoración</option>
+              <option value="0">0 Estrellas</option>
+              <option value="1">1 Estrellas</option>
+              <option value="2">2 Estrellas</option>
+              <option value="3">3 Estrellas</option>
+              <option value="4">4 Estrella</option>
+              <option value="5">5 Estrellas</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="comentario" class="form-label">Comentario:</label>
+            <textarea class="form-control" id="comentario" name="comentario" rows="6" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Enviar Reseña</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   <script src="../assets/js/producto.js"></script>
+
+<script>
+$(document).ready(function () {
+    $('#formReseña').submit(function (e) {
+        e.preventDefault(); // Evitar el envío estándar del formulario
+        var formData = $(this).serialize(); // Serializar los datos del formulario
+
+        $.ajax({
+            type: "POST",
+            url: $(this).attr('action'),
+            data: formData,
+            success: function (response) {
+                var jsonData = JSON.parse(response);
+                if (jsonData.success) {
+                    // Guardar mensaje en localStorage
+                    localStorage.setItem('alertMessage', 'Reseña añadida con éxito!');
+                    localStorage.setItem('alertType', 'success');
+                } else {
+                    // Guardar mensaje de error en localStorage
+                    localStorage.setItem('alertMessage', jsonData.message);
+                    localStorage.setItem('alertType', 'danger');
+                }
+                // Recargar la página para aplicar cambios
+                location.reload();
+            },
+            error: function () {
+                // Guardar mensaje de error en localStorage
+                localStorage.setItem('alertMessage', 'Error al procesar la petición.');
+                localStorage.setItem('alertType', 'danger');
+                location.reload();
+            }
+        });
+    });
+
+    // Mostrar alerta después de recargar
+    displayAlertFromLocalStorage();
+});
+
+function displayAlertFromLocalStorage() {
+    var message = localStorage.getItem('alertMessage');
+    var type = localStorage.getItem('alertType');
+
+    if (message && type) {
+        var alertHtml = '<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' +
+            message +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+        $('#alertPlaceholder2').html(alertHtml);
+
+        // Limpiar localStorage
+        localStorage.removeItem('alertMessage');
+        localStorage.removeItem('alertType');
+    }
+}
+</script>
 
 </body>
 
