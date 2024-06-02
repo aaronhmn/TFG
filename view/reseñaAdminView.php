@@ -88,9 +88,9 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th style="background-color: #8350F2; color: #fff;" scope="col">Id Reseña</th>
-                            <th style="background-color: #8350F2; color: #fff;" scope="col">Fecha de la reseña</th>
-                            <th style="background-color: #8350F2; color: #fff;" scope="col">Nombre del usuario</th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Id</th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Fecha</th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Usuario</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Nombre del producto</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Valoración</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Ver comentario</th>

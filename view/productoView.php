@@ -228,7 +228,7 @@ namespace views;
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="reseñaModalLabel" style="color: #8350f2;">Escribe tu reseña</h5>
+        <h4 class="modal-title" id="reseñaModalLabel" style="color: #8350f2;"><b>Escribe tu reseña</b></h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -248,9 +248,9 @@ namespace views;
           </div>
           <div class="mb-3">
             <label for="comentario" class="form-label">Comentario:</label>
-            <textarea class="form-control" id="comentario" name="comentario" rows="6" required></textarea>
+            <textarea class="form-control" id="comentario" name="comentario" rows="8" required></textarea>
           </div>
-          <button type="submit" class="btn btn-primary">Enviar Reseña</button>
+          <button type="submit" class="btn btn-primary" style="background-color: #8350f2; border-color: #8350f2;">Enviar Reseña</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         </form>
       </div>

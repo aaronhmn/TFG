@@ -95,12 +95,17 @@
                     <div class="contenedor-tarjeta">
                       <div class="contenedor-info">
                         <div class="estrellas">
-                          <!-- Aquí podrías poner la lógica para mostrar las estrellas basadas en las reseñas, por ejemplo -->
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
+                          <?php
+                          $numeroEstrellas = $producto['mediaValoraciones'];
+                          for ($i = 1; $i <= 5; $i++) {
+                            if ($i <= $numeroEstrellas) {
+                              echo '<i class="fas fa-star"></i>'; // Estrella llena
+                            } else {
+                              echo '<i class="far fa-star"></i>'; // Estrella vacía
+                            }
+                          }
+                          ?>
+                          <span style="font-size: 14px;">(<?= $producto['countReseñas'] ?>)</span>
                         </div>
                         <h3 class="precio"><b><?= $producto['precio'] ?> €</b></h3>
                       </div>
