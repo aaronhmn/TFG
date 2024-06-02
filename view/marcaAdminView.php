@@ -86,7 +86,7 @@
 
     <div class="container mt-5" style="max-width: 1600px;"><br><br>
 
-        <div class="navbar2">
+        <div class="navbar2 mt-5">
             <ul>
                 <li>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#insertarMarcaModal">
@@ -116,31 +116,33 @@
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Id</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Nombre de la Marca</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col"></th>
-                            <th style="background-color: #8350F2; color: #fff;" scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         foreach ($marcasPaginadas as $marca) {
-                            echo "<tr style='align-items: center; background-color: gray;'>";
-                            echo "<td style='padding-top: 14px;' scope='row'><b>{$marca['idmarca']}</b></td>";
-                            echo "<td style='padding-top: 14px;'>{$marca['nombre_marca']}</td>";
-
-                            // Botón para modificar
+                            echo "<tr>";
+                            echo "<td><b>{$marca['idmarca']}</b></td>";
+                            echo "<td>{$marca['nombre_marca']}</td>";
+                        
+                            // Acciones
                             echo "<td>";
-                            echo "<button data-bs-toggle='modal' data-bs-target='#modificarMarcaModal' data-id='{$marca['idmarca']}' data-nombre='" . htmlspecialchars($marca['nombre_marca'], ENT_QUOTES) . "' style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;'>";
+                            echo "<div style='display: flex; justify-content: flex-end; align-items: center; margin-right: 20px;'>"; // Flex container para los botones
+                            
+                            // Botón Modificar
+                            echo "<button class='btn btn-link p-0 align-middle' title='Modificar' data-bs-toggle='modal' data-bs-target='#modificarMarcaModal' data-id='{$marca['idmarca']}' data-nombre='" . htmlspecialchars($marca['nombre_marca'], ENT_QUOTES) . "' style='margin-right: 25px; background-color: transparent;'>";
                             echo "<i class='fas fa-edit fa-lg' style='color: #005eff;'></i>";
                             echo "</button>";
-                            echo "</td>";
-
-                            // Botón para eliminar
-                            echo "<td>";
+                        
+                            // Botón Eliminar
                             echo "<form id='formEliminar-{$marca['idmarca']}' method='POST' action='../controller/borrarMarcaController.php'>";
                             echo "<input type='hidden' name='idMarca' value='{$marca['idmarca']}'/>";
-                            echo "<button style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;' type='button' onclick='mostrarModalEliminar(" . $marca['idmarca'] . ");'><i class='fa-solid fa-trash-alt fa-lg' style='color: red;'></i></button>";
+                            echo "<button class='btn btn-link p-0 align-middle' title='Eliminar' type='button' onclick='mostrarModalEliminar(" . $marca['idmarca'] . ");' style='background-color: transparent;'>";
+                            echo "<i class='fa-solid fa-trash-alt fa-lg' style='color: red;'></i>";
+                            echo "</button>";
                             echo "</form>";
+                            echo "</div>"; // Cierre del contenedor flex
                             echo "</td>";
-
                             echo "</tr>";
                         }
                         ?>

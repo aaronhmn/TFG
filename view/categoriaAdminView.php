@@ -86,7 +86,7 @@
 
     <div class="container mt-5" style="max-width: 1600px;"><br><br>
 
-        <div class="navbar2">
+        <div class="navbar2 mt-5">
             <ul>
                 <li>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#insertarCategoriaModal">
@@ -116,31 +116,33 @@
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Id</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Nombre de la Categoría</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col"></th>
-                            <th style="background-color: #8350F2; color: #fff;" scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         foreach ($categoriasPaginadas as $categoria) {
-                            echo "<tr style='align-items: center; background-color: gray;'>";
-                            echo "<td style='padding-top: 14px;' scope='row'><b>{$categoria['idcategoria']}</b></td>";
-                            echo "<td style='padding-top: 14px;'>{$categoria['nombre_categoria']}</td>";
-
-                            // Botón para modificar
+                            echo "<tr>";
+                            echo "<td><b>{$categoria['idcategoria']}</b></td>";
+                            echo "<td>{$categoria['nombre_categoria']}</td>";
+                        
+                            // Acciones
                             echo "<td>";
-                            echo "<button data-bs-toggle='modal' data-bs-target='#modificarCategoriaModal' data-id='{$categoria['idcategoria']}' data-nombre='" . htmlspecialchars($categoria['nombre_categoria'], ENT_QUOTES) . "' style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;'>";
+                            echo "<div style='display: flex; align-items: center; justify-content: flex-end; margin-right: 20px;'>";
+                            
+                            // Botón Modificar
+                            echo "<button class='btn btn-link p-0 align-middle' title='Modificar' data-bs-toggle='modal' data-bs-target='#modificarCategoriaModal' data-id='{$categoria['idcategoria']}' data-nombre='" . htmlspecialchars($categoria['nombre_categoria'], ENT_QUOTES) . "' style='margin-right: 25px;'>";
                             echo "<i class='fas fa-edit fa-lg' style='color: #005eff;'></i>";
                             echo "</button>";
-                            echo "</td>";
-
-                            // Botón para eliminar
-                            echo "<td>";
+                        
+                            // Botón Eliminar
                             echo "<form id='formEliminar-{$categoria['idcategoria']}' method='POST' action='../controller/borrarCategoriaController.php'>";
                             echo "<input type='hidden' name='idCategoria' value='{$categoria['idcategoria']}'/>";
-                            echo "<button style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;' type='button' onclick='mostrarModalEliminar(" . $categoria['idcategoria'] . ");'><i class='fa-solid fa-trash-alt fa-lg' style='color: red;'></i></button>";
+                            echo "<button class='btn btn-link p-0 align-middle' title='Eliminar' type='button' onclick='mostrarModalEliminar(" . $categoria['idcategoria'] . ");'>";
+                            echo "<i class='fa-solid fa-trash-alt fa-lg' style='color: red;'></i>";
+                            echo "</button>";
                             echo "</form>";
+                            echo "</div>";
                             echo "</td>";
-
                             echo "</tr>";
                         }
                         ?>

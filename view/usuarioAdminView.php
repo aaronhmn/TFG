@@ -106,7 +106,7 @@
   </div>
 
   <div class="container mt-5" style="max-width: 1600px;"><br><br>
-    <div class="navbar2">
+    <div class="navbar2 mt-5">
       <ul>
         <li>
           <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#insertarUsuarioModal">
@@ -153,33 +153,33 @@
               print("<tr style='align-items: center; background-color: gray;'>\n");
 
               //Id de cliente
-              print("<td style=' padding-top: 14px;' scope='row'><b>" . $producto["idusuario"] . "</b></td>\n");
+              print("<td scope='row'><b>" . $producto["idusuario"] . "</b></td>\n");
               //Nombre de Usuario
-              print("<td style='padding-top: 14px;'>");
+              print("<td>");
               print("<a href='#' class='text-primary' data-bs-toggle='modal' data-bs-target='#usuarioDetalleModal' data-idusuario='" . $producto['idusuario'] . "'>");
               print(htmlspecialchars($producto["nombre_usuario"]));
               print("</a>");
               print("</td>\n");
               //Nombre
-              print("<td style=' padding-top: 14px;'>" . $producto["nombre"] . "</td>\n");
+              print("<td>" . $producto["nombre"] . "</td>\n");
               //Primer Apellido
-              print("<td style=' padding-top: 14px;'>" . $producto["primer_apellido"] . "</td>\n");
+              print("<td>" . $producto["primer_apellido"] . "</td>\n");
               //Segundo Apellido
-              print("<td style=' padding-top: 14px;'>" . $producto["segundo_apellido"] . "</td>\n");
+              print("<td>" . $producto["segundo_apellido"] . "</td>\n");
               //DNI
-              print("<td style=' padding-top: 14px;'>" . $producto["dni"] . "</td>\n");
+              print("<td>" . $producto["dni"] . "</td>\n");
               //Email
-              print("<td style=' padding-top: 14px;'>" . $producto["email"] . "</td>\n");
+              print("<td>" . $producto["email"] . "</td>\n");
               //Activo
-              echo "<td style='padding-top: 14px;'>" . ($producto["activo"] == 1 ? 'Sí' : 'No') . "</td>";
+              echo "<td>" . ($producto["activo"] == 1 ? 'Sí' : 'No') . "</td>";
               //Rol
-              echo "<td style='padding-top: 14px;'>" . ($producto["rol"] == 1 ? 'Admin' : 'Cliente') . "</td>";
+              echo "<td>" . ($producto["rol"] == 1 ? 'Admin' : 'Cliente') . "</td>";
               //Estado
-              echo "<td style='padding-top: 14px;'>" . ($producto["estado"] == 1 ? 'Baneado' : 'Habilitado') . "</td>";
+              echo "<td>" . ($producto["estado"] == 1 ? 'Baneado' : 'Habilitado') . "</td>";
 
               // Botón para modificar
               echo "<td>";
-              echo "<button data-bs-toggle='modal' data-bs-target='#modificarUsuarioModal'";
+              echo "<button data-bs-toggle='modal' title='Modificar' data-bs-target='#modificarUsuarioModal' class='btn btn-link p-0 align-middle' style='vertical-align: middle;'";
               echo " data-id='" . htmlspecialchars($producto['idusuario'], ENT_QUOTES) . "'";
               echo " data-nombre='" . htmlspecialchars($producto['nombre'], ENT_QUOTES) . "'";
               echo " data-primerapellido='" . htmlspecialchars($producto['primer_apellido'], ENT_QUOTES) . "'";
@@ -206,7 +206,7 @@
               echo "<td>";
               echo "<form id='formEliminar-{$producto['idusuario']}' method='POST' action='../controller/banearUsuarioController.php'>";
               echo "<input type='hidden' name='idUsuario' value='{$producto['idusuario']}'/>";
-              echo "<button style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;' type='button' onclick='mostrarModalEliminar(" . $producto['idusuario'] . ");'><i class='fa-solid fa-ban fa-lg' style='color: red;'></i></button>";
+              echo "<button title='Banear' class='btn btn-link p-0 align-middle' style='background-color: rgba(0, 0, 0, 0); vertical-align: middle;' type='button' onclick='mostrarModalEliminar(" . $producto['idusuario'] . ");'><i class='fa-solid fa-ban fa-lg' style='color: red;'></i></button>";
               echo "</form>";
               echo "</td>";
 
@@ -234,7 +234,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
-          <h3 class="modal-title" id="modalLabel" style="color: #8350F2;">Insertar nuevo usuario</h3>
+          <h3 class="modal-title" id="modalLabel" style="color: #8350F2;"><b>Insertar nuevo usuario</b></h3>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">

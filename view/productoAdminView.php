@@ -92,7 +92,7 @@
     </nav>
 
     <div class="container mt-5" style="max-width: 1600px;"><br><br>
-        <div class="navbar2">
+        <div class="navbar2 mt-5">
             <ul>
                 <li>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#insertarProductoModal">
@@ -150,23 +150,23 @@
                             print("<tr style='align-items: center; background-color: gray;'>\n");
 
                             //Id de producto
-                            print("<td style='padding-top: 14px;' scope='row'><b>" . $datosProducto["idproducto"] . "</b></td>\n");
+                            print("<td scope='row'><b>" . $datosProducto["idproducto"] . "</b></td>\n");
                             //Nombre
-                            print("<td style='padding-top: 14px;'>");
+                            print("<td>");
                             print("<a href='#' class='text-primary' data-bs-toggle='modal' data-bs-target='#productoDetalleModal' data-idproducto='" . $datosProducto['idproducto'] . "'>");
                             print(htmlspecialchars(truncarTexto($datosProducto["nombre"], 20)));
                             print("</a>");
                             print("</td>\n");
                             //Precio
-                            print("<td style='padding-top: 14px;'>" . $datosProducto["precio"] . "€</td>\n");
+                            print("<td>" . $datosProducto["precio"] . "€</td>\n");
                             //Categoria
-                            print("<td style='padding-top: 14px;'>" . $nombreCategoria . "</td>\n");
-                            print("<td style='padding-top: 14px;'>" . $nombreMarca . "</td>\n");
+                            print("<td>" . $nombreCategoria . "</td>\n");
+                            print("<td>" . $nombreMarca . "</td>\n");
                             //Stock
-                            print("<td style='padding-top: 14px;'>" . $datosProducto["stock"] . "</td>\n");
+                            print("<td>" . $datosProducto["stock"] . "</td>\n");
                             //Estado
                             $estadoTexto = $datosProducto["estado"] == 0 ? 'Disponible' : 'Oculto';
-                            print("<td style='padding-top: 14px;'>" . $estadoTexto . "</td>\n");
+                            print("<td>" . $estadoTexto . "</td>\n");
 
                             // Ocultar producto
                             echo "<td style='text-align: end/*  */;'>";
@@ -174,7 +174,7 @@
                             echo "<input type='hidden' name='idProducto' value='{$datosProducto['idproducto']}'/>";
                             // Añade clases para centrar verticalmente y ajusta con estilos si es necesario
                             echo "<button type='submit' class='btn btn-link p-0 align-middle' style='vertical-align: middle;'>";
-                            echo ($datosProducto['estado'] == 1 ? '<i class="fas fa-eye fa-lg text-secondary"></i>' : '<i class="fas fa-eye-slash fa-lg text-primary"></i>');
+                            echo ($datosProducto['estado'] == 1 ? '<i title="Mostrar" class="fas fa-eye fa-lg text-secondary"></i>' : '<i title="Ocultar" class="fas fa-eye-slash fa-lg text-primary"></i>');
                             echo "</button>";
                             echo "</form>";
                             echo "</td>";
@@ -183,12 +183,12 @@
                             echo "<td style='text-align: center;'>";
                             echo "<form id='formEliminar-{$datosProducto['idproducto']}' method='POST' action='../controller/borrarProductoController.php'>";
                             echo "<input type='hidden' name='idProducto' value='{$datosProducto['idproducto']}'/>";
-                            echo "<button class='btn btn-link p-0 align-middle' style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;' type='button' onclick='mostrarModalEliminar(" . $datosProducto['idproducto'] . ");'><i class='fa-solid fa-trash-alt fa-lg' style='color: red;'></i></button>";
+                            echo "<button title='Eliminar' class='btn btn-link p-0 align-middle' style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;' type='button' onclick='mostrarModalEliminar(" . $datosProducto['idproducto'] . ");'><i class='fa-solid fa-trash-alt fa-lg' style='color: red;'></i></button>";
                             echo "</form>";
                             echo "</td>";
 
                             echo "<td>";
-                            echo "<button class='btn btn-link p-0 align-middle' data-bs-toggle='modal' data-bs-target='#modificarProductoModal'"
+                            echo "<button title='Modificar' class='btn btn-link p-0 align-middle' data-bs-toggle='modal' data-bs-target='#modificarProductoModal'"
                                 . " data-id='" . htmlspecialchars($datosProducto['idproducto'], ENT_QUOTES) . "'"
                                 . " data-nombre='" . htmlspecialchars($datosProducto['nombre'], ENT_QUOTES) . "'"
                                 . " data-precio='" . htmlspecialchars($datosProducto['precio'], ENT_QUOTES) . "'"
@@ -224,7 +224,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="modalLabel" style="color: #8350F2;">Insertar nuevo producto</h3>
+                    <h3 class="modal-title" id="modalLabel" style="color: #8350F2;"><b>Insertar nuevo producto</b></h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -296,7 +296,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="modalLabel" style="color: #8350F2;">Modificar producto</h3>
+                    <h3 class="modal-title" id="modalLabel" style="color: #8350F2;"><b>Modificar producto</b></h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

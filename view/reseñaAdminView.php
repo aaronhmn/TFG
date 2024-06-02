@@ -83,8 +83,8 @@
     </nav>
 
     <div class="container mt-5" style="max-width: 1600px;"><br><br><br>
-        <div class="row" style="margin: 0;">
-            <div class="col-lg-12 col-sm-12 table-responsive">
+        <div class="row mt-5" style="margin: 0;">
+            <div class="col-lg-12 col-sm-12 table-responsive mt-5">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -116,17 +116,17 @@
                             print("<tr style='align-items: center; background-color: gray;'>\n");
 
                             //Id de reseña
-                            print("<td style='padding-top: 14px;' scope='row'><b>" . $datosReseña["idresena"] . "</b></td>\n");
+                            print("<td scope='row'><b>" . $datosReseña["idresena"] . "</b></td>\n");
                             //Fecha pedido
-                            print("<td style='padding-top: 14px;'>" . $datosReseña["fecha_resena"] . "</td>\n");
+                            print("<td>" . $datosReseña["fecha_resena"] . "</td>\n");
                             //Nombre usuario
-                            print("<td style='padding-top: 14px;'>" . $nombreUsuario . "</td>\n");
+                            print("<td>" . $nombreUsuario . "</td>\n");
                             //Nombre producto
-                            print("<td style='padding-top: 14px;'>" . $nombreProducto . "</td>\n");
+                            print("<td>" . $nombreProducto . "</td>\n");
                             //Valoracion
-                            print("<td style='padding-top: 14px;'>" . $datosReseña["valoracion"] . "</td>\n");
+                            print("<td>" . $datosReseña["valoracion"] . "</td>\n");
                             //Comentario
-                            print"<td style='padding-top: 14px;'><button class='btn btn-default' style='border: none;' onclick='mostrarComentario(\"" . addslashes($datosReseña["comentario"]) . "\")'><i class='fas fa-eye fa-xl' style='color: #8350f2'></i></button></td>\n";
+                            print"<td><button class='btn btn-link p-0 align-middle' style='vertical-align: middle;' title='Ver comentario' onclick='mostrarComentario(\"" . addslashes($datosReseña["comentario"]) . "\")'><i class='fas fa-eye fa-xl' style='color: #8350f2'></i></button></td>\n";
                         }
                         ?>
                     </tbody>
@@ -148,7 +148,7 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="comentarioModalLabel" style="color: #8350F2;">Comentario</h5>
+        <h3 class="modal-title" id="comentarioModalLabel" style="color: #8350F2;"><b>Comentario</b></h3>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

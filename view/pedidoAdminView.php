@@ -83,8 +83,8 @@
     </nav>
 
     <div class="container mt-5" style="max-width: 1600px;"><br><br><br>
-        <div class="row" style="margin: 0;">
-            <div class="col-lg-12 col-sm-12 table-responsive">
+        <div class="row mt-5" style="margin: 0;">
+            <div class="col-lg-12 col-sm-12 table-responsive mt-5">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -92,7 +92,7 @@
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Nombre de Usuario</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Fecha de pedido</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Precio Total</th>
-                            <th style="background-color: #8350F2; color: #fff;" scope="col"></th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Ver detalles</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -115,17 +115,17 @@
                             print("<tr style='align-items: center; background-color: gray;'>\n");
 
                             //Id de pedido
-                            print("<td style='padding-top: 14px;' scope='row'><b>" . $datosPedido["idpedido"] . "</b></td>\n");
+                            print("<td scope='row'><b>" . $datosPedido["idpedido"] . "</b></td>\n");
                             //Nombre usuario
-                            print("<td style='padding-top: 14px;'>" . $nombreUsuario . "</td>\n");
+                            print("<td>" . $nombreUsuario . "</td>\n");
                             //Fecha pedido
-                            print("<td style='padding-top: 14px;'>" . $datosPedido["fecha_pedido"] . "</td>\n");
+                            print("<td>" . $datosPedido["fecha_pedido"] . "</td>\n");
                             //Precio total
-                            print("<td style='padding-top: 14px;'>" . $datosPedido["precio_total"] . "€</td>\n");
+                            print("<td>" . $datosPedido["precio_total"] . "€</td>\n");
 
 
                             echo "<td>";
-                            echo "<a href='../controller/detallesPedidoAdminController.php?idPedido=" . htmlspecialchars($datosPedido['idpedido'], ENT_QUOTES) . "'>";
+                            echo "<a class='btn btn-link p-0 align-middle' style='vertical-align: middle;' title='Ver detalles' href='../controller/detallesPedidoAdminController.php?idPedido=" . htmlspecialchars($datosPedido['idpedido'], ENT_QUOTES) . "'>";
                             echo "<i class='fas fa-eye fa-xl' style='color: #8350f2'></i>";
                             echo "</a>";
                             echo "</td>";
