@@ -202,6 +202,16 @@
     border-radius: 50%; /* Hace el círculo */
   }
 
+  .form-control:focus {
+    border-color: #8350f2 !important;
+    box-shadow: 0 0 0 0.25rem rgba(131, 80, 242, 0.5) !important;
+  }
+  
+  .form-select:focus {
+    border-color: #8350f2 !important;
+    box-shadow: 0 0 0 0.25rem rgba(131, 80, 242, 0.5) !important;
+  }
+
 @media(max-width:1400px){
     .nav-busqueda button{
         position: absolute;

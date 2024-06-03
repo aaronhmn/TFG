@@ -247,7 +247,7 @@ namespace views;
             <div class="mb-3">
               <label for="valoracion" class="form-label">Valoración:</label>
               <select class="form-select" id="valoracion" name="valoracion" required>
-                <option value="">Selecciona una valoración</option>
+                <option selected disabled value="">Selecciona una valoración</option>
                 <option value="0">0 Estrellas</option>
                 <option value="1">1 Estrellas</option>
                 <option value="2">2 Estrellas</option>
@@ -258,7 +258,7 @@ namespace views;
             </div>
             <div class="mb-3">
               <label for="comentario" class="form-label">Comentario:</label>
-              <textarea class="form-control" id="comentario" name="comentario" rows="8" required></textarea>
+              <textarea class="form-control" id="comentario" name="comentario" rows="8" required placeholder="Escribe tu comentario aquí"></textarea>
             </div>
             <button type="submit" class="btn btn-primary" style="background-color: #8350f2; border-color: #8350f2;">Enviar Reseña</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -274,56 +274,59 @@ namespace views;
 
   <script>
     $(document).ready(function() {
-      $('#formReseña').submit(function(e) {
-        e.preventDefault(); // Evitar el envío estándar del formulario
-        var formData = $(this).serialize(); // Serializar los datos del formulario
+  $('#formReseña').submit(function(e) {
+    e.preventDefault(); // Evitar el envío estándar del formulario
+    var formData = $(this).serialize(); // Serializar los datos del formulario
 
-        $.ajax({
-          type: "POST",
-          url: $(this).attr('action'),
-          data: formData,
-          success: function(response) {
-            var jsonData = JSON.parse(response);
-            if (jsonData.success) {
-              // Guardar mensaje en localStorage
-              localStorage.setItem('alertMessage', 'Reseña añadida con éxito!');
-              localStorage.setItem('alertType', 'success');
-            } else {
-              // Guardar mensaje de error en localStorage
-              localStorage.setItem('alertMessage', jsonData.message);
-              localStorage.setItem('alertType', 'danger');
-            }
-            // Recargar la página para aplicar cambios
-            location.reload();
-          },
-          error: function() {
-            // Guardar mensaje de error en localStorage
-            localStorage.setItem('alertMessage', 'Error al procesar la petición.');
-            localStorage.setItem('alertType', 'danger');
-            location.reload();
-          }
-        });
-      });
-
-      // Mostrar alerta después de recargar
-      displayAlertFromLocalStorage();
-    });
-
-    function displayAlertFromLocalStorage() {
-      var message = localStorage.getItem('alertMessage');
-      var type = localStorage.getItem('alertType');
-
-      if (message && type) {
-        var alertHtml = '<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' +
-          message +
-          '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
-        $('#alertPlaceholder2').html(alertHtml);
-
-        // Limpiar localStorage
-        localStorage.removeItem('alertMessage');
-        localStorage.removeItem('alertType');
+    $.ajax({
+      type: "POST",
+      url: $(this).attr('action'),
+      data: formData,
+      success: function(response) {
+        var jsonData = JSON.parse(response);
+        if (jsonData.success) {
+          localStorage.setItem('alertMessage', 'Reseña añadida con éxito!');
+          localStorage.setItem('alertType', 'success');
+        } else {
+          localStorage.setItem('alertMessage', jsonData.message);
+          localStorage.setItem('alertType', 'danger');
+        }
+        location.reload();
+      },
+      error: function() {
+        localStorage.setItem('alertMessage', 'Error al procesar la petición.');
+        localStorage.setItem('alertType', 'danger');
+        location.reload();
       }
-    }
+    });
+  });
+
+  // Limpiar el formulario al cerrar el modal
+  $('#reseñaModal').on('hidden.bs.modal', function() {
+    $(this).find('form')[0].reset();
+    // Opcional: también puedes limpiar cualquier mensaje de estado
+    $('#alertPlaceholder').empty();
+  });
+
+  // Mostrar alerta después de recargar
+  displayAlertFromLocalStorage();
+});
+
+function displayAlertFromLocalStorage() {
+  var message = localStorage.getItem('alertMessage');
+  var type = localStorage.getItem('alertType');
+
+  if (message && type) {
+    var alertHtml = '<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' +
+      message +
+      '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+    $('#alertPlaceholder2').html(alertHtml);
+
+    // Limpiar localStorage
+    localStorage.removeItem('alertMessage');
+    localStorage.removeItem('alertType');
+  }
+}
   </script>
 
 </body>
