@@ -14,6 +14,8 @@ namespace views;
 
   <link rel="stylesheet" href="../assets/styles/css/style.css">
 
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
   <link rel="icon" type="image/vnd.icon" href="../assets/img/genesis logo sin fondo favicon.png">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -75,7 +77,7 @@ namespace views;
   </div>
 
   <!--CARDS DE CATEGORIAS-->
-  <div class="container" style="margin-top: 100px; margin-bottom: 100px;">
+  <div class="container" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" style="margin-top: 100px; margin-bottom: 100px;">
     <div class="cuadradito">
       <h3 style="margin-left:40px;"><b>Categorías</b></h3>
     </div>
@@ -124,7 +126,7 @@ namespace views;
   </div>
 
   <!--MARCAS-->
-  <div class="container mt-5">
+  <div class="container mt-5" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
     <div class="cuadradito" style="margin-left: 5px;">
       <h3 style="margin-left:40px;"><b>Marcas</b></h3>
     </div>
@@ -181,7 +183,7 @@ namespace views;
   </div>
 
   <!--PROXIMOS PRODUCTOS-->
-  <div class="container py-5">
+  <div class="container py-5" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
     <div class="cuadradito" style="margin-left: 5px;">
       <h3 style="margin-left:40px;"><b>Productos</b></h3>
     </div>
@@ -205,7 +207,7 @@ namespace views;
   </div><br>
 
   <!--INFO-->
-  <div class="container mt-5" style="margin-bottom: 100px;">
+  <div class="container mt-5" style="margin-bottom: 100px;" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
     <div class="row">
       <div class="col-md-4 mb-4">
         <div class="circle mx-auto">
@@ -250,7 +252,12 @@ namespace views;
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
   <script src="../assets/js/main.js"></script>
 
+  <script>
+  AOS.init();
+</script>
 </body>
+
 </html>
