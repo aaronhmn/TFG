@@ -24,10 +24,10 @@ function cargarFavoritos() {
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td><img src="${producto.imagen}" alt="${producto.nombre}" style="width: 90px; height: auto; vertical-align: middle; margin-right: 10px;"></td>
-            <td><a href="../controller/productoController.php?id=${producto.id}">${producto.nombre}</a></td>
+            <td><a title="Ir al producto" href="../controller/productoController.php?id=${producto.id}">${producto.nombre}</a></td>
             <td>${producto.precio ? `${producto.precio} €` : 'Precio no disponible'}</td>
             <td>
-                <button onclick="eliminarDeFavoritos('${id}')" class="btn btn-eliminar"><i class="fa fa-trash"></i></button>
+                <button title="Eliminar" onclick="eliminarDeFavoritos('${id}')" class="btn btn-eliminar"><i class="fa fa-trash"></i></button>
             </td>
         `;
         tbody.appendChild(tr);

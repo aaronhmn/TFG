@@ -39,8 +39,8 @@
                         <td><b><?php echo $contador++; ?></b></td>
                             <td><?php echo htmlspecialchars($pedido['fecha_pedido']); ?></td>
                             <td><?php echo htmlspecialchars($pedido['precio_total']); ?>€</td>
-                            <td><a href="../controller/misDetallesPedidoController.php?idPedido=<?php echo $pedido['idpedido']; ?>"><i class='fas fa-eye fa-xl' style='color: #8350f2'></i></a></td>
-                            <td><a href="../controller/descargarFacturaController.php?idPedido=<?php echo $pedido['idpedido']; ?>"><i class='fas fa-file-pdf fa-xl' style='color: red'></i></a></td>
+                            <td><a title="Ver detalles" href="../controller/misDetallesPedidoController.php?idPedido=<?php echo $pedido['idpedido']; ?>"><i class='fas fa-eye fa-xl' style='color: #8350f2'></i></a></td>
+                            <td><a title="Descargar factura" href="../controller/descargarFacturaController.php?idPedido=<?php echo $pedido['idpedido']; ?>"><i class='fas fa-file-pdf fa-xl' style='color: red'></i></a></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
