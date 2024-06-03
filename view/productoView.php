@@ -168,9 +168,19 @@ namespace views;
     <div class="contenedor-comentarios mt-5">
       <h2 class="text-center mb-4" style="color: #ffa500;"><b>Comentarios y Valoraciones</b></h2>
       <div id="alertPlaceholder2"></div>
-      <button class="btn btn-primary mb-3 w-100" style="background-color: #8350f2; border-color:#8350f2;" data-bs-toggle="modal" data-bs-target="#reseñaModal">
-  Realizar reseña
-</button>
+      <div class="row">
+    <div class="col-12">
+        <?php if ($productos['haComprado']) : ?>
+            <button class="btn btn-primary mb-3 w-100" style="background-color: #8350f2; border-color:#8350f2;" data-bs-toggle="modal" data-bs-target="#reseñaModal">
+                Realizar reseña
+            </button>
+        <?php else: ?>
+            <div class="alert alert-warning text-center" role="alert">
+                <b>Compra este producto para poder escribir una reseña.</b>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
 
       <!-- Mostrar reseñas del producto -->
       <div class="row row-cols-1 row-cols-lg-2 g-4">
@@ -223,98 +233,98 @@ namespace views;
   <!--FOOTER-->
   <?php include '../controller/footerController.php'; ?>
 
-<!-- Modal para crear reseña -->
-<div class="modal fade" id="reseñaModal" tabindex="-1" aria-labelledby="reseñaModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="reseñaModalLabel" style="color: #8350f2;"><b>Escribe tu reseña</b></h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form id="formReseña" action="../controller/insertarReseñaController.php" method="POST">
-          <input type="hidden" name="idProducto" value="<?= $productos['idproducto'] ?>"> <!-- Asegúrate de tener el ID del producto aquí -->
-          <div class="mb-3">
-            <label for="valoracion" class="form-label">Valoración:</label>
-            <select class="form-select" id="valoracion" name="valoracion" required>
-              <option value="">Selecciona una valoración</option>
-              <option value="0">0 Estrellas</option>
-              <option value="1">1 Estrellas</option>
-              <option value="2">2 Estrellas</option>
-              <option value="3">3 Estrellas</option>
-              <option value="4">4 Estrella</option>
-              <option value="5">5 Estrellas</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="comentario" class="form-label">Comentario:</label>
-            <textarea class="form-control" id="comentario" name="comentario" rows="8" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary" style="background-color: #8350f2; border-color: #8350f2;">Enviar Reseña</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        </form>
+  <!-- Modal para crear reseña -->
+  <div class="modal fade" id="reseñaModal" tabindex="-1" aria-labelledby="reseñaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="reseñaModalLabel" style="color: #8350f2;"><b>Escribe tu reseña</b></h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formReseña" action="../controller/insertarReseñaController.php" method="POST">
+            <input type="hidden" name="idProducto" value="<?= $productos['idproducto'] ?>"> <!-- Asegúrate de tener el ID del producto aquí -->
+            <div class="mb-3">
+              <label for="valoracion" class="form-label">Valoración:</label>
+              <select class="form-select" id="valoracion" name="valoracion" required>
+                <option value="">Selecciona una valoración</option>
+                <option value="0">0 Estrellas</option>
+                <option value="1">1 Estrellas</option>
+                <option value="2">2 Estrellas</option>
+                <option value="3">3 Estrellas</option>
+                <option value="4">4 Estrella</option>
+                <option value="5">5 Estrellas</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="comentario" class="form-label">Comentario:</label>
+              <textarea class="form-control" id="comentario" name="comentario" rows="8" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="background-color: #8350f2; border-color: #8350f2;">Enviar Reseña</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
   <script src="../assets/js/producto.js"></script>
 
-<script>
-$(document).ready(function () {
-    $('#formReseña').submit(function (e) {
+  <script>
+    $(document).ready(function() {
+      $('#formReseña').submit(function(e) {
         e.preventDefault(); // Evitar el envío estándar del formulario
         var formData = $(this).serialize(); // Serializar los datos del formulario
 
         $.ajax({
-            type: "POST",
-            url: $(this).attr('action'),
-            data: formData,
-            success: function (response) {
-                var jsonData = JSON.parse(response);
-                if (jsonData.success) {
-                    // Guardar mensaje en localStorage
-                    localStorage.setItem('alertMessage', 'Reseña añadida con éxito!');
-                    localStorage.setItem('alertType', 'success');
-                } else {
-                    // Guardar mensaje de error en localStorage
-                    localStorage.setItem('alertMessage', jsonData.message);
-                    localStorage.setItem('alertType', 'danger');
-                }
-                // Recargar la página para aplicar cambios
-                location.reload();
-            },
-            error: function () {
-                // Guardar mensaje de error en localStorage
-                localStorage.setItem('alertMessage', 'Error al procesar la petición.');
-                localStorage.setItem('alertType', 'danger');
-                location.reload();
+          type: "POST",
+          url: $(this).attr('action'),
+          data: formData,
+          success: function(response) {
+            var jsonData = JSON.parse(response);
+            if (jsonData.success) {
+              // Guardar mensaje en localStorage
+              localStorage.setItem('alertMessage', 'Reseña añadida con éxito!');
+              localStorage.setItem('alertType', 'success');
+            } else {
+              // Guardar mensaje de error en localStorage
+              localStorage.setItem('alertMessage', jsonData.message);
+              localStorage.setItem('alertType', 'danger');
             }
+            // Recargar la página para aplicar cambios
+            location.reload();
+          },
+          error: function() {
+            // Guardar mensaje de error en localStorage
+            localStorage.setItem('alertMessage', 'Error al procesar la petición.');
+            localStorage.setItem('alertType', 'danger');
+            location.reload();
+          }
         });
+      });
+
+      // Mostrar alerta después de recargar
+      displayAlertFromLocalStorage();
     });
 
-    // Mostrar alerta después de recargar
-    displayAlertFromLocalStorage();
-});
+    function displayAlertFromLocalStorage() {
+      var message = localStorage.getItem('alertMessage');
+      var type = localStorage.getItem('alertType');
 
-function displayAlertFromLocalStorage() {
-    var message = localStorage.getItem('alertMessage');
-    var type = localStorage.getItem('alertType');
-
-    if (message && type) {
+      if (message && type) {
         var alertHtml = '<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' +
-            message +
-            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+          message +
+          '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
         $('#alertPlaceholder2').html(alertHtml);
 
         // Limpiar localStorage
         localStorage.removeItem('alertMessage');
         localStorage.removeItem('alertType');
+      }
     }
-}
-</script>
+  </script>
 
 </body>
 

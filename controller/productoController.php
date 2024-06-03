@@ -1,14 +1,17 @@
 <?php
+
 namespace model;
 
 use \model\utils;
 use \model\producto;
 use \model\reseña;
+use \model\detalle_pedido;
 
 //Añadimos el código del modelo
 require_once("../model/utils.php");
 require_once("../model/productoModel.php");
 require_once("../model/reseñaModel.php");
+require_once("../model/detallePedidoModel.php");
 $mensaje = null;
 
 if (session_status() == PHP_SESSION_NONE) {
@@ -17,6 +20,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 $gestorProducto = new producto();
 $gestorReseña = new reseña();
+$detallePedidoModel = new detalle_pedido();
 $conexPDO = utils::conectar();
 
 // Número de reseñas por página
@@ -25,6 +29,7 @@ $reseñasPorPagina = 6;
 // Verificamos que el ID del producto está presente y es válido
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id = $_GET['id'];
+    $idUsuario = $_SESSION['id_usuario'] ?? null;
     $productos = $gestorProducto->getProductoId($id, $conexPDO);
 
     if (!$productos) {
@@ -34,15 +39,20 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         exit;
     }
 
+    $haComprado = $detallePedidoModel->usuarioHaCompradoProducto($conexPDO, $idUsuario, $id);
+
+    // Pasar esta información a la vista
+    $productos['haComprado'] = $haComprado;
+
     $mediaValoraciones = $gestorReseña->calcularMediaValoraciones($id, $conexPDO);
-    
+
     // Obtener el número de página actual o predeterminar a 1 si no se proporciona ninguna
     $paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
     $inicio = ($paginaActual - 1) * $reseñasPorPagina;
-    
+
     // Obtener reseñas con paginación
     $reseñas = $gestorReseña->getReseñasPorProductoIdPaginado($id, $conexPDO, $inicio, $reseñasPorPagina);
-    
+
     // Contar el total de reseñas para calcular el total de páginas
     $totalReseñas = $gestorReseña->contarReseñasPorProducto($id, $conexPDO);
     $totalPaginas = ceil($totalReseñas / $reseñasPorPagina);
@@ -58,6 +68,5 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     include("../view/productoView.php");
 } else {
     $mensaje = "ID de producto no especificado o inválido.";
-    include("../view/error404View.php"); 
+    include("../view/error404View.php");
 }
-?>

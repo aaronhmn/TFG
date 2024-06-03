@@ -98,4 +98,15 @@ class detalle_pedido
             return 0;
         }
     }
+
+    public function usuarioHaCompradoProducto($pdo, $idUsuario, $idProducto) {
+        $stmt = $pdo->prepare(
+            "SELECT COUNT(*) 
+            FROM detalle_pedido dp 
+            JOIN pedido p ON dp.id_pedido_dp = p.idpedido
+            WHERE p.id_usuario_pedido = :idUsuario AND dp.id_producto_dp = :idProducto"
+        );
+        $stmt->execute(['idUsuario' => $idUsuario, 'idProducto' => $idProducto]);
+        return $stmt->fetchColumn() > 0;
+    }
 }
