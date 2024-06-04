@@ -91,7 +91,7 @@
         </div>
     </nav>
 
-    <div class="container mt-5" style="max-width: 1600px;"><br><br>
+    <div class="container mt-5"><br><br>
         <div class="navbar2 mt-5">
             <ul>
                 <li>

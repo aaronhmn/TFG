@@ -82,7 +82,7 @@
         </div>
     </nav>
 
-    <div class="container mt-5" style="max-width: 1600px;"><br><br><br>
+    <div class="container mt-5"><br><br><br>
         <div class="row mt-5" style="margin: 0;">
             <div class="col-lg-12 col-sm-12 table-responsive mt-5">
                 <table class="table table-striped">

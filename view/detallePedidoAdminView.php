@@ -76,6 +76,9 @@
                         <li class="nav-item mt-4" id="active">
                             <a class="nav-link active" href="../controller/pedidosAdminController.php"><i class="fas fa-shipping-fast fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">pedidos</span></a>
                         </li>
+                        <li class="nav-item mt-4">
+                            <a class="nav-link active" href="../controller/reseñasAdminController.php"><i class="fas fa-comments fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Reseñas</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -85,15 +88,15 @@
     <div class="container mt-5" style="max-width: 1600px;"><br><br><br>
         <br>
         <div class="row" style="margin: 0;">
-        <div class="navbar2">
-            <ul>
-                <li>
-                    <a href="../controller/pedidosAdminController.php" class="btn btn-info" style="color: white; background-color: #8350F2; border-color: #8350F2;">
-                        <i class="fas fa-arrow-left" style="margin-right: 3px;"></i> Volver atrás
-                    </a>
-                </li>
-            </ul>
-        </div>
+            <div class="navbar2">
+                <ul>
+                    <li>
+                        <a href="../controller/pedidosAdminController.php" class="btn btn-info" style="color: white; background-color: #8350F2; border-color: #8350F2;">
+                            <i class="fas fa-arrow-left" style="margin-right: 3px;"></i> Volver atrás
+                        </a>
+                    </li>
+                </ul>
+            </div>
             <div class="col-lg-12 col-sm-12 table-responsive mt-4">
                 <table class="table table-striped">
                     <thead>
