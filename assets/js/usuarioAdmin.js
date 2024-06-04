@@ -1,51 +1,63 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Asumiendo que los IDs para el formulario de insertar son diferentes a los de modificar
+    // Seleccionar los formularios por su contenedor de modal específico
     const formInsertar = document.querySelector('#insertarUsuarioModal form');
     const formModificar = document.querySelector('#modificarUsuarioModal form');
 
-    // Puedes reutilizar esta función para ambos formularios
-    function validateForm(form) {
+    // Función de validación que se puede aplicar a cualquier formulario
+    function validateForm(form, isModification = false) {
         form.addEventListener('submit', function(event) {
-            let isValid = true;
-            const telefono = form.querySelector('[name="inputTelefono"]');
-            const dni = form.querySelector('[name="inputDNI"]');
-            const contrasena = form.querySelector('[name="inputPassword"]');
-            const contrasena2 = form.querySelector('[name="inputPassword2"]'); // Asegúrate de ajustar estos selectores al nombre correcto de tus campos.
+            let isValid = true;  // Flag para la validación del formulario
+
+            // Definir selectores basados en si el formulario es de inserción o modificación
+            const telefonoSelector = isModification ? '[name="telefono"]' : '[name="inputTelefono"]';
+            const dniSelector = isModification ? '[name="dni"]' : '[name="inputDNI"]';
+            const passwordSelector = isModification ? '[name="contrasenaNueva"]' : '[name="inputPassword"]';
+            const confirmPasswordSelector = isModification ? '[name="contrasenaConfirmar"]' : '[name="inputPassword2"]';
+
+            // Obtener los elementos del formulario
+            const telefono = form.querySelector(telefonoSelector);
+            const dni = form.querySelector(dniSelector);
+            const password = form.querySelector(passwordSelector);
+            const confirmPassword = form.querySelector(confirmPasswordSelector);
 
             // Validación del número de teléfono
-            if (!/^\d{9}$/.test(telefono.value)) {
+            if (telefono && !/^\d{9}$/.test(telefono.value)) {
                 alert('El número de teléfono debe tener 9 dígitos.');
                 isValid = false;
             }
 
             // Validación del DNI
-            if (!/^\d{8}[A-Za-z]$/.test(dni.value)) {
+            if (dni && !/^\d{8}[A-Za-z]$/.test(dni.value)) {
                 alert('El DNI debe tener 8 dígitos seguidos de una letra.');
                 isValid = false;
             }
 
-            // Validación de la contraseña
-            if (contrasena.value.length < 6) {
+            // Validación de la contraseña (si el campo está presente y no está vacío)
+            if (password && password.value && password.value.length < 6) {
                 alert('La contraseña debe tener al menos 6 caracteres.');
                 isValid = false;
             }
 
-            // Validación de coincidencia de contraseñas
-            if (contrasena.value !== contrasena2.value) {
+            // Validación de coincidencia de contraseñas (solo si se proporciona nueva contraseña y no está vacía)
+            if (password && confirmPassword && password.value && confirmPassword.value && password.value !== confirmPassword.value) {
                 alert('Las contraseñas no coinciden.');
                 isValid = false;
             }
 
+            // Si la validación falla, prevenir la acción por defecto
             if (!isValid) {
-                event.preventDefault(); // Prevenir la acción por defecto (enviar el formulario) si la validación falla
+                event.preventDefault();
             }
         });
     }
 
-    // Llamar a la función de validación para ambos formularios
+    // Aplicar la validación al formulario de inserción
     validateForm(formInsertar);
-    validateForm(formModificar);
 
+    // Aplicar la validación al formulario de modificación
+    validateForm(formModificar, true);
+
+    // Validación para asegurarse de que solo se ingresen dígitos donde es necesario
     const digitOnlyInputs = document.querySelectorAll('input[digitsonly]');
     digitOnlyInputs.forEach(input => {
         input.addEventListener('input', function() {
@@ -53,4 +65,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-

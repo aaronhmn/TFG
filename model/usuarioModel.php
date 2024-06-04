@@ -359,4 +359,40 @@ public function cambiarContraseñaPorId($idUsuario, $nuevaContrasena, $nuevaSalt
         }
         return false;
     }
+
+    public function existeEmailM($email, $idusuario, $conexPDO) {
+        try {
+            $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.usuario WHERE email = :email AND idusuario <> :idusuario");
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':idusuario', $idusuario);
+            $stmt->execute();
+            return $stmt->fetchColumn() > 0;
+        } catch (PDOException $e) {
+            error_log("Error al verificar email: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function existeNombreUsuarioM($nombreUsuario, $idusuario, $conexPDO) {
+        if ($conexPDO != null) {
+            try {
+                // Preparar una consulta SQL que excluya el ID del usuario actual
+                $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.usuario WHERE nombre_usuario = :nombre_usuario AND idusuario <> :idusuario");
+    
+                // Asociar los valores a los parámetros de la consulta
+                $stmt->bindParam(':nombre_usuario', $nombreUsuario);
+                $stmt->bindParam(':idusuario', $idusuario);
+    
+                // Ejecutar la consulta
+                $stmt->execute();
+    
+                // Devolver true si se encuentra al menos un usuario con ese nombre, excluyendo al usuario actual
+                return $stmt->fetchColumn() > 0;
+            } catch (PDOException $e) {
+                error_log("Error al verificar nombre_usuario: " . $e->getMessage());
+                return false; // Considera cómo manejar los errores correctamente
+            }
+        }
+        return false;
+    }
 }

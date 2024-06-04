@@ -2,7 +2,7 @@
 namespace model;
 
 use \model\utils;
-use \model\usuarioModel;
+use \model\usuario;
 
 //Añadimos el código del modelo
 require_once("../model/utils.php");
@@ -60,14 +60,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     // Verificar si el email ya existe
     if ($gestorUsu->existeEmail($email, $conexPDO)) {
-        $_SESSION['error'] = 'Este email ya está registrado.';
+        $_SESSION['mensaje'] = 'Este email ya esta en uso.';
+        $_SESSION['tipo_mensaje'] = 'danger';
         header("Location: ../controller/usuariosAdminController.php");
         exit();
     }
     
     // Verificar si el nombre de usuario ya existe
     if ($gestorUsu->existeNombreUsuario($usuario, $conexPDO)) {
-        $_SESSION['error'] = 'Este nombre de usuario ya está en uso.';
+        $_SESSION['mensaje'] = 'Este nombre de usuario ya está en uso.';
+        $_SESSION['tipo_mensaje'] = 'danger';
         header("Location: ../controller/usuariosAdminController.php");
         exit();
     }
