@@ -93,6 +93,7 @@
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Fecha de pedido</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Precio Total</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Ver detalles</th>
+                            <th style="background-color: #8350F2; color: #fff;">Descargar factura</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -129,6 +130,8 @@
                             echo "<i class='fas fa-eye fa-xl' style='color: #8350f2'></i>";
                             echo "</a>";
                             echo "</td>";
+
+                            echo "<td><a title='Descargar factura' href='../controller/descargarFacturaController.php?idPedido=" . htmlspecialchars($datosPedido['idpedido']) . "'><i class='fas fa-file-pdf fa-xl' style='color: red'></i></a></td>";
                         }
                         ?>
                     </tbody>

@@ -46,7 +46,7 @@ $pdf->Cell(0, 10, "Código Postal: {$datosPedido['codigo_postal']}", 0, 1);
 $pdf->Cell(0, 10, "Calle: {$datosPedido['calle']}, Número de bloque: {$datosPedido['numero_bloque']}, Piso: {$datosPedido['piso']}", 0, 1);
 
 foreach ($detallesPedido as $detalle) {
-    $pdf->Cell(0, 10, "{$detalle['nombre_producto']}: {$detalle['cantidad']} x {$detalle['precio']}€ = " . ($detalle['cantidad'] * $detalle['precio']) . "€", 0, 1);
+    $pdf->MultiCell(0, 10, "{$detalle['nombre_producto']}: {$detalle['cantidad']} x {$detalle['precio']}€ = " . ($detalle['cantidad'] * $detalle['precio']) . "€", 0, 'L', 0, 1);
 }
 
 $pdf->Cell(0, 10, "Total: {$datosPedido['precio_total']}€", 0, 1);
