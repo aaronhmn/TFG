@@ -32,6 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $contrasenaNueva = $_POST['contrasenaNueva'];
     $contrasenaConfirmar = $_POST['contrasenaConfirmar'];
 
+    // Validar longitud mínima de la nueva contraseña
+    if (strlen($contrasenaNueva) < 6) {
+        $_SESSION['mensaje'] = "La contraseña nueva debe tener al menos 6 caracteres.";
+        $_SESSION['tipo_mensaje'] = "danger";
+        header("Location: ../controller/cambioContraseñaController.php");
+        exit();
+    }
+
     // Verificar si la nueva contraseña y la confirmación coinciden
     if ($contrasenaNueva !== $contrasenaConfirmar) {
         $_SESSION['mensaje'] = "Las nuevas contraseñas no coinciden";

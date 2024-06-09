@@ -34,35 +34,35 @@
       </div>
 
       <div class="col-md-8 col-sm-12" style="background-color: #fff; margin: 5px">
-      <form class="row g-3" style="margin: 10px" action="../controller/cambioContraseñaController.php" method="POST">
-      <?php
-    if (isset($_SESSION['mensaje'])) {
-      echo "<div class='alert alert-{$_SESSION['tipo_mensaje']} alert-dismissible fade show' role='alert'>
+        <form class="row g-3" style="margin: 10px" action="../controller/cambioContraseñaController.php" method="POST">
+          <?php
+          if (isset($_SESSION['mensaje'])) {
+            echo "<div class='alert alert-{$_SESSION['tipo_mensaje']} alert-dismissible fade show' role='alert'>
             {$_SESSION['mensaje']}
             <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
           </div>";
-      // Limpia los mensajes después de mostrarlos
-      unset($_SESSION['mensaje']);
-      unset($_SESSION['tipo_mensaje']);
-    }
-    ?>
-    <div id="alertContainer"></div>
+            // Limpia los mensajes después de mostrarlos
+            unset($_SESSION['mensaje']);
+            unset($_SESSION['tipo_mensaje']);
+          }
+          ?>
+          <div id="alertContainer"></div>
           <div class="col-6" style="display: flex; align-items: center;">
             <h2 style="color: #ffa500"><b>Cambio de contraseña</b></h2>
           </div>
           <div class="col-12">
             <label for="nombre" class="form-label"><b>Contraseña actual:</b></label>
-            <input type="password" class="form-control" id="contrasenaActual" name="contrasenaActual" placeholder="Contraseña actual" required/>
+            <input type="password" class="form-control" id="contrasenaActual" name="contrasenaActual" placeholder="Contraseña actual" required />
           </div>
           <div class="col-12">
             <label for="nombre" class="form-label"><b>Contraseña nueva:</b></label>
-            <input type="password" class="form-control" id="contrasenaNueva" name="contrasenaNueva" placeholder="Nueva contraseña" required/>
+            <input type="password" class="form-control" id="contrasenaNueva" name="contrasenaNueva" placeholder="Nueva contraseña" required />
           </div>
           <div class="col-12">
             <label for="nombre" class="form-label"><b>Repetir contraseña nueva:</b></label>
-            <input type="password" class="form-control" id="contrasenaConfirmar" name="contrasenaConfirmar" placeholder="Repetir nueva contraseña" required/>
+            <input type="password" class="form-control" id="contrasenaConfirmar" name="contrasenaConfirmar" placeholder="Repetir nueva contraseña" required />
           </div>
-          
+
           <button class="btn btn-primary col-4" id="cancelButton" type="reset" style="background-color: rgb(168, 168, 168); margin-right: 15px; border: none;">
             Cancelar
           </button>
@@ -82,17 +82,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="../assets/js/main.js"></script>
-  <script src="../assets/js/cambioContraseña.js"></script>
 
   <script>
     document.getElementById('cancelButton').addEventListener('click', function() {
-    var alertContainer = document.getElementById('alertContainer');
-    var alertHTML = '<div class="alert alert-warning alert-dismissible fade show" role="alert">' +
-                    'La modificación ha sido cancelada correctamente.' +
-                    '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
-                    '</div>';
-    alertContainer.innerHTML = alertHTML;
-});
+      var alertContainer = document.getElementById('alertContainer');
+      var alertHTML = '<div class="alert alert-warning alert-dismissible fade show" role="alert">' +
+        'La modificación ha sido cancelada correctamente.' +
+        '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
+        '</div>';
+      alertContainer.innerHTML = alertHTML;
+    });
   </script>
 </body>
 
