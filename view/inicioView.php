@@ -36,8 +36,7 @@ namespace views;
 
   <!--HEADER CON TEXTO -->
   <div class="container-fluid" style="width: 90%;">
-    <div class="row align-items-center justify-content-center">
-
+    <div class="row align-items-center justify-content-center" style="margin-top: 70px;">
       <!-- Texto (col-12 en pantallas pequeñas y medianas, col-md-4 en tabletas y más grandes) -->
       <div class="col-12 col-md-4">
         <h3 class="mt-0">BIENVENIDO A GENESIS, LA MEJOR TIENDA ONLINE DE ORDENADORES Y HARDWARE</h3>

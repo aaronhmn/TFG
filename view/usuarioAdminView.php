@@ -196,7 +196,6 @@
               echo " data-activo='" . htmlspecialchars($producto['activo'], ENT_QUOTES) . "'";
               echo " data-rol='" . htmlspecialchars($producto['rol'], ENT_QUOTES) . "'";
               echo " data-estado='" . htmlspecialchars($producto['estado'], ENT_QUOTES) . "'";
-              /* echo " data-contrasena='" . htmlspecialchars($producto['contrasena'], ENT_QUOTES) . "'"; */
               echo " style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;'>";
               echo "<i class='fas fa-edit fa-lg' style='color: #005eff;'></i>";
               echo "</button>";

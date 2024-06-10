@@ -1,21 +1,16 @@
 <?php
 
-    namespace model;
+namespace model;
 
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
-    use \model\utils;
-    use \model\usuarioModel;
+use \model\utils;
 
-    //Añadimos el código del modelo
-    require_once("../model/utils.php");
-    require_once("../model/usuarioModel.php");
-    $mensaje=null;
+require_once("../model/utils.php");
+$mensaje = null;
 
-    $conexPDO = utils::conectar();
+$conexPDO = utils::conectar();
 
-    include("../view/inicioView.php");
-
-?>
+include("../view/inicioView.php");
