@@ -58,6 +58,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
+    // Verificar si la direccion ya existe
+    if ($gestorAlmacen->existeDireccionEnCodigoPostal($calle, $numeroBloque, $codigoPostal, $conexPDO)) {
+        $_SESSION['mensaje'] = 'Esta dirección ya esta en uso.';
+        $_SESSION['tipo_mensaje'] = 'danger';
+        header("Location: ../controller/almacenesAdminController.php");
+        exit();
+    }
+
     $resultado = $gestorAlmacen->addAlmacen($datosAlmacen, $conexPDO);
 
     //Para verificar si todo funcionó correctamente

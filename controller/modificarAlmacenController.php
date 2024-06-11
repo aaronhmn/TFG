@@ -63,6 +63,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
+    if ($gestorAlmacen->existeDireccionEnCodigoPostalM($almacen["calle"], $almacen["numero_bloque"], $almacen["codigo_postal"], $almacen["idalmacen"], $conexPDO)) {
+        $_SESSION['mensaje'] = 'Esta dirección ya está en uso.';
+        $_SESSION['tipo_mensaje'] = 'danger';
+        header("Location: ../controller/almacenesAdminController.php");
+        exit();
+    }
+
     $resultado = $gestorAlmacen->updateAlmacen($almacen, $conexPDO);
 
     //Para verificar si todo funcionó correctamente

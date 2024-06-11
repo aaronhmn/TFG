@@ -249,6 +249,57 @@ class almacen{
         }
     }
 
+    public function existeDireccionEnCodigoPostal($calle, $numeroBloque, $codigoPostal, $conexPDO) {
+        if ($conexPDO != null) {
+            try {
+                // Preparar la sentencia SQL para verificar la existencia de la dirección en el código postal especificado
+                $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.almacen WHERE calle = :calle AND numero_bloque = :numero_bloque AND codigo_postal = :codigo_postal");
+    
+                // Asociar los parámetros a la consulta
+                $stmt->bindParam(':calle', $calle);
+                $stmt->bindParam(':numero_bloque', $numeroBloque, PDO::PARAM_INT);
+                $stmt->bindParam(':codigo_postal', $codigoPostal);
+    
+                // Ejecutar la sentencia
+                $stmt->execute();
+    
+                // Devolver true si se encuentra al menos un registro, false en caso contrario
+                return $stmt->fetchColumn() > 0;
+            } catch (PDOException $e) {
+                // Logear y manejar el error
+                error_log("Error al verificar dirección en código postal: " . $e->getMessage());
+                return false;
+            }
+        }
+        return false; // Retornar false si no hay conexión a la base de datos
+    }
+
+    public function existeDireccionEnCodigoPostalM($calle, $numeroBloque, $codigoPostal, $idalmacen, $conexPDO) {
+        if ($conexPDO != null) {
+            try {
+                // Preparar la sentencia SQL para verificar la existencia de la dirección en el código postal especificado, excluyendo un id de almacén específico
+                $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.almacen WHERE calle = :calle AND numero_bloque = :numeroBloque AND codigo_postal = :codigoPostal AND idalmacen <> :idalmacen");
+    
+                // Asociar los parámetros a la consulta
+                $stmt->bindParam(':calle', $calle);
+                $stmt->bindParam(':numeroBloque', $numeroBloque, PDO::PARAM_INT);
+                $stmt->bindParam(':codigoPostal', $codigoPostal);
+                $stmt->bindParam(':idalmacen', $idalmacen, PDO::PARAM_INT);
+    
+                // Ejecutar la sentencia
+                $stmt->execute();
+    
+                // Devolver true si se encuentra al menos un registro, false en caso contrario
+                return $stmt->fetchColumn() > 0;
+            } catch (PDOException $e) {
+                // Logear y manejar el error
+                error_log("Error al verificar dirección en código postal excluyendo un almacén específico: " . $e->getMessage());
+                return false;
+            }
+        }
+        return false; // Retornar false si no hay conexión a la base de datos
+    }
+
 }
 
 ?>
