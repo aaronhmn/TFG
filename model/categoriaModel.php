@@ -7,7 +7,8 @@ require_once("utils.php");
 use \PDO;
 use \PDOException;
 
-class categoria{
+class categoria
+{
 
     /**Funcion que nos devuelve todas las categorias */
     public function getCategorias($conexPDO)
@@ -71,7 +72,8 @@ class categoria{
         return $result;
     }
 
-    public function delCategoria($idCategoria, $conexPDO) {
+    public function delCategoria($idCategoria, $conexPDO)
+    {
         if (!$this->verificarProductosCategoria($idCategoria, $conexPDO)) {
             try {
                 $stmt = $conexPDO->prepare("DELETE FROM categoria WHERE id_categoria = :idCategoria");
@@ -153,7 +155,8 @@ class categoria{
         }
     }
 
-    public function contarCategorias($conexPDO) {
+    public function contarCategorias($conexPDO)
+    {
         if ($conexPDO != null) {
             try {
                 $sentencia = $conexPDO->prepare("SELECT COUNT(*) AS total FROM genesis.categoria");
@@ -168,7 +171,8 @@ class categoria{
         return 0; // Si no hay conexión, retorna 0
     }
 
-    public function verificarProductosCategoria($idCategoria, $conexPDO) {
+    public function verificarProductosCategoria($idCategoria, $conexPDO)
+    {
         try {
             $stmt = $conexPDO->prepare("SELECT COUNT(*) as cantidad FROM producto WHERE id_categoria = :idCategoria");
             $stmt->bindParam(':idCategoria', $idCategoria, PDO::PARAM_INT);
@@ -182,6 +186,33 @@ class categoria{
         }
     }
 
-}
+    public function existeNombre($nombre, $conexPDO)
+    {
+        if ($conexPDO != null) {
+            try {
+                $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.categoria WHERE nombre_categoria = :nombre_categoria");
+                $stmt->bindParam(':nombre_categoria', $nombre);
+                $stmt->execute();
+                return $stmt->fetchColumn() > 0;
+            } catch (PDOException $e) {
+                error_log("Error al verificar categoria: " . $e->getMessage());
+                return false; // Considera cómo manejar los errores correctamente
+            }
+        }
+        return false;
+    }
 
-?>
+    public function existeNombreM($nombre, $idcategoria, $conexPDO)
+    {
+        try {
+            $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.categoria WHERE nombre_categoria = :nombre_categoria AND idcategoria <> :idcategoria");
+            $stmt->bindParam(':nombre_categoria', $nombre);
+            $stmt->bindParam(':idcategoria', $idcategoria);
+            $stmt->execute();
+            return $stmt->fetchColumn() > 0;
+        } catch (PDOException $e) {
+            error_log("Error al verificar categoria: " . $e->getMessage());
+            return false;
+        }
+    }
+}

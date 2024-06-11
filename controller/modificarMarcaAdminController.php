@@ -1,5 +1,7 @@
 <?php
+
 namespace model;
+
 use \model\marca;
 use \model\utils;
 
@@ -18,28 +20,35 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'
     exit();
 }
 
-    //Creamos un array para guardar los datos del categoria
-    $marca = array();
+//Creamos un array para guardar los datos del categoria
+$marca = array();
 
-    // Solo se ejecutará cuando reciba una petición del registro
-    if ($_SERVER['REQUEST_METHOD'] == 'GET')
-    {
-        $marca["idmarca"] = $_GET["idMarca"];
-        $marca["nombre_marca"] = $_GET["nombre_marca"];
+// Solo se ejecutará cuando reciba una petición del registro
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $marca["idmarca"] = $_GET["idMarca"];
+    $marca["nombre_marca"] = $_GET["nombre_marca"];
+}
+
+// Solo se ejecutará cuando reciba una petición del registro
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $marca["idmarca"] = $_POST["idMarca"];
+    $marca["nombre_marca"] = $_POST["nombre_marca"];
+
+    //Nos conectamos a la Bd
+    $conexPDO = utils::conectar();
+    $gestormarca = new Marca();
+
+    // Exclusión del usuario actual en las comprobaciones
+    if ($gestormarca->existeNombreM($marca["nombre_marca"], $marca["idmarca"], $conexPDO)) {
+        $_SESSION['mensaje'] = 'Este nombre ya está en uso.';
+        $_SESSION['tipo_mensaje'] = 'danger';
+        header("Location: ../controller/marcasAdminController.php");
+        exit();
     }
 
-    // Solo se ejecutará cuando reciba una petición del registro
-    if ($_SERVER['REQUEST_METHOD'] == 'POST')
-    {
-        $marca["idmarca"] = $_POST["idMarca"];
-        $marca["nombre_marca"] = $_POST["nombre_marca"];
+    $resultado = $gestormarca->updateMarca($marca, $conexPDO);
 
-        //Nos conectamos a la Bd
-        $conexPDO = utils::conectar();
-        $gestormarca = new Marca();
-        $resultado=$gestormarca->updateMarca($marca, $conexPDO);
-
-        //Para verificar si todo funcionó correctamente
+    //Para verificar si todo funcionó correctamente
     if ($resultado != null) {
         $_SESSION['mensaje'] = "La marca ha sido modificada correctamente.";
         $_SESSION['tipo_mensaje'] = "success";
@@ -52,8 +61,4 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'
         header('Location: ../controller/marcasAdminController.php');
         exit();
     }
-    }
-
-    
-
-?>
+}

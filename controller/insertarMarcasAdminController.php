@@ -31,6 +31,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     //Nos conectamos a la Base de Datos
     $conexPDO = utils::conectar();
+
+    // Verificar si el nombre ya existe
+    if ($gestorMarca->existeNombre($nombre, $conexPDO)) {
+        $_SESSION['mensaje'] = 'Este nombre ya esta en uso.';
+        $_SESSION['tipo_mensaje'] = 'danger';
+        header("Location: ../controller/marcasAdminController.php");
+        exit();
+    }
+
     $resultado = $gestorMarca->addMarca($datosMarca, $conexPDO);
 
     //Para verificar si todo funcionó correctamente

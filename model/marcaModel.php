@@ -7,71 +7,73 @@ require_once("utils.php");
 use \PDO;
 use \PDOException;
 
-class marca{
+class marca
+{
 
-     /**Funcion que nos devuelve todas las categorias */
-     public function getMarcas($conexPDO)
-     {
- 
-         if ($conexPDO != null) {
-             try {
- 
-                 $sentencia = $conexPDO->prepare("SELECT * FROM genesis.marca");
-                 //Ejecutamos la sentencia
-                 $sentencia->execute();
- 
-                 //Devolvemos los datos del cliente
-                 return $sentencia->fetchAll();
-             } catch (PDOException $e) {
-                 print("Error al acceder a BD" . $e->getMessage());
-             }
-         }
-     }
- 
-     public function getMarcaId($id, $conexPDO)
-     {
-         if (isset($id) && is_numeric($id)) {
- 
-             if ($conexPDO != null) {
-                 try {
-                     //Primero introducimos la sentencia a ejecutar con prepare
-                     //Ponemos en lugar de valores directamente, interrogaciones
-                     $sentencia = $conexPDO->prepare("SELECT * FROM genesis.marca where idmarca=?");
-                     //Asociamos a cada interrogacion el valor que queremos en su lugar
-                     $sentencia->bindParam(1, $id);
-                     //Ejecutamos la sentencia
-                     $sentencia->execute();
- 
-                     //Devolvemos los datos del cliente
-                     return $sentencia->fetch();
-                 } catch (PDOException $e) {
-                     print("Error al acceder a BD" . $e->getMessage());
-                 }
-             }
-         }
-     }
- 
-     function addMarca($marca, $conexPDO)
-     {
-         $result = null;
-         if (isset($marca) && $conexPDO != null) {
-             try {
-                 //Preparamos la sentencia
-                 $sentencia = $conexPDO->prepare("INSERT INTO genesis.marca (nombre_marca) VALUES ( :nombre_marca)");
- 
-                 //Asociamos los valores a los parametros de la sentencia sql (A la izquierda el parámetro y a la derecha los valores como están en la base de datos)
-                 $sentencia->bindParam(":nombre_marca", $marca["nombre_marca"]);
-                 //Ejecutamos la sentencia
-                 $result = $sentencia->execute();
-             } catch (PDOException $e) {
-                 print("Error al acceder a BD" . $e->getMessage());
-             }
-         }
- 
-         return $result;
-     }
- 
-     public function delMarca($idMarca, $conexPDO) {
+    /**Funcion que nos devuelve todas las categorias */
+    public function getMarcas($conexPDO)
+    {
+
+        if ($conexPDO != null) {
+            try {
+
+                $sentencia = $conexPDO->prepare("SELECT * FROM genesis.marca");
+                //Ejecutamos la sentencia
+                $sentencia->execute();
+
+                //Devolvemos los datos del cliente
+                return $sentencia->fetchAll();
+            } catch (PDOException $e) {
+                print("Error al acceder a BD" . $e->getMessage());
+            }
+        }
+    }
+
+    public function getMarcaId($id, $conexPDO)
+    {
+        if (isset($id) && is_numeric($id)) {
+
+            if ($conexPDO != null) {
+                try {
+                    //Primero introducimos la sentencia a ejecutar con prepare
+                    //Ponemos en lugar de valores directamente, interrogaciones
+                    $sentencia = $conexPDO->prepare("SELECT * FROM genesis.marca where idmarca=?");
+                    //Asociamos a cada interrogacion el valor que queremos en su lugar
+                    $sentencia->bindParam(1, $id);
+                    //Ejecutamos la sentencia
+                    $sentencia->execute();
+
+                    //Devolvemos los datos del cliente
+                    return $sentencia->fetch();
+                } catch (PDOException $e) {
+                    print("Error al acceder a BD" . $e->getMessage());
+                }
+            }
+        }
+    }
+
+    function addMarca($marca, $conexPDO)
+    {
+        $result = null;
+        if (isset($marca) && $conexPDO != null) {
+            try {
+                //Preparamos la sentencia
+                $sentencia = $conexPDO->prepare("INSERT INTO genesis.marca (nombre_marca) VALUES ( :nombre_marca)");
+
+                //Asociamos los valores a los parametros de la sentencia sql (A la izquierda el parámetro y a la derecha los valores como están en la base de datos)
+                $sentencia->bindParam(":nombre_marca", $marca["nombre_marca"]);
+                //Ejecutamos la sentencia
+                $result = $sentencia->execute();
+            } catch (PDOException $e) {
+                print("Error al acceder a BD" . $e->getMessage());
+            }
+        }
+
+        return $result;
+    }
+
+    public function delMarca($idMarca, $conexPDO)
+    {
         if (!$this->verificarProductosMarca($idMarca, $conexPDO)) {
             try {
                 $stmt = $conexPDO->prepare("DELETE FROM marca WHERE id_marca = :idMarca");
@@ -87,31 +89,31 @@ class marca{
             return false;
         }
     }
- 
- 
-     function updateMarca($marca, $conexPDO)
-     {
-         $result = null;
-         if (isset($marca) && isset($marca["idmarca"]) && is_numeric($marca["idmarca"])  && $conexPDO != null) {
-             try {
-                 //Preparamos la sentencia
-                 $sentencia = $conexPDO->prepare("UPDATE genesis.marca set nombre_marca=:nombre_marca  where idmarca=:idmarca");
- 
-                 //Asociamos los valores a los parametros de la sentencia sql
-                 $sentencia->bindParam(":idmarca", $marca["idmarca"]);
-                 $sentencia->bindParam(":nombre_marca", $marca["nombre_marca"]);
- 
-                 //Ejecutamos la sentencia
-                 $result = $sentencia->execute();
-             } catch (PDOException $e) {
-                 print("Error al acceder a BD" . $e->getMessage());
-             }
-         }
- 
-         return $result;
-     }
 
-     public function getMarcasPag($conexPDO, $ordAsc, string $campoOrd, int $numPag, int $cantElem)
+
+    function updateMarca($marca, $conexPDO)
+    {
+        $result = null;
+        if (isset($marca) && isset($marca["idmarca"]) && is_numeric($marca["idmarca"])  && $conexPDO != null) {
+            try {
+                //Preparamos la sentencia
+                $sentencia = $conexPDO->prepare("UPDATE genesis.marca set nombre_marca=:nombre_marca  where idmarca=:idmarca");
+
+                //Asociamos los valores a los parametros de la sentencia sql
+                $sentencia->bindParam(":idmarca", $marca["idmarca"]);
+                $sentencia->bindParam(":nombre_marca", $marca["nombre_marca"]);
+
+                //Ejecutamos la sentencia
+                $result = $sentencia->execute();
+            } catch (PDOException $e) {
+                print("Error al acceder a BD" . $e->getMessage());
+            }
+        }
+
+        return $result;
+    }
+
+    public function getMarcasPag($conexPDO, $ordAsc, string $campoOrd, int $numPag, int $cantElem)
     {
 
         if ($conexPDO != null) {
@@ -153,7 +155,8 @@ class marca{
         }
     }
 
-    public function contarMarcas($conexPDO) {
+    public function contarMarcas($conexPDO)
+    {
         if ($conexPDO != null) {
             try {
                 $sentencia = $conexPDO->prepare("SELECT COUNT(*) AS total FROM genesis.marca");
@@ -169,7 +172,8 @@ class marca{
     }
 
     // Función para verificar si existen productos asociados con una marca
-    public function verificarProductosMarca($idMarca, $conexPDO) {
+    public function verificarProductosMarca($idMarca, $conexPDO)
+    {
         try {
             $stmt = $conexPDO->prepare("SELECT COUNT(*) as cantidad FROM producto WHERE id_marca = :idMarca");
             $stmt->bindParam(':idMarca', $idMarca, PDO::PARAM_INT);
@@ -183,6 +187,33 @@ class marca{
         }
     }
 
-}
+    public function existeNombre($nombre, $conexPDO)
+    {
+        if ($conexPDO != null) {
+            try {
+                $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.marca WHERE nombre_marca = :nombre_marca");
+                $stmt->bindParam(':nombre_marca', $nombre);
+                $stmt->execute();
+                return $stmt->fetchColumn() > 0;
+            } catch (PDOException $e) {
+                error_log("Error al verificar marca: " . $e->getMessage());
+                return false; // Considera cómo manejar los errores correctamente
+            }
+        }
+        return false;
+    }
 
-?>
+    public function existeNombreM($nombre, $idmarca, $conexPDO)
+    {
+        try {
+            $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.marca WHERE nombre_marca = :nombre_marca AND idmarca <> :idmarca");
+            $stmt->bindParam(':nombre_marca', $nombre);
+            $stmt->bindParam(':idmarca', $idmarca);
+            $stmt->execute();
+            return $stmt->fetchColumn() > 0;
+        } catch (PDOException $e) {
+            error_log("Error al verificar marca: " . $e->getMessage());
+            return false;
+        }
+    }
+}
