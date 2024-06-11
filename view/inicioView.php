@@ -40,7 +40,7 @@ namespace views;
       <!-- Texto (col-12 en pantallas pequeñas y medianas, col-md-4 en tabletas y más grandes) -->
       <div class="col-12 col-md-4">
         <h3 class="mt-0">BIENVENIDO A GENESIS, LA MEJOR TIENDA ONLINE DE ORDENADORES Y HARDWARE</h3>
-        <p style="font-size: 20px;" class="mt-5">La mejor tienda online de España para comprar productos tecnológicos</p>
+        <p style="font-size: 20px; color:#8350f2;" class="mt-5">La mejor tienda online de España para comprar productos tecnológicos</p>
         <h4 class="mt-5">¡PRODUCTOS CON LA MEJOR CALIDAD AL MEJOR PRECIO!</h4>
       </div>
       <!-- Carrusel (col-12 en pantallas pequeñas, col-md-8 en tabletas y más grandes) -->
