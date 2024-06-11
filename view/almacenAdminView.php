@@ -189,7 +189,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="modalLabel" style="color: #8350F2;"><b>Insertar nuevo almacen</b></h3>
+                    <h3 class="modal-title" id="modalLabel" style="color: #8350F2;"><b>Insertar nuevo almacén</b></h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

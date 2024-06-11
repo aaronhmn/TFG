@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //Nos conectamos a la Base de Datos
     $conexPDO = utils::conectar();
 
-    // Verificar si el codigo postal ya existe
+    // Verificar si el nombre ya existe
     if ($gestorAlmacen->existeNombreAlmacen($nombre, $conexPDO)) {
         $_SESSION['mensaje'] = 'Este nombre ya esta en uso.';
         $_SESSION['tipo_mensaje'] = 'danger';

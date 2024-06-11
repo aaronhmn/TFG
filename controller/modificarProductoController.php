@@ -44,6 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         "ruta_imagen" => $gestorProducto->getProductoId($_POST["idproducto"], $conexPDO)['ruta_imagen']
     ];
 
+        // Exclusión del usuario actual en las comprobaciones
+        if ($gestorProducto->existeNombreM($producto["nombre"], $producto["idproducto"], $conexPDO)) {
+            $_SESSION['mensaje'] = 'Este nombre ya está en uso.';
+            $_SESSION['tipo_mensaje'] = 'danger';
+            header("Location: ../controller/productosAdminController.php");
+            exit();
+        }
+
     // Verificar si se han enviado nuevas imágenes
     if (!empty($_FILES['inputImagen']['name'][0])) {
         $rutasAntiguas = explode(',', $producto['ruta_imagen']);

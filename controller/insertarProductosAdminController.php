@@ -66,6 +66,19 @@ function InsertarProducto($nombre, $precio, $categoria, $descripcion, $especific
     $producto["stock"] = utils::limpiar_datos($stock);
     $producto["id_almacen"] = utils::limpiar_datos($almacen);
 
+        //Declaramos un objeto de la clase producto para utilizar sus funciones
+        $gestorProducto = new producto();
+            //Nos conectamos a la Bd
+    $conexPDO = utils::conectar();
+
+        // Verificar si el nombre ya existe
+        if ($gestorProducto->existeNombre($nombre, $conexPDO)) {
+            $_SESSION['mensaje'] = 'Este nombre ya esta en uso.';
+            $_SESSION['tipo_mensaje'] = 'danger';
+            header("Location: ../controller/productosAdminController.php");
+            exit();
+        }
+
     // Inicializa una variable para almacenar las rutas de las imágenes
     $imagenesRutas = [];
     $imagenesNombresTipos = [];
@@ -114,12 +127,6 @@ function InsertarProducto($nombre, $precio, $categoria, $descripcion, $especific
     // Asigna la cadena concatenada al array del producto
     $producto["ruta_imagen"] = $rutasConcatenadas;
     $producto["imagen"] = $nombresTiposConcatenados;
-
-    //Declaramos un objeto de la clase producto para utilizar sus funciones
-    $gestorProducto = new producto();
-
-    //Nos conectamos a la Bd
-    $conexPDO = utils::conectar();
 
     //Añadimos el registro
     $resultado = $gestorProducto->addProducto($producto, $conexPDO);

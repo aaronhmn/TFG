@@ -323,6 +323,34 @@ class producto
             return false;
         }
     }
+
+    public function existeNombre($nombre, $conexPDO) {
+        if ($conexPDO != null) {
+            try {
+                $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.producto WHERE nombre = :nombre");
+                $stmt->bindParam(':nombre', $nombre);
+                $stmt->execute();
+                return $stmt->fetchColumn() > 0;
+            } catch (PDOException $e) {
+                error_log("Error al verificar nombre: " . $e->getMessage());
+                return false; // Considera cómo manejar los errores correctamente
+            }
+        }
+        return false;
+    }
+
+    public function existeNombreM($nombre, $idproducto, $conexPDO) {
+        try {
+            $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.producto WHERE nombre = :nombre AND idproducto <> :idproducto");
+            $stmt->bindParam(':nombre', $nombre);
+            $stmt->bindParam(':idproducto', $idproducto);
+            $stmt->execute();
+            return $stmt->fetchColumn() > 0;
+        } catch (PDOException $e) {
+            error_log("Error al verificar nombre: " . $e->getMessage());
+            return false;
+        }
+    }
 }
 
 function getCategorias($conexPDO)
