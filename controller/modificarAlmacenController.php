@@ -5,11 +5,10 @@ namespace model;
 use \model\almacen;
 use \model\utils;
 
-
-//Añadimos el código del modelo
 require_once("../model/almacenModel.php");
 require_once("../model/utils.php");
 
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -72,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $resultado = $gestorAlmacen->updateAlmacen($almacen, $conexPDO);
 
-    //Para verificar si todo funcionó correctamente
+    //Para verificar si todo funcionó correctamente y mensajes para accesibilidad con bootstrap
     if ($resultado != null) {
         $_SESSION['mensaje'] = "El almacén ha sido modificada correctamente.";
         $_SESSION['tipo_mensaje'] = "success";

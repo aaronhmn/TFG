@@ -2,6 +2,7 @@
 
 namespace model;
 
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -20,15 +21,11 @@ require_once("../model/categoriaModel.php");
 require_once("../model/almacenModel.php");
 $mensaje = null;
 
-session_start();
-
 // Verificar si el usuario está logueado y si es administrador
 if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'] != 1) {
     header('Location: ../view/noAutorizadoView.php');
     exit();
 }
-
-/* include("../view/insertarProductoAdminView.php"); */
 
 // Solo se ejecutará cuando reciba una petición del registro
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -66,18 +63,18 @@ function InsertarProducto($nombre, $precio, $categoria, $descripcion, $especific
     $producto["stock"] = utils::limpiar_datos($stock);
     $producto["id_almacen"] = utils::limpiar_datos($almacen);
 
-        //Declaramos un objeto de la clase producto para utilizar sus funciones
-        $gestorProducto = new producto();
-            //Nos conectamos a la Bd
+    //Declaramos un objeto de la clase producto para utilizar sus funciones
+    $gestorProducto = new producto();
+    //Nos conectamos a la Bd
     $conexPDO = utils::conectar();
 
-        // Verificar si el nombre ya existe
-        if ($gestorProducto->existeNombre($nombre, $conexPDO)) {
-            $_SESSION['mensaje'] = 'Este nombre ya esta en uso.';
-            $_SESSION['tipo_mensaje'] = 'danger';
-            header("Location: ../controller/productosAdminController.php");
-            exit();
-        }
+    // Verificar si el nombre ya existe
+    if ($gestorProducto->existeNombre($nombre, $conexPDO)) {
+        $_SESSION['mensaje'] = 'Este nombre ya esta en uso.';
+        $_SESSION['tipo_mensaje'] = 'danger';
+        header("Location: ../controller/productosAdminController.php");
+        exit();
+    }
 
     // Inicializa una variable para almacenar las rutas de las imágenes
     $imagenesRutas = [];
@@ -92,11 +89,15 @@ function InsertarProducto($nombre, $precio, $categoria, $descripcion, $especific
 
             if (substr($imageType, 0, 5) == "image") {
                 // Define la ruta de destino para la imagen
+                // Directorio de destino para las imágenes subidas
                 $target_dir = "../assets/img/products/";
-                $path = pathinfo($name);
-                $filename = $path['filename'];
-                $ext = $path['extension'];
+                // Obtener la información del archivo
+                $path = pathinfo($name); // Obtiene información del archivo, como nombre y extensión
+                $filename = $path['filename']; // Nombre del archivo sin la extensión
+                $ext = $path['extension']; // Extensión del archivo
+                // Ruta temporal del archivo subido
                 $temp_name = $_FILES['inputImagen']['tmp_name'][$key];
+                // Ruta completa y final del archivo en el servidor
                 $path_filename_ext = $target_dir . $filename . "." . $ext;
 
                 // Verifica si el archivo ya existe
@@ -131,7 +132,7 @@ function InsertarProducto($nombre, $precio, $categoria, $descripcion, $especific
     //Añadimos el registro
     $resultado = $gestorProducto->addProducto($producto, $conexPDO);
 
-    //Para verificar si todo funcionó correctamente
+    //Para verificar si todo funcionó correctamente y mensajes de accesibilidad con bootstrap
     if ($resultado != null) {
         $_SESSION['mensaje'] = "El producto ha sido creado correctamente.";
         $_SESSION['tipo_mensaje'] = "success";

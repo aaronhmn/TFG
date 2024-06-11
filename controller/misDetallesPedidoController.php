@@ -12,7 +12,10 @@ use model\usuario;
 use model\producto;
 use model\utils;
 
-session_start();
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Asegúrate de que el usuario esté autorizado
 if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
@@ -25,6 +28,7 @@ $gestorDetallesPedido = new detalle_pedido();
 $usuarioModel = new usuario();
 $productoModel = new producto();
 
+// Conexión a la BD
 $conexPDO = utils::conectar();
 
 $productos = $productoModel->getProductos($conexPDO);
@@ -45,9 +49,12 @@ $offset = ($paginaActual - 1) * $itemsPorPagina;
 if (isset($_GET['idPedido'])) {
     $idPedido = $_GET['idPedido'];
     $totalDetalles = $gestorDetallesPedido->contarDetallesPorPedido($idPedido, $conexPDO);
+    // Calcula el número total de páginas necesarias para mostrar todos los detalles
     $totalPaginas = ceil($totalDetalles / $itemsPorPagina);
 
+    // Verifica que la página actual esté dentro del rango válido
     if ($paginaActual < 1 || $paginaActual > $totalPaginas) {
+        // Si la página actual es menor que 1 o mayor que el total de páginas, establece la página actual a 1
         $paginaActual = 1;
     }
 
@@ -57,4 +64,3 @@ if (isset($_GET['idPedido'])) {
 } else {
     header('Location: ../view/misPedidosView.php'); // Redirigir si no hay ID de pedido
 }
-?>

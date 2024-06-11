@@ -5,11 +5,11 @@ namespace model;
 use \model\utils;
 use \model\almacen;
 
-//Añadimos el código del modelo
 require_once("../model/utils.php");
 require_once("../model/almacenModel.php");
 $mensaje = null;
 
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $numeroBloque = $_POST['inputNB'];
     $piso = $_POST['inputPiso'];
 
+    // Se limpia los datos
     $datosAlmacen = array();
     $datosAlmacen["nombre"] = utils::limpiar_datos($nombre);
     $datosAlmacen["telefono"] = utils::limpiar_datos($telefono);
@@ -68,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $resultado = $gestorAlmacen->addAlmacen($datosAlmacen, $conexPDO);
 
-    //Para verificar si todo funcionó correctamente
+    //Para verificar si todo funcionó correctamente y mensajes para accesibilidad con bootstrap
     if ($resultado != null) {
         $_SESSION['mensaje'] = "El almacén ha sido creado correctamente.";
         $_SESSION['tipo_mensaje'] = "success";
@@ -77,7 +78,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $_SESSION['mensaje'] = "Error al crear el almacén.";
         $_SESSION['tipo_mensaje'] = "danger";
-        // Si decides redireccionar de todos modos o manejar de otra forma
         header('Location: ../controller/almacenesAdminController.php');
         exit();
     }

@@ -5,11 +5,11 @@ namespace model;
 use \model\categoria;
 use \model\utils;
 
-
 //Añadimos el código del modelo
 require_once("../model/categoriaModel.php");
 require_once("../model/utils.php");
 
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $gestorCategoria = new Categoria();
     $resultado = $gestorCategoria->delCategoria($idCategoria, $conexPDO);
 
+    // Control de errores y mensajes de accesibilidad con bootstrap
     if ($resultado === false) {
         $_SESSION['mensaje'] = "No se puede eliminar la categoría porque está asociada con uno o más productos.";
         $_SESSION['tipo_mensaje'] = "danger";

@@ -1,14 +1,15 @@
 <?php
+
 namespace model;
 
-use \model\usuarioModel;
+use \model\usuario;
 use \model\utils;
-
 
 //Añadimos el código del modelo
 require_once("../model/usuarioModel.php");
 require_once("../model/utils.php");
 
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -19,21 +20,18 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'
     exit();
 }
 
-    //Creamos un array para guardar los datos del usuario
-    $usuario = array();
+//Creamos un array para guardar los datos del usuario
+$usuario = array();
 
-    // Solo se ejecutará cuando reciba una petición del registro
-    if ($_SERVER['REQUEST_METHOD'] == 'POST')
-    {
-        $idUsuario = $_POST["idUsuario"];
+// Solo se ejecutará cuando reciba una petición del registro
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $idUsuario = $_POST["idUsuario"];
 
-        //Nos conectamos a la Bd
-        $conexPDO = utils::conectar();
-        $gestorUsuario = new Usuario();
-        $gestorUsuario->BanUsuarioPorId($idUsuario, $conexPDO);
+    //Nos conectamos a la Bd
+    $conexPDO = utils::conectar();
+    $gestorUsuario = new Usuario();
+    $gestorUsuario->BanUsuarioPorId($idUsuario, $conexPDO);
 
-        header("Location: ../controller/usuariosAdminController.php");
-        exit();
-    }
-
-?>
+    header("Location: ../controller/usuariosAdminController.php");
+    exit();
+}

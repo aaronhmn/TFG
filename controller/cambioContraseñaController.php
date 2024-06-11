@@ -2,6 +2,7 @@
 
 namespace model;
 
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -73,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Cambiar la contraseña del usuario en la base de datos
     $resultado = $usuarioModel->cambiarContraseña($_SESSION['email'], $nuevaContrasena, $nuevaSalt, $conexPDO);
 
+    // Control de errores y mensajes de accesibilidad con bootstrap
     if ($resultado) {
         $_SESSION['mensaje'] = "La contraseña ha sido modificada correctamente.";
         $_SESSION['tipo_mensaje'] = "success";

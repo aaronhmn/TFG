@@ -2,12 +2,14 @@
 
 namespace model;
 
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
 use \model\utils;
 use \model\usuario;
+// Recoger la libreria de phpmailer para los correos
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -36,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $contraseña = $_POST['contrasena'];
 
     $gestorUsu = new Usuario();
-
+    // Conexión a la BD
     $conexPDO = utils::conectar();
 
     // Verificar si el email ya existe
@@ -74,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         return; // Detener la ejecución si hay error
     }
 
+    // Limpieza de datos
     $usuario = array();
     $usuario["nombre"] = utils::limpiar_datos($nombre);
     $usuario["primer_apellido"] = utils::limpiar_datos($primerApellido);
@@ -87,44 +90,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $usuario["email"] = utils::limpiar_datos($email);
     $usuario["nombre_usuario"] = utils::limpiar_datos($nombreUsuario);
 
-    //Generamos una salt de 16 posiciones
-    $salt = utils::generar_salt(16);
-    $usuario["salt"] = $salt;
-    $usuario["contrasena"] = crypt($contraseña, '$6$rounds=5000$' . $salt . '$');
+    // Generamos una salt de 16 posiciones
+    $salt = utils::generar_salt(16); // Llama a la función para generar una salt de 16 caracteres
+    $usuario["salt"] = $salt; // Asigna la salt generada al array de datos del usuario
+    $usuario["contrasena"] = crypt($contraseña, '$6$rounds=5000$' . $salt . '$'); // Crea un hash de la contraseña usando SHA-512 y la salt generada
 
-    $usuario["activo"] = 0;
+    $usuario["activo"] = 0; // Establece el estado del usuario como inactivo
 
-    $usuario["activacion"] = utils::generar_codigo_activacion();
+    $usuario["activacion"] = utils::generar_codigo_activacion(); // Genera un código de activación y lo asigna al usuario
 
-    $resultado = $gestorUsu->addUsuario($usuario, $conexPDO);
+    $resultado = $gestorUsu->addUsuario($usuario, $conexPDO); // Añade el usuario a la base de datos
 
     if ($resultado) {
-        // Envío del correo con el código de activación
-        $mail = new PHPMailer(true);
+        // Si el usuario se añadió correctamente, envía un correo con el código de activación
+        $mail = new PHPMailer(true); // Crea una nueva instancia de PHPMailer
         try {
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'aaronhelices@gmail.com';
-            $mail->Password = 'tbof yhhl ebok fsqp';
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
+            $mail->isSMTP(); // Configura el correo para usar SMTP
+            $mail->Host = 'smtp.gmail.com'; // Establece el servidor SMTP
+            $mail->SMTPAuth = true; // Habilita la autenticación SMTP
+            $mail->Username = 'aaronhelices@gmail.com'; // Nombre de usuario para la autenticación SMTP
+            $mail->Password = 'tbof yhhl ebok fsqp'; // Contraseña para la autenticación SMTP
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Habilita encriptación TLS
+            $mail->Port = 587; // Puerto TCP para la conexión SMTP
 
-            $mail->setFrom('aaronhelices@gmail.com', 'Admin-Genesis');
-            $mail->addAddress($usuario["email"], $usuario["nombre"]);
+            $mail->setFrom('aaronhelices@gmail.com', 'Admin-Genesis'); // Establece el remitente del correo
+            $mail->addAddress($usuario["email"], $usuario["nombre"]); // Añade el destinatario del correo
 
-            $mail->isHTML(true);
-            $mail->Subject = 'Codigo de Activacion de Cuenta';
-            $mail->Body    = "Hola {$usuario["nombre"]},<br>Gracias por registrarte en <strong>Genesis</strong>. Tu codigo de activacion es: <strong>{$usuario["activacion"]}</strong>. Por favor, introduce este codigo en nuestra pagina para activar tu cuenta.";
+            $mail->isHTML(true); // Configura el correo para enviar en formato HTML
+            $mail->Subject = 'Codigo de Activacion de Cuenta'; // Establece el asunto del correo
+            $mail->Body    = "Hola {$usuario["nombre"]},<br>Gracias por registrarte en <strong>Genesis</strong>. Tu codigo de activacion es: <strong>{$usuario["activacion"]}</strong>. Por favor, introduce este codigo en nuestra pagina para activar tu cuenta."; // Cuerpo del correo
 
-            $mail->send();
-            echo 'Mensaje de verificación enviado';
-            header("Location: ../controller/loginController.php");
+            $mail->send(); // Envía el correo
+            echo 'Mensaje de verificación enviado'; // Mensaje de éxito
+            header("Location: ../controller/loginController.php"); // Redirige al controlador de login
             exit();
         } catch (Exception $e) {
+            // Si hay un error al enviar el correo, muestra un mensaje de error
             echo 'El mensaje no pudo ser enviado. Error: ' . $mail->ErrorInfo;
         }
     } else {
+        // Si hubo un fallo al acceder a la base de datos, muestra un mensaje de error
         $mensaje = "Ha habido un fallo al acceder a la Base de Datos";
         echo ($mensaje);
     }

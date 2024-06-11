@@ -1,21 +1,18 @@
 <?php
 
-    namespace model;
+namespace model;
 
-    use \model\utils;
-    use \model\usuarioModel;
+use \model\utils;
 
-    //Añadimos el código del modelo
-    require_once("../model/utils.php");
-    require_once("../model/usuarioModel.php");
-    $mensaje=null;
+//Añadimos el código del modelo
+require_once("../model/utils.php");
+$mensaje = null;
 
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
-    $conexPDO = utils::conectar();
+$conexPDO = utils::conectar();
 
-    include("../view/politicaPrivacidadView.php");
-
-?>
+include("../view/politicaPrivacidadView.php");

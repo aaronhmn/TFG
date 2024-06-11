@@ -5,14 +5,15 @@ namespace model;
 use \model\almacen;
 use \model\utils;
 
-
 //Añadimos el código del modelo
 require_once("../model/almacenModel.php");
 require_once("../model/utils.php");
 
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
 // Verificar si el usuario está logueado y si es administrador
 if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'] != 1) {
     header('Location: ../view/noAutorizadoView.php');
@@ -31,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $gestorAlmacen = new Almacen();
     $resultado = $gestorAlmacen->delAlmacen($idAlmacen, $conexPDO);
 
+    // Control de errores y mensajes de accesibilidad con bootstrap
     if ($resultado === false) {
         $_SESSION['mensaje'] = "No se puede eliminar el almacén porque está asociado con uno o más productos.";
         $_SESSION['tipo_mensaje'] = "danger";

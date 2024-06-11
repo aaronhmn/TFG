@@ -17,13 +17,14 @@ if (!empty($_GET['busqueda'])) {
     // Verificar el resultado de la limpieza
     error_log("Búsqueda limpia: " . $busquedaLimpia); // Esta línea ayudará a ver en los logs qué está recibiendo exactamente
 
+    // Construye la URL actual
     $urlActual = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    // Verifica si la URL actual no contiene 'tiendaController.php'
     if (strpos($urlActual, 'tiendaController.php') === false) {
+        // Redirige a 'tiendaController.php' con el parámetro de búsqueda
         header('Location: ../controller/tiendaController.php?busqueda=' . urlencode($busquedaLimpia));
-        exit;
+        exit; // Termina la ejecución del script
     }
 }
 
 include("../view/components/navbarView.php");
-
-?>

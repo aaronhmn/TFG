@@ -21,15 +21,18 @@ require_once("../model/almacenModel.php");
 
 $mensaje = null;
 
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+// Comprobación del rol de admin para poder acceder a la página
 if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'] != 1) {
     header('Location: ../view/noAutorizadoView.php');
     exit();
 }
 
+// Conexión a la BD
 $conexPDO = utils::conectar();
 
 $usuarioModel = new Usuario();

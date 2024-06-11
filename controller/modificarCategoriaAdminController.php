@@ -5,11 +5,10 @@ namespace model;
 use \model\categoria;
 use \model\utils;
 
-
-//Añadimos el código del modelo
 require_once("../model/categoriaModel.php");
 require_once("../model/utils.php");
 
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -48,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $resultado = $gestorcategoria->updateCategoria($categoria, $conexPDO);
 
-    //Para verificar si todo funcionó correctamente
+    //Para verificar si todo funcionó correctamente y mensajes de accesibilidad con bootstrap
     if ($resultado != null) {
         $_SESSION['mensaje'] = "La categoría ha sido modificada correctamente.";
         $_SESSION['tipo_mensaje'] = "success";

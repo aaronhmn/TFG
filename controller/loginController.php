@@ -7,11 +7,15 @@ use \model\Usuario;
 require_once("../model/utils.php");
 require_once("../model/usuarioModel.php");
 
-session_start();
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'] ?? null;
     $password = $_POST['contrasena'] ?? null;
-
+    // Conexión a la BD
     $conexPDO = utils::conectar();
     if ($conexPDO) {
         $gestorUsu = new Usuario();
@@ -38,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['rol'] = $resultado['rol'];
                 $_SESSION['login'] = true;
 
-                // Redirige según el rol
+                // Redirige según el rol, si eres cliente te redirige a la web y si eres admin al dashboard
                 if ($resultado["rol"] == 0) {
                     header("Location: ../controller/inicioController.php");
                     exit();

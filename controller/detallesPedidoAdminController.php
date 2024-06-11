@@ -12,7 +12,10 @@ use model\usuario;
 use model\producto;
 use model\utils;
 
-session_start();
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Asegúrate de que el usuario esté autorizado
 if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'] != 1) {
@@ -25,6 +28,7 @@ $gestorDetallesPedido = new detalle_pedido();
 $usuarioModel = new usuario();
 $productoModel = new producto();
 
+// Conectamos a la BD
 $conexPDO = utils::conectar();
 
 $productos = $productoModel->getProductos($conexPDO);
@@ -42,19 +46,22 @@ if ($paginaActual < 1 || $paginaActual > $totalPaginas) {
 // Calcula el offset basado en la página actual
 $offset = ($paginaActual - 1) * $itemsPorPagina;
 
+// Comprueba si se ha enviado el ID del pedido a través de la URL
 if (isset($_GET['idPedido'])) {
+    // Asigna el ID del pedido a una variable
     $idPedido = $_GET['idPedido'];
+    // Obtiene el número total de detalles del pedido desde la base de datos
     $totalDetalles = $gestorDetallesPedido->contarDetallesPorPedido($idPedido, $conexPDO);
+    // Calcula el número total de páginas necesarias
     $totalPaginas = ceil($totalDetalles / $itemsPorPagina);
-
+    // Verifica que la página actual esté dentro del rango válido
     if ($paginaActual < 1 || $paginaActual > $totalPaginas) {
-        $paginaActual = 1;
+        $paginaActual = 1; // Si no está en el rango, establece la página actual a 1
     }
-
+    // Obtiene los detalles del pedido para la página actual
     $detalles = $gestorDetallesPedido->getDetallesPedidosPag($conexPDO, $idPedido, $paginaActual, $itemsPorPagina);
 
     include("../view/detallePedidoAdminView.php");
 } else {
     header('Location: ../view/pedidoAdminView.php'); // Redirigir si no hay ID de pedido
 }
-?>

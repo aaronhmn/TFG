@@ -4,7 +4,10 @@ namespace model;
 require_once("../model/productoModel.php");
 require_once("../model/utils.php");
 
-session_start();
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Verificar si el usuario está logueado y si es administrador
 if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'] != 1) {
@@ -17,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idProducto'])) {
     $conexPDO = utils::conectar();
     $gestorProductos = new Producto();
 
+    // Manejo de errores y mensajes para accesibilidad con bootstrap
     if ($gestorProductos->ocultarProducto($idProducto, $conexPDO)) {
         $_SESSION['mensaje'] = 'Estado del producto actualizado con éxito.';
         $_SESSION['tipo_mensaje'] = 'success';

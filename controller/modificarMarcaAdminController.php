@@ -10,6 +10,7 @@ use \model\utils;
 require_once("../model/marcaModel.php");
 require_once("../model/utils.php");
 
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -48,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $resultado = $gestormarca->updateMarca($marca, $conexPDO);
 
-    //Para verificar si todo funcionó correctamente
+    //Para verificar si todo funcionó correctamente manejos de errores y mensajes para accesibilidad con bootstrap
     if ($resultado != null) {
         $_SESSION['mensaje'] = "La marca ha sido modificada correctamente.";
         $_SESSION['tipo_mensaje'] = "success";

@@ -1,4 +1,5 @@
 <?php
+
 namespace model;
 
 require_once("../model/usuarioModel.php");
@@ -7,6 +8,7 @@ require_once("../model/utils.php");
 use \model\Usuario;
 use \model\utils;
 
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -26,8 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['mensaje'] = "Las nuevas contraseñas no coinciden.";
         $_SESSION['tipo_mensaje'] = "danger";
     } else {
+        // Genera una nueva salt de 16 posiciones
         $nuevaSalt = utils::generar_salt(16);
+        // Crea un hash de la nueva contraseña usando SHA-512 con la salt generada
         $nuevaContrasena = crypt($contrasenaNueva, '$6$rounds=5000$' . $nuevaSalt . '$');
+        // Llama al método para cambiar la contraseña del usuario en la base de datos
         $resultado = $usuarioModel->cambiarContraseña($email, $nuevaContrasena, $nuevaSalt, $conexPDO);
 
         if ($resultado) {
@@ -46,4 +51,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 header("Location: ../view/recuperarContraseñaView.php");
 exit();
-?>

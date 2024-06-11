@@ -1,14 +1,15 @@
 <?php
+
 namespace model;
 
 use \model\utils;
 use \model\usuario;
 
-//Añadimos el código del modelo
 require_once("../model/utils.php");
 require_once("../model/usuarioModel.php");
-$mensaje=null;
+$mensaje = null;
 
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -18,12 +19,9 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'
     header('Location: ../view/noAutorizadoView.php');
     exit();
 }
-//var_dump($datosClientes);
-/* include("../view/insertarUsuarioAdminView.php"); */
 
 // Solo se ejecutará cuando reciba una petición del registro
-if ($_SERVER['REQUEST_METHOD'] == 'POST')
-{
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nombre = $_POST['inputNombre'];
     $primerApellido = $_POST['inputPrimerApellido'];
     $segundoApellido = $_POST['inputSegundoApellido'];
@@ -39,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     $rol = $_POST['inputRol'];
     $contraseña = $_POST['inputPassword'];
 
+    // Limpieza de los datos
     $datosUsuario = array();
     $datosUsuario["nombre"] = utils::limpiar_datos($nombre);
     $datosUsuario["primer_apellido"] = utils::limpiar_datos($primerApellido);
@@ -65,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         header("Location: ../controller/usuariosAdminController.php");
         exit();
     }
-    
+
     // Verificar si el nombre de usuario ya existe
     if ($gestorUsu->existeNombreUsuario($usuario, $conexPDO)) {
         $_SESSION['mensaje'] = 'Este nombre de usuario ya está en uso.';
@@ -90,18 +89,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         exit();
     }
 
-    //Generamos una salt de 16 posiciones
-    $salt = utils::generar_salt(16);
+    // Generamos una salt de 16 posiciones
+    $salt = utils::generar_salt(16); // Llama a la función para generar una salt de 16 caracteres
+    // Asigna la salt generada al array de datos del usuario
     $datosUsuario["salt"] = $salt;
-    $datosUsuario["contrasena"] = crypt($contraseña,'$6$rounds=5000$'.$salt.'$');
-
-    /* $datosUsuario["activo"] = 0; */
-
-    $datosUsuario["activacion"]=utils::generar_codigo_activacion();
+    // Genera el hash de la contraseña utilizando la salt y asigna al array de datos del usuario
+    $datosUsuario["contrasena"] = crypt($contraseña, '$6$rounds=5000$' . $salt . '$'); // Crea un hash de la contraseña usando SHA-512 y la salt generada
+    // Generamos el codigo de activación
+    $datosUsuario["activacion"] = utils::generar_codigo_activacion();
 
     $resultado = $gestorUsu->addUsuario($datosUsuario, $conexPDO);
 
-    //Para verificar si todo funcionó correctamente
+    //Para verificar si todo funcionó correctamente y mensajes de accesibilidad con bootstrap
     if ($resultado != null) {
         $_SESSION['mensaje'] = "El usuario ha sido creado correctamente.";
         $_SESSION['tipo_mensaje'] = "success";
@@ -110,10 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     } else {
         $_SESSION['mensaje'] = "Error al crear el usuario.";
         $_SESSION['tipo_mensaje'] = "danger";
-        // Si decides redireccionar de todos modos o manejar de otra forma
         header('Location: ../controller/usuariosAdminController.php');
         exit();
     }
 }
-
-?>

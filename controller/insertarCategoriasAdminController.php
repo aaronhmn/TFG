@@ -1,4 +1,5 @@
 <?php
+
 namespace model;
 
 use \model\utils;
@@ -7,8 +8,9 @@ use \model\categoria;
 //Añadimos el código del modelo
 require_once("../model/utils.php");
 require_once("../model/categoriaModel.php");
-$mensaje=null;
+$mensaje = null;
 
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -20,8 +22,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'
 }
 
 // Solo se ejecutará cuando reciba una petición del registro
-if ($_SERVER['REQUEST_METHOD'] == 'POST')
-{
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nombre = $_POST['inputNombre'];
 
     $datosCategoria = array();
@@ -29,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     $gestorCat = new Categoria();
 
-    //Nos conectamos a la Base de Datos
+    //Conexión a la BD
     $conexPDO = utils::conectar();
 
     // Verificar si el nombre ya existe
@@ -42,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     $resultado = $gestorCat->addCategoria($datosCategoria, $conexPDO);
 
-    //Para verificar si todo funcionó correctamente
+    //Para verificar si todo funcionó correctamente y mensajes de accesibilidad con bootstrap
     if ($resultado != null) {
         $_SESSION['mensaje'] = "La categoría ha sido creada correctamente.";
         $_SESSION['tipo_mensaje'] = "success";
@@ -51,10 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     } else {
         $_SESSION['mensaje'] = "Error al crear la categoría.";
         $_SESSION['tipo_mensaje'] = "danger";
-        // Si decides redireccionar de todos modos o manejar de otra forma
         header('Location: ../controller/categoriasAdminController.php');
         exit();
     }
 }
-
-?>

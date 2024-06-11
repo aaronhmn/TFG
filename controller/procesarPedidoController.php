@@ -15,12 +15,16 @@ use \model\utils;
 use model\pedido;
 use model\detalle_pedido;
 use model\producto;
-use model\Usuario;
+use model\usuario;
 
-session_start();
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Verifica que la solicitud es POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Obtiene los datos enviados en la solicitud HTTP
     $datos = json_decode(file_get_contents('php://input'), true);
 
     if (isset($_SESSION['id_usuario']) && !empty($datos)) {
@@ -29,20 +33,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $detallePedidoModel = new detalle_pedido();
         $productoModel = new producto();
 
-        // Conexión a la base de datos
+        // Conexión a la BD
         $conexPDO = utils::conectar();
 
         // Inserta el pedido
+        // Calcula el total sumando los precios multiplicados por las cantidades
         $total = array_sum(array_map(function ($item) {
+            // Multiplica el precio por la cantidad para cada elemento
             return $item['precio'] * $item['cantidad'];
         }, $datos));
+
 
         $idPedido = $pedidoModel->addPedido($conexPDO, $idUsuario, $total);
 
         if ($idPedido) {
             // Inserta los detalles del pedido
             foreach ($datos as $item) {
-                $idProducto = $item['id_producto_dp'];  // Este campo debe coincidir exactamente con el nombre que envías desde JS
+                $idProducto = $item['id_producto_dp'];
                 $cantidad = $item['cantidad'];
                 $precio = $item['precio'];
                 $precioSubtotal = $cantidad * $precio;

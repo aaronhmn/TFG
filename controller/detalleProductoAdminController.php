@@ -2,6 +2,7 @@
 
 namespace controller;
 
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -18,7 +19,7 @@ use model\Categoria;
 use model\Almacen;
 use model\utils;
 
-header('Content-Type: application/json'); // Establece el MIME type a JSON
+header('Content-Type: application/json'); // Establece el tipo de contenido de la respuesta HTTP como JSON
 
 // Verificar si el usuario está logueado y tiene permisos adecuados
 if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'] != 1) {

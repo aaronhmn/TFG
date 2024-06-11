@@ -7,21 +7,23 @@ require_once("../model/productoModel.php");
 require_once("../model/utils.php");
 
 $gestorProductos = new Producto();
+// Conexión a la BD
 $conexPDO = utils::conectar();
 
 // Obtiene los IDs de productos enviados via POST
 $productIds = json_decode(file_get_contents('php://input'), true);
 
-$resultados = [];
-foreach ($productIds as $id) {
-    $producto = $gestorProductos->getProductoIdAdmin($id, $conexPDO);
+$resultados = []; // Inicializa un array para almacenar los resultados
+foreach ($productIds as $id) { // Itera sobre cada ID de producto
+    $producto = $gestorProductos->getProductoIdAdmin($id, $conexPDO); // Obtiene la información del producto por su ID
     if ($producto) { // Asegura que el producto existe
         $resultados[] = [
             'id' => $id,
-            'disponible' => $producto['estado'] == 0, // Asumiendo que 'estado' 0 significa disponible
+            'disponible' => $producto['estado'] == 0, // 'estado' 0 significa disponible
             'nombre' => $producto['nombre']
         ];
     } else {
+        // Si el producto no existe, agrega un mensaje indicando que no se encontró
         $resultados[] = [
             'id' => $id,
             'disponible' => false,
@@ -30,4 +32,5 @@ foreach ($productIds as $id) {
     }
 }
 
+// Codifica el array de resultados en formato JSON y lo imprime
 echo json_encode($resultados);

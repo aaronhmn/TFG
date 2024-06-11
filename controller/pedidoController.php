@@ -2,11 +2,11 @@
 
 namespace controller;
 
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Asegúrate de que los namespaces y rutas sean correctos
 require_once("../model/utils.php");
 require_once("../model/usuarioModel.php");
 require_once("../model/productoModel.php");
@@ -35,5 +35,3 @@ $datosUsuario = $usuarioModel->getUsuarioId($idUsuario, $conexPDO);
 
 // Incluir la vista, pasando los datos del modelo
 include("../view/pedidoView.php");
-
-?>

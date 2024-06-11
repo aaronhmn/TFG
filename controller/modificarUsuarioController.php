@@ -2,15 +2,16 @@
 
 namespace model;
 
-use \model\usuarioModel;
+use \model\usuario;
 use \model\utils;
 
-
-//Añadimos el código del modelo
 require_once("../model/usuarioModel.php");
 require_once("../model/utils.php");
 
-session_start();
+// Asegura si hay o no sesion activa para que si no la hay iniciarla
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Verificar si el usuario está logueado y si es administrador
 if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'] != 1) {
@@ -39,7 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $usuario["activo"] = $_GET["activo"];
     $usuario["rol"] = $_GET["rol"];
     $usuario["estado"] = $_GET["estado"];
-    /* $usuario["contrasena"] = $_GET["contrasena"]; */
 }
 
 // Solo se ejecutará cuando reciba una petición del registro
@@ -59,8 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $usuario["activacion"] = $_POST["activacion"];
     $usuario["activo"] = $_POST["activo"];
     $usuario["rol"] = $_POST["rol"];
-    /* $usuario["estado"] = $_POST["estado"]; */
-    /* $usuario["contrasena"] = $_POST["contrasena"]; */
 
     //Nos conectamos a la Bd
     $gestorUsuario = new Usuario();
@@ -100,15 +98,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Cambio de contraseña solo si se proporcionan ambos campos de contraseña y son iguales
     if (!empty($_POST['contrasenaNueva']) && !empty($_POST['contrasenaConfirmar']) && $_POST['contrasenaNueva'] === $_POST['contrasenaConfirmar']) {
+        // Genera una nueva salt de 16 caracteres
         $nuevaSalt = Utils::generar_salt(16);
+        // Genera un hash de la nueva contraseña usando la nueva salt
         $nuevaContrasenaHash = crypt($_POST['contrasenaNueva'], '$6$rounds=5000$' . $nuevaSalt . '$');
+        // Cambia la contraseña del usuario en la base de datos
         if ($gestorUsuario->cambiarContraseñaPorId($_POST["idUsuario"], $nuevaContrasenaHash, $nuevaSalt, $conexPDO)) {
+            // Si la contraseña se actualiza correctamente, añade un mensaje de éxito
             $_SESSION['mensaje'] .= " y la contraseña ha sido actualizada correctamente.";
         } else {
+            // Si no se puede actualizar la contraseña, añade un mensaje de error
             $_SESSION['mensaje'] .= " pero no se pudo actualizar la contraseña.";
         }
     } elseif (!empty($_POST['contrasenaNueva']) || !empty($_POST['contrasenaConfirmar'])) {
+        // Si solo uno de los campos de contraseña está lleno o las contraseñas no coinciden
         $_SESSION['mensaje'] = "Error: Las contraseñas no coinciden o están incompletas.";
+        // Establece el tipo de mensaje como "danger" para indicar error
         $_SESSION['tipo_mensaje'] = "danger";
     }
 
