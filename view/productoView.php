@@ -9,17 +9,11 @@ namespace views;
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <link rel="stylesheet" href="../assets/styles/css/producto.css" />
-
   <link rel="icon" type="image/vnd.icon" href="../assets/img/genesis logo sin fondo favicon.png">
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
-
   <title><?= $productos['nombre'] ?></title>
 </head>
 
@@ -169,18 +163,18 @@ namespace views;
       <h2 class="text-center mb-4" style="color: #ffa500;"><b>Comentarios y Valoraciones</b></h2>
       <div id="alertPlaceholder2"></div>
       <div class="row">
-    <div class="col-12">
-        <?php if ($productos['haComprado']) : ?>
+        <div class="col-12">
+          <?php if ($productos['haComprado']) : ?>
             <button class="btn btn-primary mb-3 w-100" style="background-color: #8350f2; border-color:#8350f2;" data-bs-toggle="modal" data-bs-target="#reseñaModal">
-                Realizar reseña
+              Realizar reseña
             </button>
-        <?php else: ?>
+          <?php else : ?>
             <div class="alert alert-warning text-center" role="alert">
-                <b>Compra este producto para poder escribir una reseña.</b>
+              <b>Compra este producto para poder escribir una reseña.</b>
             </div>
-        <?php endif; ?>
-    </div>
-</div>
+          <?php endif; ?>
+        </div>
+      </div>
 
       <!-- Mostrar reseñas del producto -->
       <div class="row row-cols-1 row-cols-lg-2 g-4">
@@ -273,60 +267,65 @@ namespace views;
   <script src="../assets/js/producto.js"></script>
 
   <script>
+    // Esperar a que el documento esté completamente cargado
     $(document).ready(function() {
-  $('#formReseña').submit(function(e) {
-    e.preventDefault(); // Evitar el envío estándar del formulario
-    var formData = $(this).serialize(); // Serializar los datos del formulario
+      // Manejar el envío del formulario de reseñas
+      $('#formReseña').submit(function(e) {
+        e.preventDefault(); // Evitar el envío estándar del formulario
+        var formData = $(this).serialize(); // Serializar los datos del formulario
 
-    $.ajax({
-      type: "POST",
-      url: $(this).attr('action'),
-      data: formData,
-      success: function(response) {
-        var jsonData = JSON.parse(response);
-        if (jsonData.success) {
-          localStorage.setItem('alertMessage', 'Reseña añadida con éxito!');
-          localStorage.setItem('alertType', 'success');
-        } else {
-          localStorage.setItem('alertMessage', jsonData.message);
-          localStorage.setItem('alertType', 'danger');
-        }
-        location.reload();
-      },
-      error: function() {
-        localStorage.setItem('alertMessage', 'Error al procesar la petición.');
-        localStorage.setItem('alertType', 'danger');
-        location.reload();
-      }
+        // Realizar la solicitud AJAX
+        $.ajax({
+          type: "POST", // Método HTTP POST
+          url: $(this).attr('action'), // URL de destino tomada del atributo 'action' del formulario
+          data: formData, // Datos serializados del formulario
+          success: function(response) {
+            var jsonData = JSON.parse(response); // Parsear la respuesta JSON
+            if (jsonData.success) {
+              // Almacenar un mensaje de éxito en el almacenamiento local
+              localStorage.setItem('alertMessage', 'Reseña añadida con éxito!');
+              localStorage.setItem('alertType', 'success');
+            } else {
+              // Almacenar un mensaje de error en el almacenamiento local
+              localStorage.setItem('alertMessage', jsonData.message);
+              localStorage.setItem('alertType', 'danger');
+            }
+            location.reload(); // Recargar la página
+          },
+          error: function() {
+            // Almacenar un mensaje de error en el almacenamiento local en caso de falla de AJAX
+            localStorage.setItem('alertMessage', 'Error al procesar la petición.');
+            localStorage.setItem('alertType', 'danger');
+            location.reload(); // Recargar la página
+          }
+        });
+      });
+      // Limpiar el formulario y mensajes de estado al cerrar el modal
+      $('#reseñaModal').on('hidden.bs.modal', function() {
+        $(this).find('form')[0].reset(); // Resetear el formulario
+        $('#alertPlaceholder').empty(); // Limpiar cualquier mensaje de estado (opcional)
+      });
+      // Mostrar alerta después de recargar la página
+      displayAlertFromLocalStorage();
     });
-  });
 
-  // Limpiar el formulario al cerrar el modal
-  $('#reseñaModal').on('hidden.bs.modal', function() {
-    $(this).find('form')[0].reset();
-    // Opcional: también puedes limpiar cualquier mensaje de estado
-    $('#alertPlaceholder').empty();
-  });
-
-  // Mostrar alerta después de recargar
-  displayAlertFromLocalStorage();
-});
-
-function displayAlertFromLocalStorage() {
-  var message = localStorage.getItem('alertMessage');
-  var type = localStorage.getItem('alertType');
-
-  if (message && type) {
-    var alertHtml = '<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' +
-      message +
-      '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
-    $('#alertPlaceholder2').html(alertHtml);
-
-    // Limpiar localStorage
-    localStorage.removeItem('alertMessage');
-    localStorage.removeItem('alertType');
-  }
-}
+    function displayAlertFromLocalStorage() {
+      // Obtener mensaje y tipo de alerta del almacenamiento local
+      var message = localStorage.getItem('alertMessage');
+      var type = localStorage.getItem('alertType');
+      // Verificar si hay mensaje y tipo de alerta almacenados
+      if (message && type) {
+        // Crear HTML para la alerta
+        var alertHtml = '<div class="alert alert-' + type + ' alert-dismissible fade show" role="alert">' +
+          message +
+          '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+        // Insertar la alerta en el contenedor especificado
+        $('#alertPlaceholder2').html(alertHtml);
+        // Limpiar el almacenamiento local para que no se muestre la alerta nuevamente
+        localStorage.removeItem('alertMessage');
+        localStorage.removeItem('alertType');
+      }
+    }
   </script>
 
 </body>

@@ -521,7 +521,7 @@
       });
     });
 
-    //modificar un usuario
+    // Evento al mostrar el modal para modificar un usuario
     $('#modificarUsuarioModal').on('show.bs.modal', function(event) {
       var button = $(event.relatedTarget); // Botón que disparó el modal
       var id = button.data('id'); // Extraer información del atributo data-*
@@ -540,38 +540,37 @@
       var activo = button.data('activo');
       var rol = button.data('rol');
       var estado = button.data('estado');
-      /* var contrasena = button.data('contrasena'); */
 
       var modal = $(this);
-      modal.find('[name="idUsuario"]').val(id);
-      modal.find('[name="nombre"]').val(nombre);
-      modal.find('[name="primer_apellido"]').val(primerApellido);
-      modal.find('[name="segundo_apellido"]').val(segundoApellido);
-      modal.find('[name="dni"]').val(dni);
-      modal.find('[name="email"]').val(email);
-      modal.find('[name="nombre_usuario"]').val(nombreUsuario);
-      modal.find('[name="codigo_postal"]').val(codigoPostal);
-      modal.find('[name="codigo_postal"]').val(codigoPostal);
-      modal.find('[name="calle"]').val(calle);
-      modal.find('[name="numero_bloque"]').val(numeroBloque);
-      modal.find('[name="piso"]').val(piso);
-      modal.find('[name="telefono"]').val(telefono);
-      modal.find('[name="activacion"]').val(activacion);
-      modal.find('[name="activo"]').val(activo);
-      modal.find('[name="rol"]').val(rol);
-      modal.find('[name="estado"]').val(estado);
+      modal.find('[name="idUsuario"]').val(id); // Rellenar el campo idUsuario en el modal
+      modal.find('[name="nombre"]').val(nombre); // Rellenar el campo nombre en el modal
+      modal.find('[name="primer_apellido"]').val(primerApellido); // Rellenar el campo primer_apellido en el modal
+      modal.find('[name="segundo_apellido"]').val(segundoApellido); // Rellenar el campo segundo_apellido en el modal
+      modal.find('[name="dni"]').val(dni); // Rellenar el campo dni en el modal
+      modal.find('[name="email"]').val(email); // Rellenar el campo email en el modal
+      modal.find('[name="nombre_usuario"]').val(nombreUsuario); // Rellenar el campo nombre_usuario en el modal
+      modal.find('[name="codigo_postal"]').val(codigoPostal); // Rellenar el campo codigo_postal en el modal
+      modal.find('[name="calle"]').val(calle); // Rellenar el campo calle en el modal
+      modal.find('[name="numero_bloque"]').val(numeroBloque); // Rellenar el campo numero_bloque en el modal
+      modal.find('[name="piso"]').val(piso); // Rellenar el campo piso en el modal
+      modal.find('[name="telefono"]').val(telefono); // Rellenar el campo telefono en el modal
+      modal.find('[name="activacion"]').val(activacion); // Rellenar el campo activacion en el modal
+      modal.find('[name="activo"]').val(activo); // Rellenar el campo activo en el modal
+      modal.find('[name="rol"]').val(rol); // Rellenar el campo rol en el modal
+      modal.find('[name="estado"]').val(estado); // Rellenar el campo estado en el modal
       /* modal.find('[name="contrasena"]').val(contrasena); */
     });
 
-    //para banear un usuario
+    // Función para mostrar el modal de confirmación para banear un usuario
     function mostrarModalEliminar(idUsuario) {
-      var modal = new bootstrap.Modal(document.getElementById('confirmacionBanearModal'));
-      var botonEliminar = document.getElementById('confirmarEliminar');
+      var modal = new bootstrap.Modal(document.getElementById('confirmacionBanearModal')); // Inicializar el modal de confirmación
+      var botonEliminar = document.getElementById('confirmarEliminar'); // Botón para confirmar la acción
       botonEliminar.onclick = function() {
-        document.getElementById('formEliminar-' + idUsuario).submit();
+        document.getElementById('formEliminar-' + idUsuario).submit(); // Enviar el formulario de eliminación correspondiente
       };
-      modal.show();
+      modal.show(); // Mostrar el modal de confirmación
     }
+
 
     //detalles usuario
     $('#usuarioDetalleModal').on('show.bs.modal', function(event) {
@@ -601,7 +600,7 @@
             $('#detalle_activacion').text(usuario.activacion || 'No disponible');
             $('#detalle_activo').text(usuario.activo == 1 ? 'Sí' : 'No');
             $('#detalle_rol').text(usuario.rol == 1 ? 'Admin' : 'Cliente');
-            $('#detalle_estado').text(usuario.estado == 1 ? 'Baneado' : 'Habilitado');;
+            $('#detalle_estado').text(usuario.estado == 1 ? 'Baneado' : 'Habilitado');
 
           } else {
             console.error('No se pudo cargar la información del usuario.');

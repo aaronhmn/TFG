@@ -250,11 +250,15 @@
         });
 
         $('#modificarMarcaModal').on('show.bs.modal', function(event) {
+            // Obtiene el botón que desencadenó el evento
             var button = $(event.relatedTarget);
-            var idMarca = button.data('id');
-            var nombreMarca = button.data('nombre');
+            // Extrae datos del botón utilizando data attributes
+            var idMarca = button.data('id'); // Obtiene el id de la marca
+            var nombreMarca = button.data('nombre'); // Obtiene el nombre de la marca
 
+            // Obtiene el modal actual
             var modal = $(this);
+            // Asigna los valores extraídos a los campos correspondientes del modal
             modal.find('[name="nombre_marca"]').val(nombreMarca);
             modal.find('[name="idMarca"]').val(idMarca);
         });

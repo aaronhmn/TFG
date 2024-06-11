@@ -315,16 +315,20 @@
         });
 
         $('#modificarAlmacenModal').on('show.bs.modal', function(event) {
+            // Obtiene el botón que desencadenó el evento
             var button = $(event.relatedTarget);
-            var idAlmacen = button.data('id');
-            var nombre = button.data('nombre');
-            var telefono = button.data('telefono');
-            var codigo_postal = button.data('codigo_postal');
-            var calle = button.data('calle');
-            var numero_bloque = button.data('numero_bloque');
-            var piso = button.data('piso');
-
+            // Extrae datos del botón utilizando data attributes
+            var idAlmacen = button.data('id'); // Obtiene el id del almacén
+            var nombre = button.data('nombre'); // Obtiene el nombre del almacén
+            var telefono = button.data('telefono'); // Obtiene el teléfono del almacén
+            var codigo_postal = button.data('codigo_postal'); // Obtiene el código postal del almacén
+            var calle = button.data('calle'); // Obtiene la calle del almacén
+            var numero_bloque = button.data('numero_bloque'); // Obtiene el número de bloque del almacén
+            var piso = button.data('piso'); // Obtiene el piso del almacén
+            
+            // Obtiene el modal actual
             var modal = $(this);
+            // Asigna los valores extraídos a los campos correspondientes del modal
             modal.find('[name="nombre"]').val(nombre);
             modal.find('[name="telefono"]').val(telefono);
             modal.find('[name="codigo_postal"]').val(codigo_postal);
@@ -332,6 +336,7 @@
             modal.find('[name="numero_bloque"]').val(numero_bloque);
             modal.find('[name="piso"]').val(piso);
             modal.find('[name="idAlmacen"]').val(idAlmacen);
+
         });
 
         function mostrarModalEliminar(idAlmacen) {

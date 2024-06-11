@@ -471,103 +471,106 @@
             });
         });
 
+        // Función para mostrar el modal de confirmación de eliminación
         function mostrarModalEliminar(idProducto) {
-            var modal = new bootstrap.Modal(document.getElementById('confirmacionEliminarModal'));
-            var botonEliminar = document.getElementById('confirmarEliminar');
+            var modal = new bootstrap.Modal(document.getElementById('confirmacionEliminarModal')); // Crear una nueva instancia del modal
+            var botonEliminar = document.getElementById('confirmarEliminar'); // Obtener el botón de confirmación de eliminación
             botonEliminar.onclick = function() {
-                document.getElementById('formEliminar-' + idProducto).submit();
+                document.getElementById('formEliminar-' + idProducto).submit(); // Enviar el formulario de eliminación
             };
-            modal.show();
+            modal.show(); // Mostrar el modal
         }
 
-        //modificar producto       
+        // Evento al mostrar el modal de modificación de producto
         $('#modificarProductoModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget); // Botón que activó el modal
-            var id = button.data('id');
-            var nombre = button.data('nombre');
-            var precio = button.data('precio');
-            var stock = button.data('stock');
-            var categoria = button.data('categoria');
-            var marca = button.data('marca');
-            var almacen = button.data('almacen');
-            var descripcion = button.data('descripcion');
-            var especificacion = button.data('especificacion');
-            var estado = button.data('estado');
-            var imagenes = button.data('imagenes').split(',');
-            var imagesContainer = $('#currentImagesContainer');
-            imagesContainer.empty();
+            var id = button.data('id'); // Obtener el ID del producto
+            var nombre = button.data('nombre'); // Obtener el nombre del producto
+            var precio = button.data('precio'); // Obtener el precio del producto
+            var stock = button.data('stock'); // Obtener el stock del producto
+            var categoria = button.data('categoria'); // Obtener la categoría del producto
+            var marca = button.data('marca'); // Obtener la marca del producto
+            var almacen = button.data('almacen'); // Obtener el almacén del producto
+            var descripcion = button.data('descripcion'); // Obtener la descripción del producto
+            var especificacion = button.data('especificacion'); // Obtener la especificación del producto
+            var estado = button.data('estado'); // Obtener el estado del producto
+            var imagenes = button.data('imagenes').split(','); // Obtener las imágenes del producto
+            var imagesContainer = $('#currentImagesContainer'); // Contenedor de imágenes
+            imagesContainer.empty(); // Vaciar el contenedor de imágenes
 
-            var modal = $(this);
-            modal.find('#idproducto').val(id);
-            modal.find('#nombre').val(nombre);
-            modal.find('#precio').val(precio);
-            modal.find('#stock').val(stock);
-            modal.find('#selectCategoria').val(categoria);
-            modal.find('#selectMarca').val(marca);
-            modal.find('#selectAlmacen').val(almacen);
-            modal.find('#descripcion').val(descripcion);
-            modal.find('#especificacion').val(especificacion);
-            modal.find('#estado').val(estado);
+            var modal = $(this); // Obtener el modal actual
+            modal.find('#idproducto').val(id); // Establecer el ID del producto en el campo correspondiente
+            modal.find('#nombre').val(nombre); // Establecer el nombre en el campo correspondiente
+            modal.find('#precio').val(precio); // Establecer el precio en el campo correspondiente
+            modal.find('#stock').val(stock); // Establecer el stock en el campo correspondiente
+            modal.find('#selectCategoria').val(categoria); // Establecer la categoría en el campo correspondiente
+            modal.find('#selectMarca').val(marca); // Establecer la marca en el campo correspondiente
+            modal.find('#selectAlmacen').val(almacen); // Establecer el almacén en el campo correspondiente
+            modal.find('#descripcion').val(descripcion); // Establecer la descripción en el campo correspondiente
+            modal.find('#especificacion').val(especificacion); // Establecer la especificación en el campo correspondiente
+            modal.find('#estado').val(estado); // Establecer el estado en el campo correspondiente
 
+            // Añadir las imágenes al contenedor de imágenes
             imagenes.forEach(function(imagen) {
                 var imgHtml = $('<img>').attr('src', imagen.trim()).css('max-width', '100px').css('margin-right', '5px').css('margin-bottom', '5px');
                 imagesContainer.append(imgHtml);
             });
         });
 
-        // Actualizar visualización de imágenes al seleccionar nuevas
+        // Función para actualizar la visualización de imágenes al seleccionar nuevas
         function updateImageDisplay(files) {
-            var imagesContainer = $('#currentImagesContainer');
-            imagesContainer.empty();
+            var imagesContainer = $('#currentImagesContainer'); // Contenedor de imágenes
+            imagesContainer.empty(); // Vaciar el contenedor de imágenes
             if (files.length > 0) {
                 Array.from(files).forEach(file => {
-                    var imgElement = document.createElement('img');
-                    imgElement.style.maxWidth = '100px';
-                    imgElement.style.marginRight = '5px';
-                    imgElement.style.marginBottom = '5px';
-                    imgElement.src = URL.createObjectURL(file);
-                    imagesContainer.append(imgElement);
+                    var imgElement = document.createElement('img'); // Crear un nuevo elemento img
+                    imgElement.style.maxWidth = '100px'; // Establecer el ancho máximo de la imagen
+                    imgElement.style.marginRight = '5px'; // Establecer el margen derecho de la imagen
+                    imgElement.style.marginBottom = '5px'; // Establecer el margen inferior de la imagen
+                    imgElement.src = URL.createObjectURL(file); // Establecer la fuente de la imagen
+                    imagesContainer.append(imgElement); // Añadir la imagen al contenedor
                 });
             }
         }
 
-        //detalles producto
+        // Evento al mostrar el modal de detalles del producto
         $('#productoDetalleModal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget);
-            var idProducto = button.data('idproducto');
+            var button = $(event.relatedTarget); // Botón que activó el modal
+            var idProducto = button.data('idproducto'); // Obtener el ID del producto
 
+            // Solicitud AJAX para obtener los detalles del producto
             $.ajax({
-                url: '../controller/detalleProductoAdminController.php',
-                type: 'POST',
+                url: '../controller/detalleProductoAdminController.php', // URL del controlador para obtener los detalles del producto
+                type: 'POST', // Método HTTP POST
                 data: {
-                    idProducto: idProducto
+                    idProducto: idProducto // Datos enviados: ID del producto
                 },
-                dataType: 'json',
+                dataType: 'json', // Tipo de datos esperados: JSON
                 success: function(producto) {
                     if (producto && !producto.error) {
-                        $('#detalle_nombre').text(producto.nombre || 'No disponible');
-                        $('#detalle_precio').text(producto.precio || 'No disponible');
-                        $('#detalle_categoria').text(producto.categoria || 'No disponible');
-                        $('#detalle_descripcion').text(producto.descripcion || 'No disponible');
-                        $('#detalle_especificacion').text(producto.especificacion || 'No disponible');
-                        $('#detalle_marca').text(producto.marca || 'No disponible');
-                        $('#detalle_stock').text(producto.stock || 'No disponible');
-                        $('#detalle_almacen').text(producto.almacen || 'No disponible');
+                        // Actualizar los detalles del producto en el modal
+                        $('#detalle_nombre').text(producto.nombre || 'No disponible'); // Nombre del producto
+                        $('#detalle_precio').text(producto.precio || 'No disponible'); // Precio del producto
+                        $('#detalle_categoria').text(producto.categoria || 'No disponible'); // Categoría del producto
+                        $('#detalle_descripcion').text(producto.descripcion || 'No disponible'); // Descripción del producto
+                        $('#detalle_especificacion').text(producto.especificacion || 'No disponible'); // Especificación del producto
+                        $('#detalle_marca').text(producto.marca || 'No disponible'); // Marca del producto
+                        $('#detalle_stock').text(producto.stock || 'No disponible'); // Stock del producto
+                        $('#detalle_almacen').text(producto.almacen || 'No disponible'); // Almacén del producto
 
                         // Suponiendo que las imágenes están separadas por comas
                         var imagenesHtml = '';
-                        var imagenes = producto.ruta_imagen.split(',');
+                        var imagenes = producto.ruta_imagen.split(','); // Obtener las rutas de las imágenes
                         imagenes.forEach(function(imagen) {
-                            imagenesHtml += '<img src="' + imagen.trim() + '" class="img-fluid" style="max-width: 100px; margin-right: 5px;">';
+                            imagenesHtml += '<img src="' + imagen.trim() + '" class="img-fluid" style="max-width: 100px; margin-right: 5px;">'; // Generar el HTML de las imágenes
                         });
-                        $('#detalle_imagenes').html(imagenesHtml);
-
+                        $('#detalle_imagenes').html(imagenesHtml); // Actualizar el contenedor de imágenes
                     } else {
-                        console.error('No se pudo cargar la información del producto.');
+                        console.error('No se pudo cargar la información del producto.'); // Error si no se pudieron cargar los detalles
                     }
                 },
                 error: function(xhr, status, error) {
-                    console.error('Error en la solicitud AJAX: ' + error);
+                    console.error('Error en la solicitud AJAX: ' + error); // Error en la solicitud AJAX
                 }
             });
         });

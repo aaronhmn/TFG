@@ -250,11 +250,15 @@
         });
 
         $('#modificarCategoriaModal').on('show.bs.modal', function(event) {
+            // Obtiene el botón que desencadenó el evento
             var button = $(event.relatedTarget);
-            var idCategoria = button.data('id');
-            var nombreCategoria = button.data('nombre');
+            // Extrae datos del botón utilizando data attributes
+            var idCategoria = button.data('id'); // Obtiene el id de la categoría
+            var nombreCategoria = button.data('nombre'); // Obtiene el nombre de la categoría
 
+            // Obtiene el modal actual
             var modal = $(this);
+            // Asigna los valores extraídos a los campos correspondientes del modal
             modal.find('[name="nombre_categoria"]').val(nombreCategoria);
             modal.find('[name="idCategoria"]').val(idCategoria);
         });

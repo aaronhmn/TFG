@@ -255,6 +255,7 @@ namespace views;
   <script src="../assets/js/main.js"></script>
 
   <script>
+  // Inicia la libreria de las animaciones
   AOS.init();
 </script>
 </body>

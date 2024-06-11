@@ -169,8 +169,11 @@
 
     <script>
         function mostrarComentario(comentario) {
+            // Selecciona el elemento del cuerpo del modal donde se mostrará el comentario
             const modalBody = document.querySelector('#comentarioModal .modal-body');
-            modalBody.textContent = comentario; // Usa textContent para evitar inyección de HTML
+            // Establece el texto del comentario en el cuerpo del modal, usando textContent para evitar inyección de HTML
+            modalBody.textContent = comentario;
+            // Inicializa y muestra el modal de Bootstrap con el ID 'comentarioModal'
             const modal = new bootstrap.Modal(document.getElementById('comentarioModal'));
             modal.show();
         }
