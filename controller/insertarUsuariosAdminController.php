@@ -74,6 +74,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         exit();
     }
 
+    // Verificar si el codigo postal ya existe
+    if ($gestorUsu->existeDni($dni, $conexPDO)) {
+        $_SESSION['mensaje'] = 'Este dni ya esta en uso.';
+        $_SESSION['tipo_mensaje'] = 'danger';
+        header("Location: ../controller/usuariosAdminController.php");
+        exit();
+    }
+
+    // Verificar si el telefono ya existe
+    if ($gestorUsu->existeTelefono($telefono, $conexPDO)) {
+        $_SESSION['mensaje'] = 'Este telefono ya esta en uso.';
+        $_SESSION['tipo_mensaje'] = 'danger';
+        header("Location: ../controller/usuariosAdminController.php");
+        exit();
+    }
+
     //Generamos una salt de 16 posiciones
     $salt = utils::generar_salt(16);
     $datosUsuario["salt"] = $salt;

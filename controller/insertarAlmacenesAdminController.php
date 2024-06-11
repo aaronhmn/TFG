@@ -1,4 +1,5 @@
 <?php
+
 namespace model;
 
 use \model\utils;
@@ -7,7 +8,7 @@ use \model\almacen;
 //Añadimos el código del modelo
 require_once("../model/utils.php");
 require_once("../model/almacenModel.php");
-$mensaje=null;
+$mensaje = null;
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -20,8 +21,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true || $_SESSION['rol'
 }
 
 // Solo se ejecutará cuando reciba una petición del registro
-if ($_SERVER['REQUEST_METHOD'] == 'POST')
-{
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nombre = $_POST['inputNombre'];
     $telefono = $_POST['inputTelefono'];
     $codigoPostal = $_POST['inputCP'];
@@ -41,6 +41,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
     //Nos conectamos a la Base de Datos
     $conexPDO = utils::conectar();
+
+    // Verificar si el codigo postal ya existe
+    if ($gestorAlmacen->existeNombreAlmacen($nombre, $conexPDO)) {
+        $_SESSION['mensaje'] = 'Este nombre ya esta en uso.';
+        $_SESSION['tipo_mensaje'] = 'danger';
+        header("Location: ../controller/almacenesAdminController.php");
+        exit();
+    }
+
+    // Verificar si el telefono ya existe
+    if ($gestorAlmacen->existeTelefono($telefono, $conexPDO)) {
+        $_SESSION['mensaje'] = 'Este telefono ya esta en uso.';
+        $_SESSION['tipo_mensaje'] = 'danger';
+        header("Location: ../controller/almacenesAdminController.php");
+        exit();
+    }
+
     $resultado = $gestorAlmacen->addAlmacen($datosAlmacen, $conexPDO);
 
     //Para verificar si todo funcionó correctamente
@@ -57,5 +74,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         exit();
     }
 }
-
-?>

@@ -82,6 +82,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
+    if ($gestorUsuario->existeDniM($usuario["dni"], $usuario["idusuario"], $conexPDO)) {
+        $_SESSION['mensaje'] = 'Este dni ya está en uso.';
+        $_SESSION['tipo_mensaje'] = 'danger';
+        header("Location: ../controller/usuariosAdminController.php");
+        exit();
+    }
+
+    if ($gestorUsuario->existeTelefonoM($usuario["telefono"], $usuario["idusuario"], $conexPDO)) {
+        $_SESSION['mensaje'] = 'Este telefono ya está en uso.';
+        $_SESSION['tipo_mensaje'] = 'danger';
+        header("Location: ../controller/usuariosAdminController.php");
+        exit();
+    }
+
     $resultado = $gestorUsuario->updateUsuario($usuario, $conexPDO);
 
     // Cambio de contraseña solo si se proporcionan ambos campos de contraseña y son iguales

@@ -360,6 +360,36 @@ public function cambiarContraseñaPorId($idUsuario, $nuevaContrasena, $nuevaSalt
         return false;
     }
 
+    public function existeDni($dni, $conexPDO) {
+        if ($conexPDO != null) {
+            try {
+                $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.usuario WHERE dni = :dni");
+                $stmt->bindParam(':dni', $dni);
+                $stmt->execute();
+                return $stmt->fetchColumn() > 0;
+            } catch (PDOException $e) {
+                error_log("Error al verificar dni: " . $e->getMessage());
+                return false; // Considera cómo manejar los errores correctamente
+            }
+        }
+        return false;
+    }
+
+    public function existeTelefono($telefono, $conexPDO) {
+        if ($conexPDO != null) {
+            try {
+                $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.usuario WHERE telefono = :telefono");
+                $stmt->bindParam(':telefono', $telefono);
+                $stmt->execute();
+                return $stmt->fetchColumn() > 0;
+            } catch (PDOException $e) {
+                error_log("Error al verificar telefono: " . $e->getMessage());
+                return false; // Considera cómo manejar los errores correctamente
+            }
+        }
+        return false;
+    }
+
     public function existeEmailM($email, $idusuario, $conexPDO) {
         try {
             $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.usuario WHERE email = :email AND idusuario <> :idusuario");
@@ -394,5 +424,31 @@ public function cambiarContraseñaPorId($idUsuario, $nuevaContrasena, $nuevaSalt
             }
         }
         return false;
+    }
+
+    public function existeDniM($dni, $idusuario, $conexPDO) {
+        try {
+            $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.usuario WHERE dni = :dni AND idusuario <> :idusuario");
+            $stmt->bindParam(':dni', $dni);
+            $stmt->bindParam(':idusuario', $idusuario);
+            $stmt->execute();
+            return $stmt->fetchColumn() > 0;
+        } catch (PDOException $e) {
+            error_log("Error al verificar dni: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function existeTelefonoM($telefono, $idusuario, $conexPDO) {
+        try {
+            $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.usuario WHERE telefono = :telefono AND idusuario <> :idusuario");
+            $stmt->bindParam(':telefono', $telefono);
+            $stmt->bindParam(':idusuario', $idusuario);
+            $stmt->execute();
+            return $stmt->fetchColumn() > 0;
+        } catch (PDOException $e) {
+            error_log("Error al verificar telefono: " . $e->getMessage());
+            return false;
+        }
     }
 }

@@ -193,6 +193,62 @@ class almacen{
         }
     }
 
+    public function existeNombreAlmacen($nombreAlmacen, $conexPDO) {
+        if ($conexPDO != null) {
+            try {
+                $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.almacen WHERE nombre = :nombre");
+                $stmt->bindParam(':nombre', $nombreAlmacen);
+                $stmt->execute();
+                return $stmt->fetchColumn() > 0;
+            } catch (PDOException $e) {
+                error_log("Error al verificar nombre: " . $e->getMessage());
+                return false; // Considera cómo manejar los errores correctamente
+            }
+        }
+        return false;
+    }
+
+    public function existeTelefono($telefono, $conexPDO) {
+        if ($conexPDO != null) {
+            try {
+                $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.almacen WHERE telefono = :telefono");
+                $stmt->bindParam(':telefono', $telefono);
+                $stmt->execute();
+                return $stmt->fetchColumn() > 0;
+            } catch (PDOException $e) {
+                error_log("Error al verificar telefono: " . $e->getMessage());
+                return false; // Considera cómo manejar los errores correctamente
+            }
+        }
+        return false;
+    }
+
+    public function existeNombreAlmacenM($nombreAlmacen, $idalmacen, $conexPDO) {
+        try {
+            $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.almacen WHERE nombre = :nombre AND idalmacen <> :idalmacen");
+            $stmt->bindParam(':nombre', $nombreAlmacen);
+            $stmt->bindParam(':idalmacen', $idalmacen);
+            $stmt->execute();
+            return $stmt->fetchColumn() > 0;
+        } catch (PDOException $e) {
+            error_log("Error al verificar nombre: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function existeTelefonoM($telefono, $idalmacen, $conexPDO) {
+        try {
+            $stmt = $conexPDO->prepare("SELECT COUNT(*) FROM genesis.almacen WHERE telefono = :telefono AND idalmacen <> :idalmacen");
+            $stmt->bindParam(':telefono', $telefono);
+            $stmt->bindParam(':idalmacen', $idalmacen);
+            $stmt->execute();
+            return $stmt->fetchColumn() > 0;
+        } catch (PDOException $e) {
+            error_log("Error al verificar telefono: " . $e->getMessage());
+            return false;
+        }
+    }
+
 }
 
 ?>

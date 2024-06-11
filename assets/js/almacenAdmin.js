@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Seleccionar los formularios por su contenedor de modal específico
-    const formInsertar = document.querySelector('#insertarUsuarioModal form');
-    const formModificar = document.querySelector('#modificarUsuarioModal form');
+    const formInsertar = document.querySelector('#insertarAlmacenModal form');
+    const formModificar = document.querySelector('#modificarAlmacenModal form');
 
     // Función de validación que se puede aplicar a cualquier formulario
     function validateForm(form, isModification = false) {
@@ -10,17 +10,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Definir selectores basados en si el formulario es de inserción o modificación
             const telefonoSelector = isModification ? '[name="telefono"]' : '[name="inputTelefono"]';
-            const dniSelector = isModification ? '[name="dni"]' : '[name="inputDNI"]';
-            const codigoPostalSelector = isModification ? '[name="codigo_postal"]' : '[name="inputCodigoPostal"]';
-            const passwordSelector = isModification ? '[name="contrasenaNueva"]' : '[name="inputPassword"]';
-            const confirmPasswordSelector = isModification ? '[name="contrasenaConfirmar"]' : '[name="inputPassword2"]';
+            const codigoPostalSelector = isModification ? '[name="codigo_postal"]' : '[name="inputCP"]';
 
             // Obtener los elementos del formulario
             const telefono = form.querySelector(telefonoSelector);
-            const dni = form.querySelector(dniSelector);
             const codigoPostal = form.querySelector(codigoPostalSelector);
-            const password = form.querySelector(passwordSelector);
-            const confirmPassword = form.querySelector(confirmPasswordSelector);
 
             // Validación del número de teléfono
             if (telefono && !/^\d{9}$/.test(telefono.value)) {
@@ -28,27 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 isValid = false;
             }
 
-            // Validación del DNI
-            if (dni && !/^\d{8}[A-Za-z]$/.test(dni.value)) {
-                alert('El DNI debe tener 8 dígitos seguidos de una letra.');
-                isValid = false;
-            }
-
             // Validación del código postal
             if (codigoPostal && !/^\d{5}$/.test(codigoPostal.value)) {
                 alert('El código postal debe tener 5 dígitos.');
-                isValid = false;
-            }
-
-            // Validación de la contraseña (si el campo está presente y no está vacío)
-            if (password && password.value && password.value.length < 6) {
-                alert('La contraseña debe tener al menos 6 caracteres.');
-                isValid = false;
-            }
-
-            // Validación de coincidencia de contraseñas (solo si se proporciona nueva contraseña y no está vacía)
-            if (password && confirmPassword && password.value && confirmPassword.value && password.value !== confirmPassword.value) {
-                alert('Las contraseñas no coinciden.');
                 isValid = false;
             }
 

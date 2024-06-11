@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
 
-    <title>Marcas - Dashboard</title>
+    <title>Almacenes - Dashboard</title>
 </head>
 
 <body style="background-color: #e6e6fa">
@@ -137,7 +137,8 @@
                             echo "<td>{$almacen['codigo_postal']}</td>";
                             echo "<td>{$almacen['calle']}</td>";
                             echo "<td>{$almacen['numero_bloque']}</td>";
-                            echo "<td>{$almacen['piso']}</td>";
+                            $pisoDisplay = empty($almacen['piso']) ? "No tiene" : $almacen['piso'];
+                            echo "<td>{$pisoDisplay}</td>";
 
                             // Acciones
                             echo "<td>";
@@ -200,11 +201,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="inputTelefono" class="form-label"><b>Teléfono:</b></label>
-                            <input type="number" class="form-control" name="inputTelefono" required aria-describedby="emailHelp">
+                            <input type="number" class="form-control" name="inputTelefono" digitsonly="true" required aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
                             <label for="inputCP" class="form-label"><b>Código postal:</b></label>
-                            <input type="number" class="form-control" name="inputCP" required aria-describedby="emailHelp">
+                            <input type="number" class="form-control" name="inputCP" digitsonly="true" required aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
                             <label for="inputCalle" class="form-label"><b>Calle:</b></label>
@@ -212,7 +213,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="inputNB" class="form-label"><b>Número del bloque:</b></label>
-                            <input type="number" class="form-control" name="inputNB" required aria-describedby="emailHelp">
+                            <input type="number" class="form-control" name="inputNB" digitsonly="true" required aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
                             <label for="inputPiso" class="form-label"><b>Piso:</b></label>
@@ -245,12 +246,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="telefono" class="form-label"><b>Teléfono:</b></label>
-                            <input type="number" class="form-control" name="telefono" id="telefono" value="" required>
+                            <input type="number" class="form-control" name="telefono" id="telefono" value="" required digitsonly="true">
                             <input type="hidden" name="idAlmacen" id="idAlmacen" value="">
                         </div>
                         <div class="mb-3">
                             <label for="codigo_postal" class="form-label"><b>Código postal:</b></label>
-                            <input type="number" class="form-control" name="codigo_postal" id="codigo_postal" value="" required>
+                            <input type="number" class="form-control" name="codigo_postal" id="codigo_postal" value="" required digitsonly="true">
                             <input type="hidden" name="idAlmacen" id="idAlmacen" value="">
                         </div>
                         <div class="mb-3">
@@ -260,7 +261,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="numero_bloque" class="form-label"><b>Número del bloque:</b></label>
-                            <input type="number" class="form-control" name="numero_bloque" id="numero_bloque" value="" required>
+                            <input type="number" class="form-control" name="numero_bloque" id="numero_bloque" value="" required digitsonly="true">
                             <input type="hidden" name="idAlmacen" id="idAlmacen" value="">
                         </div>
                         <div class="mb-3">
@@ -298,6 +299,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../assets/js/almacenAdmin.js"></script>
 
     <script type='text/javascript'>
         //script para borrar lo que haya dentro del modal
