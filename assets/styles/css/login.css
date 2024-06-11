@@ -140,10 +140,10 @@ body {
 }
 
 .error-message {
-  display: block; /* Asegura que el mensaje de error esté en una nueva línea */
+  display: block;
   color: red;
   font-size: 16px;
-  margin-top: 5px; /* Añade espacio entre el input y el mensaje de error */
+  margin-top: 5px;
   margin-bottom: 20px;
 }
 
@@ -163,7 +163,7 @@ input:-moz-autofill:active {
   box-shadow: 0 0 0 30px #e6e6fa inset !important;
 }
 
-@media (max-width: 505px){
+@media (max-width: 505px) {
   .wrapper {
     position: relative;
     width: 500px;
@@ -176,7 +176,7 @@ input:-moz-autofill:active {
     justify-content: center;
     align-items: center;
   }
-  .logo{
+  .logo {
     display: none;
   }
 }

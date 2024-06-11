@@ -1,146 +1,148 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
 }
 
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
-.wrapper{
-    position: relative;
-    width: 600px;
-    height: 1440px;
-    background-color: transparent;
-    border: 2px solid #8350f2;
-    border-radius: 20px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 70px;
-    margin-bottom: 70px;
+.wrapper {
+  position: relative;
+  width: 600px;
+  height: 1440px;
+  background-color: transparent;
+  border: 2px solid #8350f2;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 70px;
+  margin-bottom: 70px;
 }
 
-.wrapper .form-box{
-    width: 100%;
-    padding: 40px;
+.wrapper .form-box {
+  width: 100%;
+  padding: 40px;
 }
 
-.encabezado{
-    display: flex;
-    justify-content: space-between;
+.encabezado {
+  display: flex;
+  justify-content: space-between;
 }
 
-.logo{
-    width: 150px;
-    margin-top: -60px;
+.logo {
+  width: 150px;
+  margin-top: -60px;
 }
 
-.form-box h2{
-    font-size: 2em;
-    text-align: center;
+.form-box h2 {
+  font-size: 2em;
+  text-align: center;
 }
 
-.input-box{
-    position: relative;
-    width: 100%;
-    height: 50px;
-    border-bottom: 2px solid gray;
-    margin: 30px 0;
+.input-box {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border-bottom: 2px solid gray;
+  margin: 30px 0;
 }
 
-.input-box label{
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
-    font-size: 1em;
-    font-weight: 500;
-    pointer-events: none;
-    transition: .2s;
+.input-box label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  font-size: 1em;
+  font-weight: 500;
+  pointer-events: none;
+  transition: 0.2s;
 }
 
-.input-box input:focus~label,
-.input-box input:valid~label{
-    top: -5px;
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+  top: -5px;
 }
 
-.input-box input{
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-size: 1em;
-    font-weight: 600;
-    color: #000;
-    padding: 0 35px 0 5px;
+.input-box input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  font-weight: 600;
+  color: #000;
+  padding: 0 35px 0 5px;
 }
 
-
-.btn{
-    width: 100%;
-    height: 45px;
-    background: #8350f2 !important;
-    color: white !important;
-    border: none;
-    outline: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 500;
+.btn {
+  width: 100%;
+  height: 45px;
+  background: #8350f2 !important;
+  color: white !important;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 500;
 }
 
-.btn:hover{
-    background: #5916e8 !important;
+.btn:hover {
+  background: #5916e8 !important;
 }
 
-.registrarse{
-    font-size: .9em;
-    font-weight: 500;
-    margin: 25px 0 10px;
+.registrarse {
+  font-size: 0.9em;
+  font-weight: 500;
+  margin: 25px 0 10px;
 }
 
-.registrarse p a{
-    color: #8350f2;
-    text-decoration: none;
-    font-weight: 600;
+.registrarse p a {
+  color: #8350f2;
+  text-decoration: none;
+  font-weight: 600;
 }
 
-.registrarse p a:hover{
-    text-decoration: underline;
-    color: #5916e8;
+.registrarse p a:hover {
+  text-decoration: underline;
+  color: #5916e8;
 }
 
 .error-message {
-    color: red;
-    font-size: 14px;
+  color: red;
+  font-size: 14px;
 }
 
-::placeholder { color: #5f5f5f; }
+::placeholder {
+  color: #5f5f5f;
+}
 
+/** Cuando seleccionas algo del input de una recomendacion se cambiaba el color del fondo, esto hace que se deje el color que yo queria */
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #e6e6fa inset !important;
-    -webkit-text-fill-color: #333 !important;
+  -webkit-box-shadow: 0 0 0 30px #e6e6fa inset !important;
+  -webkit-text-fill-color: #333 !important;
 }
 
 input:-moz-autofill,
 input:-moz-autofill:hover,
 input:-moz-autofill:focus,
 input:-moz-autofill:active {
-    box-shadow: 0 0 0 30px #e6e6fa inset !important;
+  box-shadow: 0 0 0 30px #e6e6fa inset !important;
 }
 
-@media (max-width: 505px){
+@media (max-width: 505px) {
   .wrapper {
     position: relative;
     width: 500px;
@@ -153,7 +155,7 @@ input:-moz-autofill:active {
     align-items: center;
   }
 
-  .logo{
+  .logo {
     display: none;
   }
 }

@@ -180,7 +180,7 @@ body {
 
 .badge-custom {
   background-color: #ffa500;
-  color: #fff; /* Cambia el color del texto a blanco si es necesario */
+  color: #fff;
 }
 
 .enlace-cards .card {
@@ -193,41 +193,44 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+/* Estilos para el botón que permite mostrar y ocultar el menú en dispositivos móviles */
 .navbar-toggler {
-  padding: var(--bs-navbar-toggler-padding-y) var(--bs-navbar-toggler-padding-x);
-  font-size: var(--bs-navbar-toggler-font-size);
-  line-height: 1;
-  color: var(--bs-navbar-color);
-  background-color: transparent;
-  border: 2px solid var(--bs-navbar-toggler-border-color) !important;
-  border-radius: var(--bs-navbar-toggler-border-radius);
-  transition: var(--bs-navbar-toggler-transition);
+  padding: var(--bs-navbar-toggler-padding-y) var(--bs-navbar-toggler-padding-x); /* Espacio interno usando variables para flexibilidad */
+  font-size: var(--bs-navbar-toggler-font-size); /* Tamaño de fuente definido por variable */
+  line-height: 1; /* Altura de línea fija para el texto dentro del botón */
+  color: var(--bs-navbar-color); /* Color del texto, definido por variable para adaptabilidad */
+  background-color: transparent; /* Fondo transparente para un diseño más limpio */
+  border: 2px solid var(--bs-navbar-toggler-border-color) !important; /* Borde con color definido por variable y prioridad alta */
+  border-radius: var(--bs-navbar-toggler-border-radius); /* Redondeo de bordes, definido por variable */
+  transition: var(--bs-navbar-toggler-transition); /* Transiciones suaves para cambios de estilo */
 }
 
+/* Estilos específicos para las barras de navegación en modo oscuro */
 .navbar-dark,
 .navbar[data-bs-theme="dark"] {
-  --bs-navbar-color: rgba(255, 255, 255, 1);
-  --bs-navbar-hover-color: rgba(255, 255, 255, 1);
-  --bs-navbar-disabled-color: rgba(255, 255, 255, 1);
-  --bs-navbar-active-color: #fff;
-  --bs-navbar-brand-color: #fff;
-  --bs-navbar-brand-hover-color: #fff;
-  --bs-navbar-toggler-border-color: rgba(255, 255, 255, 1) !important;
+  --bs-navbar-color: rgba(255, 255, 255, 1); /* Define el color de texto para el modo oscuro */
+  --bs-navbar-hover-color: rgba(255, 255, 255, 1); /* Color de texto al pasar el mouse */
+  --bs-navbar-disabled-color: rgba(255, 255, 255, 1); /* Color de texto para elementos deshabilitados */
+  --bs-navbar-active-color: #fff; /* Color de texto para elementos activos */
+  --bs-navbar-brand-color: #fff; /* Color de la marca o logo en la barra */
+  --bs-navbar-brand-hover-color: #fff; /* Color de la marca al pasar el mouse */
+  --bs-navbar-toggler-border-color: rgba(255, 255, 255, 1) !important; /* Color del borde del botón en modo oscuro con alta prioridad */
   --bs-navbar-toggler-icon-bg: url(
     data:image/svg + xml,
     %3csvgxmlns="http://www.w3.org/2000/svg"viewBox="0 0 30 30"%3e%3cpathstroke="rgba%28255, 255, 255, 0.55%29"stroke-linecap="round"stroke-miterlimit="10"stroke-width="2"d="M4 7h22M4 15h22M4 23h22"/%3e%3c/svg%3e
-  );
+  ); /* Fondo SVG para el ícono del botón, usando un formato de datos en línea */
 }
 
+/* Estilos para el ícono dentro del botón que muestra y oculta el menú */
 .navbar-toggler-icon {
-  display: inline-block;
-  width: 1.5em;
-  height: 1.5em;
-  vertical-align: middle;
-  --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 100%;
+  display: inline-block; /* Display como bloque en línea para mejor alineación */
+  width: 1.5em; /* Ancho fijo basado en tamaño de fuente */
+  height: 1.5em; /* Altura fija basada en tamaño de fuente */
+  vertical-align: middle; /* Alineación vertical para centrar el ícono */
+  --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important; /* Define un fondo SVG en línea para el ícono con prioridad alta */
+  background-repeat: no-repeat; /* Sin repetición de fondo */
+  background-position: center; /* Posiciona el fondo en el centro */
+  background-size: 100%; /* Ajusta el fondo para cubrir completamente el área del ícono */
 }
 
 #logo-sidebar {
