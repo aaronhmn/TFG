@@ -17,7 +17,7 @@
 
 <body style="background-color: #e6e6fa">
 
-<nav class="navbar navbar-dark fixed-top" style="background-color: #8350f2;">
+    <nav class="navbar navbar-dark fixed-top" style="background-color: #8350f2;">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -37,7 +37,8 @@
                                 <i class="fas fa-home"></i> Ir a la web
                             </button>
                         </form>
-                    </li><hr>
+                    </li>
+                    <hr>
                     <li>
                         <form action="../controller/cerrarSesionController.php" method="POST">
                             <button class="dropdown-item">
@@ -50,7 +51,7 @@
             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel" style="visibility: visible; background-color: #8350f2;">
                 <div class="offcanvas-header">
                     <h3 class="offcanvas-title" id="offcanvasDarkNavbarLabel" style="color: white; margin-left: 20px;">
-                    <img src="../assets/img/genesis Logo.png" style="width: 80px; margin-right: 5px; margin-left: -20px;"><b>Menu</b>
+                        <img src="../assets/img/genesis Logo.png" style="width: 80px; margin-right: 5px; margin-left: -20px;"><b>Menu</b>
                     </h3>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
@@ -77,6 +78,9 @@
                         </li>
                         <li class="nav-item mt-4">
                             <a class="nav-link active" href="../controller/reseñasAdminController.php"><i class="fas fa-comments fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Reseñas</span></a>
+                        </li>
+                        <li class="nav-item mt-4">
+                            <a class="nav-link active" href="../controller/almacenesAdminController.php"><i class="fa-solid fa-warehouse fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Almacenes</span></a>
                         </li>
                     </ul>
                 </div>
@@ -124,16 +128,16 @@
                             echo "<tr>";
                             echo "<td><b>{$marca['idmarca']}</b></td>";
                             echo "<td>{$marca['nombre_marca']}</td>";
-                        
+
                             // Acciones
                             echo "<td>";
                             echo "<div style='display: flex; justify-content: flex-end; align-items: center; margin-right: 20px;'>"; // Flex container para los botones
-                            
+
                             // Botón Modificar
                             echo "<button class='btn btn-link p-0 align-middle' title='Modificar' data-bs-toggle='modal' data-bs-target='#modificarMarcaModal' data-id='{$marca['idmarca']}' data-nombre='" . htmlspecialchars($marca['nombre_marca'], ENT_QUOTES) . "' style='margin-right: 25px; background-color: transparent;'>";
                             echo "<i class='fas fa-edit fa-lg' style='color: #005eff;'></i>";
                             echo "</button>";
-                        
+
                             // Botón Eliminar
                             echo "<form id='formEliminar-{$marca['idmarca']}' method='POST' action='../controller/borrarMarcaController.php'>";
                             echo "<input type='hidden' name='idMarca' value='{$marca['idmarca']}'/>";

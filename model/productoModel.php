@@ -112,7 +112,7 @@ class producto
         if (isset($producto) && $conexPDO != null) {
             try {
                 // Preparamos la sentencia SQL con todos los campos necesarios, incluidas las claves foráneas
-                $sql = "INSERT INTO genesis.producto (nombre, precio, id_categoria, descripcion, especificacion, id_marca, stock, imagen, tipo_imagen, ruta_imagen) VALUES (:nombre, :precio, :id_categoria, :descripcion, :especificacion, :id_marca, :stock, :imagen, :tipo_imagen, :ruta_imagen)";
+                $sql = "INSERT INTO genesis.producto (nombre, precio, id_categoria, descripcion, especificacion, id_marca, stock, id_almacen, imagen, tipo_imagen, ruta_imagen) VALUES (:nombre, :precio, :id_categoria, :descripcion, :especificacion, :id_marca, :stock, :id_almacen, :imagen, :tipo_imagen, :ruta_imagen)";
                 $stmt = $conexPDO->prepare($sql);
 
                 // Asociamos los valores a los parámetros de la sentencia SQL
@@ -123,6 +123,7 @@ class producto
                 $stmt->bindParam(":especificacion", $producto["especificacion"]);
                 $stmt->bindParam(":id_marca", $producto["id_marca"]);
                 $stmt->bindParam(":stock", $producto["stock"]);
+                $stmt->bindParam(":id_almacen", $producto["id_almacen"]);
                 $stmt->bindParam(":imagen", $producto["imagen"]);
                 $stmt->bindParam(":tipo_imagen", $producto["tipo_imagen"]);
                 $stmt->bindParam(":ruta_imagen", $producto["ruta_imagen"]);
@@ -143,7 +144,7 @@ class producto
         if (isset($producto) && isset($producto["idproducto"]) && is_numeric($producto["idproducto"]) && $conexPDO != null) {
             try {
                 // Preparamos la sentencia SQL con todos los campos necesarios, incluidas las claves foráneas
-                $sql = "UPDATE genesis.producto SET nombre = :nombre, precio = :precio, id_categoria = :id_categoria, descripcion = :descripcion, especificacion = :especificacion, id_marca = :id_marca, stock = :stock, ruta_imagen = :ruta_imagen, estado = :estado  WHERE idproducto = :idproducto";
+                $sql = "UPDATE genesis.producto SET nombre = :nombre, precio = :precio, id_categoria = :id_categoria, descripcion = :descripcion, especificacion = :especificacion, id_marca = :id_marca, stock = :stock, id_almacen = :id_almacen, ruta_imagen = :ruta_imagen, estado = :estado  WHERE idproducto = :idproducto";
 
                 $stmt = $conexPDO->prepare($sql);
 
@@ -156,6 +157,7 @@ class producto
                 $stmt->bindParam(":especificacion", $producto["especificacion"]);
                 $stmt->bindParam(":id_marca", $producto["id_marca"]);
                 $stmt->bindParam(":stock", $producto["stock"]);
+                $stmt->bindParam(":id_almacen", $producto["id_almacen"]);
                 $stmt->bindParam(":ruta_imagen", $producto["ruta_imagen"]);
                 $stmt->bindParam(":estado", $producto["estado"]);
 
@@ -342,6 +344,20 @@ function getMarcas($conexPDO)
     if ($conexPDO != null) {
         try {
             $sentencia = $conexPDO->prepare("SELECT * FROM genesis.marca");
+            $sentencia->execute();
+            return $sentencia->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            print("Error al acceder a BD: " . $e->getMessage());
+            return [];
+        }
+    }
+}
+
+function getAlmacenes($conexPDO)
+{
+    if ($conexPDO != null) {
+        try {
+            $sentencia = $conexPDO->prepare("SELECT * FROM genesis.almacen");
             $sentencia->execute();
             return $sentencia->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {

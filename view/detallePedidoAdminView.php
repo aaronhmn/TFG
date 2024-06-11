@@ -79,6 +79,9 @@
                         <li class="nav-item mt-4">
                             <a class="nav-link active" href="../controller/reseñasAdminController.php"><i class="fas fa-comments fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Reseñas</span></a>
                         </li>
+                        <li class="nav-item mt-4">
+                            <a class="nav-link active" href="../controller/almacenesAdminController.php"><i class="fa-solid fa-warehouse fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Almacenes</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>

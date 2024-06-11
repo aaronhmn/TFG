@@ -10,12 +10,14 @@ use \model\utils;
 use \model\producto;
 use \model\marca;
 use \model\categoria;
+use \model\almacen;
 
 //Añadimos el código del modelo
 require_once("../model/utils.php");
 require_once("../model/productoModel.php");
 require_once("../model/marcaModel.php");
 require_once("../model/categoriaModel.php");
+require_once("../model/almacenModel.php");
 $mensaje = null;
 
 session_start();
@@ -37,10 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $especificacion = $_POST['inputEspecificacion'];
     $marca = $_POST['inputMarca'];
     $stock = $_POST['inputStock'];
+    $almacen = $_POST['inputAlmacen'];
 
     // Verifica si se subieron exactamente cuatro imágenes
     if (count($_FILES['inputImagen']['name']) == 4) {
-        InsertarProducto($nombre, $precio, $categoria, $descripcion, $especificacion, $marca, $stock);
+        InsertarProducto($nombre, $precio, $categoria, $descripcion, $especificacion, $marca, $stock, $almacen);
     } else {
         $_SESSION['mensaje'] = "Debe subir exactamente cuatro imágenes.";
         $_SESSION['tipo_mensaje'] = "warning";
@@ -49,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-function InsertarProducto($nombre, $precio, $categoria, $descripcion, $especificacion, $marca, $stock)
+function InsertarProducto($nombre, $precio, $categoria, $descripcion, $especificacion, $marca, $stock, $almacen)
 {
     //Declaramos un array vacio que alojará los datos del producto
     $producto = array();
@@ -61,6 +64,7 @@ function InsertarProducto($nombre, $precio, $categoria, $descripcion, $especific
     $producto["especificacion"] = utils::limpiar_datos($especificacion);
     $producto["id_marca"] = utils::limpiar_datos($marca);
     $producto["stock"] = utils::limpiar_datos($stock);
+    $producto["id_almacen"] = utils::limpiar_datos($almacen);
 
     // Inicializa una variable para almacenar las rutas de las imágenes
     $imagenesRutas = [];

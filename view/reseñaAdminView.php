@@ -17,42 +17,45 @@
 
 <body style="background-color: #e6e6fa">
 
-<nav class="navbar navbar-dark fixed-top" style="background-color: #8350f2;">
+    <nav class="navbar navbar-dark fixed-top" style="background-color: #8350f2;">
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
-                aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-brand" href="../controller/inicioAdminController.php" id="logo-sidebar"><img src="../assets/img/genesis Logo.png" style="width: 50px;">Genesis</a>
             <div class="dropdown">
                 <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #8350f2; border-color: #8350f2; font-size: 18px;">
-                <?php
+                    <?php
                     $resultado = $_SESSION['nombre_usuario'];
                     echo "<b style='color: #fff;'>$resultado</b>";
                     ?>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                    <li><form action="../controller/inicioController.php" method="POST">
-                        <button class="dropdown-item">
-                            <i class="fas fa-home"></i> Ir a la web
-                        </button>
-                    </form></li><hr>
-                    <li><form action="../controller/cerrarSesionController.php" method="POST">
-                        <button class="dropdown-item">
-                            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-                        </button>
-                    </form></li>
+                    <li>
+                        <form action="../controller/inicioController.php" method="POST">
+                            <button class="dropdown-item">
+                                <i class="fas fa-home"></i> Ir a la web
+                            </button>
+                        </form>
+                    </li>
+                    <hr>
+                    <li>
+                        <form action="../controller/cerrarSesionController.php" method="POST">
+                            <button class="dropdown-item">
+                                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                            </button>
+                        </form>
+                    </li>
                 </ul>
             </div>
             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel" style="visibility: visible; background-color: #8350f2;">
                 <div class="offcanvas-header">
                     <h3 class="offcanvas-title" id="offcanvasDarkNavbarLabel" style="color: white; margin-left: 20px;">
-                    <img src="../assets/img/genesis Logo.png" style="width: 80px; margin-right: 5px; margin-left: -20px;"><b>Menu</b>
+                        <img src="../assets/img/genesis Logo.png" style="width: 80px; margin-right: 5px; margin-left: -20px;"><b>Menu</b>
                     </h3>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                        aria-label="Close"></button>
-                </div><hr style="color: #fff;">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <hr style="color: #fff;">
                 <div class="offcanvas-body">
                     <ul class="navbar-nav flex-grow-1 pe-3" style="margin-left: 20px;">
                         <li class="nav-item">
@@ -75,6 +78,9 @@
                         </li>
                         <li class="nav-item mt-4" id="active">
                             <a class="nav-link active" href="../controller/reseñasAdminController.php"><i class="fas fa-comments fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Reseñas</span></a>
+                        </li>
+                        <li class="nav-item mt-4">
+                            <a class="nav-link active" href="../controller/almacenesAdminController.php"><i class="fa-solid fa-warehouse fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Almacenes</span></a>
                         </li>
                     </ul>
                 </div>
@@ -126,7 +132,7 @@
                             //Valoracion
                             print("<td>" . $datosReseña["valoracion"] . "</td>\n");
                             //Comentario
-                            print"<td><button class='btn btn-link p-0 align-middle' style='vertical-align: middle;' title='Ver comentario' onclick='mostrarComentario(\"" . addslashes($datosReseña["comentario"]) . "\")'><i class='fas fa-eye fa-xl' style='color: #8350f2'></i></button></td>\n";
+                            print "<td><button class='btn btn-link p-0 align-middle' style='vertical-align: middle;' title='Ver comentario' onclick='mostrarComentario(\"" . addslashes($datosReseña["comentario"]) . "\")'><i class='fas fa-eye fa-xl' style='color: #8350f2'></i></button></td>\n";
                         }
                         ?>
                     </tbody>
@@ -144,31 +150,31 @@
     </div>
 
     <!-- Modal -->
-<div class="modal fade" id="comentarioModal" tabindex="-1" aria-labelledby="comentarioModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" id="comentarioModalLabel" style="color: #8350F2;"><b>Comentario</b></h3>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Aquí se añadirá el comentario -->
-      </div>
+    <div class="modal fade" id="comentarioModal" tabindex="-1" aria-labelledby="comentarioModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="comentarioModalLabel" style="color: #8350F2;"><b>Comentario</b></h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Aquí se añadirá el comentario -->
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
+
     <script>
-function mostrarComentario(comentario) {
-  const modalBody = document.querySelector('#comentarioModal .modal-body');
-  modalBody.textContent = comentario; // Usa textContent para evitar inyección de HTML
-  const modal = new bootstrap.Modal(document.getElementById('comentarioModal'));
-  modal.show();
-}
-</script>
+        function mostrarComentario(comentario) {
+            const modalBody = document.querySelector('#comentarioModal .modal-body');
+            modalBody.textContent = comentario; // Usa textContent para evitar inyección de HTML
+            const modal = new bootstrap.Modal(document.getElementById('comentarioModal'));
+            modal.show();
+        }
+    </script>
 
 </body>
 

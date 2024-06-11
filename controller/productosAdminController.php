@@ -5,11 +5,13 @@ use \model\producto;
 use \model\utils;
 use \model\marca;
 use \model\categoria;
+use \model\almacen;
 
 //Añadimos el código del modelo
 require_once("../model/productoModel.php");
 require_once("../model/marcaModel.php");
 require_once("../model/categoriaModel.php");
+require_once("../model/almacenModel.php");
 require_once("../model/utils.php");
 $mensaje=null;
 
@@ -33,6 +35,7 @@ function truncarTexto($texto, $maxCaracteres) {
 $gestorProductos = new Producto();
 $gestorMarcas = new Marca();
 $gestorCategorias = new Categoria();
+$gestorAlmacenes = new Almacen();
 
 //Nos conectamos a la Bd
 $conexPDO = utils::conectar();
@@ -40,6 +43,7 @@ $conexPDO = utils::conectar();
 $datosProducto = $gestorProductos->getProductos($conexPDO);
 $marcas = $gestorMarcas->getMarcas($conexPDO);
 $categorias = $gestorCategorias->getCategorias($conexPDO);
+$almacenes = $gestorAlmacenes->getAlmacenes($conexPDO);
 
 //Paginacion
 $totalProductos = $gestorProductos->getProductos($conexPDO);

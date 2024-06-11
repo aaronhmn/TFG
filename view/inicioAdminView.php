@@ -42,7 +42,8 @@
                                 <i class="fas fa-home"></i> Ir a la web
                             </button>
                         </form>
-                    </li><hr>
+                    </li>
+                    <hr>
                     <li>
                         <form action="../controller/cerrarSesionController.php" method="POST">
                             <button class="dropdown-item">
@@ -55,7 +56,7 @@
             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel" style="visibility: visible; background-color: #8350f2;">
                 <div class="offcanvas-header">
                     <h3 class="offcanvas-title" id="offcanvasDarkNavbarLabel" style="color: white; margin-left: 20px;">
-                    <img src="../assets/img/genesis Logo.png" style="width: 80px; margin-right: 5px; margin-left: -20px;"><b>Menu</b>
+                        <img src="../assets/img/genesis Logo.png" style="width: 80px; margin-right: 5px; margin-left: -20px;"><b>Menu</b>
                     </h3>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
@@ -83,14 +84,16 @@
                         <li class="nav-item mt-4">
                             <a class="nav-link active" href="../controller/reseñasAdminController.php"><i class="fas fa-comments fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Reseñas</span></a>
                         </li>
+                        <li class="nav-item mt-4">
+                            <a class="nav-link active" href="../controller/almacenesAdminController.php"><i class="fa-solid fa-warehouse fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Almacenes</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </nav>
 
-    <div class="container mt-5"><br><br>
-    <h1 class="mt-5 text-center" style="color: #8350F2;"><b>Panel de Administrador</b></h1>
+    <div class="container mt-4"><br><br>
         <div class="row g-5 justify-content-center mt-5" style="margin: 0;">
             <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-4">
                 <a href="../controller/usuariosAdminController.php" class="enlace-cards">
@@ -164,10 +167,22 @@
                     </div>
                 </a>
             </div>
+            <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 col-xxl-4" style="margin-bottom: 60px; margin-top: 0;">
+                <a href="../controller/almacenesAdminController.php" class="enlace-cards">
+                    <div class="card" style="width: 14rem; text-align: center; margin: auto; border: 2px solid #8350F2;">
+                        <div class="icon-container" style="font-size: 4rem; margin-top: 20px;">
+                            <i class="fa-solid fa-warehouse" style="color: #8350F2;"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><b>Almacenes</b> <span class="badge badge-custom"><?= $almacenes ?></span></h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
-        
+
     </div>
-    
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

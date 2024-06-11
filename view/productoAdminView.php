@@ -85,6 +85,9 @@
                         <li class="nav-item mt-4">
                             <a class="nav-link active" href="../controller/reseñasAdminController.php"><i class="fas fa-comments fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Reseñas</span></a>
                         </li>
+                        <li class="nav-item mt-4">
+                            <a class="nav-link active" href="../controller/almacenesAdminController.php"><i class="fa-solid fa-warehouse fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Almacenes</span></a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -124,6 +127,7 @@
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Categoria</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Marca</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Stock</th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Almacén</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Estado</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col"></th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col"></th>
@@ -146,6 +150,7 @@
 
                             $nombreMarca = $gestorMarcas->getMarcaId($datosProducto["id_marca"], $conexPDO)['nombre_marca'];
                             $nombreCategoria = $gestorCategorias->getCategoriaId($datosProducto["id_categoria"], $conexPDO)['nombre_categoria'];
+                            $nombreAlmacen = $gestorAlmacenes->getAlmacenId($datosProducto["id_almacen"], $conexPDO)['nombre'];
                             //Comienzo de fila
                             print("<tr style='align-items: center; background-color: gray;'>\n");
 
@@ -161,9 +166,12 @@
                             print("<td>" . $datosProducto["precio"] . "€</td>\n");
                             //Categoria
                             print("<td>" . $nombreCategoria . "</td>\n");
+                            //Marca
                             print("<td>" . $nombreMarca . "</td>\n");
                             //Stock
                             print("<td>" . $datosProducto["stock"] . "</td>\n");
+                            //Marca
+                            print("<td>" . $nombreAlmacen . "</td>\n");
                             //Estado
                             $estadoTexto = $datosProducto["estado"] == 0 ? 'Disponible' : 'Oculto';
                             print("<td>" . $estadoTexto . "</td>\n");
@@ -195,6 +203,7 @@
                                 . " data-stock='" . htmlspecialchars($datosProducto['stock'], ENT_QUOTES) . "'"
                                 . " data-categoria='" . htmlspecialchars($datosProducto['id_categoria'], ENT_QUOTES) . "'"
                                 . " data-marca='" . htmlspecialchars($datosProducto['id_marca'], ENT_QUOTES) . "'"
+                                . " data-almacen='" . htmlspecialchars($datosProducto['id_almacen'], ENT_QUOTES) . "'"
                                 . " data-descripcion='" . htmlspecialchars($datosProducto['descripcion'], ENT_QUOTES) . "'"
                                 . " data-especificacion='" . htmlspecialchars($datosProducto['especificacion'], ENT_QUOTES) . "'"
                                 /* . " data-estado='" . htmlspecialchars($datosProducto['estado'], ENT_QUOTES) . "'" */
@@ -268,6 +277,16 @@
                         </div>
 
                         <div class="mb-3">
+                            <label for="selectAlmacen" class="form-label"><b>Almacén:</b></label>
+                            <select class="form-select" name="inputAlmacen" id="selectAlmacen" required>
+                                <option value="" selected disabled>Elija un almacén</option>
+                                <?php foreach ($almacenes as $almacen) : ?>
+                                    <option value="<?= $almacen['idalmacen'] ?>"><?= htmlspecialchars($almacen['nombre']) ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label"><b>Descripción:</b></label>
                             <textarea class="form-control" name="inputDescripcion" rows="10" style="resize: none;" required></textarea>
                         </div>
@@ -338,6 +357,15 @@
                             </div>
                         </div>
                         <div class="mb-3">
+                            <label for="selectAlmacen" class="form-label"><b>Almacén:</b></label>
+                            <select class="form-select" name="id_almacen" id="selectAlmacen" required>
+                                <option value="" selected disabled>Elija un almacén</option>
+                                <?php foreach ($almacenes as $almacen) : ?>
+                                    <option value="<?= $almacen['idalmacen'] ?>"><?= htmlspecialchars($almacen['nombre']) ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label for="descripcion" class="form-label"><b>Descripción:</b></label>
                             <textarea class="form-control" id="descripcion" name="descripcion" rows="10" required></textarea>
                         </div>
@@ -393,6 +421,9 @@
                     <p style="color: #8350F2;">Stock:</p>
                     <span id="detalle_stock"></span>
                     <hr>
+                    <p style="color: #8350F2;">Almacén:</p>
+                    <span id="detalle_almacen"></span>
+                    <hr>
                     <p style="color: #8350F2;">Imágenes:</p>
                     <span id="detalle_imagenes"></span>
                 </div>
@@ -407,22 +438,22 @@
 
     <!-- Modal de Confirmación de Eliminación -->
     <div class="modal fade" id="confirmacionEliminarModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title" id="modalLabel" style="color: #8350F2;"><b>Confirmar Eliminación</b></h3>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <b>¿Estás seguro de que deseas eliminar este producto?</b>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-danger" id="confirmarEliminar">Eliminar</button>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modalLabel" style="color: #8350F2;"><b>Confirmar Eliminación</b></h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <b>¿Estás seguro de que deseas eliminar este producto?</b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmarEliminar">Eliminar</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -458,6 +489,7 @@
             var stock = button.data('stock');
             var categoria = button.data('categoria');
             var marca = button.data('marca');
+            var almacen = button.data('almacen');
             var descripcion = button.data('descripcion');
             var especificacion = button.data('especificacion');
             var estado = button.data('estado');
@@ -472,6 +504,7 @@
             modal.find('#stock').val(stock);
             modal.find('#selectCategoria').val(categoria);
             modal.find('#selectMarca').val(marca);
+            modal.find('#selectAlmacen').val(almacen);
             modal.find('#descripcion').val(descripcion);
             modal.find('#especificacion').val(especificacion);
             modal.find('#estado').val(estado);
@@ -519,6 +552,7 @@
                         $('#detalle_especificacion').text(producto.especificacion || 'No disponible');
                         $('#detalle_marca').text(producto.marca || 'No disponible');
                         $('#detalle_stock').text(producto.stock || 'No disponible');
+                        $('#detalle_almacen').text(producto.almacen || 'No disponible');
 
                         // Suponiendo que las imágenes están separadas por comas
                         var imagenesHtml = '';

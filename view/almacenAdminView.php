@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" />
 
-    <title>Categorías - Dashboard</title>
+    <title>Marcas - Dashboard</title>
 </head>
 
 <body style="background-color: #e6e6fa">
@@ -67,7 +67,7 @@
                         <li class="nav-item mt-4">
                             <a class="nav-link active" href="../controller/productosAdminController.php"><i class="fas fa-briefcase fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Productos</span></a>
                         </li>
-                        <li class="nav-item mt-4" id="active">
+                        <li class="nav-item mt-4">
                             <a class="nav-link active" href="../controller/categoriasAdminController.php"><i class="fas fa-list-alt fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Categorías</span></a>
                         </li>
                         <li class="nav-item mt-4">
@@ -79,7 +79,7 @@
                         <li class="nav-item mt-4">
                             <a class="nav-link active" href="../controller/reseñasAdminController.php"><i class="fas fa-comments fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Reseñas</span></a>
                         </li>
-                        <li class="nav-item mt-4">
+                        <li class="nav-item mt-4" id="active">
                             <a class="nav-link active" href="../controller/almacenesAdminController.php"><i class="fa-solid fa-warehouse fa-xl" style="color: #fff; margin-right: 10px;"></i><span style="font-size: 20px;">Almacenes</span></a>
                         </li>
                     </ul>
@@ -93,8 +93,8 @@
         <div class="navbar2 mt-5">
             <ul>
                 <li>
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#insertarCategoriaModal">
-                        Insertar categoria nueva
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#insertarAlmacenModal">
+                        Insertar almacén nuevo
                     </button>
                 </li>
             </ul>
@@ -118,30 +118,48 @@
                     <thead>
                         <tr>
                             <th style="background-color: #8350F2; color: #fff;" scope="col">Id</th>
-                            <th style="background-color: #8350F2; color: #fff;" scope="col">Nombre de la Categoría</th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Nombre del almacén</th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Teléfono</th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Código postal</th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Calle</th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Número del bloque</th>
+                            <th style="background-color: #8350F2; color: #fff;" scope="col">Piso</th>
                             <th style="background-color: #8350F2; color: #fff;" scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($categoriasPaginadas as $categoria) {
+                        foreach ($AlmacenesPaginadas as $almacen) {
                             echo "<tr>";
-                            echo "<td><b>{$categoria['idcategoria']}</b></td>";
-                            echo "<td>{$categoria['nombre_categoria']}</td>";
+                            echo "<td><b>{$almacen['idalmacen']}</b></td>";
+                            echo "<td>{$almacen['nombre']}</td>";
+                            echo "<td>{$almacen['telefono']}</td>";
+                            echo "<td>{$almacen['codigo_postal']}</td>";
+                            echo "<td>{$almacen['calle']}</td>";
+                            echo "<td>{$almacen['numero_bloque']}</td>";
+                            echo "<td>{$almacen['piso']}</td>";
 
                             // Acciones
                             echo "<td>";
-                            echo "<div style='display: flex; align-items: center; justify-content: flex-end; margin-right: 20px;'>";
+                            echo "<div style='display: flex; justify-content: flex-end; align-items: center; margin-right: 20px;'>"; // Flex container para los botones
 
                             // Botón Modificar
-                            echo "<button class='btn btn-link p-0 align-middle' title='Modificar' data-bs-toggle='modal' data-bs-target='#modificarCategoriaModal' data-id='{$categoria['idcategoria']}' data-nombre='" . htmlspecialchars($categoria['nombre_categoria'], ENT_QUOTES) . "' style='margin-right: 25px;'>";
+                            echo "<button class='btn btn-link p-0 align-middle' title='Modificar' data-bs-toggle='modal' data-bs-target='#modificarAlmacenModal' ";
+                            echo "data-id='{$almacen['idalmacen']}' ";
+                            echo "data-nombre='" . htmlspecialchars($almacen['nombre'], ENT_QUOTES) . "' ";
+                            echo "data-telefono='{$almacen['telefono']}' ";
+                            echo "data-codigo_postal='{$almacen['codigo_postal']}' ";
+                            echo "data-calle='" . htmlspecialchars($almacen['calle'], ENT_QUOTES) . "' ";
+                            echo "data-numero_bloque='{$almacen['numero_bloque']}' ";
+                            echo "data-piso='" . htmlspecialchars($almacen['piso'], ENT_QUOTES) . "' ";
+                            echo "style='margin-right: 25px; background-color: transparent;'>";
                             echo "<i class='fas fa-edit fa-lg' style='color: #005eff;'></i>";
                             echo "</button>";
 
                             // Botón Eliminar
-                            echo "<form id='formEliminar-{$categoria['idcategoria']}' method='POST' action='../controller/borrarCategoriaController.php'>";
-                            echo "<input type='hidden' name='idCategoria' value='{$categoria['idcategoria']}'/>";
-                            echo "<button class='btn btn-link p-0 align-middle' title='Eliminar' type='button' onclick='mostrarModalEliminar(" . $categoria['idcategoria'] . ");'>";
+                            echo "<form id='formEliminar-{$almacen['idalmacen']}' method='POST' action='../controller/borrarAlmacenController.php'>";
+                            echo "<input type='hidden' name='idAlmacen' value='{$almacen['idalmacen']}'/>";
+                            echo "<button class='btn btn-link p-0 align-middle' title='Eliminar' type='button' onclick='mostrarModalEliminar(" . $almacen['idalmacen'] . ");' style='background-color: transparent;'>";
                             echo "<i class='fa-solid fa-trash-alt fa-lg' style='color: red;'></i>";
                             echo "</button>";
                             echo "</form>";
@@ -152,7 +170,7 @@
                         ?>
                     </tbody>
                 </table>
-                <form method="POST" action="../controller/categoriasAdminController.php">
+                <form method="POST" action="../controller/almacenesAdminController.php">
                     <?php
                     for ($i = 1; $i <= $totalPaginas; $i++) {
                         echo "<button style='margin-left: 7px; margin-bottom: 25px; background-color: #8350F2; color: #fff; border-radius: 50%; width: 40px' name='Pag' value='$i' class='btn'>$i</button>";
@@ -165,20 +183,40 @@
         </div><br>
     </div>
 
-    <!-- Modal Insertar Categoria -->
-    <div class="modal fade" id="insertarCategoriaModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <!-- Modal Insertar Almacen -->
+    <div class="modal fade" id="insertarAlmacenModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="modalLabel" style="color: #8350F2;"><b>Insertar nueva categoria</b></h3>
+                    <h3 class="modal-title" id="modalLabel" style="color: #8350F2;"><b>Insertar nuevo almacen</b></h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <!-- Aquí va el formulario de inserción de categoria -->
-                    <form method="POST" action="../controller/insertarCategoriasAdminController.php" enctype="multipart/form-data">
+                    <form method="POST" action="../controller/insertarAlmacenesAdminController.php" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label for="inputNombre" class="form-label"><b>Nombre de la Categoría:</b></label>
+                            <label for="inputNombre" class="form-label"><b>Nombre del almacen:</b></label>
                             <input type="text" class="form-control" name="inputNombre" required aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputTelefono" class="form-label"><b>Teléfono:</b></label>
+                            <input type="number" class="form-control" name="inputTelefono" required aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputCP" class="form-label"><b>Código postal:</b></label>
+                            <input type="number" class="form-control" name="inputCP" required aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputCalle" class="form-label"><b>Calle:</b></label>
+                            <input type="text" class="form-control" name="inputCalle" required aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputNB" class="form-label"><b>Número del bloque:</b></label>
+                            <input type="number" class="form-control" name="inputNB" required aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputPiso" class="form-label"><b>Piso:</b></label>
+                            <input type="text" class="form-control" name="inputPiso" aria-describedby="emailHelp">
                         </div>
                         <div class="d-grid">
                             <button class="btn btn-primary" type="submit" value="Upload" style="background-color: #8350F2; border:#8350F2;">Insertar</button>
@@ -189,21 +227,46 @@
         </div>
     </div>
 
-    <!-- Modal Modificar Categoria -->
-    <div class="modal fade" id="modificarCategoriaModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <!-- Modal Modificar Almacen -->
+    <div class="modal fade" id="modificarAlmacenModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title" id="modalLabel" style="color: #8350F2;"><b>Modificar categoria</b></h3>
+                    <h3 class="modal-title" id="modalLabel" style="color: #8350F2;"><b>Modificar almacén</b></h3>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <!-- Aquí va el formulario de modificacion de categoria -->
-                    <form method="POST" action="../controller/modificarCategoriaAdminController.php" enctype="multipart/form-data">
+                    <form method="POST" action="../controller/modificarAlmacenController.php" enctype="multipart/form-data">
                         <div class="mb-3">
-                            <label for="nombre_categoria" class="form-label"><b>Nombre de la Categoría:</b></label>
-                            <input type="text" class="form-control" name="nombre_categoria" id="nombre_categoria" value="" required>
-                            <input type="hidden" name="idCategoria" id="idCategoria" value="">
+                            <label for="nombre" class="form-label"><b>Nombre del almacén:</b></label>
+                            <input type="text" class="form-control" name="nombre" id="nombre" value="" required>
+                            <input type="hidden" name="idAlmacen" id="idAlmacen" value="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefono" class="form-label"><b>Teléfono:</b></label>
+                            <input type="number" class="form-control" name="telefono" id="telefono" value="" required>
+                            <input type="hidden" name="idAlmacen" id="idAlmacen" value="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="codigo_postal" class="form-label"><b>Código postal:</b></label>
+                            <input type="number" class="form-control" name="codigo_postal" id="codigo_postal" value="" required>
+                            <input type="hidden" name="idAlmacen" id="idAlmacen" value="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="calle" class="form-label"><b>Calle:</b></label>
+                            <input type="text" class="form-control" name="calle" id="calle" value="" required>
+                            <input type="hidden" name="idAlmacen" id="idAlmacen" value="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="numero_bloque" class="form-label"><b>Número del bloque:</b></label>
+                            <input type="number" class="form-control" name="numero_bloque" id="numero_bloque" value="" required>
+                            <input type="hidden" name="idAlmacen" id="idAlmacen" value="">
+                        </div>
+                        <div class="mb-3">
+                            <label for="piso" class="form-label"><b>Piso:</b></label>
+                            <input type="text" class="form-control" name="piso" id="piso" value="">
+                            <input type="hidden" name="idAlmacen" id="idAlmacen" value="">
                         </div>
                         <div class="d-grid">
                             <button class="btn btn-primary" type="submit" value="Upload" style="background-color: #8350F2; border:#8350F2;">Modificar</button>
@@ -223,7 +286,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <b>¿Estás seguro de que deseas eliminar esta categoría?</b>
+                    <b>¿Estás seguro de que deseas eliminar esta marca?</b>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -240,7 +303,7 @@
         //script para borrar lo que haya dentro del modal
         document.addEventListener("DOMContentLoaded", function() {
             // Selecciona el modal por su ID
-            var modal = document.getElementById('insertarCategoriaModal');
+            var modal = document.getElementById('insertarAlmacenModal');
 
             // Escucha el evento 'hidden.bs.modal' que se dispara cuando el modal se ha cerrado
             modal.addEventListener('hidden.bs.modal', function(event) {
@@ -249,21 +312,31 @@
             });
         });
 
-        $('#modificarCategoriaModal').on('show.bs.modal', function(event) {
+        $('#modificarAlmacenModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
-            var idCategoria = button.data('id');
-            var nombreCategoria = button.data('nombre');
+            var idAlmacen = button.data('id');
+            var nombre = button.data('nombre');
+            var telefono = button.data('telefono');
+            var codigo_postal = button.data('codigo_postal');
+            var calle = button.data('calle');
+            var numero_bloque = button.data('numero_bloque');
+            var piso = button.data('piso');
 
             var modal = $(this);
-            modal.find('[name="nombre_categoria"]').val(nombreCategoria);
-            modal.find('[name="idCategoria"]').val(idCategoria);
+            modal.find('[name="nombre"]').val(nombre);
+            modal.find('[name="telefono"]').val(telefono);
+            modal.find('[name="codigo_postal"]').val(codigo_postal);
+            modal.find('[name="calle"]').val(calle);
+            modal.find('[name="numero_bloque"]').val(numero_bloque);
+            modal.find('[name="piso"]').val(piso);
+            modal.find('[name="idAlmacen"]').val(idAlmacen);
         });
 
-        function mostrarModalEliminar(idCategoria) {
+        function mostrarModalEliminar(idAlmacen) {
             var modal = new bootstrap.Modal(document.getElementById('confirmacionEliminarModal'));
             var botonEliminar = document.getElementById('confirmarEliminar');
             botonEliminar.onclick = function() {
-                document.getElementById('formEliminar-' + idCategoria).submit();
+                document.getElementById('formEliminar-' + idAlmacen).submit();
             };
             modal.show();
         }

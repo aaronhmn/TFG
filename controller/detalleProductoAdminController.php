@@ -9,11 +9,13 @@ if (session_status() == PHP_SESSION_NONE) {
 require_once("../model/productoModel.php");
 require_once("../model/categoriaModel.php");
 require_once("../model/marcaModel.php");
+require_once("../model/almacenModel.php");
 require_once("../model/utils.php");
 
 use model\Producto;
 use model\Marca;
 use model\Categoria;
+use model\Almacen;
 use model\utils;
 
 header('Content-Type: application/json'); // Establece el MIME type a JSON
@@ -46,6 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idProducto'])) {
     $gestorCategoria = new categoria();
     $categoria = $gestorCategoria->getCategoriaId($producto['id_categoria'], $conexPDO);
 
+    $gestorAlmacen = new almacen();
+    $almacen = $gestorAlmacen->getAlmacenId($producto['id_almacen'], $conexPDO);
+
     // Compilar la respuesta con todos los datos
     $respuesta = [
         'idproducto' => $producto['idproducto'],
@@ -56,7 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idProducto'])) {
         'stock' => $producto['stock'],
         'ruta_imagen' => $producto['ruta_imagen'],
         'marca' => $marca ? $marca['nombre_marca'] : 'Marca no especificada',
-        'categoria' => $categoria ? $categoria['nombre_categoria'] : 'Categoría no especificada'
+        'categoria' => $categoria ? $categoria['nombre_categoria'] : 'Categoría no especificada',
+        'almacen' => $almacen ? $almacen['nombre'] : 'Almacén no especificado'
     ];
     
     // Verificar si se obtuvieron los datos correctamente

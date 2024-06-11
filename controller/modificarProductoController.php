@@ -5,11 +5,13 @@ namespace model;
 use \model\producto;
 use \model\marca;
 use \model\categoria;
+use \model\almacen;
 use \model\utils;
 
 require_once("../model/productoModel.php");
 require_once("../model/marcaModel.php");
 require_once("../model/categoriaModel.php");
+require_once("../model/almacenModel.php");
 require_once("../model/utils.php");
 
 if (session_status() == PHP_SESSION_NONE) {
@@ -26,6 +28,7 @@ $conexPDO = utils::conectar();
 $gestorProducto = new Producto();
 $gestorMarca = new Marca();
 $gestorCategoria = new Categoria();
+$gestorAlmacen = new Almacen();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $producto = [
@@ -37,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         "especificacion" => $_POST["especificacion"],
         "id_marca" => $_POST["id_marca"],
         "stock" => $_POST["stock"],
+        "id_almacen" => $_POST["id_almacen"],
         "ruta_imagen" => $gestorProducto->getProductoId($_POST["idproducto"], $conexPDO)['ruta_imagen']
     ];
 
@@ -91,6 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $producto = $gestorProducto->getProductoId($_GET["idproducto"], $conexPDO);
     $marcas = $gestorMarca->getMarcas($conexPDO);
     $categorias = $gestorCategoria->getCategorias($conexPDO);
+    $almacenes = $gestorAlmacen->getAlmacenes($conexPDO);
 
     /* include("../view/modificarProductoView.php"); */
 }

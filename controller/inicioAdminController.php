@@ -8,6 +8,7 @@ use model\Categoria;
 use model\Marca;
 use model\Pedido;
 use model\Reseña;
+use model\Almacen;
 
 require_once("../model/utils.php");
 require_once("../model/usuarioModel.php");
@@ -16,6 +17,7 @@ require_once("../model/categoriaModel.php");
 require_once("../model/marcaModel.php");
 require_once("../model/pedidoModel.php");
 require_once("../model/reseñaModel.php");
+require_once("../model/almacenModel.php");
 
 $mensaje = null;
 
@@ -36,6 +38,7 @@ $categoriaModel = new Categoria();
 $marcaModel = new Marca();
 $pedidoModel = new Pedido(); 
 $reseñaModel = new Reseña(); 
+$almacenModel = new Almacen();
 
 // Realizar las consultas para obtener los contadores
 $usuarios = $usuarioModel->contarUsuarios($conexPDO);
@@ -44,6 +47,7 @@ $categorias = $categoriaModel->contarCategorias($conexPDO);
 $marcas = $marcaModel->contarMarcas($conexPDO);
 $pedidos = $pedidoModel->contarPedidos($conexPDO);
 $reseñas = $reseñaModel->contarReseñas($conexPDO);
+$almacenes = $almacenModel->contarAlmacenes($conexPDO);
 
 include("../view/inicioAdminView.php");
 ?>
