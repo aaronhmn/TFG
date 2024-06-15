@@ -81,7 +81,7 @@ class categoria
         if (!$this->verificarProductosCategoria($idCategoria, $conexPDO)) {
             try {
                 // Preparar la sentencia SQL para eliminar la categoría
-                $stmt = $conexPDO->prepare("DELETE FROM categoria WHERE id_categoria = :idCategoria");
+                $stmt = $conexPDO->prepare("DELETE FROM categoria WHERE idcategoria = :idCategoria");
                 // Asociar el ID de la categoría al parámetro de la sentencia
                 $stmt->bindParam(':idCategoria', $idCategoria, PDO::PARAM_INT);
                 // Ejecutar la sentencia y devolver el resultado

@@ -81,7 +81,7 @@ class marca
         if (!$this->verificarProductosMarca($idMarca, $conexPDO)) {
             try {
                 // Prepara la sentencia SQL para eliminar la marca
-                $stmt = $conexPDO->prepare("DELETE FROM marca WHERE id_marca = :idMarca");
+                $stmt = $conexPDO->prepare("DELETE FROM marca WHERE idmarca = :idMarca");
                 // Asocia el ID de la marca al parámetro de la sentencia
                 $stmt->bindParam(':idMarca', $idMarca, PDO::PARAM_INT);
                 // Ejecuta la sentencia y devuelve el resultado
