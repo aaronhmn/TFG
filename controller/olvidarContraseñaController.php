@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
         // Si el usuario existe, guarda el correo en la sesión para la recuperación
         $_SESSION['email_usuario_recuperacion'] = $email;
         // Construye la URL para la página de recuperación de contraseña
-        $url = "http://localhost/tfg%201.0/view/recuperarContrase%C3%B1aView.php?email=$email";
+        $url = "http://3.222.9.131/dashboard/view/recuperarContrase%C3%B1aView.php?email=$email";
         // Crea una nueva instancia de PHPMailer
         $mail = new PHPMailer(true);
 
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email'])) {
             $mail->isHTML(true); // Establece el formato del correo a HTML
             $mail->Subject = 'Recuperacion de cuenta'; // Asunto del correo
             // Cuerpo del correo con un enlace para cambiar la contraseña
-            $mail->Body = "Hola, para cambiar tu contraseña por favor haz clic en el siguiente enlace: <a href=\"$url\">Cambiar contraseña</a>";
+            $mail->Body = "Hola, para cambiar tu contrasena por favor haz clic en el siguiente enlace: <a href=\"$url\">Cambiar contrasena</a>";
 
             // Envía el correo
             $mail->send();
