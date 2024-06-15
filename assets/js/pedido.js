@@ -8,51 +8,77 @@ function getCarritoKey() {
     return `carrito_${userId}`; // Forma la clave para almacenar/recuperar el carrito del usuario en localStorage
 }
 
+// Función para verificar disponibilidad de los productos antes de mostrar PayPal
+function verificarDisponibilidadAntesDePayPal() {
+    const carritoKey = getCarritoKey();
+    const carrito = JSON.parse(localStorage.getItem(carritoKey));
+    const idsProductos = Object.keys(carrito);
+
+    fetch('../controller/comprobarDisponibilidadController.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(idsProductos)
+    })
+    .then(response => response.json())
+    .then(data => {
+        const productosNoDisponibles = data.filter(producto => !producto.disponible);
+        if (productosNoDisponibles.length > 0) {
+            const nombresProductos = productosNoDisponibles.map(p => p.nombre).join(', ');
+            showAlert(`Los siguientes productos no están disponibles: ${nombresProductos}`, 'danger');
+        } else {
+            mostrarBotonPayPal();
+        }
+    })
+    .catch(error => {
+        console.error('Error al verificar disponibilidad:', error);
+        alert("Error al verificar la disponibilidad de los productos.");
+    });
+}
+
+// Función para mostrar y configurar el botón de PayPal
+function mostrarBotonPayPal() {
+    paypal.Buttons({
+        style: {
+            layout: 'horizontal',
+            color: 'gold',
+            shape: 'rect',
+            label: 'buynow',
+            size: 'small'
+        },
+        createOrder: function(data, actions) {
+            var total = document.getElementById('precio-total').textContent.replace(' €', '');
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: total
+                    }
+                }],
+                application_context: {
+                    shipping_preference: 'NO_SHIPPING'
+                }
+            });
+        },
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                $('#purchaseConfirmationModal').modal('show');
+                document.getElementById('userName').textContent = nombreUsuario;
+                enviarDatosCarrito();
+                limpiarCarrito();
+            });
+        },
+        onError: function(err) {
+            console.error('Error al procesar el pago con PayPal:', err);
+        }
+    }).render('#paypal-button-container');
+}
+
 // Se ejecuta cuando el DOM está completamente cargado
 document.addEventListener('DOMContentLoaded', function() {
     cargarCarrito(); // Carga los productos del carrito
     actualizarContadorCarrito(); // Actualiza el contador de ítems del carrito
-
-    // Configuración del botón de PayPal
-    paypal.Buttons({
-        style: { // Estilo visual del botón de PayPal
-            layout:  'horizontal',
-            color:   'gold',
-            shape:   'rect',
-            label:   'buynow',
-            size:    'small'
-        },
-        createOrder: function(data, actions) { // Función para crear una orden de pago
-            var total = document.getElementById('precio-total').textContent.replace(' €', ''); // Obtiene el total del carrito
-            return actions.order.create({
-                purchase_units: [{
-                    amount: {
-                        value: total // Asigna el total a pagar
-                    }
-                }],
-                application_context: {
-                    shipping_preference: 'NO_SHIPPING' // Configura la orden para no incluir envío
-                }
-            });
-        },
-        onApprove: function(data, actions) { // Función que se ejecuta al aprobar el pago
-            return actions.order.capture().then(function(details) {
-                $('#purchaseConfirmationModal').modal('show'); // Muestra un modal de confirmación
-                document.getElementById('userName').textContent = nombreUsuario; // Muestra el nombre del usuario
-                
-                enviarDatosCarrito(); // Envía los datos del carrito para procesamiento
-                limpiarCarrito(); // Limpia el carrito
-            });
-        },
-        onError: function(err) { // Manejo de errores
-            console.error('Error al procesar el pago con PayPal:', err);
-        }
-    }).render('#paypal-button-container'); // Renderiza el botón de PayPal en el contenedor especificado
-
-    // Redirecciona cuando el modal de confirmación se oculta
-    $('#purchaseConfirmationModal').on('hidden.bs.modal', function () {
-        window.location.href = "../controller/misPedidosController.php";
-    });
+    verificarDisponibilidadAntesDePayPal(); // Verifica disponibilidad antes de mostrar PayPal
 });
 
 // Función para cargar los productos en el carrito y mostrarlos en la tabla
@@ -152,4 +178,12 @@ function limpiarCarrito() {
     let carritoKey = getCarritoKey(); // Obtiene la clave del carrito
     localStorage.removeItem(carritoKey); // Elimina los datos del carrito de localStorage
     actualizarContadorCarrito(); // Actualiza el contador visual en la interfaz
+}
+
+function showAlert(message, type = 'danger') {
+    const alertPlaceholder = document.getElementById('alertPlaceholder');
+    alertPlaceholder.style.display = 'block';
+    alertPlaceholder.innerHTML = `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
+        ${message}
+    </div>`;
 }

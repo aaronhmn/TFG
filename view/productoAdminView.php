@@ -196,26 +196,33 @@
                             echo "</td>";
 
                             echo "<td>";
-                            echo "<button title='Modificar' class='btn btn-link p-0 align-middle' data-bs-toggle='modal' data-bs-target='#modificarProductoModal'"
-                                . " data-id='" . htmlspecialchars($datosProducto['idproducto'], ENT_QUOTES) . "'"
-                                . " data-nombre='" . htmlspecialchars($datosProducto['nombre'], ENT_QUOTES) . "'"
-                                . " data-precio='" . htmlspecialchars($datosProducto['precio'], ENT_QUOTES) . "'"
-                                . " data-stock='" . htmlspecialchars($datosProducto['stock'], ENT_QUOTES) . "'"
-                                . " data-categoria='" . htmlspecialchars($datosProducto['id_categoria'], ENT_QUOTES) . "'"
-                                . " data-marca='" . htmlspecialchars($datosProducto['id_marca'], ENT_QUOTES) . "'"
-                                . " data-almacen='" . htmlspecialchars($datosProducto['id_almacen'], ENT_QUOTES) . "'"
-                                . " data-descripcion='" . htmlspecialchars($datosProducto['descripcion'], ENT_QUOTES) . "'"
-                                . " data-especificacion='" . htmlspecialchars($datosProducto['especificacion'], ENT_QUOTES) . "'"
-                                /* . " data-estado='" . htmlspecialchars($datosProducto['estado'], ENT_QUOTES) . "'" */
-                                . " data-imagenes='" . htmlspecialchars($datosProducto['ruta_imagen'], ENT_QUOTES) . "'"
-                                . " style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;'>"
-                                . "<i class='fas fa-edit fa-lg' style='color: #005eff;'></i>"
-                                . "</button>";
+                            if ($datosProducto['estado'] == 1) { // 1 representa 'Oculto'
+                                echo "<button title='Modificar' class='btn btn-link p-0 align-middle disabled' aria-disabled='true' style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;'>";
+                                echo "<i class='fas fa-edit fa-lg' style='color: grey;'></i>";
+                                echo "</button>";
+                            } else {
+                                echo "<button title='Modificar' class='btn btn-link p-0 align-middle' data-bs-toggle='modal' data-bs-target='#modificarProductoModal'"
+                                    . " data-id='" . htmlspecialchars($datosProducto['idproducto'], ENT_QUOTES) . "'"
+                                    . " data-nombre='" . htmlspecialchars($datosProducto['nombre'], ENT_QUOTES) . "'"
+                                    . " data-precio='" . htmlspecialchars($datosProducto['precio'], ENT_QUOTES) . "'"
+                                    . " data-stock='" . htmlspecialchars($datosProducto['stock'], ENT_QUOTES) . "'"
+                                    . " data-categoria='" . htmlspecialchars($datosProducto['id_categoria'], ENT_QUOTES) . "'"
+                                    . " data-marca='" . htmlspecialchars($datosProducto['id_marca'], ENT_QUOTES) . "'"
+                                    . " data-almacen='" . htmlspecialchars($datosProducto['id_almacen'], ENT_QUOTES) . "'"
+                                    . " data-descripcion='" . htmlspecialchars($datosProducto['descripcion'], ENT_QUOTES) . "'"
+                                    . " data-especificacion='" . htmlspecialchars($datosProducto['especificacion'], ENT_QUOTES) . "'"
+                                    . " data-estado='" . htmlspecialchars($datosProducto['estado'], ENT_QUOTES) . "'"
+                                    . " data-imagenes='" . htmlspecialchars($datosProducto['ruta_imagen'], ENT_QUOTES) . "'"
+                                    . " style='background-color: rgba(0, 0, 0, 0); padding-top: 7px;'>"
+                                    . "<i class='fas fa-edit fa-lg' style='color: #005eff;'></i>"
+                                    . "</button>";
+                            }
                             echo "</td>";
                         }
                         ?>
                     </tbody>
                 </table>
+                <h6 style="color: #ffa500; margin-bottom: 15px;"><b>¡Recuerda que no puedes modificar un producto oculto!</b></h6>
                 <form method="POST" action="../controller/productosAdminController.php">
                     <?php
                     for ($i = 1; $i <= $totalPaginas; $i++) {
@@ -353,6 +360,14 @@
                                     <?php foreach ($marcas as $marca) : ?>
                                         <option value="<?= $marca['idmarca'] ?>"><?= htmlspecialchars($marca['nombre_marca']) ?></option>
                                     <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <!-- Desplegable para el estado -->
+                            <div class="cole-md-6 mb-3">
+                                <label for="estado" class="form-label"><b>Estado:</b></label>
+                                <select class="form-select" id="estado" name="estado">
+                                    <option value="0" <?= $datosProducto['estado'] == 0 ? 'selected' : '' ?>>Disponible</option>
+                                    <option value="1" <?= $datosProducto['estado'] == 1 ? 'selected' : '' ?>>Oculto</option>
                                 </select>
                             </div>
                         </div>

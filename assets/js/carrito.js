@@ -134,7 +134,7 @@ async function verificarDisponibilidadYRealizarPedido() {
         const response = await fetch('../controller/comprobarDisponibilidadController.php', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json' // indica que el cuerpo de la solicitud o respuesta está en formato JSON 
             },
             body: JSON.stringify(ids) // Envía los IDs como JSON al servidor
         });

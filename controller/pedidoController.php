@@ -26,7 +26,7 @@ $productoModel = new Producto();
 
 // Si no hay un usuario identificado, redirigir a la página de login
 if (!$idUsuario) {
-    header('Location: ../controller/loginController.php'); // Asegúrate de que esta ruta sea correcta
+    header('Location: ../controller/loginController.php'); 
     exit();
 }
 

@@ -104,7 +104,7 @@ function addProductToCart() {
           nombre: nombre,
           precio: precio,
           cantidad: 1,
-          stock: stock // Asegúrate de añadir esta línea
+          stock: stock
       };
   }
 

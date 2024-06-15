@@ -92,6 +92,7 @@ namespace views;
         <div class="mb-3" id="pagination-container"></div>
         <div class="precio-total"><b>Total: </b><b><span id="precio-total">0 €</span></b></div>
         <div class="mt-4" id="paypal-button-container"></div>
+        <div id="alertPlaceholder" style="display: none;"></div>
       </div>
     </div>
   </div><br>

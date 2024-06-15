@@ -43,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         "especificacion" => $_POST["especificacion"],
         "id_marca" => $_POST["id_marca"],
         "stock" => $_POST["stock"],
+        "estado" => $_POST["estado"],
         "id_almacen" => $_POST["id_almacen"],
         "ruta_imagen" => $gestorProducto->getProductoId($_POST["idproducto"], $conexPDO)['ruta_imagen']
     ];
