@@ -32,6 +32,14 @@ document.addEventListener('DOMContentLoaded', function() {
             isValid = false; // Cambia el estado de validez a falso.
         }
 
+        // Validación del codigo postal
+        const codigoPostal = document.getElementById('codigo_postal').value; // Obtiene el valor del campo email.
+        // Verifica que el codigo postal tenga 5 dígitos.
+        if (!/^\d{5}$/.test(codigoPostal)) {
+            mensajeError.push("El código postal debe tener 5 dígitos.");
+            isValid = false; // Cambia el estado de validez a falso.
+        }
+
         // Si no es válido, previene el envío del formulario y muestra los errores.
         if (!isValid) {
             event.preventDefault(); // Evita que el formulario se envíe.

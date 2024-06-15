@@ -11,16 +11,19 @@ document.addEventListener('DOMContentLoaded', function() {
         // Obtiene elementos del DOM para los campos y mensajes de error.
         const telefono = document.getElementById('telefono');
         const dni = document.getElementById('dni');
+        const codigoPostal = document.getElementById('codigo_postal');
         const contrasena = document.getElementById('contrasena');
         const contrasena2 = document.getElementById('contrasena2');
         const errorTelefono = document.getElementById('errorTelefono');
         const errorDNI = document.getElementById('errorDNI');
+        const errorCodigoPostal = document.getElementById('errorCodigoPostal');
         const errorContrasena = document.getElementById('errorContrasena');
         const errorContrasena2 = document.getElementById('errorContrasena2');
 
         // Limpia los mensajes de error previos para cada campo.
         errorTelefono.textContent = '';
         errorDNI.textContent = '';
+        errorCodigoPostal.textContent = '';
         errorContrasena.textContent = '';
         errorContrasena2.textContent = '';
 
@@ -35,6 +38,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!/^\d{8}[A-Za-z]$/.test(dni.value)) {
             errorDNI.textContent = 'El DNI debe tener 8 dígitos seguidos de una letra.';
             dni.value = ''; // Limpia el campo si no es válido.
+            isValid = false; // Marca el formulario como inválido.
+        }
+
+        if (!/^\d{5}$/.test(codigoPostal.value)) {
+            errorCodigoPostal.textContent = 'El código posta debe tener 5 dígitos.';
+            codigoPostal.value = ''; // Limpia el campo si no es válido.
             isValid = false; // Marca el formulario como inválido.
         }
 

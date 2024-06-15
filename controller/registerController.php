@@ -55,6 +55,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
+    // Verificar si el telefono de usuario ya existe
+    if ($gestorUsu->existeTelefono($telefono, $conexPDO)) {
+        $_SESSION['error'] = 'Este telefono ya está en uso.';
+        header("Location: ../view/registerView.php");
+        exit();
+    }
+
+    // Verificar si el dni de usuario ya existe
+    if ($gestorUsu->existeDni($dni, $conexPDO)) {
+        $_SESSION['error'] = 'Este DNI ya está en uso.';
+        header("Location: ../view/registerView.php");
+        exit();
+    }
+
     // Validación del número de teléfono
     if (!preg_match('/^\d{9}$/', $telefono)) {
         $mensaje = 'El número de teléfono es inválido. Debe tener 9 dígitos.';
@@ -78,6 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Limpieza de datos
     $usuario = array();
+    $usuario["rol"] = 0;
     $usuario["nombre"] = utils::limpiar_datos($nombre);
     $usuario["primer_apellido"] = utils::limpiar_datos($primerApellido);
     $usuario["segundo_apellido"] = utils::limpiar_datos($segundoApellido);

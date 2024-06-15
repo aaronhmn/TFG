@@ -57,6 +57,7 @@
                 </div>
                 <div class="input-box">
                     <input type="text" required placeholder="Código Postal *" id="codigo_postal" name="codigo_postal" digitsonly="true" autocomplete="off">
+                    <span id="errorCodigoPostal" class="error-message"></span>
                 </div>
                 <div class="input-box">
                     <input type="text" required placeholder="Nombre de la calle o avenida *" id="calle" name="calle" autocomplete="off">

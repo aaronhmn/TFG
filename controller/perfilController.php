@@ -65,6 +65,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     }
 
+    // Verificar si el telefono ya están registrados
+    if ($usuarioModel->existeTelefono($telefono, $conexPDO) && $telefono !== $datosUsuario['telefono']) {
+        $_SESSION['mensaje'] = 'Este teléfono ya está registrado.';
+        $_SESSION['tipo_mensaje'] = 'danger';
+        header('Location: ../controller/perfilController.php');
+        exit();
+    }
+
+    // Verificar si el dni ya están registrados
+    if ($usuarioModel->existeTelefono($dni, $conexPDO) && $dni !== $datosUsuario['dni']) {
+        $_SESSION['mensaje'] = 'Este dni ya está registrado.';
+        $_SESSION['tipo_mensaje'] = 'danger';
+        header('Location: ../controller/perfilController.php');
+        exit();
+    }
+
     $errores = [];
 
     // Validar el DNI
@@ -75,6 +91,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Validar el teléfono
     if (!preg_match('/^\d{9}$/', $telefono)) {
         $errores[] = "El número de teléfono debe tener 9 dígitos.";
+    }
+
+    // Validar el codigo postal
+    if (!preg_match('/^\d{5}$/', $codigo_postal)) {
+        $errores[] = "El código postal debe tener 5 dígitos.";
     }
 
     // Validar el email
