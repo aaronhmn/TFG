@@ -43,7 +43,7 @@
                 <tbody>
                     <?php $contador = ($paginaActual - 1) * $itemsPorPagina + 1;
                     foreach ($detalles as $detalle) :
-                        $nombreProducto = $productoModel->getProductoId($detalle['id_producto_dp'], $conexPDO)['nombre']; ?>
+                        $nombreProducto = $productoModel->getProductoIdAdmin($detalle['id_producto_dp'], $conexPDO)['nombre']; ?>
                         <tr>
                             <td><b><?php echo $contador++; ?></b></td>
                             <!-- <td><?php echo htmlspecialchars($detalle['id_pedido_dp']); ?></td> -->

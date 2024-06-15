@@ -114,7 +114,7 @@
                     </thead>
                     <tbody>
                         <?php foreach ($detalles as $detalle) :
-                            $nombreProducto = $productoModel->getProductoId($detalle['id_producto_dp'], $conexPDO)['nombre']; ?>
+                            $nombreProducto = $productoModel->getProductoIdAdmin($detalle['id_producto_dp'], $conexPDO)['nombre']; ?>
                             <tr>
                                 <td style='padding-top: 14px;'><?php echo htmlspecialchars($detalle['iddetalle_pedido']); ?></td>
                                 <td style='padding-top: 14px;'><?php echo htmlspecialchars($detalle['id_pedido_dp']); ?></td>

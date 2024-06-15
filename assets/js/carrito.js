@@ -96,12 +96,12 @@ function cambiarCantidad(id, cambio) {
 
         // Verifica y maneja los límites de la cantidad del producto
         if (nuevaCantidad > carrito[id].stock) {
-            showAlert('No puedes añadir más unidades de este producto. Stock máximo alcanzado.', 'warning');
+            showAlert('No puedes añadir más unidades de este producto. Stock máximo alcanzado.', 'danger');
             return; // Detiene la función si se excede el stock
         }
 
         if (nuevaCantidad < 1) {
-            showAlert('No puedes reducir la cantidad a menos de uno.', 'warning');
+            showAlert('No puedes reducir la cantidad a menos de uno.', 'danger');
             return; // Detiene la función si la cantidad es menos de uno
         }
 
@@ -145,7 +145,7 @@ async function verificarDisponibilidadYRealizarPedido() {
         if (productosNoDisponibles.length > 0) {
             // Si hay productos no disponibles, muestra una alerta
             const nombresNoDisponibles = productosNoDisponibles.map(p => p.nombre).join(', ');
-            showAlert(`Los siguientes productos no están disponibles y no pueden ser pedidos: ${nombresNoDisponibles}`, 'warning');
+            showAlert(`Los siguientes productos no están disponibles y no pueden ser pedidos: ${nombresNoDisponibles}`, 'danger');
             return; // Detiene la función si hay productos no disponibles
         }
 
@@ -174,10 +174,6 @@ function showAlert(message, type) {
     ].join('');
 
     alertPlaceholder.append(wrapper); // Añade la alerta al contenedor
-
-    setTimeout(() => {
-        wrapper.remove(); // Elimina la alerta después de 4 segundos
-    }, 4000);
 }
 
 // Cargar el carrito al cargar la página

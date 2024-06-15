@@ -117,7 +117,7 @@
                         foreach ($reseñasPaginados as $datosReseña) {
 
                             $nombreUsuario = $gestorUsuarios->getUsuarioId($datosReseña["id_usuario_resena"], $conexPDO)['nombre_usuario'];
-                            $nombreProducto = $gestorProductos->getProductoId($datosReseña["id_producto_resena"], $conexPDO)['nombre'];
+                            $nombreProducto = $gestorProductos->getProductoIdAdmin($datosReseña["id_producto_resena"], $conexPDO)['nombre'];
                             //Comienzo de fila
                             print("<tr style='align-items: center; background-color: gray;'>\n");
 
