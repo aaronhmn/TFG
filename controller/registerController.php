@@ -83,6 +83,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         return; // Detener la ejecución si hay error
     }
 
+    // Validación del codigo postal
+    if (!preg_match('/^\d{5}$/', $codigoPostal)) {
+        $mensaje = 'El código postal es inválido. Debe tener 5 dígitos.';
+        echo $mensaje;
+        return; // Detener la ejecución si hay error
+    }
+
     // Validación de la contraseña
     if (strlen($contraseña) < 6) {
         $mensaje = 'La contraseña debe tener al menos 6 caracteres.';

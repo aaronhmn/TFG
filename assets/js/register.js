@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if (!/^\d{5}$/.test(codigoPostal.value)) {
-            errorCodigoPostal.textContent = 'El código posta debe tener 5 dígitos.';
+            errorCodigoPostal.textContent = 'El código postal debe tener 5 dígitos.';
             codigoPostal.value = ''; // Limpia el campo si no es válido.
             isValid = false; // Marca el formulario como inválido.
         }

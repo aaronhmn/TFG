@@ -49,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $calle = $_POST['calle'] ?? '';
     $numero_bloque = $_POST['numero_bloque'] ?? '';
     $piso = $_POST['piso'] ?? '';
+    $idUsuarioActual = $_SESSION['id_usuario'];
 
     // Verificar si el email o el nombre de usuario ya están registrados
     if ($usuarioModel->existeEmail($email, $conexPDO) && $email !== $datosUsuario['email']) {
@@ -66,15 +67,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Verificar si el telefono ya están registrados
-    if ($usuarioModel->existeTelefono($telefono, $conexPDO) && $telefono !== $datosUsuario['telefono']) {
-        $_SESSION['mensaje'] = 'Este teléfono ya está registrado.';
+    if ($usuarioModel->existeTelefonoM($telefono, $idUsuarioActual, $conexPDO) && $telefono !== $datosUsuario['telefono']) {
+        $_SESSION['mensaje'] = 'Este teléfono ya está registrado por otro usuario.';
         $_SESSION['tipo_mensaje'] = 'danger';
         header('Location: ../controller/perfilController.php');
         exit();
     }
 
     // Verificar si el dni ya están registrados
-    if ($usuarioModel->existeTelefono($dni, $conexPDO) && $dni !== $datosUsuario['dni']) {
+    if ($usuarioModel->existeDni($dni, $conexPDO) && $dni !== $datosUsuario['dni']) {
         $_SESSION['mensaje'] = 'Este dni ya está registrado.';
         $_SESSION['tipo_mensaje'] = 'danger';
         header('Location: ../controller/perfilController.php');
