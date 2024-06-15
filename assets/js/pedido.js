@@ -47,32 +47,37 @@ function mostrarBotonPayPal() {
             label: 'buynow',
             size: 'small'
         },
-        createOrder: function(data, actions) {
-            var total = document.getElementById('precio-total').textContent.replace(' €', '');
+        createOrder: function(data, actions) { // Función para crear una orden de pago
+            var total = document.getElementById('precio-total').textContent.replace(' €', ''); // Obtiene el total del carrito
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: total
+                        value: total // Asigna el total a pagar
                     }
                 }],
                 application_context: {
-                    shipping_preference: 'NO_SHIPPING'
+                    shipping_preference: 'NO_SHIPPING' // Configura la orden para no incluir envío
                 }
             });
         },
-        onApprove: function(data, actions) {
+        onApprove: function(data, actions) { // Función que se ejecuta al aprobar el pago
             return actions.order.capture().then(function(details) {
-                $('#purchaseConfirmationModal').modal('show');
-                document.getElementById('userName').textContent = nombreUsuario;
-                enviarDatosCarrito();
-                limpiarCarrito();
+                $('#purchaseConfirmationModal').modal('show'); // Muestra un modal de confirmación
+                document.getElementById('userName').textContent = nombreUsuario; // Muestra el nombre del usuario
+                enviarDatosCarrito(); // Envía los datos del carrito para procesamiento
+                limpiarCarrito(); // Limpia el carrito
             });
         },
-        onError: function(err) {
+        onError: function(err) { // Manejo de errores
             console.error('Error al procesar el pago con PayPal:', err);
         }
-    }).render('#paypal-button-container');
+    }).render('#paypal-button-container'); // Renderiza el botón de PayPal en el contenedor especificado
 }
+
+// Redirecciona cuando el modal de confirmación se oculta
+$('#purchaseConfirmationModal').on('hidden.bs.modal', function () {
+    window.location.href = "../controller/misPedidosController.php";
+});
 
 // Se ejecuta cuando el DOM está completamente cargado
 document.addEventListener('DOMContentLoaded', function() {
