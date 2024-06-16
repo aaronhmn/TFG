@@ -283,7 +283,7 @@ namespace views;
             var jsonData = JSON.parse(response); // Parsear la respuesta JSON
             if (jsonData.success) {
               // Almacenar un mensaje de éxito en el almacenamiento local
-              localStorage.setItem('alertMessage', 'Reseña añadida con éxito!');
+              localStorage.setItem('alertMessage', '¡Reseña añadida con éxito!');
               localStorage.setItem('alertType', 'success');
             } else {
               // Almacenar un mensaje de error en el almacenamiento local
