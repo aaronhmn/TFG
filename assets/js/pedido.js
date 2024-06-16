@@ -75,7 +75,7 @@ function mostrarBotonPayPal() {
             }
         }).render('#paypal-button-container'); // Renderiza el botón de PayPal en el contenedor especificado
     }else{
-        document.getElementById('paypal-button-container').style.display = 'none';
+        document.getElementById('paypal-button-container').style.display = 'none'; //ocultar el boton si el total es de 0 euros ya que no hay productos
     }
 }
 
