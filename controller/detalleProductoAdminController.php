@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['idProducto'])) {
     $respuesta = [
         'idproducto' => $producto['idproducto'],
         'nombre' => $producto['nombre'],
-        'precio' => $producto['precio'],
+        'precio' => $producto['precio'].'€',
         'descripcion' => $producto['descripcion'],
         'especificacion' => $producto['especificacion'],
         'stock' => $producto['stock'],

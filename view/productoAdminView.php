@@ -253,7 +253,7 @@
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="inputPrecio" class="form-label"><b>Precio:</b></label>
+                                <label for="inputPrecio" class="form-label"><b>Precio con IVA:</b></label>
                                 <input type="number" min=0 step="0.01" class="form-control" name="inputPrecio" aria-describedby="emailHelp" required>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -335,7 +335,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="precio" class="form-label"><b>Precio:</b></label>
+                                <label for="precio" class="form-label"><b>Precio con IVA:</b></label>
                                 <input type="number" min=0 step="0.01" class="form-control" id="precio" name="precio" required>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -414,8 +414,8 @@
                     <p style="color: #8350F2;">Nombre:</p>
                     <span id="detalle_nombre"></span>
                     <hr>
-                    <p style="color: #8350F2;">Precio:</p>
-                    <span id="detalle_precio"></span>€
+                    <p style="color: #8350F2;">Precio con IVA:</p>
+                    <span id="detalle_precio"></span>
                     <hr>
                     <p style="color: #8350F2;">Categoría:</p>
                     <span id="detalle_categoria"></span>

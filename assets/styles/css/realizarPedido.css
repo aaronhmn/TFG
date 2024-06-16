@@ -1,0 +1,161 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  .precio-total {
+    display: inline-block;
+    background-color: #fff;
+    padding: 12px;
+    border: 2px solid #8350f2;
+  }
+  
+  #precio-total {
+    color: green;
+  }
+  
+  #paypal-button-container {
+    z-index: 1; /* Asegúrate de que sea menor que el del navbar */
+    position: relative; /* z-index solo funciona en elementos posicionados */
+  }
+  
+  .pagination-button {
+    background-color: #8350f2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 6px 14px;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .pagination-button:hover {
+    background-color: #673ab7;
+  }
+  
+  .pagination-button.active {
+    background-color: #673ab7;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .table td {
+    vertical-align: middle;
+  }
+  
+  input.form-control:focus {
+    outline: 0px solid #8350f2 !important;
+  
+    outline-width: 1 !important;
+  
+    box-shadow: none;
+  
+    -moz-box-shadow: none;
+  
+    -webkit-box-shadow: none;
+  }
+  
+  .form-control:focus {
+    border-color: #8350f2 !important;
+    box-shadow: 0 0 0 0.25rem rgba(131, 80, 242, 0.5) !important;
+  }
+  
+  .form-select:focus {
+    border-color: #8350f2 !important;
+    box-shadow: 0 0 0 0.25rem rgba(131, 80, 242, 0.5) !important;
+  }
+  
+  .navbar2 {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar2 ul {
+    flex: 2;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0;
+  }
+  
+  .navbar2 ul li {
+    list-style: none;
+  }
+  
+  .table tbody tr {
+    margin-bottom: 5px !important;
+    margin-top: 5px !important;
+    border-bottom: 15px solid #e6e6fa !important;
+    border-top: 15px solid #e6e6fa !important;
+  }
+  
+  .table td,
+  .table th {
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+  }
+  
+  @media (max-width: 768px) {
+    /* Ajusta el punto de ruptura según tus necesidades */
+    .table-responsive table,
+    .table-responsive thead,
+    .table-responsive tbody,
+    .table-responsive th,
+    .table-responsive td,
+    .table-responsive tr {
+      display: block;
+    }
+  
+    /* Ocultar los encabezados de la tabla en dispositivos móviles */
+    .table-responsive thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+  
+    .table-responsive tr {
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+    }
+  
+    /* Hacer que las celdas se vean como filas */
+    .table-responsive td {
+      border: none;
+      border-bottom: 1px solid #ddd;
+      position: relative;
+      padding-left: 50%;
+      text-align: left;
+    }
+  
+    /* Agregar etiquetas a cada celda con el nombre de la columna correspondiente */
+    .table-responsive td:before {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 45%;
+      padding-right: 10px;
+      white-space: nowrap;
+      font-weight: bold;
+      text-align: left;
+    }
+  
+    /* Usar los atributos data-* para insertar el contenido antes de las celdas */
+    .table-responsive td:nth-of-type(1):before {
+      content: "Pedido :";
+    }
+    .table-responsive td:nth-of-type(2):before {
+      content: "Precio :";
+    }
+    .table-responsive td:nth-of-type(3):before {
+      content: "Cantidad :";
+    }
+    .table-responsive td:nth-of-type(4):before {
+      content: "Subtotal :";
+    }
+  }
+  
