@@ -33,45 +33,50 @@ function verificarDisponibilidadAntesDePayPal() {
     })
     .catch(error => {
         console.error('Error al verificar disponibilidad:', error);
-        alert("Error al verificar la disponibilidad de los productos.");
+        showAlert("Error al verificar la disponibilidad de los productos.", 'danger');
     });
 }
 
 // Función para mostrar y configurar el botón de PayPal
 function mostrarBotonPayPal() {
-    paypal.Buttons({
-        style: {
-            layout: 'horizontal',
-            color: 'gold',
-            shape: 'rect',
-            label: 'buynow',
-            size: 'small'
-        },
-        createOrder: function(data, actions) { // Función para crear una orden de pago
-            var total = document.getElementById('precio-total').textContent.replace(' €', ''); // Obtiene el total del carrito
-            return actions.order.create({
-                purchase_units: [{
-                    amount: {
-                        value: total // Asigna el total a pagar
+    const total = parseFloat(document.getElementById('precio-total').textContent.replace(' €', ''));
+    if(total > 0){
+        paypal.Buttons({
+            style: {
+                layout: 'horizontal',
+                color: 'gold',
+                shape: 'rect',
+                label: 'buynow',
+                size: 'small'
+            },
+            createOrder: function(data, actions) { // Función para crear una orden de pago
+                var total = document.getElementById('precio-total').textContent.replace(' €', ''); // Obtiene el total del carrito
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: total // Asigna el total a pagar
+                        }
+                    }],
+                    application_context: {
+                        shipping_preference: 'NO_SHIPPING' // Configura la orden para no incluir envío
                     }
-                }],
-                application_context: {
-                    shipping_preference: 'NO_SHIPPING' // Configura la orden para no incluir envío
-                }
-            });
-        },
-        onApprove: function(data, actions) { // Función que se ejecuta al aprobar el pago
-            return actions.order.capture().then(function(details) {
-                $('#purchaseConfirmationModal').modal('show'); // Muestra un modal de confirmación
-                document.getElementById('userName').textContent = nombreUsuario; // Muestra el nombre del usuario
-                enviarDatosCarrito(); // Envía los datos del carrito para procesamiento
-                limpiarCarrito(); // Limpia el carrito
-            });
-        },
-        onError: function(err) { // Manejo de errores
-            console.error('Error al procesar el pago con PayPal:', err);
-        }
-    }).render('#paypal-button-container'); // Renderiza el botón de PayPal en el contenedor especificado
+                });
+            },
+            onApprove: function(data, actions) { // Función que se ejecuta al aprobar el pago
+                return actions.order.capture().then(function(details) {
+                    $('#purchaseConfirmationModal').modal('show'); // Muestra un modal de confirmación
+                    document.getElementById('userName').textContent = nombreUsuario; // Muestra el nombre del usuario
+                    enviarDatosCarrito(); // Envía los datos del carrito para procesamiento
+                    limpiarCarrito(); // Limpia el carrito
+                });
+            },
+            onError: function(err) { // Manejo de errores
+                console.error('Error al procesar el pago con PayPal:', err);
+            }
+        }).render('#paypal-button-container'); // Renderiza el botón de PayPal en el contenedor especificado
+    }else{
+        document.getElementById('paypal-button-container').style.display = 'none';
+    }
 }
 
 // Redirecciona cuando el modal de confirmación se oculta
