@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $mail->Host = 'smtp.gmail.com'; // Establece el servidor SMTP
             $mail->SMTPAuth = true; // Habilita la autenticación SMTP
             $mail->Username = 'aaronhelices@gmail.com'; // Nombre de usuario para la autenticación SMTP
-            $mail->Password = 'tbof yhhl ebok fsqp'; // Contraseña para la autenticación SMTP
+            $mail->Password = ''; // Contraseña para la autenticación SMTP
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Habilita encriptación TLS
             $mail->Port = 587; // Puerto TCP para la conexión SMTP
 
